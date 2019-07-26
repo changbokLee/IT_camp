@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<a href='Programming_Keywords.html'>Keywords</a>
+
+			<span>Private</span>
+
+		</nav>
+
+		<main>
+
+<h1>Directive Private</h1>
+<p>
+Declares following code as private to local module or class.
+</p>
+<h2>Syntax</h2>
+<p>
+Private
+</p>
+<h2>Description</h2>
+<p>
+The Public and Private directives are used to control the visibility of subsequent declarations in a module or class.
+</p>
+<p>
+If the Private directive is used in the main body of a module, all subsequent declarations will be private and will not be visible outside of the current module.
+</p>
+<h2>See also</h2>
+<p>
+<a href="Programming_Keywords_Public.html">Public</a><br>
+<a href="Programming_Language reference.html">Language reference</a>
+</p>
+<h2>Example</h2>
+<div class="pretty">
+<code class="k">Private</code><br/>
+<code class="k">Global </code><code class="i">x</code><code class="d">,</code><code class="i">y</code><code class="d">,</code><code class="i">z        </code><code class="r">'These are private to the current module</code><br/>
+<br/>
+<code class="k">Public</code><br/>
+<code class="k">Global </code><code class="i">P</code><code class="d">,</code><code class="i">Q</code><code class="d">,</code><code class="i">R        </code><code class="r">'These can be used by any module</code><br/>
+</div>
+
+		</main>
+	</div>
+</body>
+</html>

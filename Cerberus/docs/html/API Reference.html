@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<span>API Reference</span>
+
+		</nav>
+
+		<main>
+
+<p>
+These are the modules Cerberus X is shipped with.
+</p>
+<h2>The Mojo framework</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_mojo.app.html">mojo.app</a></td><td>The base <a href="Modules_mojo.app_App.html">App</a> class and functions for controlling app behavior</td><td>Android, iOS, Win8, Glfw, Html5, Flash</td></tr>
+<tr><td><a href="Modules_mojo.graphics.html">mojo.graphics</a></td><td>2D rendering functions and the <a href="Modules_mojo.graphics_Image.html">Image</a> class</td><td>Android, iOS, Win8, Glfw, Html5, Flash</td></tr>
+<tr><td><a href="Modules_mojo.audio.html">mojo.audio</a></td><td>Sound and music playback functions</td><td>Android, iOS, Win8, Glfw, Html5, Flash</td></tr>
+<tr><td><a href="Modules_mojo.input.html">mojo.input</a></td><td>User input functions</td><td>Android, iOS, Win8, Glfw, Html5, Flash</td></tr>
+<tr><td><a href="Modules_mojo.asyncloaders.html">mojo.asyncloaders</a></td><td>Functions for loading images and sounds asynchronously</td><td>Android, iOS, Win8, Glfw, Html5, Flash</td></tr>
+<tr><td><a href="Modules_mojo2.html">mojo2</a></td><td>Advanced 2D rendering API</td><td>Glfw, iOS, Android, Html5</td></tr>
+</table>
+<h2>Data I/O and filesystem</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_brl.filestream.html">brl.filestream</a></td><td>The <a href="Modules_brl.filestream_FileStream.html">FileStream</a> class for reading and writing files</td><td>Android, iOS, Win8, Glfw, Stdcpp</td></tr>
+<tr><td><a href="Modules_brl.filesystem.html">brl.filesystem</a></td><td>Functions for examining and modifying the filesystem</td><td>Android, iOS, Win8, Glfw, Stdcpp</td></tr>
+<tr><td><a href="Modules_brl.databuffer.html">brl.databuffer</a></td><td>The <a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a> class for managing binary data</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.datastream.html">brl.datastream</a></td><td>The <a href="Modules_brl.datastream_DataStream.html">DataStream</a> class for reading and writing databuffers</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.process.html">brl.process</a></td><td>The <a href="Modules_brl.process_Process.html">Process</a> class for executing processes</td><td>Glfw, Stdcpp</td></tr>
+<tr><td><a href="Modules_brl.requesters.html">brl.requesters</a></td><td>Simple GUI requesters</td><td>Glfw (Windows and MacOS only)</td></tr>
+</table>
+<h2>Networking</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_brl.url.html">brl.url</a></td><td>The <a href="Modules_brl.url_Url.html">Url</a> class for manipulating urls</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.socket.html">brl.socket</a></td><td>The <a href="Modules_brl.socket_Socket.html">Socket</a> class for low level socket access</td><td>Android, iOS, Win8, Glfw, Stdcpp</td></tr>
+<tr><td><a href="Modules_brl.httprequest.html">brl.httprequest</a></td><td>The <a href="Modules_brl.httprequest_HttpRequest.html">HttpRequest</a> class for making http requests</td><td>Android, iOS, Win8, Glfw, Stdcpp</td></tr>
+<tr><td><a href="Modules_brl.tcpstream.html">brl.tcpstream</a></td><td>The <a href="Modules_brl.tcpstream_TcpStream.html">TcpStream</a> class for synchronous tcp I/O</td><td>Android, iOS, Win8, Glfw, Stdcpp</td></tr>
+</table>
+<h2>Math and Numeric</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_cerberus.math.html">cerberus.math</a></td><td>Math functions</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.random.html">cerberus.random</a></td><td>Functions for generating random numbers</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.interpolate.html">cerberus.interpolate</a></td><td>Functions for interpolating between values</td><td>All</td></tr>
+</table>
+<h2>Text and Strings</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_brl.json.html">brl.json</a></td><td>The <a href="Modules_brl.json_JsonObject.html">JsonObject</a> class for using JSON data</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.markdown.html">brl.markdown</a></td><td>The <a href="Modules_brl.markdown_Markdown.html">Markdown</a> class for generating html from simple markdown</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.filepath.html">brl.filepath</a></td><td>Functions for manipulating file paths</td><td>All</td></tr>
+</table>
+<h2>Collections</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_cerberus.list.html">cerberus.list</a></td><td>The <a href="Modules_cerberus.list_List.html">List</a> class for managing linked lists</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.stack.html">cerberus.stack</a></td><td>The <a href="Modules_cerberus.stack_Stack.html">Stack</a> class for managing stacks and dynamic arrays</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.map.html">cerberus.map</a></td><td>The <a href="Modules_cerberus.map_Map.html">Map</a> class for managing associative maps</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.set.html">cerberus.set</a></td><td>The <a href="Modules_cerberus.set_Set.html">Set</a> class for managing sets</td><td>All</td></tr>
+<tr><td><a href="Modules_cerberus.deque.html">cerberus.deque</a></td><td>The <a href="Modules_cerberus.deque_Deque.html">Deque</a> class for managing queues</td><td>All</td></tr>
+<tr><td><a href="Modules_brl.pool.html">brl.pool</a></td><td>The <a href="Modules_brl.pool_Pool.html">Pool</a> class for managing preallocated objects</td><td>All</td></tr>
+</table>
+<h2>Language</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_cerberus.lang.html">cerberus.lang</a></td><td>Built in functions and classes including <a href="Modules_cerberus.lang_String.html">String</a>, <a href="Modules_cerberus.lang_Array.html">Array</a>, <a href="Modules_cerberus.lang_Object.html">Object</a> and <a href="Modules_cerberus.lang_Throwable.html">Throwable</a></td><td>All</td></tr>
+<tr><td><a href="Modules_reflection.html">reflection</a></td><td>Functions and classes for language reflection</td><td>All</td></tr>
+</table>
+<h2>Online sevices</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_brl.admob.html">brl.admob</a></td><td>The <a href="Modules_brl.admob_Admob.html">Admob</a> class for using Google's admob service</td><td>Android, iOS</td></tr>
+<tr><td><a href="Modules_brl.cerberusstore.html">brl.cerberusstore</a></td><td>The <a href="Modules_brl.cerberusstore_CerberusStore.html">CerberusStore</a> class for making in-app purchases</td><td>Android, iOS</td></tr>
+<tr><td><a href="Modules_brl.gamecenter.html">brl.gamecenter</a></td><td>The <a href="Modules_brl.gamecenter_GameCenter.html">GameCenter</a> class for using Apple's Game Center service</td><td>iOS</td></tr>
+</table>
+<h2>Miscellaneous</h2>
+<table>
+<tr><th>Module</th><th>Contains</th><th>Availability</th></tr>
+<tr><td><a href="Modules_opengl.gles11.html">opengl.gles11</a></td><td>A wrapper module for the OpenGL ES 1.1 API</td><td>Android, iOS, Glfw</td></tr>
+<tr><td><a href="Modules_opengl.gles20.html">opengl.gles20</a></td><td>A wrapper module for the OpenGL ES 2.0 API</td><td>Android, iOS, Glfw, Html5</td></tr>
+</table>
+
+		</main>
+	</div>
+</body>
+</html>

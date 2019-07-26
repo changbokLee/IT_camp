@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<span>Optimisation</span>
+
+		</nav>
+
+		<main>
+
+<h1>Optimisation</h1>
+<p>
+Cerberus&nbsp;X optimises your code during translation for size. This means, unused functions and class members are not copied to the transpiled result. It doesn't matter whether the code in question is in an imported module or in the main file.
+</p>
+<p>
+The following example code demonstrates this behaviour:
+</p>
+<div class="pretty">
+<code class="k">Strict</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">:</code><code class="k">Int</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"Starting test..."</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' creating instances of the erroneous classes alone does not provoke</code><br/>
+<code class="d">    </code><code class="r">' any errors, since the erroneous methods, functions and fields will</code><br/>
+<code class="d">    </code><code class="r">' be optimized away</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">t</code><code class="d">:</code><code class="i">Test </code><code class="d">= </code><code class="k">New </code><code class="i">Test</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">ext</code><code class="d">:</code><code class="i">ExtTest </code><code class="d">= </code><code class="k">New </code><code class="i">ExtTest</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">err</code><code class="d">:</code><code class="i">ErrClass </code><code class="d">= </code><code class="k">New </code><code class="i">ErrClass</code><code class="d">()</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' EXAMPLE 1</code><br/>
+<code class="d">    </code><code class="r">' Unused functions are optimized away.</code><br/>
+<code class="d">    </code><code class="r">' As long as ErryFunc() ain't called, it won't cause troubles:</code><br/>
+<code class="d">    </code><code class="r">'ErryFunc()                                     ' (un-comment for proof)</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' EXAMPLE 2</code><br/>
+<code class="d">    </code><code class="r">' Unused methods are optimized away.</code><br/>
+<code class="d">    </code><code class="r">' As long as t.ErryMeth() ain't called, it won't cause troubles:</code><br/>
+<code class="d">    </code><code class="r">'t.ErryMeth()                                   ' (un-comment for proof)</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' EXAMPLE 3</code><br/>
+<code class="d">    </code><code class="r">' Although ExtClass does a few things wrong, like overwriting an erroneous</code><br/>
+<code class="d">    </code><code class="r">' method and overwriting unmatching methods, it won't cause troubles as</code><br/>
+<code class="d">    </code><code class="r">' long as the extending methods aren't called:</code><br/>
+<code class="d">    </code><code class="r">'ext.ErryMeth()                                 ' (un-comment for proof)</code><br/>
+<code class="d">    </code><code class="r">'ext.ErryMeth2()                                ' (un-comment for proof)</code><br/>
+<code class="d">    </code><code class="i">ext</code><code class="d">.</code><code class="i">OkMeth</code><code class="d">()</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' EXAMPLE 4</code><br/>
+<code class="d">    </code><code class="r">' Although ErrClass has an illegal initial value for a field, it won't cause</code><br/>
+<code class="d">    </code><code class="r">' troubles as long as the field ain't accessed:</code><br/>
+<code class="d">    </code><code class="r">'err.all.Sort()                                 ' (un-comment for proof)</code><br/>
+<br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"Done."</code><br/>
+<code class="d">    </code><code class="k">Return </code><code class="l">0</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">' erroneous function</code><br/>
+<code class="k">Function </code><code class="i">ErryFunc</code><code class="d">:</code><code class="k">Void</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="r">' Error : Void functions may not return a value.</code><br/>
+<code class="d">    </code><code class="k">Return False</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">' class with erroneous method</code><br/>
+<code class="k">Class </code><code class="i">Test</code><br/>
+<code class="d">    </code><code class="r">' erroneous method</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">ErryMeth</code><code class="d">:</code><code class="k">Void</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="r">' Error : Void functions may not return a value.</code><br/>
+<code class="d">        </code><code class="k">Return False</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' correct method (just named like that for compatibility with ErryClass)</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">ErryMeth2</code><code class="d">:</code><code class="k">Int</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="k">Return </code><code class="l">1</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">' erroneous extending class</code><br/>
+<code class="k">Class </code><code class="i">ExtTest </code><code class="k">Extends </code><code class="i">Test</code><br/>
+<code class="d">    </code><code class="r">' would be ok, but the extended method is erroneous</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">ErryMeth</code><code class="d">:</code><code class="k">Void</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"ExtTest.ErryMeth() invoked"</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' Error : Overriding method does not match any overridden method.</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">ErryMeth2</code><code class="d">:</code><code class="k">Int</code><code class="d">(</code><code class="i">arg</code><code class="d">:</code><code class="k">Int</code><code class="d">)</code><br/>
+<code class="d">        </code><code class="k">Return </code><code class="l">1</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<br/>
+<code class="d">    </code><code class="r">' totally ok</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">OkMeth</code><code class="d">:</code><code class="k">Void</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"ExtTest.OkMeth() invoked"</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">' erroneous class</code><br/>
+<code class="k">Class </code><code class="i">ErrClass</code><br/>
+<code class="d">    </code><code class="r">' Error : Cannot convert from Bool to List&lt;ErrClass&gt;.</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">all</code><code class="d">:</code><code class="i">List</code><code class="d">&lt;</code><code class="i">ErrClass</code><code class="d">&gt; = </code><code class="k">True</code><br/>
+<code class="k">End</code><br/>
+</div>
+
+		</main>
+	</div>
+</body>
+</html>

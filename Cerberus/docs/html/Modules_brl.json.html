@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>brl.json</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>brl.json</small></h1>
+
+
+	<p>
+		Minimalistic JSON module.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+	<table class="index">
+		<tr><th>Classes</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonArray.html">JsonArray</a></code></td>
+				<td>JSON arrays are ordered lists of values in square brackets, e.g.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonBool.html">JsonBool</a></code></td>
+				<td>Value representing a bool.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonError.html">JsonError</a></code></td>
+				<td>Object thrown when</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonNull.html">JsonNull</a></code></td>
+				<td>Value representing <i>null</i>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonNumber.html">JsonNumber</a></code></td>
+				<td>Value representing a number.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonObject.html">JsonObject</a></code></td>
+				<td>JSON objects are collections of pairs in curly brackets, e.g.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonParser.html">JsonParser</a></code></td>
+				<td>The json parser is used to translate a JSON string to json.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonString.html">JsonString</a></code></td>
+				<td>Value representing a string.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html">JsonValue</a></code></td>
+				<td>This base class provides some fall-back functionality for the specific json value</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Minimalistic JSON module.
+Fully functional on one hand, but on the other hand not very sophisticated
+concerning error correction or -handling when fed with faulty json strings.
+</p>
+<p>
+JSON is a form of markup language to store any kind of value in any complexity
+in objects and / or arrays. Here are some examples of valid JSON strings (each
+line is considered to be one JSON string):
+</p>
+<div class="pretty">
+<code class="l">"Foobar"</code><br/>
+<code class="l">42</code><br/>
+<code class="k">true</code><br/>
+<code class="d">{</code><code class="l">"name"</code><code class="d">:</code><code class="l">"John"</code><code class="d">,</code><code class="l">"age"</code><code class="d">:</code><code class="l">55</code><code class="d">}</code><br/>
+<code class="d">[</code><code class="l">1</code><code class="d">,</code><code class="l">2</code><code class="d">,</code><code class="l">3</code><code class="d">,</code><code class="l">"four"</code><code class="d">,</code><code class="l">"five"</code><code class="d">,</code><code class="k">false</code><code class="d">]</code><br/>
+</div>
+		
+			<span class="detail links">See also</span>
+			<p>
+ <a href="http://json.org">http://json.org</a>
+</p>
+		
+		
+			<span class="detail example"><b><a href="examples/brl_json.cxs">Example</a></b></span>
+			<div class="pretty">
+<code class="k">Strict</code><br/>
+<br/>
+<code class="k">Import </code><code class="i">brl</code><code class="d">.</code><code class="i">json</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">:</code><code class="k">Int</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">jsonTypes </code><code class="d">:= [</code><code class="l">"OBJECT"</code><code class="d">, </code><code class="l">"ARRAY"</code><code class="d">, </code><code class="l">"NULL"</code><code class="d">, </code><code class="l">"BOOL"</code><code class="d">, </code><code class="l">"NUMBER"</code><code class="d">, </code><code class="l">"STRING"</code><code class="d">]</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">str</code><code class="d">:</code><code class="k">String</code><br/>
+<code class="d">	</code><code class="r">' try these different JSON inputs</code><br/>
+<code class="d">	</code><code class="r">'str = "foul!"							' invalid JSON</code><br/>
+<code class="d">	</code><code class="r">'str = "null"							' null value</code><br/>
+<code class="d">	</code><code class="r">'str = "true"							' boolean value</code><br/>
+<code class="d">	</code><code class="r">'str = "3.14"							' numerical value</code><br/>
+<code class="d">	</code><code class="r">'str = "~qtext~q"						' string value</code><br/>
+<code class="d">	</code><code class="r">'str = "{~qfoo~q:true,~qbar~q:false}"	' object</code><br/>
+<code class="d">	</code><code class="i">str </code><code class="d">= </code><code class="l">"[1,2,~qbla~q]"					</code><code class="r">' array</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="r">' report what's fed into the parser</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"json input:"</code><br/>
+<code class="d">	</code><code class="i">Print str</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="r">' try to parse JSON</code><br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">json</code><code class="d">:</code><code class="i">JsonValue</code><br/>
+<code class="d">	</code><code class="k">Try</code><br/>
+<code class="d">		</code><code class="i">json </code><code class="d">= </code><code class="k">New </code><code class="i">JsonParser</code><code class="d">(</code><code class="i">str</code><code class="d">).</code><code class="i">ParseValue</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">Catch </code><code class="i">e</code><code class="d">:</code><code class="i">JsonError</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"invalid JSON"</code><br/>
+<code class="d">		</code><code class="k">Return </code><code class="l">0</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="r">' report how JSON is interpreted</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"value is of type "</code><code class="d">+ </code><code class="i">jsonTypes</code><code class="d">[ </code><code class="i">json</code><code class="d">.</code><code class="i">Type </code><code class="d">] +</code><code class="l">" and contains: "</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Select </code><code class="i">json</code><code class="d">.</code><code class="i">Type</code><br/>
+<code class="d">	</code><code class="r">' JsonObject</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">OBJECTTYPE</code><br/>
+<code class="d">		</code><code class="k">For Local </code><code class="i">jn </code><code class="d">:= </code><code class="k">Eachin </code><code class="i">JsonObject</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">GetData</code><code class="d">()</code><br/>
+<code class="d">			</code><code class="i">Print </code><code class="l">"node "</code><code class="d">+ </code><code class="i">jn</code><code class="d">.</code><code class="i">Key</code><code class="d">() +</code><code class="l">" containing "</code><code class="d">+ </code><code class="i">jn</code><code class="d">.</code><code class="i">Value</code><code class="d">().</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="k">End</code><br/>
+<code class="d">	</code><code class="r">' JsonArray</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">ARRAYTYPE</code><br/>
+<code class="d">		</code><code class="k">For Local </code><code class="i">entry </code><code class="d">:= </code><code class="k">Eachin </code><code class="i">JsonArray</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">GetData</code><code class="d">()</code><br/>
+<code class="d">			</code><code class="i">Print entry</code><code class="d">.</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="k">End</code><br/>
+<code class="d">	</code><code class="r">' JsonNull</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">NULLTYPE</code><br/>
+<code class="d">		</code><code class="i">Print JsonNull</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="r">' JsonBool</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">BOOLTYPE</code><br/>
+<code class="d">		</code><code class="i">Print JsonBool</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="r">' JsonNumber</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">NUMBERTYPE</code><br/>
+<code class="d">		</code><code class="i">Print JsonNumber</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="r">' JsonString</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="i">JsonValue</code><code class="d">.</code><code class="i">STRINGTYPE</code><br/>
+<code class="d">		</code><code class="i">Print JsonString</code><code class="d">( </code><code class="i">json </code><code class="d">).</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Return </code><code class="l">0</code><br/>
+<code class="k">End</code><br/>
+</div>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

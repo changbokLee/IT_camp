@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>mojo.audio</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>mojo.audio</small></h1>
+
+
+	<p>
+		The audio module contains functions for playing sounds and music.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+	<table class="index">
+		<tr><th>Imported By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_mojo.html">mojo</a></code> , 
+				
+					<code><a href="Modules_mojo.app.html">mojo.app</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented modules are listed here, there might be undocumented modules that import this one.</span>
+
+
+	<table class="index">
+		<tr><th>Classes</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo.audio_Sound.html">Sound</a></code></td>
+				<td>Sound objects contain audio data preloaded from files.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#ChannelState(Int)">ChannelState</a><small> : Int ( channel:Int )</small></code></td>
+				<td>Returns the state of the specified audio channel: 0 if the channel is currently stopped, 1 if the channel is currently playing, 2 if the channel is currently paused or -1 if the channel state cannot be determined.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadSound(String)">LoadSound</a><small> : Sound ( path:String )</small></code></td>
+				<td>Loads a sound from the specified path and returns it.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#MusicState()">MusicState</a><small> : Int ()</small></code></td>
+				<td>Returns 1 if music is currently playing, 0 if music is currently not playing or -1 if music state cannot be determined.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PauseChannel(Int)">PauseChannel</a><small> : Int ( channel:Int )</small></code></td>
+				<td>Pauses the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PauseMusic()">PauseMusic</a><small> : Int ()</small></code></td>
+				<td>Pauses music playback.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PlayMusic(String,[Int])">PlayMusic</a><small> : Int ( path:String, flags:Int=1 )</small></code></td>
+				<td>Plays an audio file through the internal music channel, using audio streaming if possible.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PlaySound(Sound,[Int],[Int])">PlaySound</a><small> : Int ( sound:Sound, channel:Int=0, flags:Int=0 )</small></code></td>
+				<td>Plays a sound through the specified channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ResumeChannel(Int)">ResumeChannel</a><small> : Int ( channel:Int )</small></code></td>
+				<td>Resumes the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ResumeMusic()">ResumeMusic</a><small> : Int ()</small></code></td>
+				<td>Resumes music playback.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetChannelPan(Int,Float)">SetChannelPan</a><small> : Int ( channel:Int, pan:Float )</small></code></td>
+				<td>Sets the pan of the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetChannelRate(Int,Float)">SetChannelRate</a><small> : Int ( channel:Int, rate:Float )</small></code></td>
+				<td>Sets the playback rate of the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetChannelVolume(Int,Float)">SetChannelVolume</a><small> : Int ( channel:Int, volume:Float )</small></code></td>
+				<td>Sets the volume of the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetMusicVolume(Float)">SetMusicVolume</a><small> : Int ( volume:Float )</small></code></td>
+				<td>Sets the music volume.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StopChannel(Int)">StopChannel</a><small> : Int ( channel:Int )</small></code></td>
+				<td>Stops the specified audio channel.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StopMusic()">StopMusic</a><small> : Int ()</small></code></td>
+				<td>Stops any music currently playing.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The audio module contains functions for playing sounds and music.
+</p>
+<p>
+It uses a simple 'fixed' 32 channel model which allows you to play sounds through any of 32 preset audio channels. Audio channels are identified by the use of integer ids in the range 0 to 31.
+</p>
+<p>
+Commands that alter a channel's volume, pan and pitch can be used to either dynamically modify a playing sound, or used on a stopped changed to prepare playback properties.
+</p>
+<p>
+In addition, a number of simple music commands are provided for streaming long samples from file.
+</p>
+<p>
+The music commands use a single internal channel, so it is not currently possible to stream multiple sample files simultaneously.
+</p>
+<p>
+Note that not all targets have equivalent audio capabilities. In particular:
+</p>
+<p>
+HTML5 : ChannelPan and ChannelRate have no effect.
+</p>
+<p>
+Flash : ChannelRate has no effect.
+</p>
+<p>
+Android : ChannelState always returns -1, ie: 'unknown'. Sounds to be used with PlaySound must be less than 1MB in length. Longer sounds can be played using the music commands.
+</p>
+<p>
+Also, not all audio formats are supported by all targets:
+</p>
+<p>
+wav : glfw, android, ios, xna (sounds)
+</p>
+<p>
+mp3 : flash, android, ios, xna (music)
+</p>
+<p>
+m4a : flash, android (music), ios
+</p>
+<p>
+wma : xna (music)
+</p>
+<p>
+ogg : android
+</p>
+<p>
+Finally, when designing for low performance hardware it's a good idea to try and minimize the number of channels used.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="ChannelState(Int)"></a>
+				<pre class="declaration">Function <strong>ChannelState</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the state of the specified audio channel: 0 if the channel is currently stopped, 1 if the channel is currently playing, 2 if the channel is currently paused or -1 if the channel state cannot be determined.
+</p>
+<p>
+Note: This function currently returns -1 on the android target.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadSound(String)"></a>
+				<pre class="declaration">Function <strong>LoadSound</strong> : <a href="Modules_mojo.audio_Sound.html">Sound</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Loads a sound from the specified path and returns it.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - file path of the sound to load.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="Modules_mojo.audio_Sound.html">Sound</a>, <a href="Programming_Resource paths.html">Resource paths</a>, <a href="Programming_File formats.html">File formats</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="MusicState()"></a>
+				<pre class="declaration">Function <strong>MusicState</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns 1 if music is currently playing, 0 if music is currently not playing or -1 if music state cannot be determined.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PauseChannel(Int)"></a>
+				<pre class="declaration">Function <strong>PauseChannel</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Pauses the specified audio channel. Has no effect if the audio channel is already paused or stopped.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PauseMusic()"></a>
+				<pre class="declaration">Function <strong>PauseMusic</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Pauses music playback. Has no effect if music is not currently playing.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PlayMusic(String,[Int])"></a>
+				<pre class="declaration">Function <strong>PlayMusic</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, flags:<a href="Programming_Keywords_Int.html">Int</a>=1 )</pre>
+				<p>
+Plays an audio file through the internal music channel, using audio streaming if possible.
+</p>
+<p>
+Since there is only one music channel, any music currently play will first be stopped.
+</p>
+<p>
+flags should be 1 to loop the music, 0 to play it just once.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="Programming_Resource paths.html">Resource paths</a>, <a href="Programming_File formats.html">File formats</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="PlaySound(Sound,[Int],[Int])"></a>
+				<pre class="declaration">Function <strong>PlaySound</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( sound:<a href="Modules_mojo.audio_Sound.html">Sound</a>, channel:<a href="Programming_Keywords_Int.html">Int</a>=0, flags:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Plays a sound through the specified channel.
+</p>
+<p>
+<b>flags</b> should be 1 to loop the sound, 0 to play it just once.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ResumeChannel(Int)"></a>
+				<pre class="declaration">Function <strong>ResumeChannel</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Resumes the specified audio channel. Has no effect if the audio channel is not currently paused.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ResumeMusic()"></a>
+				<pre class="declaration">Function <strong>ResumeMusic</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Resumes music playback. Has no effect if music is not currently paused.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetChannelPan(Int,Float)"></a>
+				<pre class="declaration">Function <strong>SetChannelPan</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a>, pan:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the pan of the specified audio channel.
+</p>
+<p>
+<b>pan</b> should be in the range -1 (full left) to +1 (full right).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetChannelRate(Int,Float)"></a>
+				<pre class="declaration">Function <strong>SetChannelRate</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a>, rate:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the playback rate of the specified audio channel. 
+</p>
+<p>
+This will affect the pitch of the sound being played.
+</p>
+<p>
+<b>rate</b> should be in the 0.5 (an octave lower) to 2 (an octave higher).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetChannelVolume(Int,Float)"></a>
+				<pre class="declaration">Function <strong>SetChannelVolume</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a>, volume:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the volume of the specified audio channel.
+</p>
+<p>
+<b>volume</b> should be in the range 0 (silence) to 1 (full volume).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetMusicVolume(Float)"></a>
+				<pre class="declaration">Function <strong>SetMusicVolume</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( volume:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the music volume.
+</p>
+<p>
+If music is currently playing, this will set the music volume immediately.
+</p>
+<p>
+Whether or not music is playing, this will set the volume to be used the next time PlayMusic is called.
+</p>
+<p>
+<b>volume</b> should be in the range 0 (silence) to 1 (full volume).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StopChannel(Int)"></a>
+				<pre class="declaration">Function <strong>StopChannel</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( channel:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Stops the specified audio channel.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StopMusic()"></a>
+				<pre class="declaration">Function <strong>StopMusic</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Stops any music currently playing.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

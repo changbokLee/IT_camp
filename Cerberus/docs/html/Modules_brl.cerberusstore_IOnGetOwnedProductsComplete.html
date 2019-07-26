@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.cerberusstore.html'>brl.cerberusstore</a>
+
+			<span>IOnGetOwnedProductsComplete</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Interface <small>IOnGetOwnedProductsComplete</small></h1>
+
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#OnGetOwnedProductsComplete(Int,Product[])">OnGetOwnedProductsComplete</a><small> : Void ( result:Int, products:Product[] )</small></code></td>
+				<td>Called when a <a href="Modules_brl.cerberusstore_CerberusStore.html#GetOwnedProductsAsync(IOnGetOwnedProductsComplete)">CerberusStore.GetOwnedProductsAsync</a> operation completes.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="OnGetOwnedProductsComplete(Int,Product[])"></a>
+				<pre class="declaration">Method <strong>OnGetOwnedProductsComplete</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( result:<a href="Programming_Keywords_Int.html">Int</a>, products:<a href="Modules_brl.cerberusstore_Product.html">Product</a>[] )</pre>
+				<p>
+Called when a <a href="Modules_brl.cerberusstore_CerberusStore.html#GetOwnedProductsAsync(IOnGetOwnedProductsComplete)">CerberusStore.GetOwnedProductsAsync</a> operation completes.
+</p>
+<p>
+<b>result</b> will be one of:
+</p>
+<table>
+<tr><th>Result</th><th>Description</th></tr>
+<tr><td>-1</td><td>Fatal error</td></tr>
+<tr><td>0</td><td>Success</td></tr>
+<tr><td>1</td><td>Cancelled by user</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

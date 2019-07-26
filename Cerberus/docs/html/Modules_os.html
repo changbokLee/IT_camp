@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>os</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>os</small></h1>
+
+
+	<p>
+		The os module provides miscellaneous operating system functionality, such as file, directory and environment variable access.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constants</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#FILETYPE_DIR">FILETYPE_DIR</a><small> : Int</small></code></td>
+				<td></td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FILETYPE_FILE">FILETYPE_FILE</a><small> : Int</small></code></td>
+				<td></td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FILETYPE_NONE">FILETYPE_NONE</a><small> : Int</small></code></td>
+				<td></td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#AppArgs()">AppArgs</a><small> : String[] ()</small></code></td>
+				<td>Returns the application startup parameters.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#AppPath()">AppPath</a><small> : String ()</small></code></td>
+				<td>Returns the file system path of the currently running application.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ChangeDir(String)">ChangeDir</a><small> : Int ( path:String )</small></code></td>
+				<td>Changes the current directory of the running application.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#CopyDir(String,String,Bool,Bool)">CopyDir</a><small> : Int ( srcpath:String, dstpath:String, recursive:Bool, hidden:Bool )</small></code></td>
+				<td>Copies the directory at srcpath to dstpath, creating dstpath if necessary.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#CopyFile(String,String)">CopyFile</a><small> : Int ( src:String, dst:String )</small></code></td>
+				<td>Copies a file from srcpath to dstpath.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#CreateDir(String)">CreateDir</a><small> : Int ( path:String )</small></code></td>
+				<td>Create a new directory at path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#CurrentDir()">CurrentDir</a><small> : String ()</small></code></td>
+				<td>Returns the current directory of the currently running application.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DeleteDir(String)">DeleteDir</a><small> : Int ( path:String )</small></code></td>
+				<td>Deletes the directory at path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DeleteDir(String,Bool)">DeleteDir</a><small> : Int ( path:String, recursive:Bool )</small></code></td>
+				<td>Deletes the directory at path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DeleteFile(String)">DeleteFile</a><small> : Int ( path:String )</small></code></td>
+				<td>Deletes the specified file.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Execute(String)">Execute</a><small> : Int ( cmd:String )</small></code></td>
+				<td>Executes a shell command and returns the result.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ExitApp(Int)">ExitApp</a><small> : Int ( retcode:Int )</small></code></td>
+				<td>Exits the application with the given return code.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ExtractDir(String)">ExtractDir</a><small> : String ( path:String )</small></code></td>
+				<td>Extracts and returns the directory of a file system path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ExtractExt(String)">ExtractExt</a><small> : String ( path:String )</small></code></td>
+				<td>Extracts and returns the file type extension of a file system path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FileSize(String)">FileSize</a><small> : Int ( path:String )</small></code></td>
+				<td>Return the length of a file, in bytes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FileTime(String)">FileTime</a><small> : Int ( path:String )</small></code></td>
+				<td>Returns the time the file at path was last modified.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FileType(String)">FileType</a><small> : Int ( path:String )</small></code></td>
+				<td>Returns an integer representing the type of a file, one of: 0 for no file, 1 for a normal file, 2 for a directory.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetEnv(String)">GetEnv</a><small> : String ( name:String )</small></code></td>
+				<td>Gets an environment variable.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#HostOS()">HostOS</a><small> : String ()</small></code></td>
+				<td>Returns a string describing the host operating system.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadDir(String)">LoadDir</a><small> : String[] ( path:String )</small></code></td>
+				<td>Loads the file names in the directory specified by path into a string array.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadDir(String,Bool,[Bool])">LoadDir</a><small> : String[] ( path:String, recursive:Bool, hidden:Bool=False )</small></code></td>
+				<td>Loads the file names in the directory specified by path into a string array.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadString(String)">LoadString</a><small> : String ( path:String )</small></code></td>
+				<td>Loads a string from the file at path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RealPath(String)">RealPath</a><small> : String ( path:String )</small></code></td>
+				<td>Returns the real, or 'absolute', file system path corresponding to the given path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SaveString(String,String)">SaveString</a><small> : Int ( str:String, path:String )</small></code></td>
+				<td>Saves str to a file specified by path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetEnv(String,String)">SetEnv</a><small> : Int ( name:String, value:String )</small></code></td>
+				<td>Sets an environment variable.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StripAll(String)">StripAll</a><small> : String ( path:String )</small></code></td>
+				<td>Removes both the directory and file extension from a file system path, returning just the file name.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StripDir(String)">StripDir</a><small> : String ( path:String )</small></code></td>
+				<td>Removes the directory from a file system path, and returns the file name and extension.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StripExt(String)">StripExt</a><small> : String ( path:String )</small></code></td>
+				<td>Extracts and returns the file extension of a file system path.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The os module provides miscellaneous operating system functionality, such as file, directory and environment variable access.
+</p>
+<p>
+The os module also includes several string processing functions for extracting various components from file system paths such as directory and file extension.
+</p>
+<p>
+IMPORTANT: The os module is currently only available for the glfw and stdcpp targets.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Constants Documentation</h2>
+		
+			<article>
+				<a name="FILETYPE_DIR"></a>
+				<pre class="declaration">Const <strong>FILETYPE_DIR</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FILETYPE_FILE"></a>
+				<pre class="declaration">Const <strong>FILETYPE_FILE</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FILETYPE_NONE"></a>
+				<pre class="declaration">Const <strong>FILETYPE_NONE</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="AppArgs()"></a>
+				<pre class="declaration">Function <strong>AppArgs</strong> : <a href="Modules_cerberus.lang_String.html">String</a>[] ()</pre>
+				<p>
+Returns the application startup parameters.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="AppPath()"></a>
+				<pre class="declaration">Function <strong>AppPath</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Returns the file system path of the currently running application.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ChangeDir(String)"></a>
+				<pre class="declaration">Function <strong>ChangeDir</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Changes the current directory of the running application.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - file system path of directory.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="CopyDir(String,String,Bool,Bool)"></a>
+				<pre class="declaration">Function <strong>CopyDir</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( srcpath:<a href="Modules_cerberus.lang_String.html">String</a>, dstpath:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a>, hidden:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Copies the directory at srcpath to dstpath, creating dstpath if necessary.
+</p>
+<p>
+If recursive is True, then subdirectories are also copied.
+</p>
+<p>
+If hidden is True, then hidden files - files starting with a dot - are also copied.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+srcpath - file system path of source directory.
+</p>
+<p>
+dstpath - file system path of destination directory.
+</p>
+<p>
+recursive - flag indicating whether subdirectories should also be copied.
+</p>
+<p>
+hidden - flag indicating whther hidden files should also be copied.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="CopyFile(String,String)"></a>
+				<pre class="declaration">Function <strong>CopyFile</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( src:<a href="Modules_cerberus.lang_String.html">String</a>, dst:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Copies a file from srcpath to dstpath.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+srcpath - file system path of source file.
+</p>
+<p>
+dstpath - file system path of destination file.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="CreateDir(String)"></a>
+				<pre class="declaration">Function <strong>CreateDir</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Create a new directory at path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="CurrentDir()"></a>
+				<pre class="declaration">Function <strong>CurrentDir</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Returns the current directory of the currently running application.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DeleteDir(String)"></a>
+				<pre class="declaration">Function <strong>DeleteDir</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Deletes the directory at path.
+</p>
+<p>
+If recursive is True, then subdirectories are also deleted - use with care!
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - file system path of directory to delete.
+</p>
+<p>
+recursive - a flag indicating whether subdirectories should also be deleted.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DeleteDir(String,Bool)"></a>
+				<pre class="declaration">Function <strong>DeleteDir</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Deletes the directory at path.
+</p>
+<p>
+If recursive is True, then subdirectories are also deleted - use with care!
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - file system path of directory to delete.
+</p>
+<p>
+recursive - a flag indicating whether subdirectories should also be deleted.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DeleteFile(String)"></a>
+				<pre class="declaration">Function <strong>DeleteFile</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Deletes the specified file.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Execute(String)"></a>
+				<pre class="declaration">Function <strong>Execute</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( cmd:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Executes a shell command and returns the result. This is generally 0 for success, or non-0 for failure.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+cmd - command to execute.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ExitApp(Int)"></a>
+				<pre class="declaration">Function <strong>ExitApp</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( retcode:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Exits the application with the given return code.
+</p>
+<p>
+In general, ExitApp should return 0 if successful, or <0 upon failure.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+retcode - application return code.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ExtractDir(String)"></a>
+				<pre class="declaration">Function <strong>ExtractDir</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Extracts and returns the directory of a file system path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ExtractExt(String)"></a>
+				<pre class="declaration">Function <strong>ExtractExt</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Extracts and returns the file type extension of a file system path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FileSize(String)"></a>
+				<pre class="declaration">Function <strong>FileSize</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Return the length of a file, in bytes.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FileTime(String)"></a>
+				<pre class="declaration">Function <strong>FileTime</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns the time the file at path was last modified.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FileType(String)"></a>
+				<pre class="declaration">Function <strong>FileType</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns an integer representing the type of a file, one of: 0 for no file, 1 for a normal file, 2 for a directory.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetEnv(String)"></a>
+				<pre class="declaration">Function <strong>GetEnv</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Gets an environment variable.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+name - name of environment var.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="HostOS()"></a>
+				<pre class="declaration">Function <strong>HostOS</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Returns a string describing the host operating system. The returned value will be one of:
+</p>
+<table>
+<tr><th>HostOS</th><th>Operating system</th></tr>
+<tr><td><code>winnt</code></td><td>Windows</td></tr>
+<tr><td><code>macos</code></td><td>MacOS</td></tr>
+<tr><td><code>linux</code></td><td>Linux</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadDir(String)"></a>
+				<pre class="declaration">Function <strong>LoadDir</strong> : <a href="Modules_cerberus.lang_String.html">String</a>[] ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Loads the file names in the directory specified by path into a string array.
+</p>
+<p>
+If recursive is True, LoadDir will also load file names in subdirectories, but will not add subdirectories to the output string array.
+</p>
+<p>
+If hidden is True, then hidden files - files starting with a dot - are also loaded.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+<p>
+recursive - a flag indicating whether subdirectories should also be loaded.
+</p>
+<p>
+hidden - a flag indicating whether hidden files should also be loaded.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadDir(String,Bool,[Bool])"></a>
+				<pre class="declaration">Function <strong>LoadDir</strong> : <a href="Modules_cerberus.lang_String.html">String</a>[] ( path:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a>, hidden:<a href="Programming_Keywords_Bool.html">Bool</a>=False )</pre>
+				<p>
+Loads the file names in the directory specified by path into a string array.
+</p>
+<p>
+If recursive is True, LoadDir will also load file names in subdirectories.
+</p>
+<p>
+If hidden is True, then hidden files - files starting with a dot - are also loaded.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+<p>
+recursive - a flag indicating whether subdirectories should also be loaded.
+</p>
+<p>
+hidden - a flag indicating whether hidden files should also be loaded.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadString(String)"></a>
+				<pre class="declaration">Function <strong>LoadString</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Loads a string from the file at path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RealPath(String)"></a>
+				<pre class="declaration">Function <strong>RealPath</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns the real, or 'absolute', file system path corresponding to the given path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SaveString(String,String)"></a>
+				<pre class="declaration">Function <strong>SaveString</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a>, path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Saves str to a file specified by path.
+</p>
+<p>
+If a file already exists at path, it will be overwritten.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+str - a string value.
+</p>
+<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetEnv(String,String)"></a>
+				<pre class="declaration">Function <strong>SetEnv</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Sets an environment variable.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+name - name of environment var.
+</p>
+<p>
+value - value to set environment var to.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StripAll(String)"></a>
+				<pre class="declaration">Function <strong>StripAll</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Removes both the directory and file extension from a file system path, returning just the file name.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StripDir(String)"></a>
+				<pre class="declaration">Function <strong>StripDir</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Removes the directory from a file system path, and returns the file name and extension.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StripExt(String)"></a>
+				<pre class="declaration">Function <strong>StripExt</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Extracts and returns the file extension of a file system path.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+path - a file system path.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

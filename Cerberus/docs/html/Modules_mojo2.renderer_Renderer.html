@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.renderer.html'>mojo2.renderer</a>
+
+			<span>Renderer</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Renderer</small></h1>
+
+
+	<p>
+		A renderer is used to draw complex scenes using multipass rendering.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Layers()">Layers</a><small> : Stack&lt;ILayer&gt; ()</small></code></td>
+				<td>Get layer stack.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Create a new renderer.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Render()">Render</a><small> : Void ()</small></code></td>
+				<td>Render everything.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetAmbientLight(Float[])">SetAmbientLight</a><small> : Void ( ambientLight:Float[] )</small></code></td>
+				<td>Set ambient light.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetCameraMatrix(Float[])">SetCameraMatrix</a><small> : Void ( cameraMatrix:Float[] )</small></code></td>
+				<td>Set 4x4 camera matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetClearColor(Float[])">SetClearColor</a><small> : Void ( clearColor:Float[] )</small></code></td>
+				<td>Set clear color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetClearMode(Int)">SetClearMode</a><small> : Void ( clearMode:Int )</small></code></td>
+				<td>Set clear mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetProjectionMatrix(Float[])">SetProjectionMatrix</a><small> : Void ( projectionMatrix:Float[] )</small></code></td>
+				<td>Set 4x4 projection matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetRenderTarget(Image)">SetRenderTarget</a><small> : Void ( image:Image )</small></code></td>
+				<td>Change render target.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetViewport(Int,Int,Int,Int)">SetViewport</a><small> : Void ( x:Int, y:Int, width:Int, height:Int )</small></code></td>
+				<td>Set viewport.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+A renderer is used to draw complex scenes using multipass rendering.
+</p>
+<p>
+To do this, renderer uses the idea of layers to manage the drawing of 2d primitives. Layers are added to a renderer by pushing them onto a renderer's layer stack and, when it is time to render, the renderer calls the <a href="Modules_mojo2.renderer_ILayer.html#OnRenderLayer(Stack<DrawList>)">ILayer.OnRenderLayer</a> method to cause each layer to render itself. Layers are rendered in the order they are pushed on the layer stack.
+</p>
+<p>
+To use renderer, you must write classes that implement the <a href="Modules_mojo2.renderer_ILight.html">ILight</a> and <a href="Modules_mojo2.renderer_ILayer.html">ILayer</a> interfaces. You add layer objects to a renderer by pushing them on the renderer's <a href="#Layers()">Layers</a> stack before rendering. You add lights when the renderer calls the <a href="Modules_mojo2.renderer_ILayer.html#EnumLayerLights(Stack<ILight>)">ILayer.EnumLayerLights</a> method during rendering.
+</p>
+<p>
+Renderer also handles shadow rendering. To add shadow casters to a scene, you can either call the <a href="Modules_mojo2.graphics_DrawList.html#AddShadowCaster(ShadowCaster,[Float],[Float],[Float],[Float],[Float])">DrawList.AddShadowCaster</a> method while rendering a layer inside <a href="Modules_mojo2.renderer_ILayer.html#OnRenderLayer(Stack<DrawList>)">ILayer.OnRenderLayer</a>, or you can simply draw images with shadow casters attached via <a href="Modules_mojo2.graphics_Image.html#SetShadowCaster(ShadowCaster)">Image.SetShadowCaster</a>. 
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Layers()"></a>
+				<pre class="declaration">Method <strong>Layers</strong> : <a href="Modules_cerberus.stack_Stack.html">Stack</a>&lt;ILayer&gt; () Property</pre>
+				<p>
+Get layer stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Create a new renderer.
+</p>
+<p>
+By default, a renderer will render to the back buffer. To change this, use <a href="#SetRenderTarget(Image)">SetRenderTarget</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Render()"></a>
+				<pre class="declaration">Method <strong>Render</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Render everything.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetAmbientLight(Float[])"></a>
+				<pre class="declaration">Method <strong>SetAmbientLight</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( ambientLight:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set ambient light.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetCameraMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>SetCameraMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( cameraMatrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set 4x4 camera matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetClearColor(Float[])"></a>
+				<pre class="declaration">Method <strong>SetClearColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( clearColor:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set clear color.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetClearMode(Int)"></a>
+				<pre class="declaration">Method <strong>SetClearMode</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( clearMode:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set clear mode.
+</p>
+<table>
+<tr><th><b>Mode</b></th><th><b>Effect</b></th></tr>
+<tr><td>0</td><td>Canvas is not cleared by renderer.</td></tr>
+<tr><td>1</td><td>Canvas is cleared using clear color.</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetProjectionMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>SetProjectionMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( projectionMatrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set 4x4 projection matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetRenderTarget(Image)"></a>
+				<pre class="declaration">Method <strong>SetRenderTarget</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( image:<a href="Modules_mojo2.graphics_Image.html">Image</a> )</pre>
+				<p>
+Change render target.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetViewport(Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>SetViewport</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set viewport.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

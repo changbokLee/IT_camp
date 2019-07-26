@@ -1,0 +1,68 @@
+Import mojo.app
+Import mojo.graphics
+
+
+
+Class MyApp Extends App
+	
+	Field GameCanvas:Canvas
+	Field Circle:Image
+	Field CircleX: Float = 0
+	Field CircleY: Float =0
+
+	Method OnCreate()
+		GameCanvas = New Canvas
+		LoadGame()
+		SetUpdateRate 0
+		
+	End
+	
+	Method LoadGame()
+		
+		Circle =Image.Load("circle.png",CircleX, CircleY)
+		
+	
+	
+	End
+	
+	Method OnUpdate()
+		
+		LoadGame()
+		 			
+	End
+	
+	Method OnRender()
+		Cls 128,0,255
+		GameCanvas.DrawImage(Circle,CircleX,CircleY)
+		
+		'Circle go right'
+		If KeyDown(KEY_A)	Then
+			CircleX = CircleX + 0.01
+		End
+		
+		'Circle left'
+		
+		If KeyDown(Key_B) Then
+			Circle X = CircleX -0.01
+		End
+		
+		'Circle go up'
+		If KeyDown(KEY_Y)	Then
+			CircleY = CircleY + 0.01
+		End
+		
+		'Circle go down'
+		
+		If KeyDown(Key_B) Then
+			Circle Y = CircleY -0.01
+		End
+		
+		Game.Canvas.Flush
+	End
+	
+
+End
+
+Function Main()
+	New MyApp
+End

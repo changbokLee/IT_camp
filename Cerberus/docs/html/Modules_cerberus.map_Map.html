@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_cerberus.map.html'>cerberus.map</a>
+
+			<span>Map</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Map&lt;K,V&gt;</small></h1>
+
+
+	<p>
+		A map is a container style object that provides a mechanism for associating <b>key</b> objects with <b>value</b> objects.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extended By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_cerberus.map_FloatMap.html">FloatMap</a></code> , 
+				
+					<code><a href="Modules_cerberus.map_IntMap.html">IntMap</a></code> , 
+				
+					<code><a href="Modules_cerberus.map_StringMap.html">StringMap</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented classes are listed here, there might be undocumented classes that extend this one.</span>
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Add(K,V)">Add</a><small> : Bool ( key:K, value:V )</small></code></td>
+				<td>Adds a key/value pair to the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clear()">Clear</a><small> : Int ()</small></code></td>
+				<td>Removes all keys and values from the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Compare(K,K)">Compare</a><small> : Int ( lhs:K, rhs:K )</small></code></td>
+				<td>The compare method must return a negative value if lhs < rhs, a positive value if lhs > rhs, or 0 if lhs = rhs.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Contains(K)">Contains</a><small> : Bool ( key:K )</small></code></td>
+				<td>Return true if the specified key is contained in the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Count()">Count</a><small> : Int ()</small></code></td>
+				<td>Returns the number of key/value pairs in the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FirstNode()">FirstNode</a><small> : Node&lt;K,V&gt; ()</small></code></td>
+				<td>Returns the first node in the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Get(K)">Get</a><small> : V ( key:K )</small></code></td>
+				<td>Returns the value contained in the map associated with the specified key.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#IsEmpty()">IsEmpty</a><small> : Bool ()</small></code></td>
+				<td>Returns True if the map is empty, ie: contains no keys/values, else False.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Keys()">Keys</a><small> : Object ()</small></code></td>
+				<td>Returns an object that can be used to iterate through all keys in a map with a For Eachin loop.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LastNode()">LastNode</a><small> : Node&lt;K,V&gt; ()</small></code></td>
+				<td>Returns the last node in the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ObjectEnumerator()">ObjectEnumerator</a><small> : Object ()</small></code></td>
+				<td>Returns an object that can be used to enumerate all nodes in the map with a For EachIn loop.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Remove(K)">Remove</a><small> : Int ( key:K )</small></code></td>
+				<td>Removes the key from the map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(K,V)">Set</a><small> : Bool ( key:K, value:V )</small></code></td>
+				<td>Set the value in a map associated with the given key.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Update(K,V)">Update</a><small> : Bool ( key:K, value:V )</small></code></td>
+				<td>Updates an existing key/value pair.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Values()">Values</a><small> : Object ()</small></code></td>
+				<td>Returns an object that can be used to enumerate all values in the map with a For Eachin loop.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+A map is a container style object that provides a mechanism for associating <b>key</b> objects with <b>value</b> objects. This is done using special node objects that contains a reference to both a key and a value, along with information about the node's location within the map.
+</p>
+<p>
+Each key in a map occurs exactly once - a map cannot contain multiple equivalent keys.
+</p>
+<p>
+Maps are very efficient, and can handle inserting, removing and finding keys in 'O(log2)' time. That is, the time needed to insert, remove or find a key is proportional to log2 of the number of items in the map.
+</p>
+<p>
+Classes that extend map must implement the Compare method. This method is used by the map to compare keys, and must return -1 if the first key is less than the second, +1 if the first key is greater than the second, or 0 if the  keys are equal.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Add(K,V)"></a>
+				<pre class="declaration">Method <strong>Add</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( key:K, value:V )</pre>
+				<p>
+Adds a key/value pair to the map.
+</p>
+<p>
+The map is only modified if it does not already contain the given key, in which case a new key/value association is created and true is returned.
+</p>
+<p>
+If the map already contains key, it is not modified and false is returned.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+key, value - key/value pair to add to map.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Set(K,V)">Set</a>, <a href="#Get(K)">Get</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Clear()"></a>
+				<pre class="declaration">Method <strong>Clear</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Removes all keys and values from the map.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Compare(K,K)"></a>
+				<pre class="declaration">Method <strong>Compare</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( lhs:K, rhs:K )</pre>
+				<p>
+The compare method must return a negative value if lhs < rhs, a positive value if lhs > rhs, or 0 if lhs = rhs.
+</p>
+<p>
+The compare method is abstract so must be implemented by all subclasses of Map.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Contains(K)"></a>
+				<pre class="declaration">Method <strong>Contains</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( key:K )</pre>
+				<p>
+Return true if the specified key is contained in the map.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+key - value to check
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Count()"></a>
+				<pre class="declaration">Method <strong>Count</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the number of key/value pairs in the map.
+</p>
+<p>
+Note that this method takes O(N) time, ie: it must visit each element of the map.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FirstNode()"></a>
+				<pre class="declaration">Method <strong>FirstNode</strong> : <a href="Modules_cerberus.map_Node.html">Node</a>&lt;K,V&gt; ()</pre>
+				<p>
+Returns the first node in the map. This is the node with the minimum key value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Get(K)"></a>
+				<pre class="declaration">Method <strong>Get</strong> : V ( key:K )</pre>
+				<p>
+Returns the value contained in the map associated with the specified key.
+</p>
+<p>
+If the key is not contained in the map, null is returned.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+key - key to find value for.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Add(K,V)">Add</a>, <a href="#Set(K,V)">Set</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="IsEmpty()"></a>
+				<pre class="declaration">Method <strong>IsEmpty</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ()</pre>
+				<p>
+Returns True if the map is empty, ie: contains no keys/values, else False.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Keys()"></a>
+				<pre class="declaration">Method <strong>Keys</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Returns an object that can be used to iterate through all keys in a map with a For Eachin loop.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LastNode()"></a>
+				<pre class="declaration">Method <strong>LastNode</strong> : <a href="Modules_cerberus.map_Node.html">Node</a>&lt;K,V&gt; ()</pre>
+				<p>
+Returns the last node in the map. This is the node with the maximum key value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ObjectEnumerator()"></a>
+				<pre class="declaration">Method <strong>ObjectEnumerator</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Returns an object that can be used to enumerate all nodes in the map with a For EachIn loop.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="Modules_cerberus.map_Node.html">Node</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Remove(K)"></a>
+				<pre class="declaration">Method <strong>Remove</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( key:K )</pre>
+				<p>
+Removes the key from the map.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+key - key to remove
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(K,V)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( key:K, value:V )</pre>
+				<p>
+Set the value in a map associated with the given key.
+</p>
+<p>
+Returns true if key was added to the map, or false if map already contained the given key.
+</p>
+<p>
+The map is always updated - the return value only indicates whether an existing key/value association was updated (false) or a new one created (true).
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+key, value - key/value pair to set.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Add(K,V)">Add</a>, <a href="#Get(K)">Get</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Update(K,V)"></a>
+				<pre class="declaration">Method <strong>Update</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( key:K, value:V )</pre>
+				<p>
+Updates an existing key/value pair.
+</p>
+<p>
+If the map does not contain <b>key</b>, the map is not modified and false is returned.
+</p>
+<p>
+Otherwise, the map is updated and true is returned.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Values()"></a>
+				<pre class="declaration">Method <strong>Values</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Returns an object that can be used to enumerate all values in the map with a For Eachin loop.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

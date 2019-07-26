@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>cerberus.math</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>cerberus.math</small></h1>
+
+
+	<p>
+		The math module provides math related constants and functions.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+	<table class="index">
+		<tr><th>Imported By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_cerberus.html">cerberus</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented modules are listed here, there might be undocumented modules that import this one.</span>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constants</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#HALFPI">HALFPI</a><small> : Float</small></code></td>
+				<td></td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PI">PI</a><small> : Float</small></code></td>
+				<td></td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#TWOPI">TWOPI</a><small> : Float</small></code></td>
+				<td></td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Abs(Float)">Abs</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the absolute value of <b>x</b>, that is, +<b>x</b> if <b>x</b>>=0 and -<b>x</b> if <b>x</b><0.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Abs(Int)">Abs</a><small> : Int ( x:Int )</small></code></td>
+				<td>Returns the absolute value of <b>x</b>, that is, +<b>x</b> if <b>x</b>>=0 and -<b>x</b> if <b>x</b><0.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ACos(Float)">ACos</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc cosine of <b>x</b>, in degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ACosr(Float)">ACosr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc cosine of <b>x</b>, in radians.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ASin(Float)">ASin</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc sine of <b>x</b>, in degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ASinr(Float)">ASinr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc sine of <b>x</b>, in radians.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ATan(Float)">ATan</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc tangent of <b>x</b>, in degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ATan2(Float,Float)">ATan2</a><small> : Float ( y:Float, x:Float )</small></code></td>
+				<td>Returns the arc tangent of <b>x</b> / <b>y</b>, in degrees ranging from -180 to +180.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ATan2r(Float,Float)">ATan2r</a><small> : Float ( y:Float, x:Float )</small></code></td>
+				<td>Returns the arc tangent of <b>x</b> / <b>y</b>, in radians ranging from -PI to +PI.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ATanr(Float)">ATanr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the arc tangent of <b>x</b>, in radians.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Ceil(Float)">Ceil</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the smallest integral value that is not less than <b>x</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clamp(Float,Float,Float)">Clamp</a><small> : Float ( x:Float, min:Float, max:Float )</small></code></td>
+				<td>Clamps <b>x</b> to the range <b>min</b> through <b>max</b> inclusive.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clamp(Int,Int,Int)">Clamp</a><small> : Int ( x:Int, min:Int, max:Int )</small></code></td>
+				<td>Clamps <b>x</b> to the range <b>min</b> through <b>max</b> inclusive.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Cos(Float)">Cos</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the cosine of <b>x</b> degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Cosr(Float)">Cosr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the cosine of <b>x</b> radians.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Exp(Float)">Exp</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the base-e exponential function of <b>x</b>, which is the <b>e</b> number raised to the power <b>x</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Floor(Float)">Floor</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the largest integral value that is not greater than <b>x</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Log(Float)">Log</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the natural logarithm of <b>x</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Max(Float,Float)">Max</a><small> : Float ( x:Float, y:Float )</small></code></td>
+				<td>Returns the maximum of <b>x</b> and <b>y</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Max(Int,Int)">Max</a><small> : Int ( x:Int, y:Int )</small></code></td>
+				<td>Returns the maximum of <b>x</b> and <b>y</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Min(Float,Float)">Min</a><small> : Float ( x:Float, y:Float )</small></code></td>
+				<td>Returns the minimum of <b>x</b> and <b>y</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Min(Int,Int)">Min</a><small> : Int ( x:Int, y:Int )</small></code></td>
+				<td>Returns the minimum of <b>x</b> and <b>y</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Pow(Float,Float)">Pow</a><small> : Float ( x:Float, y:Float )</small></code></td>
+				<td>Returns <b>x</b> raised to the power <b>y</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sgn(Float)">Sgn</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns -1 if <b>x</b> is less than zero, +1 if <b>x</b> is greater than zero or 0 if <b>x</b> is equal to zero.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sgn(Int)">Sgn</a><small> : Int ( x:Int )</small></code></td>
+				<td>Returns -1 if <b>x</b> is less than zero, +1 if <b>x</b> is greater than zero or 0 if <b>x</b> is equal to zero.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sin(Float)">Sin</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the sine of <b>x</b> degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sinr(Float)">Sinr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the sine of <b>x</b> radians.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sqrt(Float)">Sqrt</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the square root of <b>x</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Tan(Float)">Tan</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the tangent of <b>x</b> degrees.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Tanr(Float)">Tanr</a><small> : Float ( x:Float )</small></code></td>
+				<td>Returns the tangent of <b>x</b> radians.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The math module provides math related constants and functions.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Constants Documentation</h2>
+		
+			<article>
+				<a name="HALFPI"></a>
+				<pre class="declaration">Const <strong>HALFPI</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PI"></a>
+				<pre class="declaration">Const <strong>PI</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="TWOPI"></a>
+				<pre class="declaration">Const <strong>TWOPI</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Abs(Float)"></a>
+				<pre class="declaration">Function <strong>Abs</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the absolute value of <b>x</b>, that is, +<b>x</b> if <b>x</b>>=0 and -<b>x</b> if <b>x</b><0.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - input value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Abs(Int)"></a>
+				<pre class="declaration">Function <strong>Abs</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the absolute value of <b>x</b>, that is, +<b>x</b> if <b>x</b>>=0 and -<b>x</b> if <b>x</b><0.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - input value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ACos(Float)"></a>
+				<pre class="declaration">Function <strong>ACos</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc cosine of <b>x</b>, in degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ACosr(Float)"></a>
+				<pre class="declaration">Function <strong>ACosr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc cosine of <b>x</b>, in radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ASin(Float)"></a>
+				<pre class="declaration">Function <strong>ASin</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc sine of <b>x</b>, in degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ASinr(Float)"></a>
+				<pre class="declaration">Function <strong>ASinr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc sine of <b>x</b>, in radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ATan(Float)"></a>
+				<pre class="declaration">Function <strong>ATan</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc tangent of <b>x</b>, in degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ATan2(Float,Float)"></a>
+				<pre class="declaration">Function <strong>ATan2</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( y:<a href="Programming_Keywords_Float.html">Float</a>, x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc tangent of <b>x</b> / <b>y</b>, in degrees ranging from -180 to +180.
+</p>
+<p>
+The function uses the signs of <b>x</b> and <b>y</b> to compute the correct quadrant for the result.
+</p>
+<div class="pretty">
+<code class="i">Print Atan2</code><code class="d">(</code><code class="l">0</code><code class="d">,</code><code class="l">1</code><code class="d">)	</code><code class="r">' 0</code><br/>
+<code class="i">Print Atan2</code><code class="d">(</code><code class="l">1</code><code class="d">,</code><code class="l">1</code><code class="d">)	</code><code class="r">' 45</code><br/>
+<code class="i">Print Atan2</code><code class="d">(</code><code class="l">1</code><code class="d">,</code><code class="l">0</code><code class="d">)	</code><code class="r">' 90</code><br/>
+<code class="i">Print Atan2</code><code class="d">(-</code><code class="l">1</code><code class="d">,</code><code class="l">0</code><code class="d">)	</code><code class="r">' -90</code><br/>
+</div>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - floating point values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ATan2r(Float,Float)"></a>
+				<pre class="declaration">Function <strong>ATan2r</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( y:<a href="Programming_Keywords_Float.html">Float</a>, x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc tangent of <b>x</b> / <b>y</b>, in radians ranging from -PI to +PI.
+</p>
+<p>
+The function uses the signs of <b>x</b> and <b>y</b> to compute the correct quadrant for the result.
+</p>
+<div class="pretty">
+<code class="i">Print Atan2r</code><code class="d">(</code><code class="l">0</code><code class="d">,</code><code class="l">1</code><code class="d">)	</code><code class="r">' 0</code><br/>
+<code class="i">Print Atan2r</code><code class="d">(</code><code class="l">1</code><code class="d">,</code><code class="l">1</code><code class="d">)	</code><code class="r">' approx PI/4</code><br/>
+<code class="i">Print Atan2r</code><code class="d">(</code><code class="l">1</code><code class="d">,</code><code class="l">0</code><code class="d">)	</code><code class="r">' approx PI/2</code><br/>
+<code class="i">Print Atan2r</code><code class="d">(-</code><code class="l">1</code><code class="d">,</code><code class="l">0</code><code class="d">)	</code><code class="r">' approx -PI/2</code><br/>
+</div>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - floating point values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ATanr(Float)"></a>
+				<pre class="declaration">Function <strong>ATanr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the arc tangent of <b>x</b>, in radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value in the range -1 to 1 (inclusive).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Ceil(Float)"></a>
+				<pre class="declaration">Function <strong>Ceil</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the smallest integral value that is not less than <b>x</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Clamp(Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>Clamp</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, min:<a href="Programming_Keywords_Float.html">Float</a>, max:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Clamps <b>x</b> to the range <b>min</b> through <b>max</b> inclusive.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - value to clamp
+</p>
+<p>
+<b>min</b> - minimum returnable value
+</p>
+<p>
+<b>max</b> - maximum returnable value
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Clamp(Int,Int,Int)"></a>
+				<pre class="declaration">Function <strong>Clamp</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, min:<a href="Programming_Keywords_Int.html">Int</a>, max:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Clamps <b>x</b> to the range <b>min</b> through <b>max</b> inclusive.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - value to clamp
+</p>
+<p>
+<b>min</b> - minimum returnable value
+</p>
+<p>
+<b>max</b> - maximum returnable value
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Cos(Float)"></a>
+				<pre class="declaration">Function <strong>Cos</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the cosine of <b>x</b> degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in degrees.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Cosr(Float)"></a>
+				<pre class="declaration">Function <strong>Cosr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the cosine of <b>x</b> radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in radians.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Exp(Float)"></a>
+				<pre class="declaration">Function <strong>Exp</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the base-e exponential function of <b>x</b>, which is the <b>e</b> number raised to the power <b>x</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Floor(Float)"></a>
+				<pre class="declaration">Function <strong>Floor</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the largest integral value that is not greater than <b>x</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Log(Float)"></a>
+				<pre class="declaration">Function <strong>Log</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the natural logarithm of <b>x</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Max(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Max</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the maximum of <b>x</b> and <b>y</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - input values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Max(Int,Int)"></a>
+				<pre class="declaration">Function <strong>Max</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the maximum of <b>x</b> and <b>y</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - input values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Min(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Min</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the minimum of <b>x</b> and <b>y</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - input values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Min(Int,Int)"></a>
+				<pre class="declaration">Function <strong>Min</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the minimum of <b>x</b> and <b>y</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - input values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Pow(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Pow</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns <b>x</b> raised to the power <b>y</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b>, <b>y</b> - float point values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sgn(Float)"></a>
+				<pre class="declaration">Function <strong>Sgn</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns -1 if <b>x</b> is less than zero, +1 if <b>x</b> is greater than zero or 0 if <b>x</b> is equal to zero.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - input value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sgn(Int)"></a>
+				<pre class="declaration">Function <strong>Sgn</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns -1 if <b>x</b> is less than zero, +1 if <b>x</b> is greater than zero or 0 if <b>x</b> is equal to zero.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - input value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sin(Float)"></a>
+				<pre class="declaration">Function <strong>Sin</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the sine of <b>x</b> degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in degrees.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sinr(Float)"></a>
+				<pre class="declaration">Function <strong>Sinr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the sine of <b>x</b> radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in radians.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sqrt(Float)"></a>
+				<pre class="declaration">Function <strong>Sqrt</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the square root of <b>x</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - floating point value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Tan(Float)"></a>
+				<pre class="declaration">Function <strong>Tan</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the tangent of <b>x</b> degrees.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in degrees.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Tanr(Float)"></a>
+				<pre class="declaration">Function <strong>Tanr</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( x:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns the tangent of <b>x</b> radians.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>x</b> - angle in radians.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

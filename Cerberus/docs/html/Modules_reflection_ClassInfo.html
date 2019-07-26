@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_reflection.html'>reflection</a>
+
+			<span>ClassInfo</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>ClassInfo</small></h1>
+
+
+	<p>
+		ClassInfo objects describe classes declared by your program and in modules.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Attributes()">Attributes</a><small> : Int ()</small></code></td>
+				<td>Get class attributes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ElementType()">ElementType</a><small> : ClassInfo ()</small></code></td>
+				<td>Get array element type.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Interfaces()">Interfaces</a><small> : ClassInfo[] ()</small></code></td>
+				<td>Get interfaces implemented by this class, or interfaces extended by this interface.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Name()">Name</a><small> : String ()</small></code></td>
+				<td>Get name of class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SuperClass()">SuperClass</a><small> : ClassInfo ()</small></code></td>
+				<td>Get super class of class.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#ArrayLength(Object)">ArrayLength</a><small> : Int ( inst:Object )</small></code></td>
+				<td>Get length of an array.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ExtendsClass(ClassInfo)">ExtendsClass</a><small> : Bool ( clas:ClassInfo )</small></code></td>
+				<td>Check if class extends another class, or implements an interface.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetConst(String,Bool)">GetConst</a><small> : ConstInfo ( name:String, recursive:Bool )</small></code></td>
+				<td>Get a class const.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetConstructor(ClassInfo[])">GetConstructor</a><small> : FunctionInfo ( argTypes:ClassInfo[] )</small></code></td>
+				<td>Get a class constructor.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetConstructors()">GetConstructors</a><small> : FunctionInfo[] ()</small></code></td>
+				<td>Get all constructors declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetConsts(Bool)">GetConsts</a><small> : ConstInfo[] ( recursive:Bool )</small></code></td>
+				<td>Get all consts declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetElement(Object,Int)">GetElement</a><small> : Object ( inst:Object, index:Int )</small></code></td>
+				<td>Get an array element.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetField(String,Bool)">GetField</a><small> : FieldInfo ( name:String, recursive:Bool )</small></code></td>
+				<td>Get a class field.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFields(Bool)">GetFields</a><small> : FieldInfo[] ( recursive:Bool )</small></code></td>
+				<td>Get all fields declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFunction(String,ClassInfo[],Bool)">GetFunction</a><small> : FunctionInfo ( name:String, argTypes:ClassInfo[], recursive:Bool )</small></code></td>
+				<td>Get a class function.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFunctions(Bool)">GetFunctions</a><small> : FunctionInfo[] ( recursive:Bool )</small></code></td>
+				<td>Get all functions declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetGlobal(String,Bool)">GetGlobal</a><small> : GlobalInfo ( name:String, recursive:Bool )</small></code></td>
+				<td>Get a class global.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetGlobals(Bool)">GetGlobals</a><small> : GlobalInfo[] ( recursive:Bool )</small></code></td>
+				<td>Get all globals declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetMethod(String,ClassInfo[],Bool)">GetMethod</a><small> : MethodInfo ( name:String, argTypes:ClassInfo[], recursive:Bool )</small></code></td>
+				<td>Get a class method.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetMethods(Bool)">GetMethods</a><small> : MethodInfo[] ( recursive:Bool )</small></code></td>
+				<td>Get all methods declared by class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#NewArray(Int)">NewArray</a><small> : Object ( length:Int )</small></code></td>
+				<td>Create a new array box object of this class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#NewInstance()">NewInstance</a><small> : Object ()</small></code></td>
+				<td>Create a new object of this class.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetElement(Object,Int,Object)">SetElement</a><small> : Void ( inst:Object, index:Int, value:Object )</small></code></td>
+				<td>Set an array element.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+ClassInfo objects describe classes declared by your program and in modules.
+</p>
+<p>
+The ArrayLength, GetElement, SetElement and NewArray methods are only valid if the class represents an array box class. You can determine whether a class is an array box class with the ElementType method. If ElementType returns non-null, then the class is an array box class.
+</p>
+<p>
+The recursive parameter of the GetConst, GetGlobal, GetField, GetMethod and GetFunction methods indicates whether or not the entire class hierarchy should be searched, or only the current class.
+</p>
+<p>
+The recursive parameter of the GetConsts, GetGlobals, GetFields, GetMethods and GetFunctions methods indicates whether or not all declarations spanning the entire class hierarchy should be returned, or only those declared within the current class.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Attributes()"></a>
+				<pre class="declaration">Method <strong>Attributes</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get class attributes.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ElementType()"></a>
+				<pre class="declaration">Method <strong>ElementType</strong> : <a href="Modules_reflection_ClassInfo.html">ClassInfo</a> () Property</pre>
+				<p>
+Get array element type.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Interfaces()"></a>
+				<pre class="declaration">Method <strong>Interfaces</strong> : <a href="Modules_reflection_ClassInfo.html">ClassInfo</a>[] () Property</pre>
+				<p>
+Get interfaces implemented by this class, or interfaces extended by this interface.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Name()"></a>
+				<pre class="declaration">Method <strong>Name</strong> : <a href="Modules_cerberus.lang_String.html">String</a> () Property</pre>
+				<p>
+Get name of class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SuperClass()"></a>
+				<pre class="declaration">Method <strong>SuperClass</strong> : <a href="Modules_reflection_ClassInfo.html">ClassInfo</a> () Property</pre>
+				<p>
+Get super class of class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="ArrayLength(Object)"></a>
+				<pre class="declaration">Method <strong>ArrayLength</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( inst:<a href="Modules_cerberus.lang_Object.html">Object</a> )</pre>
+				<p>
+Get length of an array.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ExtendsClass(ClassInfo)"></a>
+				<pre class="declaration">Method <strong>ExtendsClass</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( clas:<a href="Modules_reflection_ClassInfo.html">ClassInfo</a> )</pre>
+				<p>
+Check if class extends another class, or implements an interface.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetConst(String,Bool)"></a>
+				<pre class="declaration">Method <strong>GetConst</strong> : <a href="Modules_reflection_ConstInfo.html">ConstInfo</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get a class const.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetConstructor(ClassInfo[])"></a>
+				<pre class="declaration">Method <strong>GetConstructor</strong> : <a href="Modules_reflection_FunctionInfo.html">FunctionInfo</a> ( argTypes:<a href="Modules_reflection_ClassInfo.html">ClassInfo</a>[] )</pre>
+				<p>
+Get a class constructor.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetConstructors()"></a>
+				<pre class="declaration">Method <strong>GetConstructors</strong> : <a href="Modules_reflection_FunctionInfo.html">FunctionInfo</a>[] ()</pre>
+				<p>
+Get all constructors declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetConsts(Bool)"></a>
+				<pre class="declaration">Method <strong>GetConsts</strong> : <a href="Modules_reflection_ConstInfo.html">ConstInfo</a>[] ( recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get all consts declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetElement(Object,Int)"></a>
+				<pre class="declaration">Method <strong>GetElement</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ( inst:<a href="Modules_cerberus.lang_Object.html">Object</a>, index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get an array element.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetField(String,Bool)"></a>
+				<pre class="declaration">Method <strong>GetField</strong> : <a href="Modules_reflection_FieldInfo.html">FieldInfo</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get a class field.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFields(Bool)"></a>
+				<pre class="declaration">Method <strong>GetFields</strong> : <a href="Modules_reflection_FieldInfo.html">FieldInfo</a>[] ( recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get all fields declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFunction(String,ClassInfo[],Bool)"></a>
+				<pre class="declaration">Method <strong>GetFunction</strong> : <a href="Modules_reflection_FunctionInfo.html">FunctionInfo</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, argTypes:<a href="Modules_reflection_ClassInfo.html">ClassInfo</a>[], recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get a class function.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFunctions(Bool)"></a>
+				<pre class="declaration">Method <strong>GetFunctions</strong> : <a href="Modules_reflection_FunctionInfo.html">FunctionInfo</a>[] ( recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get all functions declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetGlobal(String,Bool)"></a>
+				<pre class="declaration">Method <strong>GetGlobal</strong> : <a href="Modules_reflection_GlobalInfo.html">GlobalInfo</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get a class global.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetGlobals(Bool)"></a>
+				<pre class="declaration">Method <strong>GetGlobals</strong> : <a href="Modules_reflection_GlobalInfo.html">GlobalInfo</a>[] ( recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get all globals declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetMethod(String,ClassInfo[],Bool)"></a>
+				<pre class="declaration">Method <strong>GetMethod</strong> : <a href="Modules_reflection_MethodInfo.html">MethodInfo</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, argTypes:<a href="Modules_reflection_ClassInfo.html">ClassInfo</a>[], recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get a class method.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetMethods(Bool)"></a>
+				<pre class="declaration">Method <strong>GetMethods</strong> : <a href="Modules_reflection_MethodInfo.html">MethodInfo</a>[] ( recursive:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Get all methods declared by class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="NewArray(Int)"></a>
+				<pre class="declaration">Method <strong>NewArray</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ( length:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Create a new array box object of this class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="NewInstance()"></a>
+				<pre class="declaration">Method <strong>NewInstance</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Create a new object of this class.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetElement(Object,Int,Object)"></a>
+				<pre class="declaration">Method <strong>SetElement</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( inst:<a href="Modules_cerberus.lang_Object.html">Object</a>, index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Modules_cerberus.lang_Object.html">Object</a> )</pre>
+				<p>
+Set an array element.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

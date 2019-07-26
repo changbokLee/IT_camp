@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>Shader</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Shader</small></h1>
+
+
+	<p>
+		Mojo2 provides support for simple shaders that fetch texture/color data and produce values for use by the lighting equations.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Build(String)">Build</a><small> : Void ( source:String )</small></code></td>
+				<td>Compiles and links the shader.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnInitMaterial(Material)">OnInitMaterial</a><small> : Void ( material:Material )</small></code></td>
+				<td>Classes that extend Shader must set defalut values for all valid shader parameters in this method.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnLoadMaterial(Material,String,Int)">OnLoadMaterial</a><small> : Material ( material:Material, path:String, texFlags:Int )</small></code></td>
+				<td>Classes that extend Shader should load textures and other valid shader parameters from <b>path</b> into <b>material</b> in this method.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#BumpShader()">BumpShader</a><small> : Shader ()</small></code></td>
+				<td>Returns a stock bump shader for drawing lit sprites with specular and normal maps.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DefaultShader()">DefaultShader</a><small> : Shader ()</small></code></td>
+				<td>Returns the default shader used when a material is created with a 'Null' shader.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FastShader()">FastShader</a><small> : Shader ()</small></code></td>
+				<td>Returns a stock 'fast shader' for drawing unlit sprites efficiently.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LightMaskShader()">LightMaskShader</a><small> : Shader ()</small></code></td>
+				<td>Returns a stock shader for drawing light textures and light mask effects.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#MatteShader()">MatteShader</a><small> : Shader ()</small></code></td>
+				<td>Returns a stock matte shader for drawing lit sprites with no specular or normal maps.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetDefaultShader(Shader)">SetDefaultShader</a><small> : Void ( shader:Shader )</small></code></td>
+				<td>Sets the default shader used when a material is created with a 'Null' shader.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ShadowShader()">ShadowShader</a><small> : Shader ()</small></code></td>
+				<td>Returns a stock shadow shader for drawing shadows.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Mojo2 provides support for simple shaders that fetch texture/color data and produce values for use by the lighting equations. Shaders must be written in the opengl shading language. Shaders should declare a single void shader(){} function.
+</p>
+<p>
+Shaders are injected into a 'template' shader program that performs vertex processing and lighting. Shaders are executed at the top of the fragment shader portion of this program. Shaders cannot modify how the vertex processing and lighting steps are performed, although you can replace the template program with your own version.
+</p>
+<p>
+The textures and other parameters used by a shader are stored in materials. Every material has a single associated shader. When a material is used for rendering, the shader parameters stored in the material are copied to the shader's uniform variables for rendering.
+</p>
+<p>
+Shaders may make use of several built-in input variables, and should write values to one or more built-in output variables. These variables are:
+</p>
+<p>
+Shader inputs:
+</p>
+<table>
+<tr><th><b>Input</b> var</th><th><b>Description</b></th></tr>
+<tr><td>vec2 b3d_Texcoord0</td><td>Interpolated vertex texture coordinates</td></tr>
+<tr><td>vec4 b3d_Color</td><td>Interpolated vertex color</td></tr>
+<tr><td>vec4 b3d_ClipPosition</td><td>Interpolated clip space vertex position</td></tr>
+<tr><td>vec3 b3d_ViewPosition</td><td>Interpolated view space vertex position</td></tr>
+<tr><td>vec3 b3d_ViewNormal</td><td>Interpolated view space vertex normal</td></tr>
+</table>
+<p>
+Shader outputs:
+</p>
+<table>
+<tr><th><b>Output</b> var</th><th><b>Description</b></th></tr>
+<tr><td>vec4 b3d_FragColor</td><td>direct color write</td></tr>
+<tr><td>vec4 b3d_Ambient</td><td>ambient color for lighting</td></tr>
+<tr><td>float b3d_Alpha</td><td>alpha component</td></tr>
+<tr><td>vec4 b3d_Diffuse</td><td>diffuse color for lighting</td></tr>
+<tr><td>vec4 b3d_Specular</td><td>specular color for lighting</td></tr>
+<tr><td>vec3 b3d_Normal</td><td>surface normal in tanspace</td></tr>
+<tr><td>float b3d_Roughness</td><td>roughness for lighting</td></tr>
+</table>
+<p>
+Notes:
+</p>
+<ul>
+<li>If b3d_FragColor is written by the shader, no other processing is performed on the fragment. This will effectively disable fog, and the following notes can be ignored.</li>
+<ul></ul>
+<li>b3d_Ambient and b3d_Alpha should always be written.</li>
+<ul></ul>
+<li>To perform lighting, b3d_Diffuse, b3d_Specular, b3d_Normal and b3d_Roughness should also be written.</li>
+<ul></ul>
+<ul></ul>
+</ul>
+<p>
+To declare your own shader, you must:
+</p>
+<ul>
+<li>Extend the Shader class.</li>
+<ul></ul>
+<li>Call the Shader.Build method somewhere inside the shader. This is usually done in the shader's constructor.</li>
+<ul></ul>
+<li>Implement the <a href="#OnInitMaterial(Material)">OnInitMaterial</a> method. This method must initialize an 'empty' material object to a default state, using the various Material.Set methods. A shader should initialize ALL material properties required by the shader, as once a material is initialized, properties cannot be added or removed from a material.</li>
+<ul></ul>
+<li>Implement the <a href="#OnLoadMaterial(Material,String,Int)">OnLoadMaterial</a> method. This method should load the various textures required by a shader from the given path parameter, and assign them to a material.</li>
+<ul></ul>
+</ul>
+<p>
+Once you have created an instance of your shader, you can pass it as a parameter to <a href="Modules_mojo2.graphics_Material.html#New(Shader)">Material.New</a>, <a href="Modules_mojo2.graphics_Material.html#Load(String,Int,Shader)">Material.Load</a>, <a href="Modules_mojo2.graphics_Image.html#New(Image,Int,Int,Int,Int,[Float],[Float])">Image.New</a>, <a href="Modules_mojo2.graphics_Image.html#Load(String,[Float],[Float],[Int],[Shader])">Image.Load</a> and <a href="#SetDefaultShader(Shader)">Shader.SetDefaultShader</a>.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Build(String)"></a>
+				<pre class="declaration">Method <strong>Build</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( source:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Compiles and links the shader.
+</p>
+<p>
+Classes that extend Shader must call this method at some point. This is usually done in the subclasses constructor.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnInitMaterial(Material)"></a>
+				<pre class="declaration">Method <strong>OnInitMaterial</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( material:<a href="Modules_mojo2.graphics_Material.html">Material</a> )</pre>
+				<p>
+Classes that extend Shader must set defalut values for all valid shader parameters in this method.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnLoadMaterial(Material,String,Int)"></a>
+				<pre class="declaration">Method <strong>OnLoadMaterial</strong> : <a href="Modules_mojo2.graphics_Material.html">Material</a> ( material:<a href="Modules_mojo2.graphics_Material.html">Material</a>, path:<a href="Modules_cerberus.lang_String.html">String</a>, texFlags:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Classes that extend Shader should load textures and other valid shader parameters from <b>path</b> into <b>material</b> in this method. The interpretation of <b>path</b> is completely up to the shader. The <b>texFlags</b> parameter contains texture flag values that should be used for any textures loaded.
+</p>
+<p>
+The <b>material</b> parameter is an already initialized material.
+</p>
+<p>
+This method should return <b>material</b> if successful, or null on failure.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="BumpShader()"></a>
+				<pre class="declaration">Function <strong>BumpShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns a stock bump shader for drawing lit sprites with specular and normal maps.
+</p>
+<p>
+The following material properties are supported:
+</p>
+<table>
+<tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Default</b></th></tr>
+<tr><td>ColorTexture</td><td>Texture</td><td>White</td></tr>
+<tr><td>SpecularTexture</td><td>Texture</td><td>Black</td></tr>
+<tr><td>NormalTexture</td><td>Texture</td><td>Flat</td></tr>
+<tr><td>AmbientColor</td><td>Float[4]</td><td>[0.0,0.0,0.0,1.0]</td></tr>
+<tr><td>Roughness</td><td>Float</td><td>0.5</td></tr>
+</table>
+<p>
+The shader b3d_Ambient value is computed by multiplying ColorTexture by AmbientColor.
+</p>
+<p>
+The shader b3d_Diffuse value is computed by multiplying ColorTexture by 1-AmbientColor.
+</p>
+<p>
+When loading materials that use the bump shader, diffuse, specular and normal maps can be given the following files names:
+</p>
+<table>
+<tr><th><b>Texture</b> map</th><th><b>Valid</b> paths</th></tr>
+<tr><td>Diffuse</td><td>(FILE).(EXT) ; (FILE)_d.(EXT) ; (FILE)_diff.(EXT) ; (FILE)_diffuse.(EXT)</td></tr>
+<tr><td>Specular</td><td>(FILE)_s.(EXT) ; (FILE)_spec.(EXT) ; (FILE)_specular.(EXT) ;(FILE)_SPECUALR.(EXT)</td></tr>
+<tr><td>Normal</td><td>(FILE)_n.(EXT) ; (FILE)_norm.(EXT) ; (FILE)_normal.(EXT) ; (FILE)_NORMALS.(EXT)</td></tr>
+</table>
+<p>
+Where (FILE) is the filename component of the path provided to Material.Load or Image.Load, and (EXT) is the file extension, eg: png, jpg.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DefaultShader()"></a>
+				<pre class="declaration">Function <strong>DefaultShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns the default shader used when a material is created with a 'Null' shader. This is initially the <a href="#BumpShader()">BumpShader</a>, but can be modified using  <a href="#SetDefaultShader(Shader)">SetDefaultShader</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FastShader()"></a>
+				<pre class="declaration">Function <strong>FastShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns a stock 'fast shader' for drawing unlit sprites efficiently.
+</p>
+<p>
+The following material properties are supported:
+</p>
+<table>
+<tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Default</b></th></tr>
+<tr><td>ColorTexture</td><td>Texture</td><td>White</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LightMaskShader()"></a>
+				<pre class="declaration">Function <strong>LightMaskShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns a stock shader for drawing light textures and light mask effects. This shader performs a texture lookup, and writes the red component to b3d_FragColor.
+</p>
+<p>
+The following material properties are supported:
+</p>
+<table>
+<tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Default</b></th></tr>
+<tr><td>ColorTexture</td><td>Texture</td><td>White</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="MatteShader()"></a>
+				<pre class="declaration">Function <strong>MatteShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns a stock matte shader for drawing lit sprites with no specular or normal maps.
+</p>
+<p>
+The following material properties are supported:
+</p>
+<table>
+<tr><th><b>Property</b></th><th><b>Type</b></th><th><b>Default</b></th></tr>
+<tr><td>ColorTexture</td><td>Texture</td><td>White</td></tr>
+<tr><td>AmbientColor</td><td>Float[4]</td><td>[0.0,0.0,0.0,1.0]</td></tr>
+<tr><td>Roughness</td><td>Float</td><td>0.5</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetDefaultShader(Shader)"></a>
+				<pre class="declaration">Function <strong>SetDefaultShader</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( shader:<a href="Modules_mojo2.graphics_Shader.html">Shader</a> )</pre>
+				<p>
+Sets the default shader used when a material is created with a 'Null' shader.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ShadowShader()"></a>
+				<pre class="declaration">Function <strong>ShadowShader</strong> : <a href="Modules_mojo2.graphics_Shader.html">Shader</a> ()</pre>
+				<p>
+Returns a stock shadow shader for drawing shadows. This shader simply writes 'black' to b3d_FragColor.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

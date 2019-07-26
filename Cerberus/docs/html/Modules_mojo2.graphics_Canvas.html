@@ -1,0 +1,1383 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>Canvas</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Canvas</small></h1>
+
+
+	<p>
+		Canvas objects are used to perform rendering to either the app window or an 'off screen' image.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extends</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html">DrawList</a><small></small></code></td>
+				<td>A drawlist contains drawing state and a sequence of 2d drawing operations.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#AmbientLight()">AmbientLight</a><small> : Float[] ()</small></code></td>
+				<td>Get ambient light color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ColorMask()">ColorMask</a><small> : Bool[] ()</small></code></td>
+				<td>Get color mask.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FogColor()">FogColor</a><small> : Float[] ()</small></code></td>
+				<td>Get fog color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Height()">Height</a><small> : Int ()</small></code></td>
+				<td>Get canvas height.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ModelMatrix()">ModelMatrix</a><small> : Float[] ()</small></code></td>
+				<td>Get model matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ProjectionMatrix()">ProjectionMatrix</a><small> : Float[] ()</small></code></td>
+				<td>Get projection matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RenderTarget()">RenderTarget</a><small> : Object ()</small></code></td>
+				<td>Get current render target.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Scissor()">Scissor</a><small> : Int[] ()</small></code></td>
+				<td>Get scissor rect.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ShadowMap()">ShadowMap</a><small> : Image ()</small></code></td>
+				<td>Get shadow map.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ViewMatrix()">ViewMatrix</a><small> : Float[] ()</small></code></td>
+				<td>Get view matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Viewport()">Viewport</a><small> : Int[] ()</small></code></td>
+				<td>Get viewport.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Width()">Width</a><small> : Int ()</small></code></td>
+				<td>Get canvas width.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Create a new canvas for rendering directly to the app window.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Object)">New</a><small> ( renderTarget:Object )</small></code></td>
+				<td>Create a new canvas for rendering to the given <b>renderTarget</b>, which must be an image or a texture.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Clear(Color)">Clear</a><small> : Void ( col:Color )</small></code></td>
+				<td>Clear canvas to the specified <a href="Modules_mojo2.graphics_DrawList.html#Color()">Color</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clear(Int)">Clear</a><small> : Void ( rgb:Int )</small></code></td>
+				<td>Clear canvas to the specified hex color value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clear([Float],[Float],[Float],[Float])">Clear</a><small> : Void ( r:Float=0, g:Float=0, b:Float=0, a:Float=1 )</small></code></td>
+				<td>Clear canvas to the specified color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Flush()">Flush</a><small> : Void ()</small></code></td>
+				<td>Flush rendering operations.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetLightColor(Int)">GetLightColor</a><small> : Float[] ( index:Int )</small></code></td>
+				<td>Get light color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetLightPosition(Int)">GetLightPosition</a><small> : Float[] ( index:Int )</small></code></td>
+				<td>Get light position.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetLightRange(Int)">GetLightRange</a><small> : Float ( index:Int )</small></code></td>
+				<td>Get light range.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetLightType(Int)">GetLightType</a><small> : Int ( index:Int )</small></code></td>
+				<td>Get light type.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ReadPixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])">ReadPixels</a><small> : Void ( x:Int, y:Int, width:Int, height:Int, data:DataBuffer, dataOffset:Int=0, dataPitch:Int=0 )</small></code></td>
+				<td>Read pixel data from canvas.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RenderDrawList(DrawList)">RenderDrawList</a><small> : Void ( drawList:DrawList )</small></code></td>
+				<td>Render a drawlist to canvas.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RenderDrawList(DrawList,Float,Float,[Float],[Float],[Float])">RenderDrawList</a><small> : Void ( drawList:DrawList, tx:Float, ty:Float, rz:Float=0, sx:Float=1, sy:Float=1 )</small></code></td>
+				<td>Render a drawlist to canvas, transformed by the canvas' current 2d matrix and <b>tx</b>, <b>ty</b>, <b>rz</b>, <b>sx</b> and <b>sy</b> parameters.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetAmbientLight(Float,Float,Float)">SetAmbientLight</a><small> : Void ( red:Float, green:Float, blue:Float )</small></code></td>
+				<td>Set ambient light color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColorMask(Bool,Bool,Bool,Bool)">SetColorMask</a><small> : Void ( r:Bool, g:Bool, b:Bool, a:Bool )</small></code></td>
+				<td>Set which color components are writeable.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFogColor(Float,Float,Float,Float)">SetFogColor</a><small> : Void ( red:Float, green:Float, blue:Float, alpha:Float )</small></code></td>
+				<td>Set fog color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetLightColor(Int,Float,Float,Float)">SetLightColor</a><small> : Void ( index:Int, r:Float, g:Float, b:Float )</small></code></td>
+				<td>Set light color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetLightPosition(Int,Float,Float,Float)">SetLightPosition</a><small> : Void ( index:Int, x:Float, y:Float, z:Float )</small></code></td>
+				<td>Set light position in world space.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetLightRange(Int,Float)">SetLightRange</a><small> : Void ( index:Int, range:Float )</small></code></td>
+				<td>Set light range.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetLightType(Int,Int)">SetLightType</a><small> : Void ( index:Int, type:Int )</small></code></td>
+				<td>Set light type.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetModelMatrix(Float[])">SetModelMatrix</a><small> : Void ( modelMatrix:Float[] )</small></code></td>
+				<td>Set model matrix, ie: the matrix that transforms points in 2d canvas space into 3d world space.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetProjection2d(Float,Float,Float,Float)">SetProjection2d</a><small> : Void ( left:Float, right:Float, top:Float, bottom:Float )</small></code></td>
+				<td>Set 2d orthographic projection matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetProjectionMatrix(Float[])">SetProjectionMatrix</a><small> : Void ( projMatrix:Float[] )</small></code></td>
+				<td>Set arbitrary projection matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetRenderTarget(Object)">SetRenderTarget</a><small> : Void ( renderTarget:Object )</small></code></td>
+				<td>Change canvas render target.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetScissor(Int,Int,Int,Int)">SetScissor</a><small> : Void ( x:Int, y:Int, width:Int, height:Int )</small></code></td>
+				<td>Set scissor rect, in viewport coordinates.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetShadowMap(Image)">SetShadowMap</a><small> : Void ( shadowMap:Image )</small></code></td>
+				<td>Set shadow map to use when lighting.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetViewMatrix(Float[])">SetViewMatrix</a><small> : Void ( viewMatrix:Float[] )</small></code></td>
+				<td>Set view matrix, ie: the matrix the transforms points in world space to view space.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetViewport(Int,Int,Int,Int)">SetViewport</a><small> : Void ( x:Int, y:Int, width:Int, height:Int )</small></code></td>
+				<td>Set viewport.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#TransformCoords(Float[],Float[],[Int])">TransformCoords</a><small> : Void ( coords_in:Float[], coords_out:Float[], mode:Int=0 )</small></code></td>
+				<td><b>Mode</b>	| <b>Description</b></td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Inherited Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Alpha()">Alpha</a><small> : Float ()</small></code></td>
+				<td>Return current alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#BlendMode()">BlendMode</a><small> : Int ()</small></code></td>
+				<td>Get blend mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Color()">Color</a><small> : Float[] ()</small></code></td>
+				<td>Returns a 4 component float array containing current color and alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DefaultMaterial()">DefaultMaterial</a><small> : Material ()</small></code></td>
+				<td>Return the current default material.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Font()">Font</a><small> : Font ()</small></code></td>
+				<td>Get font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#MatrixStackCapacity()">MatrixStackCapacity</a><small> : Int ()</small></code></td>
+				<td>Get the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="Modules_mojo2.graphics_DrawList.html#PushMatrix()">PushMatrix</a>.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Inherited Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#AddShadowCaster(ShadowCaster,[Float],[Float],[Float],[Float],[Float])">AddShadowCaster</a><small> : Void ( shadowCaster:ShadowCaster, tx:Float=0, ty:Float=0, rz:Float=0, sx:Float=1, sy:Float=1 )</small></code></td>
+				<td>Add a shadow caster to the drawlist.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawCircle(Float,Float,Float,[Material])">DrawCircle</a><small> : Void ( x:Float, y:Float, radius:Float, material:Material=Null )</small></code></td>
+				<td>Draw a circle at <b>x</b>, <b>y</b> with radius <b>radius</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawEllipse(Float,Float,Float,Float,[Material])">DrawEllipse</a><small> : Void ( x:Float, y:Float, xRadius:Float, yRadius:Float, material:Material=Null )</small></code></td>
+				<td>Draw an ellipse at <b>x</b>, <b>y</b> with radii <b>xRadius</b>, <b>yRadius</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawImage(Image,Float,Float,Float)">DrawImage</a><small> : Void ( image:Image, tx:Float, ty:Float, rz:Float )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawImage(Image,Float,Float,Float,Float,Float)">DrawImage</a><small> : Void ( image:Image, tx:Float, ty:Float, rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b> and scaled by <b>sx</b>,<b>sy</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawImage(Image,[Float],[Float])">DrawImage</a><small> : Void ( image:Image, tx:Float=0, ty:Float=0 )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawImage9P(Image,Float,Float,Int,Float,Float,Float)">DrawImage9P</a><small> : Void ( image:Image, tx:Float, ty:Float, patchSize:Int, rz:Float, scaleX:Float, scaleY:Float )</small></code></td>
+				<td>Draws an 9-Patch image at coordinates <b>tx</b>, <b>ty</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], vertcols:Int[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawIndexedPrimitives(Int,Int,Float[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawLine(Float,Float,Float,Float,[Material])">DrawLine</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, material:Material=Null )</small></code></td>
+				<td>Draw a line from <b>x0</b>,<b>y0</b> to <b>x1</b>,<b>y1</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawOval(Float,Float,Float,Float,[Material])">DrawOval</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, material:Material=Null )</small></code></td>
+				<td>Draw an oval in the given rectangle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawPoint(Float,Float,[Material])">DrawPoint</a><small> : Void ( x0:Float, y0:Float, material:Material=Null )</small></code></td>
+				<td>Draw a point at <b>x0</b>,<b>y0</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawPrimitives(Int,Int,Float[],Float[],Int[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], vertcols:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawPrimitives(Int,Int,Float[],Float[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawPrimitives(Int,Int,Float[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawQuad(Float,Float,Float,Float,Float,Float,Float,Float,[Material])">DrawQuad</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, material:Material=Null )</small></code></td>
+				<td>Draw a quad.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawRect(Float,Float,Float,Float,Image)">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, image:Image )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawRect(Float,Float,Float,Float,Image,Int,Int,Int,Int)">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, image:Image, sourceX:Int, sourceY:Int, sourceWidth:Int, sourceHeight:Int )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with the given subrect of <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawRect(Float,Float,Float,Float,[Material])">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, material:Material=Null )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawRect(Float,Float,Image,Int,Int,Int,Int)">DrawRect</a><small> : Void ( x:Float, y:Float, image:Image, sourceX:Int, sourceY:Int, width:Int, height:Int )</small></code></td>
+				<td>Draw a rect at <b>x</b>,<b>y</b> filled with the given subrect of <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawShadow(Float,Float,Float,Float,Float,Float)">DrawShadow</a><small> : Void ( lightX:Float, lightY:Float, x0:Float, y0:Float, x1:Float, y1:Float )</small></code></td>
+				<td>Draw a shadow volume.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawShadows(Float,Float,DrawList)">DrawShadows</a><small> : Void ( lightX:Float, lightY:Float, drawList:DrawList )</small></code></td>
+				<td>Draw multiple shadow volumes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawText(String,Float,Float,[Float],[Float])">DrawText</a><small> : Void ( text:String, x:Float, y:Float, xhandle:Float=0, yhandle:Float=0 )</small></code></td>
+				<td>Draw <b>text</b> at <b>x</b>,<b>y</b> in the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#DrawTriangle(Float,Float,Float,Float,Float,Float,[Material])">DrawTriangle</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, material:Material=Null )</small></code></td>
+				<td>Draw a triangle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#GetColor(Float[])">GetColor</a><small> : Void ( color:Float[] )</small></code></td>
+				<td>Copy current color to <b>color</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#GetMatrix(Float[])">GetMatrix</a><small> : Void ( matrix:Float[] )</small></code></td>
+				<td>Get current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#PopMatrix()">PopMatrix</a><small> : Void ()</small></code></td>
+				<td>Pop the current 2d matrix from the 2d matrix stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#PushMatrix()">PushMatrix</a><small> : Void ()</small></code></td>
+				<td>Push the current 2d matrix on the 2d matrix stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Reset()">Reset</a><small> : Void ()</small></code></td>
+				<td>Removes all items from drawlist.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#ResetMatrix()">ResetMatrix</a><small> : Void ()</small></code></td>
+				<td>Set the current 2d matrix to the identity matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Rotate(Float)">Rotate</a><small> : Void ( rz:Float )</small></code></td>
+				<td>Rotate current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#RotateScale(Float,Float,Float)">RotateScale</a><small> : Void ( rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Rotate and scale (in that order) the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Scale(Float,Float)">Scale</a><small> : Void ( sx:Float, sy:Float )</small></code></td>
+				<td>Scale current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetAlpha(Float)">SetAlpha</a><small> : Void ( a:Float )</small></code></td>
+				<td>Set alpha only.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetBlendMode(Int)">SetBlendMode</a><small> : Void ( blendMode:Int )</small></code></td>
+				<td>Set blend mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetColor(Color)">SetColor</a><small> : Void ( col:Color )</small></code></td>
+				<td>Set color to specified <a href="Modules_mojo2.graphics_DrawList.html#Color()">Color</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetColor(Float,Float,Float)">SetColor</a><small> : Void ( red:Float, green:Float, blue:Float )</small></code></td>
+				<td>Set color only.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetColor(Float,Float,Float,Float)">SetColor</a><small> : Void ( red:Float, green:Float, blue:Float, alpha:Float )</small></code></td>
+				<td>Set color and alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetColor(Int)">SetColor</a><small> : Void ( hex:Int )</small></code></td>
+				<td>Set color to specified hex color value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetDefaultMaterial(Material)">SetDefaultMaterial</a><small> : Int ( material:Material )</small></code></td>
+				<td>Set the default material used for drawing operations that use a null material.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetFont(Font)">SetFont</a><small> : Void ( font:Font )</small></code></td>
+				<td>Set current font for use with <b>DrawText</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetMatrix(Float,Float,Float,Float,Float,Float)">SetMatrix</a><small> : Void ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Set the current 2d matrix to the given matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#SetMatrixStackCapacity(Int)">SetMatrixStackCapacity</a><small> : Void ( capacity:Int )</small></code></td>
+				<td>Set the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="Modules_mojo2.graphics_DrawList.html#PushMatrix()">PushMatrix</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Transform(Float,Float,Float,Float,Float,Float)">Transform</a><small> : Void ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Multiply the current 2d matrix by the given matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#Translate(Float,Float)">Translate</a><small> : Void ( tx:Float, ty:Float )</small></code></td>
+				<td>Translate the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#TranslateRotate(Float,Float,Float)">TranslateRotate</a><small> : Void ( tx:Float, ty:Float, rz:Float )</small></code></td>
+				<td>Translate and rotate (in that order) the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#TranslateRotateScale(Float,Float,Float,Float,Float)">TranslateRotateScale</a><small> : Void ( tx:Float, ty:Float, rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Translate, rotate and scale (in that order) the current 2d matrix.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Inherited Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#PremultiplyArgb2Abgr(Int)">PremultiplyArgb2Abgr</a><small> : Int ( color:Int )</small></code></td>
+				<td>Returns a color that is premultiplied (rgb components multiplied by alpha) and has byte format reordered from argb (commonly used) to abgr (used internally).</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo2.graphics_DrawList.html#PremultiplyArgb2Abgr(Int[])">PremultiplyArgb2Abgr</a><small> : Void ( colors:Int[] )</small></code></td>
+				<td>Premultiplies colors (multiplies rgb components by alpha) and reorders the byte format from argb (commonly used) to abgr (used internally).</td>
+			</tr>
+		
+	</table>
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Canvas objects are used to perform rendering to either the app window or an 'off screen' image.
+</p>
+<p>
+Canvas extends <a href="Modules_mojo2.graphics_DrawList.html">DrawList</a>, so offers the same drawing commands as DrawList. You can also render any arbitrary drawlist to a canvas using <a href="#RenderDrawList(DrawList)">RenderDrawList</a>.
+</p>
+<p>
+Once you have finished drawing to a canvas, you should call <a href="#Flush()">Flush</a> to cause any buffered drawing operations to be rendered. Forgetting to do this can result in corrupt graphics.
+</p>
+<p>
+A canvas maintains various pieces of state, including:
+</p>
+<ul>
+<li>Current render target: the image the canvas renders to, or null if the canvas renders directly to the app window. Use <a href="#SetRenderTarget(Object)">SetRenderTarget</a> to change the current render target.</li>
+<ul></ul>
+<li>Current viewport: a rectangle within the render target that drawing coordinates are mapped to. Nothing is rendered outside of the viewport regardless of the scissor rect. Use <a href="#SetViewport(Int,Int,Int,Int)">SetViewport</a> to change the current viewport.</li>
+<ul></ul>
+<li>Current scissor rect: a rectangle within the viewport that all rendering is clipped to. Use <a href="#SetScissor(Int,Int,Int,Int)">SetScissor</a> to change the current scissor rect.</li>
+<ul></ul>
+<li>Current projection matrix: a matrix that describes the mapping from view space coordinates to viewport coordinates. This provides support for 'virtual resolutions'. Use <a href="#SetProjection2d(Float,Float,Float,Float)">SetProjection2d</a> and <a href="#SetProjectionMatrix(Float[])">SetProjectionMatrix</a> to change the current projection matrix.</li>
+<ul></ul>
+<li>Currect model matrix: a matrix that transforms coordinates in draw lists to world space. You can change the model matrix using <a href="#SetModelMatrix(Float[])">SetModelMatrix</a>, but for most 2d rendering you will not have to worry about the model matrix.</li>
+<ul></ul>
+<li>Current view matrix: a matrix that transforms coordinates from world space to view space. You can change the view matrix using <a href="#SetViewMatrix(Float[])">SetViewMatrix</a>, but for most 2d rendering you will not have to worry about the view matrix.</li>
+<ul></ul>
+</ul>
+<p>
+To create a canvas for rendering directly to the app window, simply use a new Canvas. For example:
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo2</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">MyApp </code><code class="k">Extends </code><code class="i">App</code><br/>
+<code class="d">	</code><code class="k">Field </code><code class="i">canvas</code><code class="d">:</code><code class="i">Canvas</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnCreate</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">=</code><code class="k">New </code><code class="i">Canvas</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnRender</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">Clear</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">DrawText </code><code class="l">"Hello World!"</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="l">0</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">Flush</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">New </code><code class="i">MyApp</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+To create a canvas for rendering to an image, provide the image to the canvas constructor. For example:
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo2</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">MyApp </code><code class="k">Extends </code><code class="i">App</code><br/>
+<code class="d">	</code><code class="k">Field </code><code class="i">image</code><code class="d">:</code><code class="i">Image</code><br/>
+<code class="d">	</code><code class="k">Field </code><code class="i">imageCanvas</code><code class="d">:</code><code class="i">Canvas</code><br/>
+<code class="d">	</code><code class="k">field </code><code class="i">windowCanvas</code><code class="d">:</code><code class="i">Canvas</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnCreate</code><code class="d">()</code><br/>
+<code class="d">	</code><br/>
+<code class="d">		</code><code class="i">image</code><code class="d">=</code><code class="k">New </code><code class="i">Image</code><code class="d">( </code><code class="i">DeviceWidth</code><code class="d">,</code><code class="i">DeviceHeight</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="l">0 </code><code class="d">)</code><br/>
+<code class="d">		</code><code class="i">imageCanvas</code><code class="d">=</code><code class="k">New </code><code class="i">Canvas</code><code class="d">( </code><code class="i">image </code><code class="d">)</code><br/>
+<code class="d">		</code><code class="i">windowCanvas</code><code class="d">=</code><code class="k">New </code><code class="i">Canvas</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnRender</code><code class="d">()</code><br/>
+<br/>
+<code class="d">		</code><code class="i">imageCanvas</code><code class="d">.</code><code class="i">Clear</code><br/>
+<code class="d">		</code><code class="i">imageCanvas</code><code class="d">.</code><code class="i">DrawText </code><code class="l">"Hello World!"</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="l">0</code><br/>
+<code class="d">		</code><code class="i">imageCanvas</code><code class="d">.</code><code class="i">Flush</code><br/>
+<code class="d">		</code><br/>
+<code class="d">		</code><code class="i">windowCanvas</code><code class="d">.</code><code class="i">Clear</code><br/>
+<code class="d">		</code><code class="i">windowCanvas</code><code class="d">.</code><code class="i">DrawImage image</code><br/>
+<code class="d">		</code><code class="i">windowCanvas</code><code class="d">.</code><code class="i">Flush</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">New </code><code class="i">MyApp</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+To setup a 'virtual resolution', use <a href="#SetProjection2d(Float,Float,Float,Float)">SetProjection2d</a>. <a href="#TransformCoords(Float[],Float[],[Int])">TransformCoords</a> can also be used to convert mouse coordinates to canvas coordinates. For example:
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo2</code><br/>
+<br/>
+<code class="r">'virtual resolution</code><br/>
+<code class="k">Const </code><code class="i">VWIDTH</code><code class="d">:=</code><code class="l">320</code><br/>
+<code class="k">Const </code><code class="i">VHEIGHT</code><code class="d">:=</code><code class="l">240</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">MyApp </code><code class="k">Extends </code><code class="i">App</code><br/>
+<code class="d">	</code><code class="k">Field </code><code class="i">canvas</code><code class="d">:</code><code class="i">Canvas</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnCreate</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">=</code><code class="k">New </code><code class="i">Canvas</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">SetProjection2d </code><code class="l">0</code><code class="d">,</code><code class="i">VWIDTH</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="i">VHEIGHT	</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnRender</code><code class="d">()</code><br/>
+<code class="d">	</code><br/>
+<code class="d">		</code><code class="k">Local </code><code class="i">in</code><code class="d">:=[</code><code class="i">MouseX</code><code class="d">,</code><code class="i">MouseY</code><code class="d">],</code><code class="i">out</code><code class="d">:</code><code class="k">Float</code><code class="d">[</code><code class="l">2</code><code class="d">]</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">TransformCoords in</code><code class="d">,</code><code class="i">out</code><br/>
+<code class="d">		</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">Clear</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">SetColor </code><code class="l">1</code><code class="d">,</code><code class="l">1</code><code class="d">,</code><code class="l">1</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">DrawText </code><code class="l">"Hello World!"</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="l">0</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">DrawText </code><code class="l">"MouseX="</code><code class="d">+</code><code class="i">out</code><code class="d">[</code><code class="l">0</code><code class="d">]+</code><code class="l">", MouseY="</code><code class="d">+</code><code class="i">out</code><code class="d">[</code><code class="l">1</code><code class="d">],</code><code class="l">0</code><code class="d">,</code><code class="l">12</code><br/>
+<code class="d">		</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">SetColor </code><code class="l">1</code><code class="d">,</code><code class="l">1</code><code class="d">,</code><code class="l">0</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">DrawRect out</code><code class="d">[</code><code class="l">0</code><code class="d">]-</code><code class="l">2</code><code class="d">,</code><code class="i">out</code><code class="d">[</code><code class="l">1</code><code class="d">]-</code><code class="l">2</code><code class="d">,</code><code class="l">5</code><code class="d">,</code><code class="l">5</code><br/>
+<code class="d">		</code><code class="i">canvas</code><code class="d">.</code><code class="i">Flush</code><br/>
+<code class="d">		</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">New </code><code class="i">MyApp</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+A canvas also provides supports for simple 2d lighting with up to 4 point lights.
+</p>
+<p>
+To enable or disable a light, use <a href="#SetLightType(Int,Int)">SetLightType</a>. To set a light's position, color and range, use <a href="#SetLightPosition(Int,Float,Float,Float)">SetLightPosition</a>, <a href="#SetLightColor(Int,Float,Float,Float)">SetLightColor</a> and <a href="#SetLightRange(Int,Float)">SetLightRange</a>.
+</p>
+<p>
+Lights should be positioned 'off' the canvas. That is, a light's position should have a negative 'z' component. This allows you to control the angle that light rays hit the canvas at, creating a pseudo 3d lighting effect. 
+</p>
+<p>
+In addition, for lighting to work correctly images and materials drawn with lighting enabled will need to be correctly setup for lighting.
+</p>
+<p>
+The easiest way to load images for use with lighting is to use the matte shader when loading an image, eg:
+</p>
+<p>
+Local image:=Image.Load( "myimage.png",.5,.,5,Image.Filter|Image.Mipmap,Shader.MatteShader() )
+</p>
+<p>
+This will allow simple images with no specular or normal maps to be used with lighting.
+</p>
+<p>
+For more complex lighting, you can provide 'specular' and 'normal' maps. For example, if you use Image.Load to load an image name "myimage.png", and provide the following 3 image files:
+</p>
+<p>
+myimage.png
+myimage_s.png
+myimage_n.png
+</p>
+<p>
+The image will be automatically setup for correct lighting when loaded.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="AmbientLight()"></a>
+				<pre class="declaration">Method <strong>AmbientLight</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Get ambient light color.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ColorMask()"></a>
+				<pre class="declaration">Method <strong>ColorMask</strong> : <a href="Programming_Keywords_Bool.html">Bool</a>[] () Property</pre>
+				<p>
+Get color mask.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FogColor()"></a>
+				<pre class="declaration">Method <strong>FogColor</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Get fog color.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Height()"></a>
+				<pre class="declaration">Method <strong>Height</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get canvas height.
+</p>
+<p>
+ 
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ModelMatrix()"></a>
+				<pre class="declaration">Method <strong>ModelMatrix</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Get model matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ProjectionMatrix()"></a>
+				<pre class="declaration">Method <strong>ProjectionMatrix</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Get projection matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RenderTarget()"></a>
+				<pre class="declaration">Method <strong>RenderTarget</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> () Property</pre>
+				<p>
+Get current render target.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Scissor()"></a>
+				<pre class="declaration">Method <strong>Scissor</strong> : <a href="Programming_Keywords_Int.html">Int</a>[] () Property</pre>
+				<p>
+Get scissor rect.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ShadowMap()"></a>
+				<pre class="declaration">Method <strong>ShadowMap</strong> : <a href="Modules_mojo2.graphics_Image.html">Image</a> () Property</pre>
+				<p>
+Get shadow map.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ViewMatrix()"></a>
+				<pre class="declaration">Method <strong>ViewMatrix</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Get view matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Viewport()"></a>
+				<pre class="declaration">Method <strong>Viewport</strong> : <a href="Programming_Keywords_Int.html">Int</a>[] () Property</pre>
+				<p>
+Get viewport.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Width()"></a>
+				<pre class="declaration">Method <strong>Width</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get canvas width.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Create a new canvas for rendering directly to the app window.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Object)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( renderTarget:<a href="Modules_cerberus.lang_Object.html">Object</a> )</pre>
+				<p>
+Create a new canvas for rendering to the given <b>renderTarget</b>, which must be an image or a texture.
+</p>
+<p>
+If <b>renderTarget</b> is an image, rendering will affect the "ColorMaterial" texture of the image's material.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Clear(Color)"></a>
+				<pre class="declaration">Method <strong>Clear</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( col:<a href="Modules_mojo2.graphics_DrawList.html#Color()">Color</a> )</pre>
+				<p>
+Clear canvas to the specified <a href="Modules_mojo2.graphics_DrawList.html#Color()">Color</a>.
+</p>
+<p>
+Clear is affect by the current viewport, scissor rect and color mask.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Clear(Int)"></a>
+				<pre class="declaration">Method <strong>Clear</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( rgb:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Clear canvas to the specified hex color value.
+</p>
+<p>
+Clear is affect by the current viewport, scissor rect and color mask.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Clear([Float],[Float],[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>Clear</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( r:<a href="Programming_Keywords_Float.html">Float</a>=0, g:<a href="Programming_Keywords_Float.html">Float</a>=0, b:<a href="Programming_Keywords_Float.html">Float</a>=0, a:<a href="Programming_Keywords_Float.html">Float</a>=1 )</pre>
+				<p>
+Clear canvas to the specified color.
+</p>
+<p>
+Clear is affect by the current viewport, scissor rect and color mask.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Flush()"></a>
+				<pre class="declaration">Method <strong>Flush</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Flush rendering operations.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetLightColor(Int)"></a>
+				<pre class="declaration">Method <strong>GetLightColor</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get light color.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetLightPosition(Int)"></a>
+				<pre class="declaration">Method <strong>GetLightPosition</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get light position.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetLightRange(Int)"></a>
+				<pre class="declaration">Method <strong>GetLightRange</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get light range.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetLightType(Int)"></a>
+				<pre class="declaration">Method <strong>GetLightType</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get light type.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ReadPixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])"></a>
+				<pre class="declaration">Method <strong>ReadPixels</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, data:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, dataOffset:<a href="Programming_Keywords_Int.html">Int</a>=0, dataPitch:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Read pixel data from canvas.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RenderDrawList(DrawList)"></a>
+				<pre class="declaration">Method <strong>RenderDrawList</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( drawList:<a href="Modules_mojo2.graphics_DrawList.html">DrawList</a> )</pre>
+				<p>
+Render a drawlist to canvas.
+</p>
+<p>
+Rendering is affected by the current 2d matrix and color (inherited from DrawList), but not the current blendmode. The blendmodes used to created the drawlist are used instead.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RenderDrawList(DrawList,Float,Float,[Float],[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>RenderDrawList</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( drawList:<a href="Modules_mojo2.graphics_DrawList.html">DrawList</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, rz:<a href="Programming_Keywords_Float.html">Float</a>=0, sx:<a href="Programming_Keywords_Float.html">Float</a>=1, sy:<a href="Programming_Keywords_Float.html">Float</a>=1 )</pre>
+				<p>
+Render a drawlist to canvas, transformed by the canvas' current 2d matrix and <b>tx</b>, <b>ty</b>, <b>rz</b>, <b>sx</b> and <b>sy</b> parameters.
+</p>
+<p>
+Rendering is affected by the current 2d matrix and color (inherited from DrawList), but not the current blendmode. The blendmodes used to created the drawlist are used instead.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetAmbientLight(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetAmbientLight</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( red:<a href="Programming_Keywords_Float.html">Float</a>, green:<a href="Programming_Keywords_Float.html">Float</a>, blue:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set ambient light color.
+</p>
+<p>
+By default, ambient light is 0,0,0.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColorMask(Bool,Bool,Bool,Bool)"></a>
+				<pre class="declaration">Method <strong>SetColorMask</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( r:<a href="Programming_Keywords_Bool.html">Bool</a>, g:<a href="Programming_Keywords_Bool.html">Bool</a>, b:<a href="Programming_Keywords_Bool.html">Bool</a>, a:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Set which color components are writeable.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFogColor(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetFogColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( red:<a href="Programming_Keywords_Float.html">Float</a>, green:<a href="Programming_Keywords_Float.html">Float</a>, blue:<a href="Programming_Keywords_Float.html">Float</a>, alpha:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set fog color.
+</p>
+<p>
+The <b>alpha</b> paramater controls the strength of the fog. If this is 1, all pixels are rendered in fog color. If 0, fog has no effect.
+</p>
+<p>
+By default, fog color is 0,0,0,0.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetLightColor(Int,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetLightColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, r:<a href="Programming_Keywords_Float.html">Float</a>, g:<a href="Programming_Keywords_Float.html">Float</a>, b:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set light color.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetLightPosition(Int,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetLightPosition</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, z:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set light position in world space.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetLightRange(Int,Float)"></a>
+				<pre class="declaration">Method <strong>SetLightRange</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, range:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set light range.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetLightType(Int,Int)"></a>
+				<pre class="declaration">Method <strong>SetLightType</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, type:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set light type.
+</p>
+<p>
+<b>index</b> must be in the range 0 to 3 inclusive.
+</p>
+<p>
+<b>type</b> must be one of:
+</p>
+<table>
+<tr><th><b>type</b></th><th><b>Light</b> type</th></tr>
+<tr><td>0</td><td>Light is disabled</td></tr>
+<tr><td>1</td><td>Light is a point light</td></tr>
+</table>
+<p>
+By default, all lights are disabled.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetModelMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>SetModelMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( modelMatrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set model matrix, ie: the matrix that transforms points in 2d canvas space into 3d world space.
+</p>
+<p>
+Defaults to the identity matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetProjection2d(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetProjection2d</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( left:<a href="Programming_Keywords_Float.html">Float</a>, right:<a href="Programming_Keywords_Float.html">Float</a>, top:<a href="Programming_Keywords_Float.html">Float</a>, bottom:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set 2d orthographic projection matrix.
+</p>
+<p>
+By default, the projection matrix is initialized to 0,width,0,height where width and height are the dimensions of the canvas.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetProjectionMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>SetProjectionMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( projMatrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set arbitrary projection matrix.
+</p>
+<p>
+Defaults to the identity matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetRenderTarget(Object)"></a>
+				<pre class="declaration">Method <strong>SetRenderTarget</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( renderTarget:<a href="Modules_cerberus.lang_Object.html">Object</a> )</pre>
+				<p>
+Change canvas render target.
+</p>
+<p>
+Note: Changing the render target does not affect the viewport.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetScissor(Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>SetScissor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set scissor rect, in viewport coordinates.
+</p>
+<p>
+All rendering operations are clipped to the scissor rect and the viewport.
+</p>
+<p>
+By default, the scissor rect is initialized to 0,0,width,height where width and height are the dimensions of the canvas.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetShadowMap(Image)"></a>
+				<pre class="declaration">Method <strong>SetShadowMap</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( shadowMap:<a href="Modules_mojo2.graphics_Image.html">Image</a> )</pre>
+				<p>
+Set shadow map to use when lighting.
+</p>
+<p>
+If <b>shadowMap</b> is null (the default), shadow mapping is disabled.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetViewMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>SetViewMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( viewMatrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Set view matrix, ie: the matrix the transforms points in world space to view space.
+</p>
+<p>
+Defaults to the identity matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetViewport(Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>SetViewport</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set viewport.
+</p>
+<p>
+By default, the viewport is initialized to 0,0,width,height where width and height are the dimensions of the canvas.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="TransformCoords(Float[],Float[],[Int])"></a>
+				<pre class="declaration">Method <strong>TransformCoords</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( coords_in:<a href="Programming_Keywords_Float.html">Float</a>[], coords_out:<a href="Programming_Keywords_Float.html">Float</a>[], mode:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<table>
+<tr><th><b>Mode</b></th><th><b>Description</b></th></tr>
+<tr><td>0</td><td>Transform window space x,y coords to canvas space.</td></tr>
+</table>
+<p>
+Use mode 0 to transform MouseX, MouseY to canvas coords.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

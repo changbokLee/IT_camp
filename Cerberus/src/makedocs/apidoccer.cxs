@@ -1,0 +1,802 @@
+Strict
+
+Import makedocs
+
+' Parses the modules folder for useful cerberus docs.
+' Also, it copies any 3rdparty.cerberusdoc to docs/cerberusdoc/ so the
+' DocDoccer can handle them afterwards
+' Plus, it copies any cerberusdoc .data dirs
+Class ApiDoccer
+	Field maker:Makedocs
+	' current Parser (so it hasn't to be passed from func to func)
+	Field parser:Parser
+	' for documentation: in what section the current paragraph should be put
+	Field cursect:Int
+	' for documentation: current paragraph
+	Field curparagraph:DocDecl
+	
+	Method New( pMakedocs:Makedocs )
+		maker = pMakedocs
+	End
+	
+	' parse all modules
+	Method Parse:Void()
+		' go through all dirs in modpaths
+		For Local path:String = Eachin maker.modpaths.Split(";")
+			If FileType( path ) = FILETYPE_DIR Then
+				ParseIn( path, maker.rootmodules )
+			End
+		Next
+	End
+	
+	' parse modules in specified directory
+	' pScope says to which decl found modules are attached
+	' pModulePath is set, when scanning a module's directory (e.g. brl), the
+	' full modpath must be known for the ignoremods comparison
+	Method ParseIn:Void( pDirectory:String, pScope:DocDecl, pModulePath:String="" )
+		#If LOG_PARSEIN
+			maker.Log( "ParseIn: "+pDirectory+", "+pModulePath, True )
+		#End
+		' go through the complete directory
+		For Local file:String = Eachin LoadDir( pDirectory, False, False )
+			#If LOG_PARSEIN
+				maker.Log( file, True )
+			#End
+			' item to look at
+			Local path:String = pDirectory + "/" + file
+			Local modpath:String = pModulePath
+			Select FileType( path )
+			' directory?
+			Case FILETYPE_DIR
+				' 3rd party stuff gets marked for later doccing
+				If file = "3rdparty.cerberusdoc" Or
+				file = "3rdparty.monkeydoc" Then
+					Local decl := New DocDecl( DECL_3RDPARTYDOC, path )
+					maker.branch3rdparty.Add( decl )
+				' examples get stored to be passed on to decls
+				Elseif file = "examples" Then
+					LoadExamples( path, pScope )
+				' cerberusdoc folders may also contain example folders
+				Elseif file = "cerberusdoc" Then
+					Local expath:String = path + "/examples"
+					If FileType( expath ) = FILETYPE_DIR Then
+						LoadExamples( expath, pScope )
+					End
+					' the actual cerberusdoc-folder-doccing gets done per module
+					' when a source file is found. See below in the "file?"
+					' section
+				' rest gets parsed as if it's a modpath
+				Elseif Not( file.Contains(".") ) Then
+					' append modpath
+					If modpath Then
+						modpath = modpath + "." + file
+					Else
+						modpath = file
+					End
+					' recursively scan module directory
+					If Not( maker.ignoremods.Contains( modpath ) ) Then
+						' scope for that folder: either existing or new module
+						Local decl := pScope.GetChild( file )
+						Local newscope:Bool = False
+						If Not decl Then
+							' create new module scope decl
+							decl = New DocDecl( DECL_MODULE_SCOPE, modpath )
+							newscope = True
+							' do not add already because module could turn out empty
+							' but set parent already because childs have to know it
+							decl.parent = pScope
+						End
+						ParseIn(path, decl, modpath)
+						' save new scope only if it really contains modules,
+						' or is in fact a module
+						If newscope And
+						( decl.GetChilds( DECL_MODULE, True ) Or decl.GetChild( DECL_MODHEADER ) ) Then
+							pScope.Add( decl )
+						End
+					End
+				End
+			' file?
+			Case FILETYPE_FILE
+				Local name:String = StripExt( file )
+				Local ext:String = ExtractExt( file )
+				Local docdir:String
+				Local docext:String
+				' lookup information for CX files
+				If ext = "cxs" Then
+					docdir = "cerberusdoc/"
+					docext = ".cerberusdoc"
+				' backwards compatibility for Monkey
+				ElseIf ext = "monkey" Then
+					docdir = "monkeydoc/"
+					docext = ".monkeydoc"
+				End
+				' valid doccable file?
+				If docext Then
+					' to which scope decls shall be added
+					Local tmpscope:DocDecl
+					Local scopechilds:DocDeclStack = Null
+					' since a module could also be stored in a folder with its
+					' name (e.g. mypath.mymod can be in either 
+					' mypath/mymod.cxs or mypath/mymod/mymod.cxs),
+					' the name gets only appended to modpath if it differs from
+					' the last part of the directory
+					' plus, if the filename matches the dir name, the scope
+					' (DECL_MODULE_SCOPE then) later gets turned into a module
+					If name = StripDir( pDirectory ) Then
+						tmpscope = New DocDecl( DECL_MODULE )
+					Else
+						tmpscope = pScope
+						modpath = modpath + "." + name
+						' it's possible, that there's a folder in this directory
+						' with the same name and has already been parsed as
+						' DECL_MODULE_SCOPE - store its childs, remove it and
+						' restore childs later in created module decl
+						Local decl := pScope.GetChild( modpath, DECL_MODULE_SCOPE )
+						If decl Then
+							pScope.childs.RemoveEach( decl )
+							scopechilds = decl.childs
+						End
+					End
+					If Not( maker.ignoremods.Contains( modpath ) ) Then
+						Local dir:String = pDirectory + "/"
+						Local p1:String = dir + name + docext
+						Local p2:String = dir + docdir + name + docext
+						' priorities:
+						' first name.cerberusdoc
+						If FileType( p1 ) = FILETYPE_FILE Then
+							ParseDocFile( p1, tmpscope, modpath )
+						' second cerberusdoc/name.cerberusdoc
+						' (also, cerberusdoc/ docs may have .data directories)
+						Elseif FileType( p2 ) Then
+							ParseDocFile( p2, tmpscope, modpath )
+							CopyDocsData( p2, modpath )
+						' last name.cxs (existence proven by FileType( path ) )
+						Else
+							ParseSourceFile( path, tmpscope, modpath )
+						End
+						' when there was already a scope with that name...
+						If scopechilds Then
+							'... move scope childs to module
+							Local mdecl := tmpscope.GetChild( name, DECL_MODULE )
+							If mdecl Then
+								For Local c := Eachin scopechilds
+									mdecl.Add( c )
+								Next
+							End
+						End
+						' when a module scope has to be turned in a module
+						If name = StripDir( pDirectory ) Then
+							'... move modules childs to scope
+							Local mdecl := tmpscope.GetChild( DECL_MODULE )
+							If mdecl And mdecl.childs Then
+								For Local c := Eachin mdecl.childs
+									pScope.Add( c )
+								Next
+								'... and turn scope into module
+								pScope.kind = DECL_MODULE
+								pScope.canbefound = True
+							End
+						End
+					End
+				End
+			End
+		Next
+	End
+	
+	' parse a doc file for given module
+	Method ParseDocFile:Void( pPath:String, pScope:DocDecl, pModulePath:String )
+		'If pModulePath <> "cerberus.map" Then Return
+		#If LOG_PARSEFILE
+			maker.Log( "Parsing file: "+pPath+" for module "+pModulePath )
+		#End
+		maker.SetErrInfoFile( pPath )
+		' retreive module identifier from modpath
+		Local p0:Int = pModulePath.FindLast(".")
+		Local path:String, ident:String
+		If p0 Then
+			path = pModulePath[ .. p0+1 ]
+			ident = pModulePath[ p0+1 .. ]
+		Else
+			ident = pModulePath
+		End
+		Local mdecl := New DocDecl( DECL_MODULE, pModulePath )
+		Local curdecl := mdecl
+		' reset doc section
+		cursect = DECL_DESCRIPTION
+		curparagraph = Null
+		Try
+			' load source and parse
+			Local source:String = LoadString( pPath )
+			parser = New Parser( source )
+			' reset toker position - first could have to be read by NextCdata
+			parser._tokePos = 0
+			While Not( parser._tokeType = TOKE_EOF )
+				#If LOG_PARSER
+					Local state := parser.Store()
+					parser.NextRestOfLine()
+					Local txt:String = parser._toke
+					txt = txt.Replace("~n", "\n")
+					parser.Restore( state )
+					maker.Log( txt )
+				#End
+				' ignore indentation
+				Local state := parser.Store()
+				parser.NextSpace()
+				' declarations
+				If parser.NextCdata("# ") Then
+					parser.NextToke()
+					curdecl = parser.ParseDecl( curdecl )
+					parser.NextRestOfLine()
+					' a new header resets the doc section and paragraph
+					cursect = DECL_DESCRIPTION
+					curparagraph = Null
+				' ignore commented declarations
+				Elseif parser.NextCdata("'# ") Then
+					parser.NextRestOfLine()
+				' documentation
+				Else
+					' restore indentation
+					parser.Restore( state )
+					Local str:String = parser.NextRestOfLine()
+					AppendDocContents( curdecl, str )
+				End
+			Wend
+			If mdecl.GetChild( DECL_MODHEADER ) Then
+				' complete and addressable module
+				mdecl.canbefound = True
+				pScope.Add( mdecl )
+			Else
+				maker.SetErrInfoLine(0)
+				maker.SetErrInfoChar(0)
+				maker.Error("Module header not found")
+			End
+		Catch message:ThrowableString
+			Error( message )
+		End
+	End
+	
+	' parse a source file for given module
+	Method ParseSourceFile:Void( pPath:String, pScope:DocDecl, pModulePath:String )
+		#If LOG_PARSEFILE
+			maker.Log( "Parsing file: "+pPath+" for module  "+pModulePath )
+		#End
+		maker.SetErrInfoFile( pPath )
+		' retreive module identifier from modpath
+		Local p0:Int = pModulePath.FindLast(".")
+		Local path:String, ident:String
+		If p0 Then
+			path = pModulePath[ .. p0+1 ]
+			ident = pModulePath[ p0+1 .. ]
+		Else
+			ident = pModulePath
+		End
+		Local mdecl:DocDecl = Null
+		Local doccdecl:DocDecl = Null
+		Local curdecl:DocDecl = Null
+		' reset doc section
+		cursect = DECL_DESCRIPTION
+		curparagraph = Null
+		Try
+			Enumerate BLOCK_DOC, BLOCK_REM, BLOCK_CONDITION
+			Local docswitch:Int = False	' for turning doccing temporarly on/off
+			' stack of blocks
+			Local docblocks:IntStack = New IntStack
+			' block flags
+			Local inrem:Bool = False
+			Local indoc:Bool = False
+			' load source and parse
+			Local source:String = LoadString( pPath )
+			parser = New Parser( source )
+			' reset toker position - first could have to be read by NextCdata
+			parser._tokePos = 0
+			While Not( parser._tokeType = TOKE_EOF )
+				#If LOG_PARSER
+					Local state := parser.Store()
+					parser.NextRestOfLine()
+					Local txt:String = parser._toke
+					txt = txt.Replace("~n", "\n")
+					parser.Restore( state )
+					maker.Log( txt )
+				#End
+				' update block control flags (dep. on latest block)
+				inrem = False
+				indoc = False
+				For Local b := Eachin docblocks.Backwards()
+					If b = BLOCK_DOC Then
+						indoc = True
+						Exit
+					Elseif b = BLOCK_REM Then
+						inrem = True
+						Exit
+					End
+				Next
+				' ignore indentation
+				Local state := parser.Store()
+				parser.NextSpace()
+				' start of a rem block
+				If parser.NextCdata("#rem", True) Then
+					parser.NextToke()
+					' only analyse first level rem blocks
+					' (not already in a block)
+					Local doanalyse:Bool = Not(indoc Or inrem)
+					If doanalyse And parser.PopToken("cerberusdoc") Then
+						' activate doccing of current block
+						docblocks.Push( BLOCK_DOC )
+						' a new block resets the doc section and paragraph
+						cursect = DECL_DESCRIPTION
+						curparagraph = Null
+						' module header?
+						If parser.PopUntilKeyword("module") Then
+							'mdecl = New DocDecl( DECL_MODULE, ident )
+							mdecl = New DocDecl( DECL_MODULE, pModulePath )
+							If path Then
+								'mdecl.Add( New DocDecl( DECL_UIDENT_SCOPE, path ) )
+							End
+							parser.ParseDecl( mdecl )
+							' turn doccing on and redirect it to module
+							docswitch = True
+							doccdecl = mdecl
+							curdecl = mdecl
+						' doccing switch?
+						Elseif parser.PopToken("off") Then
+							docswitch = False
+							docblocks.Pop()
+							docblocks.Push( BLOCK_REM )
+						Elseif parser.PopToken("on") Then
+							docswitch = True
+							doccdecl = New DocDecl( DECL_MODULE )
+							curparagraph = Null
+						' or actual documentation
+						Else
+							doccdecl = New DocDecl( DECL_MODULE )
+							curparagraph = Null
+						End
+						' ignore rest of line
+						parser.NextRestOfLine()
+					' block nested in doc: document
+					Elseif indoc Then
+						parser.Restore( state )
+						Local str:String = parser.NextRestOfLine()
+						AppendDocContents( doccdecl, str )
+						' nested doccing block
+						docblocks.Push( BLOCK_DOC )
+					' block nested in rem: don't document
+					Else
+						parser.NextRestOfLine()
+						docblocks.Push( BLOCK_REM )
+					End
+				' start of another precompiler conditional block
+				' (count them too as they're terminated with #End as well)
+				Elseif parser.NextCdata("#if", True) Then
+					If indoc Then
+						parser.Restore( state )
+						Local str:String = parser.NextRestOfLine()
+						AppendDocContents( doccdecl, str )
+						docblocks.Push( BLOCK_DOC )
+					Else
+						parser.NextRestOfLine()
+						docblocks.Push( BLOCK_CONDITION )
+					End
+				' end of a contitional block
+				Elseif parser.NextCdata("#end", True) Then
+					docblocks.Pop()
+					If docblocks.Length() > 0 And docblocks.Get(0) = BLOCK_DOC Then
+						parser.Restore( state )
+						Local str:String = parser.NextRestOfLine()
+						AppendDocContents( doccdecl, str )
+					End
+				' any other line of code or documentation to analyse
+				Elseif docswitch Then
+					' documentation
+					If indoc Then
+						' restore indentation
+						parser.Restore( state )
+						Local str:String = parser.NextRestOfLine()
+						AppendDocContents( doccdecl, str )
+					' probably declaration
+					Elseif Not(indoc Or inrem) Then
+						parser.NextToke()
+						parser.PopSpace()
+						Local decl := parser.ParseDecl( curdecl )
+						parser.NextRestOfLine()
+						If decl Then
+							curdecl = decl
+							' doccable line?
+							' then copy documentation to this decl, except for
+							' modules, because module documentation gets appended
+							' directly when reading doc contents
+							If curdecl And doccdecl And doccdecl <> mdecl And doccdecl.childs Then
+								For Local d := Eachin doccdecl.childs
+									' send through Add to match parent
+									curdecl.Add( d )
+								Next
+								' if decl was a whole list, copy documentation
+								' to other set elements
+								If parser.listofdecls Then
+									' remove curdecl - that one is already docced
+									parser.listofdecls.RemoveEach( curdecl )
+									' copy documentation to rest in list
+									_CopyDoccDecl( doccdecl, parser.listofdecls )
+								End
+								doccdecl = Null
+							End
+						End
+					' lines to ignore
+					Else
+						parser.NextRestOfLine()
+					End
+				' lines with irrelevant stuff
+				Else
+					parser.NextRestOfLine()
+					' make it stop after line 5 if there was no cerberusdoc Module yet
+					If Not mdecl And parser.GetCarretLine() > 5 Then
+						Return
+					End
+				End
+			Wend
+			If mdecl Then
+				pScope.Add( mdecl )
+			End
+		Catch message:ThrowableString
+			Error( message )
+		End
+	End
+	
+	' appends doc contents to the right decl
+	Method AppendDocContents:Void( pDecl:DocDecl, pString:String )
+		' special treatment for sections (lines starting with:)
+		' Example:
+		If pString.StartsWith("Example:") Then
+			cursect = DECL_EXAMPLE
+			curparagraph = Null'New DocDecl( cursect )
+			pString = pString[8..]
+		' Links:
+		Elseif pString.StartsWith("Links:") Then
+			cursect = DECL_LINKS
+			curparagraph = Null
+			pString = pString[6..]
+		' Params:
+		Elseif pString.StartsWith("Parameters:") Then
+			cursect = DECL_PARAMS
+			curparagraph = Null
+			pString = pString[11..]
+		' Returns:
+		Elseif pString.StartsWith("Returns:") Then
+			cursect = DECL_RETURNS
+			curparagraph = Null
+			pString = pString[8..]
+		End
+		' once there's actual text, open new paragraph
+		If pString.Trim() And Not curparagraph Then
+			curparagraph = New DocDecl( cursect )
+			pDecl.Add( curparagraph )
+		End
+		' once there's an open paragraph, add text
+		If curparagraph Then
+			' since markdown only understands Unix line endings (LF), replace
+			' Windows (CR+LF) and Mac line endings (CR) to Unix ones
+			curparagraph.ident += UnifyLineEndings( pString )
+		End
+	End
+	
+	' copy the childs from pDoccDecl to all decls in pDecls
+	Method _CopyDoccDecl:Void( pDoccDecl:DocDecl, pDecls:Stack<DocDecl> )
+		For Local ld := Eachin pDecls
+			For Local d := Eachin pDoccDecl.childs
+				' Add copy of existing doccdecl
+				ld.Add( New DocDecl( d.kind, d.ident ) )
+			Next
+		Next
+	End
+	
+	' apply the template loaded in pPager to a module like pDecl
+	Method ApplyModuleTemplate:String( pDecl:DocDecl, pPager:PageMaker )
+		pPager.Clear()
+		SetPagerStrings( pPager, pDecl )
+		' lists, consisting of DocDecl kinds and their names
+		Local kinds := [	DECL_IMPORT,
+							DECL_IMPORTEDBY,
+							DECL_CLASS,
+							DECL_INTERFACE,
+							DECL_FUNCTION,
+							DECL_CONST,
+							DECL_GLOBAL,
+							DECL_ENUM]
+		Local lists := [	"IMPORTS",
+							"IMPORTED_BY",
+							"CLASSES",
+							"INTERFACES",
+							"FUNCTIONS",
+							"CONSTS",
+							"GLOBALS",
+							"ENUMS"]
+		SetPagerLists( pPager, pDecl, kinds, lists )
+		Return pPager.MakePage()
+	End
+	
+	' apply the template loaded in pPager to a class like pDecl
+	Method ApplyClassTemplate:String( pDecl:DocDecl, pPager:PageMaker )
+		pPager.Clear()
+		SetPagerStrings( pPager, pDecl )
+		' lists, consisting of DocDecl kinds and their names
+		Local kinds := [	DECL_EXTENDS,
+							DECL_IMPLEMENTS,
+							DECL_EXTENDEDBY,
+							DECL_IMPLEMENTEDBY,
+							DECL_METHOD,
+							DECL_PROPERTY,
+							DECL_CTOR,
+							DECL_CLASSFUNCTION,
+							DECL_CLASSCONST,
+							DECL_CLASSGLOBAL,
+							DECL_CLASSENUM,
+							DECL_FIELD,
+							DECL_INH_METHOD,
+							DECL_INH_PROPERTY,
+							DECL_INH_CTOR,
+							DECL_INH_CLASSFUNCTION,
+							DECL_INH_CLASSCONST,
+							DECL_INH_CLASSGLOBAL,
+							DECL_INH_CLASSENUM,
+							DECL_INH_FIELD]
+		Local lists := [	"EXTENDS",
+							"IMPLEMENTS",
+							"EXTENDED_BY",
+							"IMPLEMENTED_BY",
+							"METHODS",
+							"PROPERTIES",
+							"CTORS",
+							"FUNCTIONS",
+							"CONSTS",
+							"GLOBALS",
+							"ENUMS",
+							"FIELDS",
+							"INHERITED_METHODS",
+							"INHERITED_PROPERTIES",
+							"INHERITED_CTORS",
+							"INHERITED_FUNCTIONS",
+							"INHERITED_CONSTS",
+							"INHERITED_GLOBALS",
+							"INHERITED_ENUMS",
+							"INHERITED_FIELDS"]
+		SetPagerLists( pPager, pDecl, kinds, lists )
+		Return pPager.MakePage()
+	End
+	
+	' provides (or tries to provide) those ${vars} for any decl:
+	' KIND, IDENT, UIDENT, SCOPE, PARAMS, DECL, XDECL, URL,
+	' SUMMARY, DESCRIPTION, LINKS, EXAMPLE, PARAMETERS, RETURNS,
+	' EXAMPLE_URL,
+	' XEXTENDS, XIMPLEMENTS, XEXTENDED_BY (these three are deprecated)
+	' If a decl does not contain the necessary child nodes to fill the ${var},
+	' it's created but remains empty (this is important because if it's not
+	' created, the pagemaker will the more global ${var} as fallback, which
+	' means when e.g. a list item does not have an example, it takes the one
+	' of the scope...)
+	' Set pOnlyForIndex to true to only set the fields that are accessible from
+	' index_template.html
+	Method SetPagerStrings:Void( pPager:PageMaker, pDecl:DocDecl, pOnlyForIndex:Bool=False )
+		'maker.curdecl = pDecl
+		' most of the fields come from the targetted decl, if available
+		Local tdecl:DocDecl
+		If pDecl.target Then
+			tdecl = pDecl.target
+		Else
+			tdecl = pDecl
+		End
+		Local txt:String
+		' always accessible fields
+		' IDENT
+		pPager.SetString("IDENT", tdecl.GetIdent() )
+		' URL - the unique URL to this (or the targeted) decl
+		pPager.SetString("URL", maker.BuildDocLink( tdecl ) )
+		' SCOPE - the scope that uniquely identifies this decl at global
+		pPager.SetString("SCOPE", tdecl.GetScopeIdent() )
+		' SUMMARY, markdowned
+		If tdecl.kind = DECL_ENUM_ELEMENT Then
+			txt = tdecl.parent.GetTextOfChild( DECL_SUMMARY )
+		Else
+			txt = tdecl.GetTextOfChild( DECL_SUMMARY )
+		End
+		txt = StripParagraph( maker.marker.ToHtml(txt) )
+		pPager.SetString("SUMMARY", txt )
+		' fields only for CX declarations
+		If pOnlyForIndex Then Return
+		' KIND
+		txt = pDecl.GetKindName()
+		pPager.SetString("KIND", txt)
+		' UIDENT
+		pPager.SetString("UIDENT", tdecl.GetIdentWithParams() )
+		' PARAMTYPES - the parameters that uniquely identify this decl in this scope
+		txt = tdecl.GetTextOfChild( DECL_UIDENT_PARAMS )
+		pPager.SetString("PARAMTYPES", txt)
+		' TYPE, XTYPE and their new equivalents DECL and XDECL 
+		' extends have their own type (generic type arguments)
+		If pDecl.kind = DECL_EXTENDS Then
+			txt = HtmlEscape( pDecl.GetDocType() )
+			' for extends, XDECL does not contain any links and is = DECL
+			pPager.SetString("DECL", txt)
+			pPager.SetString("XDECL", txt)
+			'... nor does it contain a ":", so TYPE = DECL
+			pPager.SetString("TYPE", txt)
+			pPager.SetString("XTYPE", txt)
+		' other classes are genericly typed
+		Elseif tdecl.kind = DECL_CLASS Then
+			txt = HtmlEscape( tdecl.GetGenType() )
+			' generic types do not contain any links and thus DECL = XDECL
+			pPager.SetString("DECL", txt)
+			pPager.SetString("XDECL", txt)
+			'... nor does it contain a ":", so TYPE = DECL
+			pPager.SetString("TYPE", txt)
+			pPager.SetString("XTYPE", txt)
+		' for functions and shit TYPE also contains parameters...
+		' (GetDocType handles this)
+		Else
+			Local xtxt:String 
+			txt = HtmlEscape( tdecl.GetDocType() )
+			xtxt = StripParagraph( maker.marker.ToHtml( tdecl.GetDocXType() ) )
+			' declaration including the optional leading ":"
+			pPager.SetString("DECL", txt)
+			pPager.SetString("XDECL", xtxt)
+			' strip leading ":" and trim whitespaces for old TYPE/XTYPE support
+			txt = txt.Trim()
+			If txt.StartsWith(":") Then txt = txt[1..].Trim()
+			xtxt = xtxt.Trim()
+			If xtxt.StartsWith(":") Then xtxt = xtxt[1..].Trim()
+			pPager.SetString("TYPE", txt)
+			pPager.SetString("XTYPE", txt) 
+			
+		End
+		' for enum elements, take infos from containing enum from here on
+		If tdecl.kind = DECL_ENUM_ELEMENT Then
+			tdecl = tdecl.parent
+		End
+		' DESCRIPTION, markdowned
+		txt = tdecl.GetTextOfChild( DECL_DESCRIPTION )
+		pPager.SetString("DESCRIPTION", maker.marker.ToHtml(txt) )
+		' LINKS, EXAMPLE, PARAMETERS, RETURNS, all markdowned
+		txt = tdecl.GetTextOfChild( DECL_LINKS )
+		pPager.SetString("LINKS", maker.marker.ToHtml(txt) )
+		txt = tdecl.GetTextOfChild( DECL_EXAMPLE )
+		pPager.SetString("EXAMPLE", maker.marker.ToHtml(txt) )
+		txt = tdecl.GetTextOfChild( DECL_PARAMS )
+		pPager.SetString("PARAMETERS", maker.marker.ToHtml(txt) )
+		txt = tdecl.GetTextOfChild( DECL_RETURNS )
+		pPager.SetString("RETURNS", maker.marker.ToHtml(txt) )
+		' EXAMPLE_URL
+		Local ex := tdecl.GetChild( DECL_EXAMPLE )
+		If ex Then
+			' precede examples/ because the url has to be relative from
+			' PATH_HTML_BASE on
+			txt = "examples/" + ex.GetTextOfChild( DECL_EXAMPLE_URL )
+		Else
+			txt = ""
+		End
+		pPager.SetString("EXAMPLE_URL", txt)
+		'''' deprecated, may be removed in future versions ''''
+		' XEXTENDS
+		Local decls:DocDeclStack
+		decls = pDecl.GetChilds( DECL_EXTENDS )
+		txt = ""
+		If decls Then
+			For Local d := Eachin decls
+				If txt Then txt += ", "
+				txt += "[[" + d.GetTargetIdent() + "]]" + HtmlEscape( d.GetType() )
+			Next
+		End
+		pPager.SetString("XEXTENDS", maker.marker.ToHtml(txt) )
+		' XIMPLEMENTS
+		decls = pDecl.GetChilds( DECL_IMPLEMENTS )
+		txt = ""
+		If decls Then
+			For Local d := Eachin decls
+				If txt Then txt += ", "
+				txt += "[[" + d.GetTargetIdent() + "]]"
+			Next
+		End
+		pPager.SetString("XIMPLEMENTS", maker.marker.ToHtml(txt) )
+		' XEXTENDED_BY
+		decls = pDecl.GetChilds( DECL_EXTENDEDBY )
+		txt = ""
+		If decls Then
+			For Local d := Eachin decls
+				If txt Then txt += ", "
+				txt += "[[" + d.target.ident + "]]" + HtmlEscape( d.GetType() )
+			Next
+		End
+		pPager.SetString("XEXTENDED_BY", maker.marker.ToHtml(txt) )
+	End	
+	
+	' set contents for all lists
+	Method SetPagerLists:Void( pPager:PageMaker, pDecl:DocDecl, pKinds:Int[], pLists:String[] )
+		' go through all lists...
+		For Local li:Int = 0 Until pKinds.Length
+			SetPagerList( pPager, pDecl, pKinds[li], pLists[li] )
+		Next
+	End
+	' set contents of a list for pPager/pDecl, pKind says which childs to take,
+	' pList names the list
+	Method SetPagerList:Void( pPager:PageMaker, pDecl:DocDecl, pKind:Int, pList:String )
+		' get matching childs
+		Local decls := pDecl.GetChilds( pKind )
+		If decls Then
+			'... and put them in a list
+			pPager.BeginList( pList )
+			For Local d := Eachin decls
+				pPager.AddItem()
+				SetPagerStrings( pPager, d )
+				' enums are lists themselves
+				Select pKind
+				Case DECL_ENUM,
+				DECL_CLASSENUM,
+				DECL_INH_CLASSENUM
+					Local kind := DECL_ENUM_ELEMENT
+					Local listname := "ENUM_ELEMENTS"
+					Local tdecl := d
+					' redirect inherited enums
+					If tdecl.target Then tdecl = tdecl.target
+					SetPagerList( pPager, tdecl, kind, listname )
+				End
+			Next
+			pPager.EndList()
+		End
+	End
+	
+	' strips the <p> </p> tags around pText
+	' (mainly used for the summary field that gets put into a <td> and XDECL -
+	' fields that get markdowned, which puts them in a paragraph, but aren't
+	' used as paragraphs)
+	Method StripParagraph:String( pText:String )
+		' strip p tags
+		If pText.StartsWith("<p>") And pText.EndsWith("</p>") Then
+			pText = pText[3..-4]
+		End
+		' strip leading newlines
+		While pText And ( pText[0] = `~n` Or pText[0] = `~r` )
+			pText = pText[1 ..]
+		Wend
+		' strip trailing newlines
+		While pText And ( pText[pText.Length()-1] = `~n` Or pText[pText.Length()-1] = `~r` )
+			pText = pText[.. -1]
+		Wend
+		Return pText
+	End
+	
+	' loads .cxs files from example directories
+	Method LoadExamples:Void( pDirectory:String, pScope:DocDecl )
+		For Local file := Eachin LoadDir( pDirectory )
+			Local path:String = pDirectory + "/" + file
+			Local ext:String = ExtractExt( file )
+			Local name:String = StripExt( file )
+			' load .cxs and .monkey sources, that are actually examples
+			If ( ext = "cxs" Or ext = "monkey" ) And
+			name.EndsWith( "_example" ) Then
+				Local source := LoadString( path )
+				Local decl := New DocDecl( DECL_EXAMPLE_IDENT, name[.. -8] )
+				decl.Add( New DocDecl( DECL_EXAMPLE_SOURCE, source ) )
+				pScope.Add( decl )
+			End
+		Next
+	End
+
+	' copies a cerberusdoc's data directory (if existing)
+	Method CopyDocsData:Void( pPath:String, pModulePath:String )
+		' potential name of data dir
+		Local path:String = StripExt( pPath ) + ".data"
+		' exists, copy
+		If FileType( path ) = FILETYPE_DIR Then
+			Local dst:String = PATH_HTML_DATA + "/" +pModulePath.Replace(".", "/")
+			maker.CopyDir( path, dst, True )
+		End
+	End
+	
+	' generates error message
+	Method Error:Void( pMessage:String )
+		' set additional info
+		maker.SetErrInfoLine( parser.GetCarretLine() )
+		maker.SetErrInfoChar( parser.GetCarretChar() )
+		maker.Error( pMessage )
+		' reset additional info
+		maker.ClearErrInfo()
+	End
+End

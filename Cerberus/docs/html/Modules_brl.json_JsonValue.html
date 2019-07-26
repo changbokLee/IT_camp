@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.json.html'>brl.json</a>
+
+			<span>JsonValue</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>JsonValue</small></h1>
+
+
+	<p>
+		This base class provides some fall-back functionality for the specific json value<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extended By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_brl.json_JsonArray.html">JsonArray</a></code> , 
+				
+					<code><a href="Modules_brl.json_JsonBool.html">JsonBool</a></code> , 
+				
+					<code><a href="Modules_brl.json_JsonNull.html">JsonNull</a></code> , 
+				
+					<code><a href="Modules_brl.json_JsonNumber.html">JsonNumber</a></code> , 
+				
+					<code><a href="Modules_brl.json_JsonObject.html">JsonObject</a></code> , 
+				
+					<code><a href="Modules_brl.json_JsonString.html">JsonString</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented classes are listed here, there might be undocumented classes that extend this one.</span>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Type()">Type</a><small> : Int ()</small></code></td>
+				<td>Indicates the type of the specific JsonValue object.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#BoolValue()">BoolValue</a><small> : Bool ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>, this will return its boolean value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FloatValue()">FloatValue</a><small> : Float ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as float.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#IntValue()">IntValue</a><small> : Int ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as int.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StringValue()">StringValue</a><small> : String ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonString.html">JsonString</a>, this will return its string value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToJson()">ToJson</a><small> : String ()</small></code></td>
+				<td>Converts value to a JSON string.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+This base class provides some fall-back functionality for the specific json value
+classes.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Type()"></a>
+				<pre class="declaration">Method <strong>Type</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Indicates the type of the specific JsonValue object.
+Type is one of the following:
+</p>
+<table>
+<tr><th>Type</th><th>Meaning</th></tr>
+<tr><td>JsonValue.OBJECTTYPE</td><td>object is JsonObject</td></tr>
+<tr><td>JsonValue.ARRAYTYPE</td><td>object is JsonArray</td></tr>
+<tr><td>JsonValue.NULLTYPE</td><td>object is JsonNull</td></tr>
+<tr><td>JsonValue.BOOLTYPE</td><td>object is JsonBool</td></tr>
+<tr><td>JsonValue.NUMBERTYPE</td><td>object is JsonNumber</td></tr>
+<tr><td>JsonValue.STRINGTYPE</td><td>object is JsonString</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="BoolValue()"></a>
+				<pre class="declaration">Method <strong>BoolValue</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ()</pre>
+				<p>
+For a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>, this will return its boolean value.
+</p>
+<p>
+Otherwise, it throws a <a href="Modules_brl.json_JsonError.html">JsonError</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FloatValue()"></a>
+				<pre class="declaration">Method <strong>FloatValue</strong> : <a href="Programming_Keywords_Float.html">Float</a> ()</pre>
+				<p>
+For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as float.
+</p>
+<p>
+Otherwise, it throws a <a href="Modules_brl.json_JsonError.html">JsonError</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="IntValue()"></a>
+				<pre class="declaration">Method <strong>IntValue</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as int.
+</p>
+<p>
+Otherwise, it throws a <a href="Modules_brl.json_JsonError.html">JsonError</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StringValue()"></a>
+				<pre class="declaration">Method <strong>StringValue</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+For a <a href="Modules_brl.json_JsonString.html">JsonString</a>, this will return its string value.
+</p>
+<p>
+Otherwise, it throws a <a href="Modules_brl.json_JsonError.html">JsonError</a>.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToJson()"></a>
+				<pre class="declaration">Method <strong>ToJson</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Converts value to a JSON string.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+Import mojo.app
+Import mojo.graphics
+
+
+
+Class MyApp Extends App
+	
+	Field Circle
+	Field BackgroundX: Float = 0
+	Field BackgroundY: Float =0
+
+	Method OnCreate()
+	
+		LoadGame()
+		SetUpdateRate 60
+		
+	End
+	
+	Method LoadGame()
+	
+	
+	End
+	
+	Method OnUpdate()
+		
+		 			
+	End
+	
+	Method OnRender()
+		Cls
+	End
+	
+	
+	Method OnLoading()
+		
+	End
+End
+
+Function Main()
+	New MyApp
+End

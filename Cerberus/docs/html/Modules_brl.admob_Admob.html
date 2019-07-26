@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.admob.html'>brl.admob</a>
+
+			<span>Admob</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Admob</small></h1>
+
+
+	<p>
+		The admob class provides simple support for the Google Admob advertising system, which allows you to add advertising to your games.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#AdViewHeight()">AdViewHeight</a><small> : Int ()</small></code></td>
+				<td>Returns the height of the ad view, or 0 if the ad view is hidden.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#AdViewWidth()">AdViewWidth</a><small> : Int ()</small></code></td>
+				<td>Returns the width of the ad view, or 0 if the ad view is hidden.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#HideAdView()">HideAdView</a><small> : Void ()</small></code></td>
+				<td>Hides the ad view and disables ads</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ShowAdView([Int],[Int])">ShowAdView</a><small> : Void ( style:Int=1, layout:Int=2 )</small></code></td>
+				<td>Shows the ad view and enables ads.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#GetAdmob()">GetAdmob</a><small> : Admob ()</small></code></td>
+				<td>Get the global Admob object.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The admob class provides simple support for the Google Admob advertising system, which allows you to add advertising to your games.
+</p>
+<p>
+To use Admob advertising in your game:
+</p>
+<ol>
+<li>Create an Admob account and add a new site/app for your game. You can create an Admob account at http://www.admob.com</li>
+<ul></ul>
+<li>Add the app config setting ADMOB_PUBLISHER_ID to your game. This must be set to your app's Admob 'Publisher ID'. See <a href="Programming_App config settings.html">App config settings</a>.</li>
+<ul></ul>
+<li>Import the brl.admob module into your game and use the Admob class to enable and disable ads as required.</li>
+<ul></ul>
+<ul></ul>
+</ol>
+		
+		
+			<span class="detail example"><b><a href="examples/brl_admob_Admob.cxs">Example</a></b></span>
+			<p>
+#If TARGET<>"android" And TARGET<>"ios"
+#Error "Admob is only supported on Android and iOS targets"
+#End
+</p>
+<p>
+#ADMOB_PUBLISHER_ID="ca-app-pub-3940256099942544/6300978111"    'replace with id from your admob account
+#ADMOB_ANDROID_TEST_DEVICE1="TEST_EMULATOR"
+#ADMOB_ANDROID_TEST_DEVICE2="TEST_EMULATOR"
+</p>
+<p>
+Import mojo
+Import brl.admob
+</p>
+<p>
+Class MyApp Extends App
+</p>
+<p>
+  Field admob:Admob
+  Field interstitialAdmob:AdmobInterstitial
+  Field layout:=1
+  Field state:=1
+</p>
+<p>
+  Method OnCreate()
+    admob=Admob.GetAdmob()
+    admob.ShowAdView 1,layout
+    interstitialAdmob=AdmobInterstitial.GetAdmobInterstitial("ca-app-pub-3940256099942544/1033173712")
+    SetUpdateRate 60
+  End
+</p>
+<p>
+  Method OnUpdate()
+    If MouseHit( 0 )
+      If state = 3
+        admob.HideAdView
+        state+=1
+      Else If state = 1
+        layout+=1
+        If layout=7 layout=1
+        admob.ShowAdView 1,layout
+        state+=1
+      Else If state = 2
+        admob.HideAdView
+        interstitialAdmob.ShowAd
+        state+=1
+      End
+    End
+  End
+</p>
+<p>
+  Method OnRender()
+    Local en:="disabled"
+    If state=2 en="enabled"
+    Cls
+    PushMatrix
+      Scale 2,2
+      DrawText "Click to toggle ads! ads are currently "+en,DeviceWidth/4,DeviceHeight/4,.5,.5
+    PopMatrix
+  End
+</p>
+<p>
+End
+</p>
+<p>
+Function Main()
+  New MyApp
+End
+</p>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="AdViewHeight()"></a>
+				<pre class="declaration">Method <strong>AdViewHeight</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the height of the ad view, or 0 if the ad view is hidden.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#AdViewWidth()">AdViewWidth</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="AdViewWidth()"></a>
+				<pre class="declaration">Method <strong>AdViewWidth</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the width of the ad view, or 0 if the ad view is hidden.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#AdViewHeight()">AdViewHeight</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="HideAdView()"></a>
+				<pre class="declaration">Method <strong>HideAdView</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Hides the ad view and disables ads
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#ShowAdView([Int],[Int])">ShowAdView</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="ShowAdView([Int],[Int])"></a>
+				<pre class="declaration">Method <strong>ShowAdView</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( style:<a href="Programming_Keywords_Int.html">Int</a>=1, layout:<a href="Programming_Keywords_Int.html">Int</a>=2 )</pre>
+				<p>
+Shows the ad view and enables ads. The <b>style</b> and <b>layout</b> parameters should be one of the following:
+</p>
+<table>
+<tr><th>Style</th><th>Meaning</th></tr>
+<tr><td>1</td><td>Standard banner</td></tr>
+<tr><td>2</td><td>Smart banner portrait</td></tr>
+<tr><td>3</td><td>Smart banner landscape</td></tr>
+</table>
+<table>
+<tr><th>Layout</th><th>Meaning</th></tr>
+<tr><td>1</td><td>Top left</td></tr>
+<tr><td>2</td><td>Top center</td></tr>
+<tr><td>3</td><td>Top right</td></tr>
+<tr><td>4</td><td>Bottom left</td></tr>
+<tr><td>5</td><td>Bottom center</td></tr>
+<tr><td>6</td><td>Bottom right</td></tr>
+</table>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#HideAdView()">HideAdView</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="GetAdmob()"></a>
+				<pre class="declaration">Function <strong>GetAdmob</strong> : <a href="Modules_brl.admob_Admob.html">Admob</a> ()</pre>
+				<p>
+Get the global Admob object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

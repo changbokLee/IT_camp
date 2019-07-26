@@ -1,0 +1,18 @@
+
+Import brl.pool
+
+Class Actor Implements IOnPoolFree
+	Method OnPoolFree:Void()
+		Print( "An actor has left the stage." )
+	End
+End
+
+Function Main:Int()
+	Local actorPool := New Pool<Actor>
+	
+	' create a new actor object
+	Local actor := actorPool.Allocate()
+	
+	' free the actor
+	actorPool.Free(actor)
+End

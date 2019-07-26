@@ -1,0 +1,62 @@
+
+Strict
+
+Import brl.json
+
+Function Main:Int()
+	Local jsonTypes := ["OBJECT", "ARRAY", "NULL", "BOOL", "NUMBER", "STRING"]
+	
+	Local str:String
+	' try these different JSON inputs
+	'str = "foul!"							' invalid JSON
+	'str = "null"							' null value
+	'str = "true"							' boolean value
+	'str = "3.14"							' numerical value
+	'str = "~qtext~q"						' string value
+	'str = "{~qfoo~q:true,~qbar~q:false}"	' object
+	str = "[1,2,~qbla~q]"					' array
+	
+	' report what's fed into the parser
+	Print "json input:"
+	Print str
+	Print ""
+	
+	' try to parse JSON
+	Local json:JsonValue
+	Try
+		json = New JsonParser(str).ParseValue()
+	Catch e:JsonError
+		Print "invalid JSON"
+		Return 0
+	End
+	
+	' report how JSON is interpreted
+	Print "value is of type "+ jsonTypes[ json.Type ] +" and contains: "
+	
+	Select json.Type
+	' JsonObject
+	Case JsonValue.OBJECTTYPE
+		For Local jn := Eachin JsonObject( json ).GetData()
+			Print "node "+ jn.Key() +" containing "+ jn.Value().ToJson()
+		End
+	' JsonArray
+	Case JsonValue.ARRAYTYPE
+		For Local entry := Eachin JsonArray( json ).GetData()
+			Print entry.ToJson()
+		End
+	' JsonNull
+	Case JsonValue.NULLTYPE
+		Print JsonNull( json ).ToJson()
+	' JsonBool
+	Case JsonValue.BOOLTYPE
+		Print JsonBool( json ).ToJson()
+	' JsonNumber
+	Case JsonValue.NUMBERTYPE
+		Print JsonNumber( json ).ToJson()
+	' JsonString
+	Case JsonValue.STRINGTYPE
+		Print JsonString( json ).ToJson()
+	End
+	
+	Return 0
+End
