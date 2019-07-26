@@ -1,0 +1,184 @@
+' Cerberus X - Renderer Demo
+'
+' How to use Renderer to obtain more than 4 lights and implement basic shadow casting.
+
+
+Strict
+
+Import mojo2
+
+Const NUM_LIGHTS:Int = 5
+
+
+' create an orthographic projection matrix
+Function Mat4Ortho:Float[](left:Float, right:Float, lower:Float, upper:Float, znear:Float, zfar:Float)
+
+	Local wide:Float = right - left
+	Local high:Float = upper - lower
+	Local deep:Float = zfar - znear	
+	Return [2.0 / wide, 0, 0, 0, 0, 2.0 / high, 0, 0, 0, 0, 2.0/ deep, 0, -(right + left) / wide, -(upper + lower) / high, -(zfar + znear) / deep, 1]
+End
+
+
+
+
+Class MyLight Implements ILight
+
+	' note: x,y,z,w are last 4 components of matrix...
+	Field myMatrix:Float[] = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 	0.0, -100.0, 1.0]
+	Field myLightRange:Float = 400.0
+	Field myLightColor:Float[] = [0.1, 0.1, 0.1, 1.0]
+		
+	' implement ILight interface methods
+	
+	Method LightMatrix:Float[]()
+		Return myMatrix
+	End
+	
+	
+	Method LightType:Int()
+		' all lights are point-light type: 0 = disabled, 1 = enabled
+		Return 1
+	End
+	
+	
+	Method LightColor:Float[]()
+		Return myLightColor
+	End
+	
+	
+	Method LightRange:Float()
+		Return myLightRange
+	End
+	
+	
+	Method LightImage:Image()
+		' we're not using a texture image for lighting
+		Return Null
+	End
+
+End
+
+
+
+Class RenderLayer Extends DrawList Implements ILayer
+
+	Field lights:Stack<MyLight> = New Stack<MyLight>()
+	Field myLayerMatrix:Float[] = [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]
+	Field myLayerFogColor:Float[] = [0.0, 0.0, 0.0, 0.0]
+
+	' implement ILayer interface methods
+	
+	Method LayerMatrix:Float[]()
+		Return myLayerMatrix
+	End
+	
+	
+	Method LayerFogColor:Float[]()
+		Return myLayerFogColor
+	End
+	
+	
+	Method LayerLightMaskImage:Image()
+		Return Null
+	End
+	
+	
+	Method EnumLayerLights:Void(lights:Stack<ILight>)
+		For Local light:=Eachin Self.lights
+			lights.Push(light)
+		Next
+	End
+
+
+	Method OnRenderLayer:Void(drawLists:Stack<DrawList> )
+		drawLists.Push(Self)
+	End
+
+End
+
+
+
+Class MyApp Extends App
+
+	Field tile:Image
+	Field myShadowCaster:ShadowCaster
+	Field myRenderer:Renderer
+	Field layer0:RenderLayer
+	Field rimage:Image
+	Field wallImage:Image
+	
+		
+	Method OnCreate:Int()
+	
+		' create renderer
+		myRenderer = New Renderer()
+		myRenderer.SetViewport(0, 0, DeviceWidth(), DeviceHeight())
+		myRenderer.SetProjectionMatrix(Mat4Ortho(0, 640, 0, 480, -1, 1))
+		myRenderer.SetAmbientLight([0.1, 0.1, 0.1, 1.0])
+		
+		' load a background image
+		tile = Image.Load("t3.png", 0, 0)
+		
+		' load wall image to use with shadow casters
+		wallImage = Image.Load("wall.png")
+		
+		' create layer 0
+		layer0 = New RenderLayer()
+		
+		' add some lights to layer
+		For Local i:Int = 0 Until NUM_LIGHTS
+			layer0.lights.Push(New MyLight())
+		Next
+
+		' draw tiled background
+		For Local x:Int = 0 Until 640 Step 128
+			For Local y:Int = 0 Until 480 Step 128	
+				layer0.DrawImage(tile, x, y)
+			Next
+		Next
+		
+		' create simple rectangular shadow caster
+		myShadowCaster = New ShadowCaster()
+		myShadowCaster.SetVertices([0.0, 0.0, 32.0, 0.0, 32.0, 32.0, 0.0, 32.0])
+		
+		' draw shadow casters to layer
+		For Local x:Int = 100 Until 640 Step 220		
+			For Local y:Int = 60 Until 480 Step 180
+				
+				layer0.DrawImage(wallImage, x, y)
+				layer0.SetColor(1, 1, 1)
+				layer0.AddShadowCaster(myShadowCaster, x - 16, y - 16)
+			Next
+		Next
+
+		' add layer to renderer		
+		myRenderer.Layers.Push(layer0)
+		Return 0
+	End
+	
+	
+	Method OnRender:Int()
+	
+		myRenderer.SetViewport(0, 0, DeviceWidth(), DeviceHeight())
+	
+		For Local i:Int = 0 Until NUM_LIGHTS
+			Local light:MyLight = layer0.lights.Get(i)
+			Local radius:Float = 120.0
+			Local an:Float = (i * 360.0 / NUM_LIGHTS) + (Millisecs() / 50.0)
+			' rotate lights around mouse position, setting x and y co-ords in matrix[]	
+			light.myMatrix[12] = MouseX() - DeviceWidth() / 2 + Cos(an) * radius + 320
+			light.myMatrix[13] = MouseY() - DeviceHeight() / 2 + Sin(an) * radius + 240
+		Next
+
+		' render the scene
+		myRenderer.Render()
+		Return 0
+	End
+End
+
+
+Function Main:Int()
+	New MyApp()
+	Return 0
+End

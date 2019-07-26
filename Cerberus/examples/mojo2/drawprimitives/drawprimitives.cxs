@@ -1,0 +1,101 @@
+' Cerberus X - Draw Primitives example
+'
+' Shows how to construct, draw and manipulate a list of primitive shapes
+
+Strict
+
+
+Import mojo2
+Import cerberus.random
+
+
+Class MyApp Extends App
+
+	Field myCanvas:Canvas
+	Field verts:Float[]
+	Field grabbed:Bool
+	
+	Method OnCreate:Int()
+
+		'randomise
+		Seed = Millisecs()
+		myCanvas = New Canvas()
+		
+		' create 100 shapes consisting of 4 vertices, each vertex has an x and y co-ordinate
+		verts = New Float[100 * 4 * 2]
+		Local sz:Float = 20.0
+		Local p:Int = 0
+
+		For Local i:Int = 0 Until 100
+		
+			' choose a random position, leaving a little space near the bottom of the window for a message
+			Local x:Float = Rnd(DeviceWidth()) 
+			Local y:Float = Rnd(DeviceHeight() - 36)
+			
+			' set the four verticeas for each shape - initially a 20x20 square
+			verts[p + 0] = x
+			verts[p + 1] = y
+			
+			verts[p + 2] = x + sz
+			verts[p + 3] = y
+			
+			verts[p + 4] = x + sz
+			verts[p + 5] = y + sz
+			
+			verts[p + 6] = x
+			verts[p + 7] = y + sz
+			
+			p += 8
+		Next
+
+		grabbed = False
+		
+		Return 0		
+	End
+	
+	Method OnRender:Int()
+	
+		myCanvas.Clear(0, 0, 1)
+		
+		Local m:Int = Millisecs()
+		myCanvas.SetColor(0, 0, 0) 
+		myCanvas.DrawText("CLICK TO GRAB CENTRE", DeviceWidth()/2, DeviceHeight() - 16, 0.5)		
+		myCanvas.SetColor(1, 1, 1) 
+		
+		' if grabbed by mouse translate the drawing of the list
+		If grabbed
+			myCanvas.PushMatrix()
+			myCanvas.Translate(MouseX() - DeviceWidth() / 2, MouseY() - DeviceHeight() / 2)
+		
+			' First parameter is the 'order' or number of vertices per item: point, line, triangle, rectangle etc
+			' We have 100 sets, with their vertices in the verts[] array.
+			' Refer to Help for details of similar DrawIndexedPrimitives() method
+			myCanvas.DrawPrimitives(4, 100, verts)
+			myCanvas.PopMatrix()
+		Else
+			myCanvas.DrawPrimitives(4, 100, verts)
+		Endif
+
+		myCanvas.Flush()
+		Return 0
+	End
+	
+	
+	Method OnUpdate:Int()
+		
+		If MouseHit(MOUSE_LEFT) Or MouseHit(MOUSE_RIGHT) grabbed = Not grabbed
+
+		' distort the shapes by moving each vertex a little
+		For Local i:Int = 0 Until verts.Length()			
+			verts[i] += Rnd(-0.25, 0.25)
+		Next
+		
+		Return 0
+	End
+
+End
+
+Function Main:Int()
+	New MyApp()
+	Return 0
+End

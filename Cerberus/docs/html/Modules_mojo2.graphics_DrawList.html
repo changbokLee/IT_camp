@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>DrawList</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>DrawList</small></h1>
+
+
+	<p>
+		A drawlist contains drawing state and a sequence of 2d drawing operations.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extended By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_mojo2.graphics_Canvas.html">Canvas</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented classes are listed here, there might be undocumented classes that extend this one.</span>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Alpha()">Alpha</a><small> : Float ()</small></code></td>
+				<td>Return current alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#BlendMode()">BlendMode</a><small> : Int ()</small></code></td>
+				<td>Get blend mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Color()">Color</a><small> : Float[] ()</small></code></td>
+				<td>Returns a 4 component float array containing current color and alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DefaultMaterial()">DefaultMaterial</a><small> : Material ()</small></code></td>
+				<td>Return the current default material.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Font()">Font</a><small> : Font ()</small></code></td>
+				<td>Get font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#MatrixStackCapacity()">MatrixStackCapacity</a><small> : Int ()</small></code></td>
+				<td>Get the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="#PushMatrix()">PushMatrix</a>.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#AddShadowCaster(ShadowCaster,[Float],[Float],[Float],[Float],[Float])">AddShadowCaster</a><small> : Void ( shadowCaster:ShadowCaster, tx:Float=0, ty:Float=0, rz:Float=0, sx:Float=1, sy:Float=1 )</small></code></td>
+				<td>Add a shadow caster to the drawlist.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawCircle(Float,Float,Float,[Material])">DrawCircle</a><small> : Void ( x:Float, y:Float, radius:Float, material:Material=Null )</small></code></td>
+				<td>Draw a circle at <b>x</b>, <b>y</b> with radius <b>radius</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawEllipse(Float,Float,Float,Float,[Material])">DrawEllipse</a><small> : Void ( x:Float, y:Float, xRadius:Float, yRadius:Float, material:Material=Null )</small></code></td>
+				<td>Draw an ellipse at <b>x</b>, <b>y</b> with radii <b>xRadius</b>, <b>yRadius</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage(Image,Float,Float,Float)">DrawImage</a><small> : Void ( image:Image, tx:Float, ty:Float, rz:Float )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage(Image,Float,Float,Float,Float,Float)">DrawImage</a><small> : Void ( image:Image, tx:Float, ty:Float, rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b> and scaled by <b>sx</b>,<b>sy</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage(Image,[Float],[Float])">DrawImage</a><small> : Void ( image:Image, tx:Float=0, ty:Float=0 )</small></code></td>
+				<td>Draw an image at <b>tx</b>,<b>ty</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float)">DrawImage9P</a><small> : Void ( image:Image, tx:Float, ty:Float, patchSize:Int, rz:Float, scaleX:Float, scaleY:Float )</small></code></td>
+				<td>Draws an 9-Patch image at coordinates <b>tx</b>, <b>ty</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], vertcols:Int[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawIndexedPrimitives(Int,Int,Float[],Int[],[Material])">DrawIndexedPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], indices:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of indexed primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawLine(Float,Float,Float,Float,[Material])">DrawLine</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, material:Material=Null )</small></code></td>
+				<td>Draw a line from <b>x0</b>,<b>y0</b> to <b>x1</b>,<b>y1</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawOval(Float,Float,Float,Float,[Material])">DrawOval</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, material:Material=Null )</small></code></td>
+				<td>Draw an oval in the given rectangle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPoint(Float,Float,[Material])">DrawPoint</a><small> : Void ( x0:Float, y0:Float, material:Material=Null )</small></code></td>
+				<td>Draw a point at <b>x0</b>,<b>y0</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPrimitives(Int,Int,Float[],Float[],Int[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], vertcols:Int[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPrimitives(Int,Int,Float[],Float[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], texcoords:Float[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPrimitives(Int,Int,Float[],[Material])">DrawPrimitives</a><small> : Void ( order:Int, count:Int, vertices:Float[], material:Material=Null )</small></code></td>
+				<td>Draw a batch of primtives.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawQuad(Float,Float,Float,Float,Float,Float,Float,Float,[Material])">DrawQuad</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, x3:Float, y3:Float, material:Material=Null )</small></code></td>
+				<td>Draw a quad.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawRect(Float,Float,Float,Float,Image)">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, image:Image )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawRect(Float,Float,Float,Float,Image,Int,Int,Int,Int)">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, image:Image, sourceX:Int, sourceY:Int, sourceWidth:Int, sourceHeight:Int )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with the given subrect of <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawRect(Float,Float,Float,Float,[Material])">DrawRect</a><small> : Void ( x:Float, y:Float, width:Float, height:Float, material:Material=Null )</small></code></td>
+				<td>Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawRect(Float,Float,Image,Int,Int,Int,Int)">DrawRect</a><small> : Void ( x:Float, y:Float, image:Image, sourceX:Int, sourceY:Int, width:Int, height:Int )</small></code></td>
+				<td>Draw a rect at <b>x</b>,<b>y</b> filled with the given subrect of <b>image</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawShadow(Float,Float,Float,Float,Float,Float)">DrawShadow</a><small> : Void ( lightX:Float, lightY:Float, x0:Float, y0:Float, x1:Float, y1:Float )</small></code></td>
+				<td>Draw a shadow volume.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawShadows(Float,Float,DrawList)">DrawShadows</a><small> : Void ( lightX:Float, lightY:Float, drawList:DrawList )</small></code></td>
+				<td>Draw multiple shadow volumes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawText(String,Float,Float,[Float],[Float])">DrawText</a><small> : Void ( text:String, x:Float, y:Float, xhandle:Float=0, yhandle:Float=0 )</small></code></td>
+				<td>Draw <b>text</b> at <b>x</b>,<b>y</b> in the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawTriangle(Float,Float,Float,Float,Float,Float,[Material])">DrawTriangle</a><small> : Void ( x0:Float, y0:Float, x1:Float, y1:Float, x2:Float, y2:Float, material:Material=Null )</small></code></td>
+				<td>Draw a triangle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetColor(Float[])">GetColor</a><small> : Void ( color:Float[] )</small></code></td>
+				<td>Copy current color to <b>color</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetMatrix(Float[])">GetMatrix</a><small> : Void ( matrix:Float[] )</small></code></td>
+				<td>Get current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PopMatrix()">PopMatrix</a><small> : Void ()</small></code></td>
+				<td>Pop the current 2d matrix from the 2d matrix stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PushMatrix()">PushMatrix</a><small> : Void ()</small></code></td>
+				<td>Push the current 2d matrix on the 2d matrix stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Reset()">Reset</a><small> : Void ()</small></code></td>
+				<td>Removes all items from drawlist.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ResetMatrix()">ResetMatrix</a><small> : Void ()</small></code></td>
+				<td>Set the current 2d matrix to the identity matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Rotate(Float)">Rotate</a><small> : Void ( rz:Float )</small></code></td>
+				<td>Rotate current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RotateScale(Float,Float,Float)">RotateScale</a><small> : Void ( rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Rotate and scale (in that order) the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Scale(Float,Float)">Scale</a><small> : Void ( sx:Float, sy:Float )</small></code></td>
+				<td>Scale current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetAlpha(Float)">SetAlpha</a><small> : Void ( a:Float )</small></code></td>
+				<td>Set alpha only.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetBlendMode(Int)">SetBlendMode</a><small> : Void ( blendMode:Int )</small></code></td>
+				<td>Set blend mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Color)">SetColor</a><small> : Void ( col:Color )</small></code></td>
+				<td>Set color to specified <a href="#Color()">Color</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Float,Float,Float)">SetColor</a><small> : Void ( red:Float, green:Float, blue:Float )</small></code></td>
+				<td>Set color only.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Float,Float,Float,Float)">SetColor</a><small> : Void ( red:Float, green:Float, blue:Float, alpha:Float )</small></code></td>
+				<td>Set color and alpha.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Int)">SetColor</a><small> : Void ( hex:Int )</small></code></td>
+				<td>Set color to specified hex color value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a><small> : Int ( material:Material )</small></code></td>
+				<td>Set the default material used for drawing operations that use a null material.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFont(Font)">SetFont</a><small> : Void ( font:Font )</small></code></td>
+				<td>Set current font for use with <b>DrawText</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetMatrix(Float,Float,Float,Float,Float,Float)">SetMatrix</a><small> : Void ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Set the current 2d matrix to the given matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetMatrixStackCapacity(Int)">SetMatrixStackCapacity</a><small> : Void ( capacity:Int )</small></code></td>
+				<td>Set the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="#PushMatrix()">PushMatrix</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Transform(Float,Float,Float,Float,Float,Float)">Transform</a><small> : Void ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Multiply the current 2d matrix by the given matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Translate(Float,Float)">Translate</a><small> : Void ( tx:Float, ty:Float )</small></code></td>
+				<td>Translate the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#TranslateRotate(Float,Float,Float)">TranslateRotate</a><small> : Void ( tx:Float, ty:Float, rz:Float )</small></code></td>
+				<td>Translate and rotate (in that order) the current 2d matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#TranslateRotateScale(Float,Float,Float,Float,Float)">TranslateRotateScale</a><small> : Void ( tx:Float, ty:Float, rz:Float, sx:Float, sy:Float )</small></code></td>
+				<td>Translate, rotate and scale (in that order) the current 2d matrix.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#PremultiplyArgb2Abgr(Int)">PremultiplyArgb2Abgr</a><small> : Int ( color:Int )</small></code></td>
+				<td>Returns a color that is premultiplied (rgb components multiplied by alpha) and has byte format reordered from argb (commonly used) to abgr (used internally).</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PremultiplyArgb2Abgr(Int[])">PremultiplyArgb2Abgr</a><small> : Void ( colors:Int[] )</small></code></td>
+				<td>Premultiplies colors (multiplies rgb components by alpha) and reorders the byte format from argb (commonly used) to abgr (used internally).</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+A drawlist contains drawing state and a sequence of 2d drawing operations.
+</p>
+<p>
+You add drawing operations to a drawlist using any of the Draw methods. When a drawing operation is added, the current drawing state is captured by the drawing operation. Further changes to the drawing state will not affect drawing operations already in the drawlist.
+</p>
+<p>
+A <a href="Modules_mojo2.graphics_Canvas.html">Canvas</a> extends <a href="Modules_mojo2.graphics_DrawList.html">DrawList</a>, and can be used to draw directly to the app window or an image. A drawlist can also be rendered to a canvas using <a href="Modules_mojo2.graphics_Canvas.html#RenderDrawList(DrawList)">Canvas.RenderDrawList</a>.
+</p>
+<p>
+A drawlist's drawing state consists of:
+</p>
+<table>
+<tr><th><b>Drawing</b> state</th><th><b>Description</b></th></tr>
+<tr><td>Current color</td><td><a href="#SetColor(Color)">SetColor</a></td></tr>
+<tr><td>Current 2d matrix</td><td><a href="#Translate(Float,Float)">Translate</a>, <a href="#Rotate(Float)">Rotate</a>, <a href="#Scale(Float,Float)">Scale</a>, <a href="#PushMatrix()">PushMatrix</a>, <a href="#PopMatrix()">PopMatrix</a></td></tr>
+<tr><td>Current blend mode</td><td><a href="#SetBlendMode(Int)">SetBlendMode</a></td></tr>
+<tr><td>Current font</td><td><a href="#DrawText(String,Float,Float,[Float],[Float])">DrawText</a></td></tr>
+</table>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Alpha()"></a>
+				<pre class="declaration">Method <strong>Alpha</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Return current alpha.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="BlendMode()"></a>
+				<pre class="declaration">Method <strong>BlendMode</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get blend mode.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Color()"></a>
+				<pre class="declaration">Method <strong>Color</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] () Property</pre>
+				<p>
+Returns a 4 component float array containing current color and alpha.
+</p>
+<p>
+Note: To avoid the overhead of an array copy, use <a href="#GetColor(Float[])">GetColor</a> instead.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DefaultMaterial()"></a>
+				<pre class="declaration">Method <strong>DefaultMaterial</strong> : <a href="Modules_mojo2.graphics_Material.html">Material</a> () Property</pre>
+				<p>
+Return the current default material.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Font()"></a>
+				<pre class="declaration">Method <strong>Font</strong> : <a href="#Font()">Font</a> () Property</pre>
+				<p>
+Get font.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="MatrixStackCapacity()"></a>
+				<pre class="declaration">Method <strong>MatrixStackCapacity</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="#PushMatrix()">PushMatrix</a>.
+</p>
+<p>
+See also: <a href="#SetMatrixStackCapacity(Int)">SetMatrixStackCapacity</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="AddShadowCaster(ShadowCaster,[Float],[Float],[Float],[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>AddShadowCaster</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( shadowCaster:<a href="Modules_mojo2.graphics_ShadowCaster.html">ShadowCaster</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>=0, ty:<a href="Programming_Keywords_Float.html">Float</a>=0, rz:<a href="Programming_Keywords_Float.html">Float</a>=0, sx:<a href="Programming_Keywords_Float.html">Float</a>=1, sy:<a href="Programming_Keywords_Float.html">Float</a>=1 )</pre>
+				<p>
+Add a shadow caster to the drawlist.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawCircle(Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawCircle</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, radius:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a circle at <b>x</b>, <b>y</b> with radius <b>radius</b>.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawEllipse(Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawEllipse</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, xRadius:<a href="Programming_Keywords_Float.html">Float</a>, yRadius:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw an ellipse at <b>x</b>, <b>y</b> with radii <b>xRadius</b>, <b>yRadius</b>.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage(Image,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>DrawImage</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, rz:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b>.
+</p>
+<p>
+If the image has a shadow caster attached, the shadow caster will also be added to the drawlist.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage(Image,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>DrawImage</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, rz:<a href="Programming_Keywords_Float.html">Float</a>, sx:<a href="Programming_Keywords_Float.html">Float</a>, sy:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draw an image at <b>tx</b>,<b>ty</b> rotated by <b>rz</b> and scaled by <b>sx</b>,<b>sy</b>.
+</p>
+<p>
+If the image has a shadow caster attached, the shadow caster will also be added to the drawlist.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage(Image,[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>DrawImage</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>=0, ty:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Draw an image at <b>tx</b>,<b>ty</b>.
+</p>
+<p>
+If the image has a shadow caster attached, the shadow caster will also be added to the drawlist.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage9P(Image,Float,Float,Int,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>DrawImage9P</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, patchSize:<a href="Programming_Keywords_Int.html">Int</a>, rz:<a href="Programming_Keywords_Float.html">Float</a>, scaleX:<a href="Programming_Keywords_Float.html">Float</a>, scaleY:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws an 9-Patch image at coordinates <b>tx</b>, <b>ty</b>.
+</p>
+<p>
+The <b>rz</b>, <b>scaleX</b> and <b>scaleY</b> parameters provide a convenient way for you to 'locally' rotate and scale the image.
+</p>
+<p>
+The scaling is done via the 9-Patch method. The <b>patchSize</b> determines the width and height of the top-height, bottom-height, 
+left-width and right-width of the image. These are not scaled. The rest is.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],Int[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawIndexedPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], texcoords:<a href="Programming_Keywords_Float.html">Float</a>[], vertcols:<a href="Programming_Keywords_Int.html">Int</a>[], indices:<a href="Programming_Keywords_Int.html">Int</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of indexed primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data.
+</p>
+<p>
+The <b>texcoords</b> array contains s,t texture coordinate data.
+</p>
+<p>
+The <b>vertcols</b> array contains premultiplied abgr color values, and must be at least <b>count</b> * <b>order</b> long.
+</p>
+<p>
+The <b>indices</b> array contains vertex indices, and must be at least <b>count</b> * <b>order</b> long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>, <a href="#PremultiplyArgb2Abgr(Int)">PremultiplyArgb2Abgr</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawIndexedPrimitives(Int,Int,Float[],Float[],Int[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawIndexedPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], texcoords:<a href="Programming_Keywords_Float.html">Float</a>[], indices:<a href="Programming_Keywords_Int.html">Int</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of indexed primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data.
+</p>
+<p>
+The <b>texcoords</b> array contains s,t texture coordinate data.
+</p>
+<p>
+The <b>indices</b> array contains vertex indices, and must be at least <b>count</b> * <b>order</b> long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawIndexedPrimitives(Int,Int,Float[],Int[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawIndexedPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], indices:<a href="Programming_Keywords_Int.html">Int</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of indexed primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data.
+</p>
+<p>
+The <b>indices</b> array contains vertex indices, and must be at least <b>count</b> * <b>order</b> long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawLine(Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawLine</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x0:<a href="Programming_Keywords_Float.html">Float</a>, y0:<a href="Programming_Keywords_Float.html">Float</a>, x1:<a href="Programming_Keywords_Float.html">Float</a>, y1:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a line from <b>x0</b>,<b>y0</b> to <b>x1</b>,<b>y1</b>.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawOval(Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawOval</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, width:<a href="Programming_Keywords_Float.html">Float</a>, height:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw an oval in the given rectangle.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPoint(Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawPoint</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x0:<a href="Programming_Keywords_Float.html">Float</a>, y0:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a point at <b>x0</b>,<b>y0</b>.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPrimitives(Int,Int,Float[],Float[],Int[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], texcoords:<a href="Programming_Keywords_Float.html">Float</a>[], vertcols:<a href="Programming_Keywords_Int.html">Int</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data, and must be at least <b>count</b> * <b>order</b> * 2 long.
+</p>
+<p>
+The <b>texcoords</b> array contains s,t texture coordinate data, and must be at least <b>count</b> * <b>order</b> * 2 long.
+</p>
+<p>
+The <b>vertcols</b> array contains premultiplied abgr color values, and must be at least <b>count</b> * <b>order</b> long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>, <a href="#PremultiplyArgb2Abgr(Int)">PremultiplyArgb2Abgr</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPrimitives(Int,Int,Float[],Float[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], texcoords:<a href="Programming_Keywords_Float.html">Float</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data, and must be at least <b>count</b> * <b>order</b> * 2 long.
+</p>
+<p>
+The <b>texcoords</b> array contains s,t texture coordinate data, and must be at least <b>count</b> * <b>order</b> * 2 long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPrimitives(Int,Int,Float[],[Material])"></a>
+				<pre class="declaration">Method <strong>DrawPrimitives</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( order:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a>, vertices:<a href="Programming_Keywords_Float.html">Float</a>[], material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a batch of primtives.
+</p>
+<p>
+<b>order</b> is the number of vertices for each primitive, eg: 1 for points, 2 for lines, 3 for triangles etc.
+</p>
+<p>
+<b>count</b> is the number of primitives to draw.
+</p>
+<p>
+The <b>vertices</b> array contains x,y vertex data, and must be at least <b>count</b> * <b>order</b> * 2 long.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawQuad(Float,Float,Float,Float,Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawQuad</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x0:<a href="Programming_Keywords_Float.html">Float</a>, y0:<a href="Programming_Keywords_Float.html">Float</a>, x1:<a href="Programming_Keywords_Float.html">Float</a>, y1:<a href="Programming_Keywords_Float.html">Float</a>, x2:<a href="Programming_Keywords_Float.html">Float</a>, y2:<a href="Programming_Keywords_Float.html">Float</a>, x3:<a href="Programming_Keywords_Float.html">Float</a>, y3:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a quad.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawRect(Float,Float,Float,Float,Image)"></a>
+				<pre class="declaration">Method <strong>DrawRect</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, width:<a href="Programming_Keywords_Float.html">Float</a>, height:<a href="Programming_Keywords_Float.html">Float</a>, image:<a href="Modules_mojo2.graphics_Image.html">Image</a> )</pre>
+				<p>
+Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with <b>image</b>.
+</p>
+<p>
+The image's handle is ignored.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawRect(Float,Float,Float,Float,Image,Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>DrawRect</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, width:<a href="Programming_Keywords_Float.html">Float</a>, height:<a href="Programming_Keywords_Float.html">Float</a>, image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, sourceX:<a href="Programming_Keywords_Int.html">Int</a>, sourceY:<a href="Programming_Keywords_Int.html">Int</a>, sourceWidth:<a href="Programming_Keywords_Int.html">Int</a>, sourceHeight:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b> filled with the given subrect of <b>image</b>.
+</p>
+<p>
+The image's handle is ignored.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawRect(Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawRect</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, width:<a href="Programming_Keywords_Float.html">Float</a>, height:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a rect from <b>x</b>,<b>y</b> to <b>x</b>+<b>width</b>,<b>y</b>+<b>height</b>.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawRect(Float,Float,Image,Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>DrawRect</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, image:<a href="Modules_mojo2.graphics_Image.html">Image</a>, sourceX:<a href="Programming_Keywords_Int.html">Int</a>, sourceY:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Draw a rect at <b>x</b>,<b>y</b> filled with the given subrect of <b>image</b>.
+</p>
+<p>
+The image's handle is ignored.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawShadow(Float,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>DrawShadow</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( lightX:<a href="Programming_Keywords_Float.html">Float</a>, lightY:<a href="Programming_Keywords_Float.html">Float</a>, x0:<a href="Programming_Keywords_Float.html">Float</a>, y0:<a href="Programming_Keywords_Float.html">Float</a>, x1:<a href="Programming_Keywords_Float.html">Float</a>, y1:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draw a shadow volume.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawShadows(Float,Float,DrawList)"></a>
+				<pre class="declaration">Method <strong>DrawShadows</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( lightX:<a href="Programming_Keywords_Float.html">Float</a>, lightY:<a href="Programming_Keywords_Float.html">Float</a>, drawList:<a href="Modules_mojo2.graphics_DrawList.html">DrawList</a> )</pre>
+				<p>
+Draw multiple shadow volumes.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawText(String,Float,Float,[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>DrawText</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( text:<a href="Modules_cerberus.lang_String.html">String</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=0, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Draw <b>text</b> at <b>x</b>,<b>y</b> in the current font.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawTriangle(Float,Float,Float,Float,Float,Float,[Material])"></a>
+				<pre class="declaration">Method <strong>DrawTriangle</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x0:<a href="Programming_Keywords_Float.html">Float</a>, y0:<a href="Programming_Keywords_Float.html">Float</a>, x1:<a href="Programming_Keywords_Float.html">Float</a>, y1:<a href="Programming_Keywords_Float.html">Float</a>, x2:<a href="Programming_Keywords_Float.html">Float</a>, y2:<a href="Programming_Keywords_Float.html">Float</a>, material:<a href="Modules_mojo2.graphics_Material.html">Material</a>=Null )</pre>
+				<p>
+Draw a triangle.
+</p>
+<p>
+If <b>material</b> is null, the current default material is used.
+</p>
+<p>
+See also: <a href="#SetDefaultMaterial(Material)">SetDefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetColor(Float[])"></a>
+				<pre class="declaration">Method <strong>GetColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( color:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Copy current color to <b>color</b>.
+</p>
+<p>
+<b>color</b> must have a length of at least 3. If the length of <b>color</b> is greater than 3, alpha is also copied.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetMatrix(Float[])"></a>
+				<pre class="declaration">Method <strong>GetMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( matrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Get current 2d matrix.
+</p>
+<p>
+<b>matrix</b> should be at least 6 elements in length.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PopMatrix()"></a>
+				<pre class="declaration">Method <strong>PopMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Pop the current 2d matrix from the 2d matrix stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PushMatrix()"></a>
+				<pre class="declaration">Method <strong>PushMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Push the current 2d matrix on the 2d matrix stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Reset()"></a>
+				<pre class="declaration">Method <strong>Reset</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Removes all items from drawlist.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ResetMatrix()"></a>
+				<pre class="declaration">Method <strong>ResetMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Set the current 2d matrix to the identity matrix. Same as SetMatrix( 1,0,0,1,0,0 ).
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Rotate(Float)"></a>
+				<pre class="declaration">Method <strong>Rotate</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( rz:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Rotate current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RotateScale(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>RotateScale</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( rz:<a href="Programming_Keywords_Float.html">Float</a>, sx:<a href="Programming_Keywords_Float.html">Float</a>, sy:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Rotate and scale (in that order) the current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Scale(Float,Float)"></a>
+				<pre class="declaration">Method <strong>Scale</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( sx:<a href="Programming_Keywords_Float.html">Float</a>, sy:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Scale current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetAlpha(Float)"></a>
+				<pre class="declaration">Method <strong>SetAlpha</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( a:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set alpha only. Doesn't affect color.
+</p>
+<p>
+All color and alpha values should be in the range 0 to 1 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetBlendMode(Int)"></a>
+				<pre class="declaration">Method <strong>SetBlendMode</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( blendMode:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set blend mode. The <b>blendMode</b> parameter should be one of:
+</p>
+<table>
+<tr><th><b>Mode</b></th><th><b>BlendFunc</b></th><th>Render to back buffer</th><th>Render to texture</th></tr>
+<tr><td>BlendMode.Opaque</td><td>-</td><td><img src="data/mojo2/graphics/bb_opaque.png" alt="Opaque on back buffer" /><br/> opaque - no blending</td><td><img src="data/mojo2/graphics/rt_opaque.png" alt="Opaque on texture" /><br/> overwrites everything, even alpha</td></tr>
+<tr><td>BlendMode.Alpha</td><td>glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA )</td><td><img src="data/mojo2/graphics/bb_alpha.png" alt="Alpha on back buffer" /><br/> alpha blending</td><td><img src="data/mojo2/graphics/rt_alpha.png" alt="Alpha on texture" /><br/> mixes rgb</td></tr>
+<tr><td>BlendMode.Additive</td><td>glBlendFunc( GL_ONE, GL_ONE )</td><td><img src="data/mojo2/graphics/bb_additive.png" alt="Additive on back buffer" /><br/> additive blending</td><td><img src="data/mojo2/graphics/rt_additive.png" alt="Additive on texture" /><br/> adds rgb</td></tr>
+<tr><td>BlendMode.Multiply</td><td>glBlendFunc( GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA )</td><td><img src="data/mojo2/graphics/bb_multiply.png" alt="Multiply on back buffer" /><br/> multiply blending</td><td><img src="data/mojo2/graphics/rt_multiply.png" alt="Multiply on texture" /><br/> multiplies rgb</td></tr>
+<tr><td>BlendMode.Multiply2</td><td>glBlendFunc( GL_DST_COLOR, GL_ZERO )</td><td><img src="data/mojo2/graphics/bb_multiply2.png" alt="Multiply2 on back buffer" /><br/> multiply blending ignoring alpha</td><td><img src="data/mojo2/graphics/rt_multiply2.png" alt="Multiply2 on texture" /><br/> multiplies rgb ingoring alpha, overwrites alpha</td></tr>
+<tr><td>BlendMode.Alpha2</td><td>glBlendFuncSeparate( GL_ZERO, GL_ONE, GL_ONE, GL_ZERO )</td><td><img src="data/mojo2/graphics/bb_alpha2.png" alt="Alpha2 on back buffer" /><br/> no effect</td><td><img src="data/mojo2/graphics/rt_alpha2.png" alt="Alpha2 on texture" /><br/> no effect on rgb, overwrites alpha</td></tr>
+<tr><td>BlendMode.Opaque2</td><td>glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA )</td><td><img src="data/mojo2/graphics/bb_opaque2.png" alt="Opaque2 on back buffer" /><br/> alpha blending for images that aren't premultiplied</td><td><img src="data/mojo2/graphics/rt_opaque2.png" alt="Opaque2 on texture" /><br/> mixes rgb and mixes alpha depending on alpha (yeah, weird)</td></tr>
+<tr><td>BlendMode.AlphaStamp</td><td>glBlendFuncSeparate( GL_ZERO, GL_SRC_ALPHA, GL_ONE, GL_ZERO );<br/>glBlendEquation(GL_FUNC_ADD);</td><td><img src="data/mojo2/graphics/bb_alphastamp.png" alt="AlphaStamp on back buffer" /><br/> multiplies rgb with alpha</td><td><img src="data/mojo2/graphics/rt_alphastamp.png" alt="AlphaStamp on texture" /><br/> multiplies rgb with alpha, overwrites alpha</td></tr>
+</table>
+<p>
+Technically, the effects when rendering to back buffer are the same as when rendering to texture. But because the back buffer's alpha channel is ignored, the effects are perceived differently.
+</p>
+<p>
+For the demonstration of the effects, these three images have been used (put on a checkered background to show transparency):
+</p>
+<p>
+<b>Image1:</b> <img src="data/mojo2/graphics/image1.png" alt="Image1" />
+<b>Image2:</b> <img src="data/mojo2/graphics/image2.png" alt="Image2" />
+<b>Image3:</b> <img src="data/mojo2/graphics/image3.png" alt="Image3" />
+</p>
+<p>
+Image1 has no alpha, Image2 has alpha and is premultiplied (happens automatically in mojo2 when loading an image) Image3 has alpha but is not premultiplied.
+Image1 is rendered opaque, then Image2 and Image3 are rendered on top with indicated <b>BlendMode</b>.
+For the <b>Render to back buffer</b>, background is first cleared with a brownish color.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Color)"></a>
+				<pre class="declaration">Method <strong>SetColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( col:<a href="#Color()">Color</a> )</pre>
+				<p>
+Set color to specified <a href="#Color()">Color</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( red:<a href="Programming_Keywords_Float.html">Float</a>, green:<a href="Programming_Keywords_Float.html">Float</a>, blue:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set color only. Doesn't affect alpha.
+</p>
+<p>
+All color and alpha values should be in the range 0 to 1 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( red:<a href="Programming_Keywords_Float.html">Float</a>, green:<a href="Programming_Keywords_Float.html">Float</a>, blue:<a href="Programming_Keywords_Float.html">Float</a>, alpha:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set color and alpha.
+</p>
+<p>
+All color and alpha values should be in the range 0 to 1 inclusive.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Int)"></a>
+				<pre class="declaration">Method <strong>SetColor</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( hex:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set color to specified hex color value.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetDefaultMaterial(Material)"></a>
+				<pre class="declaration">Method <strong>SetDefaultMaterial</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( material:<a href="Modules_mojo2.graphics_Material.html">Material</a> )</pre>
+				<p>
+Set the default material used for drawing operations that use a null material.
+</p>
+<p>
+See also: <a href="#DefaultMaterial()">DefaultMaterial</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFont(Font)"></a>
+				<pre class="declaration">Method <strong>SetFont</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( font:<a href="#Font()">Font</a> )</pre>
+				<p>
+Set current font for use with <b>DrawText</b>.
+</p>
+<p>
+If <b>font</b> is null, a default font is used.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetMatrix(Float,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetMatrix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( ix:<a href="Programming_Keywords_Float.html">Float</a>, iy:<a href="Programming_Keywords_Float.html">Float</a>, jx:<a href="Programming_Keywords_Float.html">Float</a>, jy:<a href="Programming_Keywords_Float.html">Float</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set the current 2d matrix to the given matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetMatrixStackCapacity(Int)"></a>
+				<pre class="declaration">Method <strong>SetMatrixStackCapacity</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( capacity:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set the maximum number of 2d matrices that can be pushed onto the matrix stack using <a href="#PushMatrix()">PushMatrix</a>.
+</p>
+<p>
+See also: <a href="#MatrixStackCapacity()">MatrixStackCapacity</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Transform(Float,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>Transform</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( ix:<a href="Programming_Keywords_Float.html">Float</a>, iy:<a href="Programming_Keywords_Float.html">Float</a>, jx:<a href="Programming_Keywords_Float.html">Float</a>, jy:<a href="Programming_Keywords_Float.html">Float</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Multiply the current 2d matrix by the given matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Translate(Float,Float)"></a>
+				<pre class="declaration">Method <strong>Translate</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Translate the current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="TranslateRotate(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>TranslateRotate</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, rz:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Translate and rotate (in that order) the current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="TranslateRotateScale(Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>TranslateRotateScale</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a>, rz:<a href="Programming_Keywords_Float.html">Float</a>, sx:<a href="Programming_Keywords_Float.html">Float</a>, sy:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Translate, rotate and scale (in that order) the current 2d matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="PremultiplyArgb2Abgr(Int)"></a>
+				<pre class="declaration">Function <strong>PremultiplyArgb2Abgr</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( color:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns a color that is premultiplied (rgb components multiplied by alpha) and has byte format reordered from argb (commonly used) to abgr (used internally).
+</p>
+<div class="pretty">
+<code class="i">color </code><code class="d">= </code><code class="i">DrawList</code><code class="d">.</code><code class="i">PremultiplyArgb2Abgr</code><code class="d">( </code><code class="i">color </code><code class="d">)</code><br/>
+</div>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PremultiplyArgb2Abgr(Int[])"></a>
+				<pre class="declaration">Function <strong>PremultiplyArgb2Abgr</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( colors:<a href="Programming_Keywords_Int.html">Int</a>[] )</pre>
+				<p>
+Premultiplies colors (multiplies rgb components by alpha) and reorders the byte format from argb (commonly used) to abgr (used internally).
+</p>
+<div class="pretty">
+<code class="i">DrawList</code><code class="d">.</code><code class="i">PremultiplyArgb2Abgr</code><code class="d">( </code><code class="i">colors </code><code class="d">)</code><br/>
+</div>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

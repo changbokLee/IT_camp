@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.markdown.html'>brl.markdown</a>
+
+			<span>IPrettifier</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Interface <small>IPrettifier</small></h1>
+
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#BeginPrettyBlock()">BeginPrettyBlock</a><small> : String ()</small></code></td>
+				<td>This method is called when a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> objects encounters a &lt;pre&gt; tag, and should return an appropriate html block start tag, eg: &lt;div&gt;.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#EndPrettyBlock()">EndPrettyBlock</a><small> : String ()</small></code></td>
+				<td>This method is called when a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> object encounters a &lt;/pre&gt; tag, and should return an appropriate html block end tag, eg: &lt;/div&gt;.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PrettifyLine(String)">PrettifyLine</a><small> : String ( text:String )</small></code></td>
+				<td>This method is called by a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> object for every line inside a &lt;pre&gt; block, and should returned an html 'prettified' version of <b>text</b>.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="BeginPrettyBlock()"></a>
+				<pre class="declaration">Method <strong>BeginPrettyBlock</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+This method is called when a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> objects encounters a &lt;pre&gt; tag, and should return an appropriate html block start tag, eg: &lt;div&gt;.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="EndPrettyBlock()"></a>
+				<pre class="declaration">Method <strong>EndPrettyBlock</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+This method is called when a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> object encounters a &lt;/pre&gt; tag, and should return an appropriate html block end tag, eg: &lt;/div&gt;.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="PrettifyLine(String)"></a>
+				<pre class="declaration">Method <strong>PrettifyLine</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( text:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+This method is called by a <a href="Modules_brl.markdown_Markdown.html">Markdown</a> object for every line inside a &lt;pre&gt; block, and should returned an html 'prettified' version of <b>text</b>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

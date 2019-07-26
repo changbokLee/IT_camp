@@ -1,0 +1,67 @@
+
+#If TARGET<>"android" And TARGET<>"ios"
+  #Error "The Admob module is only available on the android and ios targets"
+#End
+
+#If TARGET="android"
+  #If ANDROID_LIBGOOGLEPLAY_AVAILABLE
+
+    Import "native/admob_googleplay.android.java"
+
+    #ANDROID_MANIFEST_APPLICATION+="<activity android:name=~qcom.google.android.gms.ads.AdActivity~q android:configChanges=~qkeyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize~q />"
+
+    #ANDROID_MANIFEST_APPLICATION+="<meta-data android:name=~qcom.google.android.gms.version~q android:value=~q@integer/google_play_services_version~q />"
+
+    #ANDROID_LIBRARY_REFERENCE_1="implementation fileTree(dir: 'libs', include: ['*.jar'])"
+    #ANDROID_LIBRARY_REFERENCE_2="implementation 'com.google.android.gms:play-services-ads:15.0.1'"
+
+  #Else
+
+    #Error "The standalone admob library has been discontinued"
+
+  #End
+
+#Else
+
+  Import "native/admob.ios.cpp"
+
+  #LIBS+="${CD}/native/GoogleMobileAds.framework"
+
+  #LIBS+="AdSupport.framework"
+  #LIBS+="CFNetwork.framework"
+  #LIBS+="CoreMedia.framework"
+  #LIBS+="CoreMotion.framework"
+  #LIBS+="CoreTelephony.framework"
+  #LIBS+="CoreVideo.framework"
+  #LIBS+="EventKit.framework"
+  #LIBS+="EventKitUI.framework"
+  #LIBS+="GLKit.framework"
+  #LIBS+="MediaPlayer.framework"
+  #LIBS+="MessageUI.framework"
+  #LIBS+="MobileCoreServices.framework"
+  #LIBS+="OpenGLES.framework"
+  #LIBS+="StoreKit.framework"
+  #LIBS+="SystemConfiguration.framework"
+
+#End
+
+Extern
+
+Class Admob Extends Null="BBAdmob"
+
+	Function GetAdmob:Admob()
+	
+	Method ShowAdView:Void( style:Int,layout:Int )
+	
+	Method HideAdView:Void()
+	
+	Method AdViewWidth:Int()
+	
+	Method AdViewHeight:Int()
+	
+End
+
+Class AdmobInterstitial Extends Null = "BBAdmobInterstitial"
+	Function GetAdmobInterstitial:AdmobInterstitial(adUnitId:String)
+	Method ShowAdViewInterstitial:Void()
+End

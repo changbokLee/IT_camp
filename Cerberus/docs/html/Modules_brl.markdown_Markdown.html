@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.markdown.html'>brl.markdown</a>
+
+			<span>Markdown</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Markdown</small></h1>
+
+
+	<p>
+		The Markdown class is used to transform text using the <a href="Modules_brl.markdown.html">brl.markdown</a> syntax.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New(ILinkResolver,IPrettifier)">New</a><small> ( linkResolver:ILinkResolver, prettifier:IPrettifier )</small></code></td>
+				<td>Creates a new markdown object with the given link resolver.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#ToHtml(String)">ToHtml</a><small> : String ( markdown:String )</small></code></td>
+				<td>Converts markdown to html.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The Markdown class is used to transform text using the <a href="Modules_brl.markdown.html">brl.markdown</a> syntax.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New(ILinkResolver,IPrettifier)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( linkResolver:<a href="Modules_brl.markdown_ILinkResolver.html">ILinkResolver</a>, prettifier:<a href="Modules_brl.markdown_IPrettifier.html">IPrettifier</a> )</pre>
+				<p>
+Creates a new markdown object with the given link resolver.
+</p>
+<p>
+The <b>linkResolver</b> parameter is used by the markdown object to resolve links. 
+</p>
+<p>
+<b>linkResolver</b> may be null, in which case links are not resolved and will instead be converted to plain text.
+</p>
+<p>
+The <b>prettifier</b> parameter is used by the markdown object to process &lt;pre> blocks.
+</p>
+<p>
+<b>prettifier</b> may be null, in which case &lt;pre> blocks are converted to html without modification.
+</p>
+<p>
+For a discussion of markdown syntax, please see <a href="Modules_brl.markdown.html">brl.markdown</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="ToHtml(String)"></a>
+				<pre class="declaration">Method <strong>ToHtml</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( markdown:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Converts markdown to html.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

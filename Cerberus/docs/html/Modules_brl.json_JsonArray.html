@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.json.html'>brl.json</a>
+
+			<span>JsonArray</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>JsonArray</small></h1>
+
+
+	<p>
+		JSON arrays are ordered lists of values in square brackets, e.g.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extends</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html">JsonValue</a><small></small></code></td>
+				<td>This base class provides some fall-back functionality for the specific json value</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Length()">Length</a><small> : Int ()</small></code></td>
+				<td>Returns length of the array.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New(Int)">New</a><small> ( length:Int )</small></code></td>
+				<td>Creates a new array of the given length.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(JsonValue[])">New</a><small> ( data:JsonValue[] )</small></code></td>
+				<td>Creates a new array with the given data.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Get(Int)">Get</a><small> : JsonValue ( index:Int )</small></code></td>
+				<td>Get json value at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetBool(Int)">GetBool</a><small> : Bool ( index:Int )</small></code></td>
+				<td>Get boolean value at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetData()">GetData</a><small> : JsonValue[] ()</small></code></td>
+				<td>Gets internal array used to contain values.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFloat(Int)">GetFloat</a><small> : Float ( index:Int )</small></code></td>
+				<td>Get float value at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetInt(Int)">GetInt</a><small> : Int ( index:Int )</small></code></td>
+				<td>Get integer value at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetString(Int)">GetString</a><small> : String ( index:Int )</small></code></td>
+				<td>Get string value at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Int,JsonValue)">Set</a><small> : Void ( index:Int, value:JsonValue )</small></code></td>
+				<td>Set entry at <b>index</b> to specific <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetBool(Int,Bool)">SetBool</a><small> : Void ( index:Int, value:Bool )</small></code></td>
+				<td>Set boolean <b>value</b> at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFloat(Int,Float)">SetFloat</a><small> : Void ( index:Int, value:Float )</small></code></td>
+				<td>Set float <b>value</b> at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetInt(Int,Int)">SetInt</a><small> : Void ( index:Int, value:Int )</small></code></td>
+				<td>Set integer <b>value</b> at <b>index</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetString(Int,String)">SetString</a><small> : Void ( index:Int, value:String )</small></code></td>
+				<td>Set string <b>value</b> at <b>index</b>.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Inherited Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#Type()">Type</a><small> : Int ()</small></code></td>
+				<td>Indicates the type of the specific JsonValue object.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Inherited Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#BoolValue()">BoolValue</a><small> : Bool ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>, this will return its boolean value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#FloatValue()">FloatValue</a><small> : Float ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as float.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#IntValue()">IntValue</a><small> : Int ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as int.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#StringValue()">StringValue</a><small> : String ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonString.html">JsonString</a>, this will return its string value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#ToJson()">ToJson</a><small> : String ()</small></code></td>
+				<td>Converts value to a JSON string.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+JSON arrays are ordered lists of values in square brackets, e.g.
+</p>
+<div class="pretty">
+<code class="d">[</code><code class="l">"bar"</code><code class="d">,</code><code class="l">42</code><code class="d">]</code><br/>
+</div>
+<p>
+<b>Note</b>: JsonArrays can't be resized. To achieve that, you have to retrieve the
+array using <a href="#GetData()">GetData</a>, resize the array manually and create a new JsonArray 
+with the resized array as argument.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Length()"></a>
+				<pre class="declaration">Method <strong>Length</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Returns length of the array.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New(Int)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( length:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Creates a new array of the given length.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(JsonValue[])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( data:<a href="Modules_brl.json_JsonValue.html">JsonValue</a>[] )</pre>
+				<p>
+Creates a new array with the given data.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Get(Int)"></a>
+				<pre class="declaration">Method <strong>Get</strong> : <a href="Modules_brl.json_JsonValue.html">JsonValue</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get json value at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+Returns a <a href="Modules_brl.json_JsonNull.html">JsonNull</a> object if element at <b>index</b> is null.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetBool(Int)"></a>
+				<pre class="declaration">Method <strong>GetBool</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get boolean value at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds or value at <b>index</b> is not a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetData()"></a>
+				<pre class="declaration">Method <strong>GetData</strong> : <a href="Modules_brl.json_JsonValue.html">JsonValue</a>[] ()</pre>
+				<p>
+Gets internal array used to contain values.
+</p>
+<p>
+To iterate through the array, use
+</p>
+<div class="pretty">
+<code class="k">For Local </code><code class="i">entry </code><code class="d">:= </code><code class="k">Eachin </code><code class="i">json</code><code class="d">.</code><code class="i">GetData</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="i">Print entry</code><code class="d">.</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFloat(Int)"></a>
+				<pre class="declaration">Method <strong>GetFloat</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get float value at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds or value at <b>index</b> is not a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetInt(Int)"></a>
+				<pre class="declaration">Method <strong>GetInt</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get integer value at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds or value at <b>index</b> is not a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetString(Int)"></a>
+				<pre class="declaration">Method <strong>GetString</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Get string value at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds or value at <b>index</b> is not a <a href="Modules_brl.json_JsonString.html">JsonString</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Int,JsonValue)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Modules_brl.json_JsonValue.html">JsonValue</a> )</pre>
+				<p>
+Set entry at <b>index</b> to specific <b>value</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetBool(Int,Bool)"></a>
+				<pre class="declaration">Method <strong>SetBool</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Set boolean <b>value</b> at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFloat(Int,Float)"></a>
+				<pre class="declaration">Method <strong>SetFloat</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set float <b>value</b> at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetInt(Int,Int)"></a>
+				<pre class="declaration">Method <strong>SetInt</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set integer <b>value</b> at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetString(Int,String)"></a>
+				<pre class="declaration">Method <strong>SetString</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Set string <b>value</b> at <b>index</b>.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>index</b> is out of bounds.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>mojo.graphics</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>mojo.graphics</small></h1>
+
+
+	<p>
+		The graphics module contains various functions that allow you to draw 2D graphics on all supported Cerberus target platforms.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+	<table class="index">
+		<tr><th>Imported By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_mojo.html">mojo</a></code> , 
+				
+					<code><a href="Modules_mojo.app.html">mojo.app</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented modules are listed here, there might be undocumented modules that import this one.</span>
+
+
+	<table class="index">
+		<tr><th>Classes</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo.graphics_Font.html">Font</a></code></td>
+				<td>The mojo Font class provides support for bitmap fonts.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_mojo.graphics_Image.html">Image</a></code></td>
+				<td>An image is a rectangular area of pixels, loaded from an image file with LoadImage or grabbed from another image with GrabImage.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constants</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#AdditiveBlend">AdditiveBlend</a><small> : Int</small></code></td>
+				<td></td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#AlphaBlend">AlphaBlend</a><small> : Int</small></code></td>
+				<td></td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Cls(Color)">Cls</a><small> : Int ( col:Color )</small></code></td>
+				<td>Clears the graphics device to the specified <a href="Modules_mojo.color_Color.html">Color</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Cls(Int)">Cls</a><small> : Int ( rgb:Int )</small></code></td>
+				<td>Clears the graphics device to the specified hex color value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Cls([Float],[Float],[Float])">Cls</a><small> : Int ( r:Float=0, g:Float=0, b:Float=0 )</small></code></td>
+				<td>Clears the graphics device to the specified color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#CreateImage(Int,Int,[Int],[Int])">CreateImage</a><small> : Image ( width:Int, height:Int, frameCount:Int=1, flags:Int=Image.DefaultFlags )</small></code></td>
+				<td>Creates an empty image for use with <a href="Modules_mojo.graphics_Image.html#WritePixels(Int[],Int,Int,Int,Int,[Int],[Int],[Int])">Image.WritePixels</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DeviceHeight()">DeviceHeight</a><small> : Int ()</small></code></td>
+				<td>***** Moved to <a href="Modules_mojo.app.html#DeviceHeight()">mojo.app.DeviceHeight</a> *****</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DeviceWidth()">DeviceWidth</a><small> : Int ()</small></code></td>
+				<td>***** Moved to <a href="Modules_mojo.app.html#DeviceWidth()">mojo.app.DeviceWidth</a> *****</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawCircle(Float,Float,Float)">DrawCircle</a><small> : Int ( x:Float, y:Float, r:Float )</small></code></td>
+				<td>Draws a circle of the given radius at coordinates x, y.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawEllipse(Float,Float,Float,Float)">DrawEllipse</a><small> : Int ( x:Float, y:Float, xr:Float, yr:Float )</small></code></td>
+				<td>Draws an ellipse of radii xRadius, yRadius at coordinates x, y.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage(Image,Float,Float,Float,Float,Float,[Int])">DrawImage</a><small> : Int ( image:Image, x:Float, y:Float, rotation:Float, scaleX:Float, scaleY:Float, frame:Int=0 )</small></code></td>
+				<td>Draws an image at coordinates x, y, offset by the image's handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage(Image,Float,Float,[Int])">DrawImage</a><small> : Int ( image:Image, x:Float, y:Float, frame:Int=0 )</small></code></td>
+				<td>Draws an image at coordinates x, y, offset by the image's handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])">DrawImage9P</a><small> : Int ( image:Image, x:Float, y:Float, patchSize:Int, rotation:Float, scaleX:Float, scaleY:Float, frame:Int=0 )</small></code></td>
+				<td>Draws an 9-Patch image at coordinates x, y, offset by the image's handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImageRect(Image,Float,Float,Int,Int,Int,Int,Float,Float,Float,[Int])">DrawImageRect</a><small> : Int ( image:Image, x:Float, y:Float, srcX:Int, srcY:Int, srcWidth:Int, srcHeight:Int, rotation:Float, scaleX:Float, scaleY:Float, frame:Int=0 )</small></code></td>
+				<td>Draws a sub-rectangle of an image at coordinates x, y, offset by the image's handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawImageRect(Image,Float,Float,Int,Int,Int,Int,[Int])">DrawImageRect</a><small> : Int ( image:Image, x:Float, y:Float, srcX:Int, srcY:Int, srcWidth:Int, srcHeight:Int, frame:Int=0 )</small></code></td>
+				<td>Draws a sub-rectangle of an image at coordinates x, y, offset by the image's handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawLine(Float,Float,Float,Float)">DrawLine</a><small> : Int ( x1:Float, y1:Float, x2:Float, y2:Float )</small></code></td>
+				<td>Draws a line from x1, y1 to x2, y2.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawOval(Float,Float,Float,Float)">DrawOval</a><small> : Int ( x:Float, y:Float, w:Float, h:Float )</small></code></td>
+				<td>Draws an oval of size width, height at coordinates x, y.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPoint(Float,Float)">DrawPoint</a><small> : Int ( x:Float, y:Float )</small></code></td>
+				<td>Draws a point at the coordinates x, y.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawPoly(Float[])">DrawPoly</a><small> : Int ( verts:Float[] )</small></code></td>
+				<td>Draw a convex polygon using the provided vertices.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawRect(Float,Float,Float,Float)">DrawRect</a><small> : Int ( x:Float, y:Float, w:Float, h:Float )</small></code></td>
+				<td>Draws a rectangle of size width, height at the coordinates x, y.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawText(String,Int,Int,[Float],[Float])">DrawText</a><small> : Int ( text:String, x:Int, y:Int, xalign:Float=0, yalign:Float=0 )</small></code></td>
+				<td>Draws text at coordinates x, y in the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#DrawText(String[],Int,Int,[Float],[Float])">DrawText</a><small> : Void ( textLines:String[], x:Int, y:Int, xhandle:Float=0, yhandle:Float=0 )</small></code></td>
+				<td>Draws a multiline text beginning at coordinates x, y in the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FontHeight()">FontHeight</a><small> : Float ()</small></code></td>
+				<td>Returns the height of the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetAlpha()">GetAlpha</a><small> : Float ()</small></code></td>
+				<td>Returns the current alpha level in the range 0 to 1 inclusive.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetBlend()">GetBlend</a><small> : Int ()</small></code></td>
+				<td>Returns the current blend mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetColor()">GetColor</a><small> : Float[] ()</small></code></td>
+				<td>Returns the current color as a 3 component float array containg the current color's red, green and blue components respectively.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetColor(Float[])">GetColor</a><small> : Int ( color:Float[] )</small></code></td>
+				<td>Copies the current color to <b>color</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFont()">GetFont</a><small> : Font ()</small></code></td>
+				<td>Returns the current font.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetMatrix()">GetMatrix</a><small> : Float[] ()</small></code></td>
+				<td>Returns the current transformation matrix as an array of 6 floats.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetMatrix(Float[])">GetMatrix</a><small> : Int ( matrix:Float[] )</small></code></td>
+				<td>Copies the current transformation matrix to <b>matrix</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetScissor()">GetScissor</a><small> : Float[] ()</small></code></td>
+				<td>Returns the current scissor rectangle as a 4 component float array containg the scissor rectangle's x,y, width and height coordinates respectively.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetScissor(Float[])">GetScissor</a><small> : Int ( scissor:Float[] )</small></code></td>
+				<td>Copies the current scissor rectangle to <b>scissor</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a><small> : Image ( path:String, frameWidth:Int, frameHeight:Int, frameCount:Int, flags:Int=Image.DefaultFlags )</small></code></td>
+				<td>Loads an image from path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadImage(String,[Int],[Int])">LoadImage</a><small> : Image ( path:String, frameCount:Int=1, flags:Int=Image.DefaultFlags )</small></code></td>
+				<td>Loads an image from path.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PopMatrix()">PopMatrix</a><small> : Int ()</small></code></td>
+				<td>Pops a matrix from the internal matrix stack and makes it the current matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#PushMatrix()">PushMatrix</a><small> : Int ()</small></code></td>
+				<td>Pushes the current matrix onto the internal matrix stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ReadPixels(Int[],Int,Int,Int,Int,[Int],[Int])">ReadPixels</a><small> : Void ( pixels:Int[], x:Int, y:Int, width:Int, height:Int, arrayOffset:Int=0, arrayPitch:Int=0 )</small></code></td>
+				<td>Copies a rectangular section of pixels from the current render buffer into an int array.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Rotate(Float)">Rotate</a><small> : Int ( angle:Float )</small></code></td>
+				<td>Multiplies the current matrix by a matrix representing the specified rotation.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Scale(Float,Float)">Scale</a><small> : Int ( x:Float, y:Float )</small></code></td>
+				<td>Multiplies the current matrix by a matrix representing the specified scale.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetAlpha(Float)">SetAlpha</a><small> : Int ( alpha:Float )</small></code></td>
+				<td>Sets the current global alpha level.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetBlend(Int)">SetBlend</a><small> : Int ( blend:Int )</small></code></td>
+				<td>Sets the current blending mode.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Color)">SetColor</a><small> : Int ( col:Color )</small></code></td>
+				<td>Sets the current color using a <a href="Modules_mojo.color_Color.html">Color</a> object.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Float,Float,Float)">SetColor</a><small> : Int ( r:Float, g:Float, b:Float )</small></code></td>
+				<td>Sets the current color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetColor(Int)">SetColor</a><small> : Int ( rgb:Int )</small></code></td>
+				<td>Sets the current color using a hex color value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFont(Font)">SetFont</a><small> : Void ( font:Font )</small></code></td>
+				<td>Sets the font for use with DrawText.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetMatrix(Float,Float,Float,Float,Float,Float)">SetMatrix</a><small> : Int ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Sets the current matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetMatrix(Float[])">SetMatrix</a><small> : Int ( m:Float[] )</small></code></td>
+				<td>Sets the current matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetScissor(Float,Float,Float,Float)">SetScissor</a><small> : Int ( x:Float, y:Float, width:Float, height:Float )</small></code></td>
+				<td>Sets the current scissor rectangle to the rectangle specified by x, y, width and height.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#TextWidth(String)">TextWidth</a><small> : Float ( text:String )</small></code></td>
+				<td>Returns the width of the given text.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Transform(Float,Float,Float,Float,Float,Float)">Transform</a><small> : Int ( ix:Float, iy:Float, jx:Float, jy:Float, tx:Float, ty:Float )</small></code></td>
+				<td>Multiplies the current matrix by the specified matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Transform(Float[])">Transform</a><small> : Int ( m:Float[] )</small></code></td>
+				<td>Multiplies the current matrix by the specified matrix.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Translate(Float,Float)">Translate</a><small> : Int ( x:Float, y:Float )</small></code></td>
+				<td>Multiplies the current matrix by a matrix representing the specified translation.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The graphics module contains various functions that allow you to draw 2D graphics on all supported Cerberus target platforms.
+</p>
+<p>
+The module supports rendering of file based images, and a small set of simple primitives.
+</p>
+<p>
+Transparency effects can be achieved using SetAlpha to set the global alpha level, and fullscreen rotation and scaling effects can be achieved using the various matrix commands such as Translate, Rotate and Scale.
+</p>
+<p>
+The graphics module is state based, and commands that 'set' various states will remain in effect until a subsequent 'set' modifies the state.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Constants Documentation</h2>
+		
+			<article>
+				<a name="AdditiveBlend"></a>
+				<pre class="declaration">Const <strong>AdditiveBlend</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="AlphaBlend"></a>
+				<pre class="declaration">Const <strong>AlphaBlend</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Cls(Color)"></a>
+				<pre class="declaration">Function <strong>Cls</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( col:<a href="Modules_mojo.color_Color.html">Color</a> )</pre>
+				<p>
+Clears the graphics device to the specified <a href="Modules_mojo.color_Color.html">Color</a>.
+</p>
+<p>
+The current color, alpha and blend mode are ignored by Cls. However, the scissor rect is still used so only the area inside the scissor rect is cleared.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Cls(Int)"></a>
+				<pre class="declaration">Function <strong>Cls</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( rgb:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Clears the graphics device to the specified hex color value.
+</p>
+<p>
+The current color, alpha and blend mode are ignored by Cls. However, the scissor rect is still used so only the area inside the scissor rect is cleared.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Cls([Float],[Float],[Float])"></a>
+				<pre class="declaration">Function <strong>Cls</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( r:<a href="Programming_Keywords_Float.html">Float</a>=0, g:<a href="Programming_Keywords_Float.html">Float</a>=0, b:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Clears the graphics device to the specified color.
+</p>
+<p>
+The current color, alpha and blend mode are ignored by Cls. However, the scissor rect is still used so only the area inside the scissor rect is cleared.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="CreateImage(Int,Int,[Int],[Int])"></a>
+				<pre class="declaration">Function <strong>CreateImage</strong> : <a href="Modules_mojo.graphics_Image.html">Image</a> ( width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, frameCount:<a href="Programming_Keywords_Int.html">Int</a>=1, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.DefaultFlags )</pre>
+				<p>
+Creates an empty image for use with <a href="Modules_mojo.graphics_Image.html#WritePixels(Int[],Int,Int,Int,Int,[Int],[Int],[Int])">Image.WritePixels</a>.
+</p>
+<p>
+The contents of the image are initially undefined.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DeviceHeight()"></a>
+				<pre class="declaration">Function <strong>DeviceHeight</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+***** Moved to <a href="Modules_mojo.app.html#DeviceHeight()">mojo.app.DeviceHeight</a> *****
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DeviceWidth()"></a>
+				<pre class="declaration">Function <strong>DeviceWidth</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+***** Moved to <a href="Modules_mojo.app.html#DeviceWidth()">mojo.app.DeviceWidth</a> *****
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawCircle(Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawCircle</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, r:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws a circle of the given radius at coordinates x, y.
+</p>
+<p>
+The circle is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawEllipse(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawEllipse</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, xr:<a href="Programming_Keywords_Float.html">Float</a>, yr:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws an ellipse of radii xRadius, yRadius at coordinates x, y.
+</p>
+<p>
+The ellipse is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#DrawOval(Float,Float,Float,Float)">DrawOval</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage(Image,Float,Float,Float,Float,Float,[Int])"></a>
+				<pre class="declaration">Function <strong>DrawImage</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( image:<a href="Modules_mojo.graphics_Image.html">Image</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, rotation:<a href="Programming_Keywords_Float.html">Float</a>, scaleX:<a href="Programming_Keywords_Float.html">Float</a>, scaleY:<a href="Programming_Keywords_Float.html">Float</a>, frame:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Draws an image at coordinates x, y, offset by the image's handle.
+</p>
+<p>
+The image is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+<p>
+The rotation and scaleX, scaleY parameters provide a convenient way for you to 'locally' rotate and scale the image.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>, <a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])">DrawImage9P</a>, <a href="#DrawImageRect(Image,Float,Float,Int,Int,Int,Int,Float,Float,Float,[Int])">DrawImageRect</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage(Image,Float,Float,[Int])"></a>
+				<pre class="declaration">Function <strong>DrawImage</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( image:<a href="Modules_mojo.graphics_Image.html">Image</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, frame:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Draws an image at coordinates x, y, offset by the image's handle.
+</p>
+<p>
+The image is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>, <a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])">DrawImage9P</a>, <a href="#DrawImageRect(Image,Float,Float,Int,Int,Int,Int,Float,Float,Float,[Int])">DrawImageRect</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])"></a>
+				<pre class="declaration">Function <strong>DrawImage9P</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( image:<a href="Modules_mojo.graphics_Image.html">Image</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, patchSize:<a href="Programming_Keywords_Int.html">Int</a>, rotation:<a href="Programming_Keywords_Float.html">Float</a>, scaleX:<a href="Programming_Keywords_Float.html">Float</a>, scaleY:<a href="Programming_Keywords_Float.html">Float</a>, frame:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Draws an 9-Patch image at coordinates x, y, offset by the image's handle.
+</p>
+<p>
+The image is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+<p>
+The rotation, scaleX and scaleY parameters provide a convenient way for you to 'locally' rotate and scale the image.
+</p>
+<p>
+The scaling is done via the 9-Patch method. The patchSize determines the width and height of the top-height, bottom-height, 
+left-width and right-width of the image. These are not scaled. The rest is.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>, <a href="#DrawImage(Image,Float,Float,Float,Float,Float,[Int])">DrawImage</a>, <a href="#DrawImageRect(Image,Float,Float,Int,Int,Int,Int,Float,Float,Float,[Int])">DrawImageRect</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImageRect(Image,Float,Float,Int,Int,Int,Int,Float,Float,Float,[Int])"></a>
+				<pre class="declaration">Function <strong>DrawImageRect</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( image:<a href="Modules_mojo.graphics_Image.html">Image</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, srcX:<a href="Programming_Keywords_Int.html">Int</a>, srcY:<a href="Programming_Keywords_Int.html">Int</a>, srcWidth:<a href="Programming_Keywords_Int.html">Int</a>, srcHeight:<a href="Programming_Keywords_Int.html">Int</a>, rotation:<a href="Programming_Keywords_Float.html">Float</a>, scaleX:<a href="Programming_Keywords_Float.html">Float</a>, scaleY:<a href="Programming_Keywords_Float.html">Float</a>, frame:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Draws a sub-rectangle of an image at coordinates x, y, offset by the image's handle.
+</p>
+<p>
+The image is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+<p>
+The rotation and scaleX, scaleY parameters provide a convenient way for you to 'locally' rotate and scale the image.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>, <a href="#DrawImage(Image,Float,Float,Float,Float,Float,[Int])">DrawImage</a>, <a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])">DrawImage9P</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawImageRect(Image,Float,Float,Int,Int,Int,Int,[Int])"></a>
+				<pre class="declaration">Function <strong>DrawImageRect</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( image:<a href="Modules_mojo.graphics_Image.html">Image</a>, x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, srcX:<a href="Programming_Keywords_Int.html">Int</a>, srcY:<a href="Programming_Keywords_Int.html">Int</a>, srcWidth:<a href="Programming_Keywords_Int.html">Int</a>, srcHeight:<a href="Programming_Keywords_Int.html">Int</a>, frame:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Draws a sub-rectangle of an image at coordinates x, y, offset by the image's handle.
+</p>
+<p>
+The image is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#LoadImage(String,Int,Int,Int,[Int])">LoadImage</a>, <a href="#DrawImage(Image,Float,Float,Float,Float,Float,[Int])">DrawImage</a>, <a href="#DrawImage9P(Image,Float,Float,Int,Float,Float,Float,[Int])">DrawImage9P</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawLine(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawLine</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x1:<a href="Programming_Keywords_Float.html">Float</a>, y1:<a href="Programming_Keywords_Float.html">Float</a>, x2:<a href="Programming_Keywords_Float.html">Float</a>, y2:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws a line from x1, y1 to x2, y2.
+</p>
+<p>
+The line is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawOval(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawOval</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, w:<a href="Programming_Keywords_Float.html">Float</a>, h:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws an oval of size width, height at coordinates x, y.
+</p>
+<p>
+The oval is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#DrawEllipse(Float,Float,Float,Float)">DrawEllipse</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPoint(Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawPoint</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws a point at the coordinates x, y.
+</p>
+<p>
+The point is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawPoly(Float[])"></a>
+				<pre class="declaration">Function <strong>DrawPoly</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( verts:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Draw a convex polygon using the provided vertices.
+</p>
+<p>
+The polygon is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+<p>
+If the polygon described by vertices is not convex, the results are undefined.
+</p>
+<p>
+The vertices array must contain at least 3 x,y pairs.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawRect(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>DrawRect</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, w:<a href="Programming_Keywords_Float.html">Float</a>, h:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Draws a rectangle of size width, height at the coordinates x, y.
+</p>
+<p>
+The rectangle is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawText(String,Int,Int,[Float],[Float])"></a>
+				<pre class="declaration">Function <strong>DrawText</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( text:<a href="Modules_cerberus.lang_String.html">String</a>, x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, xalign:<a href="Programming_Keywords_Float.html">Float</a>=0, yalign:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Draws text at coordinates x, y in the current font.
+</p>
+<p>
+The current font may be modified using SetFont. By default, an internal 7 x 13 white-on-black font is used.
+</p>
+<p>
+xalign and yalign allow you to control the alignment of the text and should be in the range 0 for left/top alignment to 1 for right/bottom alignment. A value of .5 can be used for centering text horizontally or vertically.
+</p>
+<p>
+The text is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="DrawText(String[],Int,Int,[Float],[Float])"></a>
+				<pre class="declaration">Function <strong>DrawText</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( textLines:<a href="Modules_cerberus.lang_String.html">String</a>[], x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=0, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Draws a multiline text beginning at coordinates x, y in the current font.
+</p>
+<p>
+The current font may be modified using SetFont. By default, an internal 7 x 13 white-on-black font is used.
+</p>
+<p>
+xalign and yalign allow you to control the alignment of the text and should be in the range 0 for left/top alignment to 1 for right/bottom alignment. A value of .5 can be used for centering text horizontally or vertically.
+</p>
+<p>
+The text is drawn using the current color, alpha, blend mode and matrix, and is clipped to the current scissor rectangle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FontHeight()"></a>
+				<pre class="declaration">Function <strong>FontHeight</strong> : <a href="Programming_Keywords_Float.html">Float</a> ()</pre>
+				<p>
+Returns the height of the current font.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetAlpha()"></a>
+				<pre class="declaration">Function <strong>GetAlpha</strong> : <a href="Programming_Keywords_Float.html">Float</a> ()</pre>
+				<p>
+Returns the current alpha level in the range 0 to 1 inclusive.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetAlpha(Float)">SetAlpha</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetBlend()"></a>
+				<pre class="declaration">Function <strong>GetBlend</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the current blend mode. See <a href="#SetBlend(Int)">SetBlend</a> for possible return values.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetBlend(Int)">SetBlend</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetColor()"></a>
+				<pre class="declaration">Function <strong>GetColor</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ()</pre>
+				<p>
+Returns the current color as a 3 component float array containg the current color's red, green and blue components respectively.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetColor(Color)">SetColor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetColor(Float[])"></a>
+				<pre class="declaration">Function <strong>GetColor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( color:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Copies the current color to <b>color</b>.
+</p>
+<p>
+The length of <b>color</b> must be at least 3.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetColor(Color)">SetColor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFont()"></a>
+				<pre class="declaration">Function <strong>GetFont</strong> : <a href="Modules_mojo.graphics_Font.html">Font</a> ()</pre>
+				<p>
+Returns the current font.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#SetFont(Font)">SetFont</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetMatrix()"></a>
+				<pre class="declaration">Function <strong>GetMatrix</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ()</pre>
+				<p>
+Returns the current transformation matrix as an array of 6 floats.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetMatrix(Float,Float,Float,Float,Float,Float)">SetMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetMatrix(Float[])"></a>
+				<pre class="declaration">Function <strong>GetMatrix</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( matrix:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Copies the current transformation matrix to <b>matrix</b>.
+</p>
+<p>
+The length of <b>matrix</b> must be at least 6.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetMatrix(Float,Float,Float,Float,Float,Float)">SetMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetScissor()"></a>
+				<pre class="declaration">Function <strong>GetScissor</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ()</pre>
+				<p>
+Returns the current scissor rectangle as a 4 component float array containg the scissor rectangle's x,y, width and height coordinates respectively.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetScissor(Float,Float,Float,Float)">SetScissor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetScissor(Float[])"></a>
+				<pre class="declaration">Function <strong>GetScissor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( scissor:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Copies the current scissor rectangle to <b>scissor</b>.
+</p>
+<p>
+The length of <b>scissor</b> must be at least 4.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#SetScissor(Float,Float,Float,Float)">SetScissor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadImage(String,Int,Int,Int,[Int])"></a>
+				<pre class="declaration">Function <strong>LoadImage</strong> : <a href="Modules_mojo.graphics_Image.html">Image</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, frameWidth:<a href="Programming_Keywords_Int.html">Int</a>, frameHeight:<a href="Programming_Keywords_Int.html">Int</a>, frameCount:<a href="Programming_Keywords_Int.html">Int</a>, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.DefaultFlags )</pre>
+				<p>
+Loads an image from path.
+</p>
+<p>
+The frames of a multi-frame image may occupy more than 1 row. In this case, frames should be laid out left-to-right, top-to-bottom.
+</p>
+<p>
+The image must be a PNG or JPEG image format, and must have the three-letter file extension .png or .jpg (not .jpeg). PNGs with alpha transparency channels are supported.
+</p>
+<p>
+Like all game data, the image file must be saved in your project's .data folder or one of its sub-folders.
+</p>
+<p>
+If your images contain edge padding, you will need to use one of the padding flags such as XYPadding.
+</p>
+<p>
+See DefaultFlags for a list of valid image flags.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="Programming_Resource paths.html">Resource paths</a>, <a href="Programming_File formats.html">File formats</a>, <a href="#CreateImage(Int,Int,[Int],[Int])">CreateImage</a>, <a href="Modules_mojo.graphics_Image.html#DefaultFlags">Image.DefaultFlags</a>, <a href="Modules_mojo.graphics_Image.html#GrabImage(Int,Int,Int,Int,Int,Int)">Image.GrabImage</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadImage(String,[Int],[Int])"></a>
+				<pre class="declaration">Function <strong>LoadImage</strong> : <a href="Modules_mojo.graphics_Image.html">Image</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, frameCount:<a href="Programming_Keywords_Int.html">Int</a>=1, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.DefaultFlags )</pre>
+				<p>
+Loads an image from path.
+</p>
+<p>
+The frames of a multi-frame image must be laid out in a single horizontal strip, in which case the width of the image is the width of image file divided by the number of frames, and the height of the image is the height of the image file.
+</p>
+<p>
+The image must be a PNG or JPEG image format, and must have the three-letter file extension .png or .jpg (not .jpeg). PNGs with alpha transparency channels are supported.
+</p>
+<p>
+Like all game data, the image file must be saved in your project's .data folder or one of its sub-folders.
+</p>
+<p>
+If your images contain edge padding, you will need to use one of the padding flags such as XYPadding.
+</p>
+<p>
+See DefaultFlags for a list of valid image flags.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="Programming_Resource paths.html">Resource paths</a>, <a href="Programming_File formats.html">File formats</a>, <a href="#CreateImage(Int,Int,[Int],[Int])">CreateImage</a>, <a href="Modules_mojo.graphics_Image.html#DefaultFlags">Image.DefaultFlags</a>, <a href="Modules_mojo.graphics_Image.html#GrabImage(Int,Int,Int,Int,Int,Int)">Image.GrabImage</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="PopMatrix()"></a>
+				<pre class="declaration">Function <strong>PopMatrix</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Pops a matrix from the internal matrix stack and makes it the current matrix.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#PushMatrix()">PushMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="PushMatrix()"></a>
+				<pre class="declaration">Function <strong>PushMatrix</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Pushes the current matrix onto the internal matrix stack.
+</p>
+<p>
+The matrix can be restored at a later time using PopMatrix.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#PopMatrix()">PopMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="ReadPixels(Int[],Int,Int,Int,Int,[Int],[Int])"></a>
+				<pre class="declaration">Function <strong>ReadPixels</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( pixels:<a href="Programming_Keywords_Int.html">Int</a>[], x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, arrayOffset:<a href="Programming_Keywords_Int.html">Int</a>=0, arrayPitch:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Copies a rectangular section of pixels from the current render buffer into an int array.
+</p>
+<p>
+The pixel data is stored in int-per-pixel ARGB format, with the alpha component stored in bits 24-31, the red component in bits 16-23, the green component in bits 8-15 and the blue component in bits 0-7.
+</p>
+<p>
+The optional <b>arrayOffset</b> parameter allows you to specify an index into the array at which to start writing pixel values.
+</p>
+<p>
+The optional <b>arrayPitch</b> parameter allows you to specify a 'pitch'. This is the number of array elements between successive rows in the array. If this is 0, then <b>width</b> is used as pitch, meaning pixel data is assumed to be 'tightly packed'.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Rotate(Float)"></a>
+				<pre class="declaration">Function <strong>Rotate</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( angle:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Multiplies the current matrix by a matrix representing the specified rotation.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Scale(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Scale</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Multiplies the current matrix by a matrix representing the specified scale.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetAlpha(Float)"></a>
+				<pre class="declaration">Function <strong>SetAlpha</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( alpha:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the current global alpha level.
+</p>
+<p>
+Alpha controls the 'mixing' that occurs when rendering. An alpha value of 1 results in completely opaque rendering, while 0 results in completely transparent rendering.
+</p>
+<p>
+In the case of images which contain alpha, the alpha used for rendering is the product of each image pixel's alpha and the current global alpha.
+</p>
+<p>
+Global alpha affects all drawing operations except for Cls.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetAlpha()">GetAlpha</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetBlend(Int)"></a>
+				<pre class="declaration">Function <strong>SetBlend</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( blend:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Sets the current blending mode.
+</p>
+<p>
+The current blending mode affects all drawing commands except for Cls.
+</p>
+<p>
+The <b>blend</b> parameter can be one of the following:
+</p>
+<table>
+<tr><th>Blend</th><th>Description</th></tr>
+<tr><td>AlphaBlend</td><td>Rendering operations are alpha blended with existing graphics</td></tr>
+<tr><td>AdditiveBlend</td><td>Rendering operations are additively blended with existing graphics</td></tr>
+</table>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetBlend()">GetBlend</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Color)"></a>
+				<pre class="declaration">Function <strong>SetColor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( col:<a href="Modules_mojo.color_Color.html">Color</a> )</pre>
+				<p>
+Sets the current color using a <a href="Modules_mojo.color_Color.html">Color</a> object.
+</p>
+<p>
+The current color is used by all drawing operations except Cls.
+</p>
+<p>
+Note: Drawing images in any color other than $FFFFFF on the HTML5 target will incur a major runtime overhead. For best results on the HTML5 target, either use colored images sparingly, or consider using 'pre-colored' images stored in multiple image files.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>SetColor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( r:<a href="Programming_Keywords_Float.html">Float</a>, g:<a href="Programming_Keywords_Float.html">Float</a>, b:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the current color.
+</p>
+<p>
+The current color is used by all drawing operations except Cls.
+</p>
+<p>
+Note: Drawing images in any color other than 255,255,255 on the HTML5 target will incur a major runtime overhead. For best results on the HTML5 target, either use colored images sparingly, or consider using 'pre-colored' images stored in multiple image files.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetColor()">GetColor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetColor(Int)"></a>
+				<pre class="declaration">Function <strong>SetColor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( rgb:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Sets the current color using a hex color value.
+</p>
+<p>
+The current color is used by all drawing operations except Cls.
+</p>
+<p>
+Note: Drawing images in any color other than $FFFFFF on the HTML5 target will incur a major runtime overhead. For best results on the HTML5 target, either use colored images sparingly, or consider using 'pre-colored' images stored in multiple image files.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFont(Font)"></a>
+				<pre class="declaration">Function <strong>SetFont</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( font:<a href="Modules_mojo.graphics_Font.html">Font</a> )</pre>
+				<p>
+Sets the font for use with DrawText.
+</p>
+<p>
+The font parameter may be Null, in which case an internal 7x11 white-on-black font is used.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="Modules_mojo.graphics_Font.html#Load(String)">Font.Load</a>, <a href="#GetFont()">GetFont</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetMatrix(Float,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>SetMatrix</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( ix:<a href="Programming_Keywords_Float.html">Float</a>, iy:<a href="Programming_Keywords_Float.html">Float</a>, jx:<a href="Programming_Keywords_Float.html">Float</a>, jy:<a href="Programming_Keywords_Float.html">Float</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the current matrix.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetMatrix()">GetMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetMatrix(Float[])"></a>
+				<pre class="declaration">Function <strong>SetMatrix</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( m:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Sets the current matrix.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetMatrix()">GetMatrix</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetScissor(Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>SetScissor</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a>, width:<a href="Programming_Keywords_Float.html">Float</a>, height:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the current scissor rectangle to the rectangle specified by x, y, width and height.
+</p>
+<p>
+All drawing commands are 'clipped' to the current scissor rectangle. To disable clipping, set the scissor rectangle to 0,0,DeviceWidth,DeviceHeight.
+</p>
+<p>
+The rectangle coordinates used with SetScissor are device coordinates, and are not affected by the current matrix.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#GetScissor()">GetScissor</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="TextWidth(String)"></a>
+				<pre class="declaration">Function <strong>TextWidth</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( text:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns the width of the given text.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Transform(Float,Float,Float,Float,Float,Float)"></a>
+				<pre class="declaration">Function <strong>Transform</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( ix:<a href="Programming_Keywords_Float.html">Float</a>, iy:<a href="Programming_Keywords_Float.html">Float</a>, jx:<a href="Programming_Keywords_Float.html">Float</a>, jy:<a href="Programming_Keywords_Float.html">Float</a>, tx:<a href="Programming_Keywords_Float.html">Float</a>, ty:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Multiplies the current matrix by the specified matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Transform(Float[])"></a>
+				<pre class="declaration">Function <strong>Transform</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( m:<a href="Programming_Keywords_Float.html">Float</a>[] )</pre>
+				<p>
+Multiplies the current matrix by the specified matrix.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Translate(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Translate</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( x:<a href="Programming_Keywords_Float.html">Float</a>, y:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Multiplies the current matrix by a matrix representing the specified translation.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

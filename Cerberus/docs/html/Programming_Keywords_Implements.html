@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<a href='Programming_Keywords.html'>Keywords</a>
+
+			<span>Implements</span>
+
+		</nav>
+
+		<main>
+
+<h1>Keyword Implements</h1>
+<p>
+Declares that a class implements the methods of the specified interface.
+</p>
+<h2>Syntax</h2>
+<p>
+Class <b>Identifier</b> [ Implements <b>Interface</b> ]<br>
+		 <b>Declarations...</b><br>
+End [ Class ]
+</p>
+<h2>Description</h2>
+<p>
+The Implements keyword is used to declare that a class will provide the methods listed in a given interface.
+</p>
+<p>
+Please see the Interfaces section of the Cerberus X language reference for more information on interfaces.
+</p>
+<h2>See also</h2>
+<p>
+<a href="Programming_Keywords_Class.html">Class</a> | <a href="Programming_Keywords_Interface.html">Interface</a><br>
+<a href="Programming_Language reference.html">Language reference (Interfaces)</a>  
+</p>
+<h2>Example</h2>
+<p>
+An example of a simple interface, including use of the Implements keyword.
+</p>
+<div class="pretty">
+<code class="k">Interface </code><code class="i">Computer</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Boot </code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Process </code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Display </code><code class="d">()</code><br/>
+<code class="d">	</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">PC </code><code class="k">Implements </code><code class="i">Computer</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Boot </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"BIOS version 1.01. Performing ancient rituals..."</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Process </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"Calculating 1 + 1..."</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Display </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"The result of 1 + 1 equals 2!"</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">C64 </code><code class="k">Implements </code><code class="i">Computer</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Boot </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"**** COMMODORE 64 BASIC V2 **** | 64K RAM SYSTEM  38911 BASIC BYTES FREE"</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Process </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"Calculating missile position..."</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">Display </code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"Enemies exploding!"</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main </code><code class="d">()</code><br/>
+<br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"PC"</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">ibm</code><code class="d">:</code><code class="i">Computer </code><code class="d">= </code><code class="k">New </code><code class="i">PC</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">ibm</code><code class="d">.</code><code class="i">Boot</code><br/>
+<code class="d">	</code><code class="i">ibm</code><code class="d">.</code><code class="i">Process</code><br/>
+<code class="d">	</code><code class="i">ibm</code><code class="d">.</code><code class="i">Display</code><br/>
+<br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"C64"</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">commodore</code><code class="d">:</code><code class="i">Computer </code><code class="d">= </code><code class="k">New </code><code class="i">C64</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">commodore</code><code class="d">.</code><code class="i">Boot</code><br/>
+<code class="d">	</code><code class="i">commodore</code><code class="d">.</code><code class="i">Process</code><br/>
+<code class="d">	</code><code class="i">commodore</code><code class="d">.</code><code class="i">Display</code><br/>
+<br/>
+<code class="k">End</code><br/>
+</div>
+
+		</main>
+	</div>
+</body>
+</html>

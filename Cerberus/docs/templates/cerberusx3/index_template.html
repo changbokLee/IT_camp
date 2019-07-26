@@ -1,0 +1,18 @@
+
+<h1>${INDEX}</h1>
+
+<div class="shortcuts">
+${FOR INDEX_SHORTCUTS}
+	<span>${IF URL}<a href="${URL}">${ENDIF}${IDENT}${IF URL}</a>${ENDIF}</span>
+${NEXT}
+</div>
+
+<table class="index">
+	<tr><th>Name</th><th>Description</th></tr>
+	${FOR ITEMS}
+		<tr>
+			<td id="${IDENT}"><code><a href="${URL}">${IDENT}</a><small> ${PARAMTYPES}</small></code><br/><small>${IF SCOPE}in ${SCOPE}${ENDIF}${IF NOT SCOPE}&nbsp;${ENDIF}</small></td>
+			<td>${SUMMARY}</td>
+		</tr>
+	${NEXT}
+</table>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Tutorials.html'>Tutorials</a>
+
+			<span>First cerberus steps</span>
+
+		</nav>
+
+		<main>
+
+<h1>First Cerberus X steps</h1>
+<p>
+<a href="http://nitrologic.blogspot.co.nz/">Skid</a> spills some source...
+</p>
+<h2>Main</h2>
+<p>
+We begin with the smallest Cerberus X program.
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"Hello"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+	
+In which, with the HTML5 target selected, we verify we are able to create and view our Cerberus X developments. 
+</p>
+<p>
+To learn more about the Main entry point of a program make sure you read the Programs and Declarations section of the <a href="Programming_Language reference.html">Language reference</a>.
+</p>
+<h2>Game App</h2>
+<p>
+We now build a mojo <a href="Modules_mojo.app_App.html">App</a> which we call Game (in Cerberus X class names are typically capitalized).
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">Game </code><code class="k">Extends </code><code class="i">App</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnCreate</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"hello"</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">New </code><code class="i">Game</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+A mojo <a href="Modules_mojo.app_App.html">App</a> is used to provide us methods of input, graphics and sound. The framework above creates a single App using the Game class definition.  
+</p>
+<h2>Spiral animation</h2>
+<p>
+With our game object defined we extend the basic Update and Render parts of the app.
+</p>
+<p>
+The minimum requirements for an animating Cerberus X application are an <a href="Modules_mojo.app_App.html">App</a> implementing the methods:
+</p>
+<ul>
+<li><a href="Modules_mojo.app_App.html#OnCreate()">OnCreate</a> must call <a href="Modules_mojo.app.html#SetUpdateRate(Int)">SetUpdateRate</a></li>
+<ul></ul>
+<li><a href="Modules_mojo.app_App.html#OnUpdate()">OnUpdate</a> can use mojo input commands</li>
+<ul></ul>
+<li><a href="Modules_mojo.app_App.html#OnRender()">OnRender</a> can use mojo drawing commands</li>
+<ul></ul>
+</ul>
+<p>
+The following draws an animated spiral shape using the <a href="Modules_mojo.graphics.html#DrawPoint(Float,Float)">DrawPoint</a> command.
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">Game </code><code class="k">Extends </code><code class="i">App</code><br/>
+<br/>
+<code class="d">	</code><code class="r">' radial sprial with axis aligned phase</code><br/>
+<code class="d">		</code><br/>
+<code class="d">	</code><code class="k">Function </code><code class="i">DrawSpiral</code><code class="d">(</code><code class="i">clock</code><code class="d">)</code><br/>
+<code class="d">		</code><code class="k">Local </code><code class="i">w</code><code class="d">=</code><code class="i">DeviceWidth</code><code class="d">/</code><code class="l">2</code><br/>
+<code class="d">		</code><code class="k">For Local </code><code class="i">i</code><code class="d">#=</code><code class="l">0 </code><code class="k">Until </code><code class="i">w</code><code class="d">*</code><code class="l">1.5 </code><code class="k">Step </code><code class="l">.2</code><br/>
+<code class="d">			</code><code class="k">Local </code><code class="i">x</code><code class="d">#,</code><code class="i">y</code><code class="d">#</code><br/>
+<code class="d">			</code><code class="i">x</code><code class="d">=</code><code class="i">w</code><code class="d">+</code><code class="i">i</code><code class="d">*</code><code class="i">Sin</code><code class="d">(</code><code class="i">i</code><code class="d">*</code><code class="l">3</code><code class="d">+</code><code class="i">clock</code><code class="d">)</code><br/>
+<code class="d">			</code><code class="i">y</code><code class="d">=</code><code class="i">w</code><code class="d">+</code><code class="i">i</code><code class="d">*</code><code class="i">Cos</code><code class="d">(</code><code class="i">i</code><code class="d">*</code><code class="l">2</code><code class="d">+</code><code class="i">clock</code><code class="d">)</code><br/>
+<code class="d">			</code><code class="i">DrawPoint x</code><code class="d">,</code><code class="i">y</code><br/>
+<code class="d">		</code><code class="k">Next</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Field </code><code class="i">updateCount</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnCreate</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"spiral"</code><br/>
+<code class="d">		</code><br/>
+<code class="d">		</code><code class="i">SetUpdateRate </code><code class="l">60</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnUpdate</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">updateCount</code><code class="d">+=</code><code class="l">1</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">		</code><br/>
+<code class="d">	</code><code class="k">Method </code><code class="i">OnRender</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Cls</code><br/>
+<code class="d">		</code><code class="i">DrawSpiral updateCount</code><br/>
+<code class="d">		</code><code class="i">DrawSpiral updateCount</code><code class="d">*</code><code class="l">1.1</code><br/>
+<code class="d">	</code><code class="k">End</code><br/>
+<code class="d">	</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">New </code><code class="i">Game</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Each spiral drawn by the program begins at the middle of the screen and spirals out using the Maths functions <a href="Modules_cerberus.math.html#Sin(Float)">Sin</a> and <a href="Modules_cerberus.math.html#Cos(Float)">Cos</a>.
+</p>
+<p>
+Here is the final application:
+</p>
+<p>
+<iframe src="data/Tutorials/First cerberus steps/spiral/spiral.build/html5/CerberusGame.html" width=640 height=480 scrolling=no></iframe>
+</p>
+
+		</main>
+	</div>
+</body>
+</html>

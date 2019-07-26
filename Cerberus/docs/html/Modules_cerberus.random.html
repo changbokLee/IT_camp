@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<span>cerberus.random</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Module <small>cerberus.random</small></h1>
+
+
+	<p>
+		The random module provides functions to generate random numbers.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+	<table class="index">
+		<tr><th>Imported By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_cerberus.html">cerberus</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented modules are listed here, there might be undocumented modules that import this one.</span>
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Globals</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Seed">Seed</a><small> : Int</small></code></td>
+				<td>The current random number generator seed used by Rnd.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Rnd()">Rnd</a><small> : Float ()</small></code></td>
+				<td>Returns a random float in the range 0 (exclusive) to 1 (exclusive).</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Rnd(Float)">Rnd</a><small> : Float ( range:Float )</small></code></td>
+				<td>Returns a random float in the range 0 (exclusive) to range (exclusive).</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Rnd(Float,Float)">Rnd</a><small> : Float ( low:Float, high:Float )</small></code></td>
+				<td>Returns a random float in the range low (exclusive) to high (exclusive).</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The random module provides functions to generate random numbers.
+</p>
+<div class="pretty">
+<code class="i">Print Rnd</code><code class="d">()				</code><code class="r">' anything between 0.0 and 1.0</code><br/>
+<code class="i">Print </code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">10</code><code class="d">))		</code><code class="r">' any integer from 0 to 9</code><br/>
+<code class="i">Print </code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">5</code><code class="d">,</code><code class="l">10</code><code class="d">))	</code><code class="r">' any integer from 5 to 9</code><br/>
+<code class="i">Print </code><code class="d">(</code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">21</code><code class="d">))-</code><code class="l">10</code><code class="d">)	</code><code class="r">' any integer from -10 to 10</code><br/>
+</div>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+	<section>
+		<h2>Globals Documentation</h2>
+		
+			<article>
+				<a name="Seed"></a>
+				<pre class="declaration">Global <strong>Seed</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				<p>
+The current random number generator seed used by Rnd.
+</p>
+<p>
+A common way to initialize seed is to use the current system time, so the random number generator always generates different sequences after every start up:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">date </code><code class="d">:= </code><code class="i">GetDate</code><code class="d">()</code><br/>
+<code class="i">Seed </code><code class="d">= </code><code class="i">date</code><code class="d">[</code><code class="l">3</code><code class="d">] * </code><code class="l">3600000 </code><code class="d">+ </code><code class="i">date</code><code class="d">[</code><code class="l">4</code><code class="d">] * </code><code class="l">60000 </code><code class="d">+ </code><code class="i">date</code><code class="d">[</code><code class="l">5</code><code class="d">] * </code><code class="l">1000 </code><code class="d">+ </code><code class="i">date</code><code class="d">[</code><code class="l">6</code><code class="d">]</code><br/>
+</div>
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Rnd()">Rnd</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Rnd()"></a>
+				<pre class="declaration">Function <strong>Rnd</strong> : <a href="Programming_Keywords_Float.html">Float</a> ()</pre>
+				<p>
+Returns a random float in the range 0 (exclusive) to 1 (exclusive).
+</p>
+<div class="pretty">
+<code class="i">Print Rnd</code><code class="d">()			</code><code class="r">' anything between 0.0 and 1.0</code><br/>
+<code class="i">Print </code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">())	</code><code class="r">' always 0</code><br/>
+</div>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Seed">Seed</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Rnd(Float)"></a>
+				<pre class="declaration">Function <strong>Rnd</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( range:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns a random float in the range 0 (exclusive) to range (exclusive).
+</p>
+<div class="pretty">
+<code class="i">Print Rnd</code><code class="d">(</code><code class="l">10</code><code class="d">)			</code><code class="r">' anything between 0.0 and 10.0</code><br/>
+<code class="i">Print </code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">10</code><code class="d">))		</code><code class="r">' any integer from 0 to 9</code><br/>
+</div>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Seed">Seed</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Rnd(Float,Float)"></a>
+				<pre class="declaration">Function <strong>Rnd</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( low:<a href="Programming_Keywords_Float.html">Float</a>, high:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Returns a random float in the range low (exclusive) to high (exclusive).
+</p>
+<div class="pretty">
+<code class="i">Print Rnd</code><code class="d">(</code><code class="l">5</code><code class="d">,</code><code class="l">10</code><code class="d">)			</code><code class="r">' anything between 5.0 and 10.0</code><br/>
+<code class="i">Print </code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">5</code><code class="d">,</code><code class="l">10</code><code class="d">))	</code><code class="r">' any integer from 5 to 9</code><br/>
+</div>
+<p>
+Attention: When trying to generate integers around 0, don't write Int(Rnd(-10,10))! Because all numbers between -1.0 and +1.0 will get cast to 0, doubling the chance for a 0. Instead, write:
+</p>
+<div class="pretty">
+<code class="i">Print </code><code class="d">(</code><code class="k">Int</code><code class="d">(</code><code class="i">Rnd</code><code class="d">(</code><code class="l">21</code><code class="d">))-</code><code class="l">10</code><code class="d">)	</code><code class="r">' any integer (from 0 to 20)-10 = from -10 to 10</code><br/>
+</div>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Seed">Seed</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

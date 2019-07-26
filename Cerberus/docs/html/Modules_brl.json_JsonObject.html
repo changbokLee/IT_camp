@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.json.html'>brl.json</a>
+
+			<span>JsonObject</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>JsonObject</small></h1>
+
+
+	<p>
+		JSON objects are collections of pairs in curly brackets, e.g.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extends</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html">JsonValue</a><small></small></code></td>
+				<td>This base class provides some fall-back functionality for the specific json value</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Creates a new empty json object.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(String)">New</a><small> ( json:String )</small></code></td>
+				<td>Creates a new json object from the given JSON string.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(StringMap<JsonValue>)">New</a><small> ( data:StringMap&lt;JsonValue&gt; )</small></code></td>
+				<td>Creates a new json object with the given data.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Contains(String)">Contains</a><small> : Bool ( key:String )</small></code></td>
+				<td>Returns true if the json object contains <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Get(String,[JsonValue])">Get</a><small> : JsonValue ( key:String, defval:JsonValue=null )</small></code></td>
+				<td>Get json value of <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetBool(String,[Bool])">GetBool</a><small> : Int ( key:String, defval:Bool=False )</small></code></td>
+				<td>Get boolean value of <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetData()">GetData</a><small> : StringMap&lt;JsonValue&gt; ()</small></code></td>
+				<td>Gets the internal map used to represent the object.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetFloat(String,[Float])">GetFloat</a><small> : Float ( key:String, defval:Float=0 )</small></code></td>
+				<td>Get float value of <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetInt(String,[Int])">GetInt</a><small> : Int ( key:String, defval:Int=0 )</small></code></td>
+				<td>Get integer value of <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetString(String,[String])">GetString</a><small> : String ( key:String, defval:String="" )</small></code></td>
+				<td>Get string value of <b>key</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(String,JsonValue)">Set</a><small> : Void ( key:String, value:JsonValue )</small></code></td>
+				<td>Set <b>key</b> to specific <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetBool(String,Bool)">SetBool</a><small> : Void ( key:String, value:Bool )</small></code></td>
+				<td>Set <b>key</b> to boolean <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFloat(String,Float)">SetFloat</a><small> : Void ( key:String, value:Float )</small></code></td>
+				<td>Set <b>key</b> to float <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetInt(String,Int)">SetInt</a><small> : Void ( key:String, value:Int )</small></code></td>
+				<td>Set <b>key</b> to integer <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetString(String,String)">SetString</a><small> : Void ( key:String, value:String )</small></code></td>
+				<td>Set <b>key</b> to string <b>value</b>.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Inherited Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#Type()">Type</a><small> : Int ()</small></code></td>
+				<td>Indicates the type of the specific JsonValue object.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Inherited Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#BoolValue()">BoolValue</a><small> : Bool ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>, this will return its boolean value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#FloatValue()">FloatValue</a><small> : Float ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as float.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#IntValue()">IntValue</a><small> : Int ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>, this will return its numerical value as int.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#StringValue()">StringValue</a><small> : String ()</small></code></td>
+				<td>For a <a href="Modules_brl.json_JsonString.html">JsonString</a>, this will return its string value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.json_JsonValue.html#ToJson()">ToJson</a><small> : String ()</small></code></td>
+				<td>Converts value to a JSON string.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+JSON objects are collections of pairs in curly brackets, e.g.
+</p>
+<div class="pretty">
+<code class="d">{</code><code class="l">"foo"</code><code class="d">:</code><code class="l">"bar"</code><code class="d">,</code><code class="l">"answer"</code><code class="d">:</code><code class="l">42</code><code class="d">}</code><br/>
+</div>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Creates a new empty json object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(String)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( json:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Creates a new json object from the given JSON string.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if <b>json</b> is invalid.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(StringMap<JsonValue>)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( data:<a href="Modules_cerberus.map_StringMap.html">StringMap</a>&lt;JsonValue&gt; )</pre>
+				<p>
+Creates a new json object with the given data.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Contains(String)"></a>
+				<pre class="declaration">Method <strong>Contains</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns true if the json object contains <b>key</b>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Get(String,[JsonValue])"></a>
+				<pre class="declaration">Method <strong>Get</strong> : <a href="Modules_brl.json_JsonValue.html">JsonValue</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, defval:<a href="Modules_brl.json_JsonValue.html">JsonValue</a>=null )</pre>
+				<p>
+Get json value of <b>key</b>.
+</p>
+<p>
+Returns <b>defval</b> if <b>key</b> doesn't exist.
+</p>
+<p>
+Returns a <a href="Modules_brl.json_JsonNull.html">JsonNull</a> object if <b>key</b> is mapped to null.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetBool(String,[Bool])"></a>
+				<pre class="declaration">Method <strong>GetBool</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, defval:<a href="Programming_Keywords_Bool.html">Bool</a>=False )</pre>
+				<p>
+Get boolean value of <b>key</b>.
+</p>
+<p>
+Returns <b>defval</b> if <b>key</b> doesn't exist.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if value mapped to <b>key</b> is not a <a href="Modules_brl.json_JsonBool.html">JsonBool</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetData()"></a>
+				<pre class="declaration">Method <strong>GetData</strong> : <a href="Modules_cerberus.map_StringMap.html">StringMap</a>&lt;JsonValue&gt; ()</pre>
+				<p>
+Gets the internal map used to represent the object.
+</p>
+<p>
+To iterate through the map, use
+</p>
+<div class="pretty">
+<code class="k">For Local </code><code class="i">node </code><code class="d">:= </code><code class="k">Eachin </code><code class="i">json</code><code class="d">.</code><code class="i">GetData</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="i">Print node</code><code class="d">.</code><code class="i">Key</code><code class="d">() +</code><code class="l">" : "</code><code class="d">+ </code><code class="i">node</code><code class="d">.</code><code class="i">Value</code><code class="d">().</code><code class="i">ToJson</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetFloat(String,[Float])"></a>
+				<pre class="declaration">Method <strong>GetFloat</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, defval:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Get float value of <b>key</b>.
+</p>
+<p>
+Returns <b>defval</b> if <b>key</b> doesn't exist.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if value mapped to <b>key</b> is not a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetInt(String,[Int])"></a>
+				<pre class="declaration">Method <strong>GetInt</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, defval:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Get integer value of <b>key</b>.
+</p>
+<p>
+Returns <b>defval</b> if <b>key</b> doesn't exist.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if value mapped to <b>key</b> is not a <a href="Modules_brl.json_JsonNumber.html">JsonNumber</a>.
+</p>
+<p>
+		
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetString(String,[String])"></a>
+				<pre class="declaration">Method <strong>GetString</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, defval:<a href="Modules_cerberus.lang_String.html">String</a>="" )</pre>
+				<p>
+Get string value of <b>key</b>.
+</p>
+<p>
+Returns <b>defval</b> if <b>key</b> doesn't exist.
+</p>
+<p>
+Throws a <a href="Modules_brl.json_JsonError.html">JsonError</a> if value mapped to <b>key</b> is not a <a href="Modules_brl.json_JsonString.html">JsonString</a>.
+		
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(String,JsonValue)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Modules_brl.json_JsonValue.html">JsonValue</a> )</pre>
+				<p>
+Set <b>key</b> to specific <b>value</b>.
+</p>
+<p>
+If <b>key</b> is already a member of json object, its value is overwritten.
+Otherwise, the <b>key</b>:<b>value</b> pair is appended to the json object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetBool(String,Bool)"></a>
+				<pre class="declaration">Method <strong>SetBool</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Programming_Keywords_Bool.html">Bool</a> )</pre>
+				<p>
+Set <b>key</b> to boolean <b>value</b>.
+</p>
+<p>
+If <b>key</b> is already a member of json object, its value is overwritten.
+Otherwise, the <b>key</b>:<b>value</b> pair is appended to the json object.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFloat(String,Float)"></a>
+				<pre class="declaration">Method <strong>SetFloat</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set <b>key</b> to float <b>value</b>.
+</p>
+<p>
+If <b>key</b> is already a member of json object, its value is overwritten.
+Otherwise, the <b>key</b>:<b>value</b> pair is appended to the json object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetInt(String,Int)"></a>
+				<pre class="declaration">Method <strong>SetInt</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Set <b>key</b> to integer <b>value</b>.
+</p>
+<p>
+If <b>key</b> is already a member of json object, its value is overwritten.
+Otherwise, the <b>key</b>:<b>value</b> pair is appended to the json object.
+</p>
+<p>
+	
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetString(String,String)"></a>
+				<pre class="declaration">Method <strong>SetString</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( key:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Set <b>key</b> to string <b>value</b>.
+</p>
+<p>
+If <b>key</b> is already a member of json object, its value is overwritten.
+Otherwise, the <b>key</b>:<b>value</b> pair is appended to the json object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>Material</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Material</small></h1>
+
+
+	<p>
+		Materials contain shader parameters that map to shader uniforms variables when rendering.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Shader()">Shader</a><small> : Shader ()</small></code></td>
+				<td>Get material shader.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New(Shader)">New</a><small> ( shader:Shader )</small></code></td>
+				<td>Create a new material.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#GetScalar(String,[Float])">GetScalar</a><small> : Float ( paramName:String, defaultValue:Float=0 )</small></code></td>
+				<td>Get float shader parameter.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetTexture(String,[Texture])">GetTexture</a><small> : Texture ( paramName:String, defaultValue:Texture=Null )</small></code></td>
+				<td>Get texture shader parameter.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#GetVector(String,[Float[]])">GetVector</a><small> : Float[] ( paramName:String, defaultValue:Float[]=[] )</small></code></td>
+				<td>Get vector shader parameter.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetScalar(String,Float)">SetScalar</a><small> : Void ( paramName:String, scalar:Float )</small></code></td>
+				<td>Set float shader parameter.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetTexture(String,Texture)">SetTexture</a><small> : Void ( paramName:String, texture:Texture )</small></code></td>
+				<td>Set texture shader parameter.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetVector(String,Float)">SetVector</a><small> : Void ( paramName:String, vector:Float )</small></code></td>
+				<td>Set vector shader parameter.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Load(String,Int,Shader)">Load</a><small> : Material ( path:String, texFlags:Int, shader:Shader )</small></code></td>
+				<td>Load a material.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Materials contain shader parameters that map to shader uniforms variables when rendering. For more information, please see the <a href="#Shader()">Shader</a> class.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Shader()"></a>
+				<pre class="declaration">Method <strong>Shader</strong> : <a href="#Shader()">Shader</a> () Property</pre>
+				<p>
+Get material shader.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New(Shader)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( shader:<a href="#Shader()">Shader</a> )</pre>
+				<p>
+Create a new material.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="GetScalar(String,[Float])"></a>
+				<pre class="declaration">Method <strong>GetScalar</strong> : <a href="Programming_Keywords_Float.html">Float</a> ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, defaultValue:<a href="Programming_Keywords_Float.html">Float</a>=0 )</pre>
+				<p>
+Get float shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetTexture(String,[Texture])"></a>
+				<pre class="declaration">Method <strong>GetTexture</strong> : <a href="Modules_mojo2.graphics_Texture.html">Texture</a> ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, defaultValue:<a href="Modules_mojo2.graphics_Texture.html">Texture</a>=Null )</pre>
+				<p>
+Get texture shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="GetVector(String,[Float[]])"></a>
+				<pre class="declaration">Method <strong>GetVector</strong> : <a href="Programming_Keywords_Float.html">Float</a>[] ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, defaultValue:<a href="Programming_Keywords_Float.html">Float</a>[]=[] )</pre>
+				<p>
+Get vector shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetScalar(String,Float)"></a>
+				<pre class="declaration">Method <strong>SetScalar</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, scalar:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set float shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetTexture(String,Texture)"></a>
+				<pre class="declaration">Method <strong>SetTexture</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, texture:<a href="Modules_mojo2.graphics_Texture.html">Texture</a> )</pre>
+				<p>
+Set texture shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetVector(String,Float)"></a>
+				<pre class="declaration">Method <strong>SetVector</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( paramName:<a href="Modules_cerberus.lang_String.html">String</a>, vector:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set vector shader parameter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Load(String,Int,Shader)"></a>
+				<pre class="declaration">Function <strong>Load</strong> : <a href="Modules_mojo2.graphics_Material.html">Material</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, texFlags:<a href="Programming_Keywords_Int.html">Int</a>, shader:<a href="#Shader()">Shader</a> )</pre>
+				<p>
+Load a material.
+</p>
+<p>
+If <b>shader</b> is null, the <a href="Modules_mojo2.graphics_Shader.html#DefaultShader()">Shader.DefaultShader</a> is used.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

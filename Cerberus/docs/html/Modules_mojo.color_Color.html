@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo.color.html'>mojo.color</a>
+
+			<span>Color</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Color</small></h1>
+
+
+	<p>
+		Stores a color and provides different possibilities to modify it.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Fields</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#b">b</a><small> : Int</small></code></td>
+				<td>Blue component of the color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#bri">bri</a><small> : Float</small></code></td>
+				<td>The color's brightness ranging 0 to 1.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#g">g</a><small> : Int</small></code></td>
+				<td>Green component of the color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#hue">hue</a><small> : Float</small></code></td>
+				<td>The color's hue, ranging 0 to 360.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#r">r</a><small> : Int</small></code></td>
+				<td>Red component of the color.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#sat">sat</a><small> : Float</small></code></td>
+				<td>The color's saturation, ranging 0 to 1.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Creates a new Color object which is black by default.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Color)">New</a><small> ( pColor:Color )</small></code></td>
+				<td>Creates a new Color object by copying the components from the Color object you</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Int)">New</a><small> ( pHex:Int )</small></code></td>
+				<td>Creates a new Color object which is initialized to the hexadecimal color value</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Int,Int,Int)">New</a><small> ( pRed:Int, pGrn:Int, pBlu:Int )</small></code></td>
+				<td>Creates a new Color object which is initialized to the rgb components you pass.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Int[])">New</a><small> ( pRgb:Int[] )</small></code></td>
+				<td>Creates a new Color object which is initialized to the rgb components contained</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(String)">New</a><small> ( pColorName:String )</small></code></td>
+				<td>Creates a new Color object based on the <a href="Modules_mojo.colornames.html">color name</a> you pass.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#GetHex()">GetHex</a><small> : Int ()</small></code></td>
+				<td>See <a href="#ToInt()">ToInt</a>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Mix(Color,Color,Float)">Mix</a><small> : Void ( pColor1:Color, pColor2:Color, pMix:Float )</small></code></td>
+				<td>Sets the color's components by mixing two colors.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#MixHsb(Color,Color,Float,[Int])">MixHsb</a><small> : Void ( pColor1:Color, pColor2:Color, pMix:Float, pHueWay:Int=0 )</small></code></td>
+				<td>Sets the color's hue, saturation and brightness by mixing two colors.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Color)">Set</a><small> : Int ( pColor:Color )</small></code></td>
+				<td>Sets the color by copying the components from the Color object you</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Int)">Set</a><small> : Int ( pHex:Int )</small></code></td>
+				<td>Sets the color to the hexadecimal color value</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Int,Int,Int)">Set</a><small> : Int ( pRed:Int, pGrn:Int, pBlu:Int )</small></code></td>
+				<td>Sets the color to the rgb components you pass.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Int[])">Set</a><small> : Int ( pRgb:Int[] )</small></code></td>
+				<td>Sets the color to the rgb components contained</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(String)">Set</a><small> : Int ( pColorName:String )</small></code></td>
+				<td>Sets the color based on the <a href="Modules_mojo.colornames.html">color name</a> you pass.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetHsb(Float,Float,Float)">SetHsb</a><small> : Void ( pHue:Float, pSat:Float, pBri:Float )</small></code></td>
+				<td>Sets the color to the <b>hue</b>, <b>saturation</b> and <b>brightness</b> values you pass.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetHsl(Float,Float,Float)">SetHsl</a><small> : Void ( pHue:Float, pSat:Float, pLit:Float )</small></code></td>
+				<td>Sets the color to the <b>hue</b>, <b>saturation</b> and <b>lightness</b> values you pass.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToInt()">ToInt</a><small> : Int ()</small></code></td>
+				<td>Returns the color as one Int with the rgb components represented by the three</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Stores a color and provides different possibilities to modify it.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+	<section>
+		<h2>Fields Documentation</h2>
+		
+			<article>
+				<a name="b"></a>
+				<pre class="declaration">Field <strong>b</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				<p>
+Blue component of the color.
+Do only assign values ranging 0 to 255, they're <b>not</b> automatically clamped
+upon assignment.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="bri"></a>
+				<pre class="declaration">Field <strong>bri</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				<p>
+The color's brightness ranging 0 to 1. Setting this will update the rgb components.
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="g"></a>
+				<pre class="declaration">Field <strong>g</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				<p>
+Green component of the color.
+Do only assign values ranging 0 to 255, they're <b>not</b> automatically clamped
+upon assignment.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="hue"></a>
+				<pre class="declaration">Field <strong>hue</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				<p>
+The color's hue, ranging 0 to 360. Setting this will update the rgb components.
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="r"></a>
+				<pre class="declaration">Field <strong>r</strong> : <a href="Programming_Keywords_Int.html">Int</a></pre>
+				<p>
+Red component of the color.
+Do only assign values ranging 0 to 255, they're <b>not</b> automatically clamped
+upon assignment.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="sat"></a>
+				<pre class="declaration">Field <strong>sat</strong> : <a href="Programming_Keywords_Float.html">Float</a></pre>
+				<p>
+The color's saturation, ranging 0 to 1. Setting this will update the rgb components.
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Creates a new Color object which is black by default.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Color)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( pColor:<a href="Modules_mojo.color_Color.html">Color</a> )</pre>
+				<p>
+Creates a new Color object by copying the components from the Color object you
+pass.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Int)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( pHex:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Creates a new Color object which is initialized to the hexadecimal color value
+you pass. E.g. <code>$ff0000</code> is red.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( pRed:<a href="Programming_Keywords_Int.html">Int</a>, pGrn:<a href="Programming_Keywords_Int.html">Int</a>, pBlu:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Creates a new Color object which is initialized to the rgb components you pass.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Int[])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( pRgb:<a href="Programming_Keywords_Int.html">Int</a>[] )</pre>
+				<p>
+Creates a new Color object which is initialized to the rgb components contained
+in the 3-component Int array you pass.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(String)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( pColorName:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Creates a new Color object based on the <a href="Modules_mojo.colornames.html">color name</a> you pass. E.g. <code>"black"</code> is black.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="GetHex()"></a>
+				<pre class="declaration">Method <strong>GetHex</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+See <a href="#ToInt()">ToInt</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Mix(Color,Color,Float)"></a>
+				<pre class="declaration">Method <strong>Mix</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( pColor1:<a href="Modules_mojo.color_Color.html">Color</a>, pColor2:<a href="Modules_mojo.color_Color.html">Color</a>, pMix:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the color's components by mixing two colors.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<ul>
+<li><b>pColor1</b>, <b>pColor2</b> - the two colors to mix</li>
+<li><b>pMix</b> - percentage of <b>pColor2</b> to apply in the mix, ranging 0 to 1</li>
+<ul></ul>
+<ul></ul>
+<ul></ul>
+</ul>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="MixHsb(Color,Color,Float,[Int])"></a>
+				<pre class="declaration">Method <strong>MixHsb</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( pColor1:<a href="Modules_mojo.color_Color.html">Color</a>, pColor2:<a href="Modules_mojo.color_Color.html">Color</a>, pMix:<a href="Programming_Keywords_Float.html">Float</a>, pHueWay:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Sets the color's hue, saturation and brightness by mixing two colors.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<ul>
+<li><b>pColor1</b>, <b>pColor2</b> - the two colors to mix</li>
+<li><b>pMix</b> - percentage of <b>pColor2</b> to apply in the mix, ranging 0 to 1</li>
+<li><b>pHueWay</b> - which way to rotate hue: 0 = shortest, +1 = positive, -1 = negative</li>
+<ul></ul>
+<ul></ul>
+</ul>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Color)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( pColor:<a href="Modules_mojo.color_Color.html">Color</a> )</pre>
+				<p>
+Sets the color by copying the components from the Color object you
+pass.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Int)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( pHex:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Sets the color to the hexadecimal color value
+you pass. E.g. <code>$ff0000</code> is red.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( pRed:<a href="Programming_Keywords_Int.html">Int</a>, pGrn:<a href="Programming_Keywords_Int.html">Int</a>, pBlu:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Sets the color to the rgb components you pass.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Int[])"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( pRgb:<a href="Programming_Keywords_Int.html">Int</a>[] )</pre>
+				<p>
+Sets the color to the rgb components contained
+in the 3-component Int array you pass.
+</p>
+<p>
+<b>note for mojo2:</b> Instead of Int, use Float ranging 0.0 to 1.0
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(String)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( pColorName:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Sets the color based on the <a href="Modules_mojo.colornames.html">color name</a> you pass. E.g. <code>"black"</code> is black.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetHsb(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetHsb</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( pHue:<a href="Programming_Keywords_Float.html">Float</a>, pSat:<a href="Programming_Keywords_Float.html">Float</a>, pBri:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the color to the <b>hue</b>, <b>saturation</b> and <b>brightness</b> values you pass. They
+range 0 to 360, 0 to 1 and 0 to 1 respectively.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetHsl(Float,Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetHsl</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( pHue:<a href="Programming_Keywords_Float.html">Float</a>, pSat:<a href="Programming_Keywords_Float.html">Float</a>, pLit:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Sets the color to the <b>hue</b>, <b>saturation</b> and <b>lightness</b> values you pass. They
+range 0 to 360, 0 to 1 and 0 to 1 respectively.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToInt()"></a>
+				<pre class="declaration">Method <strong>ToInt</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the color as one Int with the rgb components represented by the three
+least significant bytes. For a red color, the returned value will equal To
+<code>$ff0000</code>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

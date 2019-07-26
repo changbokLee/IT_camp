@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>Texture</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Texture</small></h1>
+
+
+	<p>
+		Textures contains image data for use by shaders when rendering.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Flags()">Flags</a><small> : Int ()</small></code></td>
+				<td>Get texture flags.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Format()">Format</a><small> : Int ()</small></code></td>
+				<td>Get texture format.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Height()">Height</a><small> : Int ()</small></code></td>
+				<td>Get texture height.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Width()">Width</a><small> : Int ()</small></code></td>
+				<td>Get texture width.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New(Int,Int,Int,Int)">New</a><small> ( width:Int, height:Int, format:Int, flags:Int )</small></code></td>
+				<td>The <b>width</b> and <b>height</b> are parameters are the size of the new texture.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#WritePixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])">WritePixels</a><small> : Void ( x:Int, y:Int, width:Int, height:Int, data:DataBuffer, dataOffset:Int=0, dataPitch:Int=0 )</small></code></td>
+				<td>Write pixel data to texture.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#BlackTexture()">BlackTexture</a><small> : Texture ()</small></code></td>
+				<td>Return a stock single texel black texture.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FlatTexture()">FlatTexture</a><small> : Texture ()</small></code></td>
+				<td>Return a stock single texel 'flat' texture for normal mapping.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Load(String,Int,Int)">Load</a><small> : Texture ( path:String, format:Int, flags:Int )</small></code></td>
+				<td>Load a texture from a file.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#WhiteTexture()">WhiteTexture</a><small> : Texture ()</small></code></td>
+				<td>Return a stock single texel white texture.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Textures contains image data for use by shaders when rendering. For more information, please see the <a href="Modules_mojo2.graphics_Shader.html">Shader</a> class.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Flags()"></a>
+				<pre class="declaration">Method <strong>Flags</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get texture flags.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Format()"></a>
+				<pre class="declaration">Method <strong>Format</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get texture format.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Height()"></a>
+				<pre class="declaration">Method <strong>Height</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get texture height.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Width()"></a>
+				<pre class="declaration">Method <strong>Width</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get texture width.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New(Int,Int,Int,Int)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, format:<a href="Programming_Keywords_Int.html">Int</a>, flags:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+The <b>width</b> and <b>height</b> are parameters are the size of the new texture.
+</p>
+<p>
+The <b>format</b> parameter must be 4.
+</p>
+<p>
+The <b>flags</b> parameter can be a bitwise combination of:
+</p>
+<table>
+<tr><th>@ Flags</th><th><b>Description</b></th></tr>
+<tr><td>Texture.Filter</td><td>The texture is filtered when magnified</td></tr>
+<tr><td>Texture.Mipmap</td><td>The texture is mipmapped when minified</td></tr>
+<tr><td>Texture.ClampS</td><td>Texture S coordinate is clamped</td></tr>
+<tr><td>Texture.ClampT</td><td>Texture T coordinate is clamped</td></tr>
+<tr><td>Texture.ClampST</td><td>Texture S and T coordinates are clamped.</td></tr>
+<tr><td>Texture.RenderTarget</td><td>The texture can rendered to using a #Canvas.</td></tr>
+<tr><td>Texture.Managed</td><td>Texture contents are preserved when graphics are lost</td></tr>
+</table>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="WritePixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])"></a>
+				<pre class="declaration">Method <strong>WritePixels</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, data:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, dataOffset:<a href="Programming_Keywords_Int.html">Int</a>=0, dataPitch:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Write pixel data to texture.
+</p>
+<p>
+Pixels should be in premultiplied alpha format. Use the <a href="Modules_mojo2.graphics_DrawList.html#PremultiplyArgb2Abgr(Int)">PremultiplyArgb2Abgr</a> function to premultiply a color and convert the byte format from argb (commonly used) to abgr (used internally).
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="BlackTexture()"></a>
+				<pre class="declaration">Function <strong>BlackTexture</strong> : <a href="Modules_mojo2.graphics_Texture.html">Texture</a> ()</pre>
+				<p>
+Return a stock single texel black texture.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FlatTexture()"></a>
+				<pre class="declaration">Function <strong>FlatTexture</strong> : <a href="Modules_mojo2.graphics_Texture.html">Texture</a> ()</pre>
+				<p>
+Return a stock single texel 'flat' texture for normal mapping.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Load(String,Int,Int)"></a>
+				<pre class="declaration">Function <strong>Load</strong> : <a href="Modules_mojo2.graphics_Texture.html">Texture</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, format:<a href="Programming_Keywords_Int.html">Int</a>, flags:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Load a texture from a file.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="WhiteTexture()"></a>
+				<pre class="declaration">Function <strong>WhiteTexture</strong> : <a href="Modules_mojo2.graphics_Texture.html">Texture</a> ()</pre>
+				<p>
+Return a stock single texel white texture.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+Import mojo
+Import mojo.graphics
+
+
+Class Image Extends My App
+	Method CreateImage()
+	 	Drawimage()
+	
+		End
+		
+Function Main()
+	New MyApp
+	End

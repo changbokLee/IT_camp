@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.filestream.html'>brl.filestream</a>
+
+			<span>FileStream</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>FileStream</small></h1>
+
+
+	<p>
+		A filestream allows you to read/write data from/to a file.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extends</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html">Stream</a><small></small></code></td>
+				<td>Streams are used to read or write data in a sequential manner.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Open(String,String)">Open</a><small> : FileStream ( path:String, mode:String )</small></code></td>
+				<td>Opens a new filestream.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Inherited Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Eof()">Eof</a><small> : Int ()</small></code></td>
+				<td>Returns 1 if end-of-file has been reached, -1 if an IO error has occurred or 0 if the stream can be read.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Length()">Length</a><small> : Int ()</small></code></td>
+				<td>Returns the stream length if the stream is seekable, else 0.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Position()">Position</a><small> : Int ()</small></code></td>
+				<td>Returns the read/write position within the stream if the stream is seekable, else 0.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Inherited Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Close()">Close</a><small> : Void ()</small></code></td>
+				<td>Closes the stream and released any OS resources in use.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Read(DataBuffer,Int,Int)">Read</a><small> : Int ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Reads <b>count</b> bytes from the stream into <b>databuffer</b>, starting at address <b>offset</b> within the databuffer.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadAll()">ReadAll</a><small> : DataBuffer ()</small></code></td>
+				<td>Reads all remaining bytes from the stream into a databuffer.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadAll(DataBuffer,Int,Int)">ReadAll</a><small> : Void ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Reads <b>count</b> bytes from the stream into <b>databuffer</b>, starting at address <b>offset</b> within the databuffer.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadByte()">ReadByte</a><small> : Int ()</small></code></td>
+				<td>Reads an 8 bit byte from the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadFloat()">ReadFloat</a><small> : Float ()</small></code></td>
+				<td>Reads a 32 bit float value from the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadInt()">ReadInt</a><small> : Int ()</small></code></td>
+				<td>Reads a 32 bit int value from the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadShort()">ReadShort</a><small> : Int ()</small></code></td>
+				<td>Reads a 16 bit int value from the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadString(Int,[String])">ReadString</a><small> : String ( count:Int, encoding:String="utf8" )</small></code></td>
+				<td>Reads <b>count</b> bytes from the stream and converts them to a string using the given <b>encoding</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#ReadString([String])">ReadString</a><small> : String ( encoding:String="utf8" )</small></code></td>
+				<td>Reads all bytes from the stream until end-of-file and converts them to a string using the given <b>encoding</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Seek(Int)">Seek</a><small> : Int ( position:Int )</small></code></td>
+				<td>If the stream is seekable, adjusts the read/write position within the stream and returns the new read/write position.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#Write(DataBuffer,Int,Int)">Write</a><small> : Int ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Writes <b>count</b> bytes from <b>databuffer</b> to the stream, starting at address <b>offset</b> within the databuffer.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteAll(DataBuffer,Int,Int)">WriteAll</a><small> : Void ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Writes <b>count</b> bytes from <b>databuffer</b> to the stream, starting at address <b>offset</b> within the databuffer.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteByte(Int)">WriteByte</a><small> : Void ( value:Int )</small></code></td>
+				<td>Writes an 8 bit byte to the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteFloat(Float)">WriteFloat</a><small> : Void ( value:Float )</small></code></td>
+				<td>Writes a 32 bit float value to the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteInt(Int)">WriteInt</a><small> : Void ( value:Int )</small></code></td>
+				<td>Writes a 32 bit int value to the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteShort(Int)">WriteShort</a><small> : Void ( value:Int )</small></code></td>
+				<td>Write a 16 bit int value to the stream.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="Modules_brl.stream_Stream.html#WriteString(String,[String])">WriteString</a><small> : Void ( value:String, encoding:String="utf8" )</small></code></td>
+				<td>Writes a string to the stream using the given <b>encoding</b>.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+A filestream allows you to read/write data from/to a file.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Open(String,String)"></a>
+				<pre class="declaration">Function <strong>Open</strong> : <a href="Modules_brl.filestream_FileStream.html">FileStream</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, mode:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Opens a new filestream. The <b>mode</b> parameter should be one of the following:
+</p>
+<table>
+<tr><th>Mode</th><th>Description</th></tr>
+<tr><td>"r"</td><td>Open a filestream for reading.</td></tr>
+<tr><td>"w"</td><td>Open a filestream for writing. If the file does not already exist, it will be created. If the file already exists, it will be emptied.</td></tr>
+<tr><td>"u"</td><td>Open a filestream for read/write updating. If the file does not already exist, it will be created.</td></tr>
+<tr><td>"a"</td><td>Open a filestream for read/write appending. This is the same as opening a filestream for updating and seeking to the end.</td></tr>
+</table>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="Programming_Resource paths.html">Resource paths</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

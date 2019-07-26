@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo2.graphics.html'>mojo2.graphics</a>
+
+			<span>Image</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Image</small></h1>
+
+
+	<p>
+		An image is a rectangular area of pixels within a material, that can be drawn using one of the <a href="Modules_mojo2.graphics_DrawList.html#DrawImage(Image,Float,Float,Float)">DrawList.DrawImage</a> methods.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#HandleX()">HandleX</a><small> : Float ()</small></code></td>
+				<td>Get image x handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#HandleY()">HandleY</a><small> : Float ()</small></code></td>
+				<td>Get image y handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Height()">Height</a><small> : Int ()</small></code></td>
+				<td>Get image height.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Loading()">Loading</a><small> : Bool ()</small></code></td>
+				<td>Returns true if image is currently busy loading.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ShadowCaster()">ShadowCaster</a><small> : ShadowCaster ()</small></code></td>
+				<td>Get attached shadow caster.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Width()">Width</a><small> : Int ()</small></code></td>
+				<td>Get image width.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#X0()">X0</a><small> : Float ()</small></code></td>
+				<td>Get x coordinate of the left edge of the image rect.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#X1()">X1</a><small> : Float ()</small></code></td>
+				<td>Get x coordinate of the right edge of the image rect.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Y0()">Y0</a><small> : Float ()</small></code></td>
+				<td>Get y coordinate of the top edge of the image rect.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Y1()">Y1</a><small> : Float ()</small></code></td>
+				<td>Get y coordinate of the bottom edge of the image rect.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New(Image,Int,Int,Int,Int,[Float],[Float])">New</a><small> ( sourceImage:Image, sourceX:Int, sourceY:Int, sourceWidth:Int, sourceHeight:Int, xhandle:Float=.5, yhandle:Float=.5 )</small></code></td>
+				<td>Create a new image from a region within an existing image.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Int,Int,[Float],[Float],[Int])">New</a><small> ( width:Int, height:Int, xhandle:Float=.5, yhandle:Float=.5, flags:Int=Image.Filter )</small></code></td>
+				<td>Create a new image for rendering.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Material,Int,Int,Int,Int,[Float],[Float])">New</a><small> ( material:Material, x:Int, y:Int, width:Int, height:Int, xhandle:Float=.5, yhandle:Float=.5 )</small></code></td>
+				<td>Create a new image representing a rect within a material.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(Material,[Float],[Float])">New</a><small> ( material:Material, xhandle:Float=.5, yhandle:Float=.5 )</small></code></td>
+				<td>Create a new image from a material.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Discard()">Discard</a><small> : Void ()</small></code></td>
+				<td>Discard any internal resources such as videomem used by the image.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetHandle(Float,Float)">SetHandle</a><small> : Void ( xhandle:Float, yhandle:Float )</small></code></td>
+				<td>Set image handle.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetShadowCaster(ShadowCaster)">SetShadowCaster</a><small> : Void ( shadowCaster:ShadowCaster )</small></code></td>
+				<td>Set image shadow caster.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#WritePixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])">WritePixels</a><small> : Void ( x:Int, y:Int, width:Int, height:Int, data:DataBuffer, dataOffset:Int=0, dataPitch:Int=0 )</small></code></td>
+				<td>Write pixel data to image.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#FlagsMask()">FlagsMask</a><small> : Int ()</small></code></td>
+				<td>Returns the current flags mask.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ImagesLoading()">ImagesLoading</a><small> : Bool ()</small></code></td>
+				<td>Returns true if any images are currently busy loading.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Load(String,[Float],[Float],[Int],[Shader])">Load</a><small> : Image ( path:String, xhandle:Float=.5, yhandle:Float=.5, flags:Int=Image.Filter|Image.Mipmap, shader:Shader=Null )</small></code></td>
+				<td>Load an image from <b>path</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadFrames(String,Int,Bool,[Float],[Float],[Int],[Shader])">LoadFrames</a><small> : Image[] ( path:String, numFrames:Int, padded:Bool, xhandle:Float=.5, yhandle:Float=.5, flags:Int=Image.Filter|Image.Mipmap, shader:Shader=Null )</small></code></td>
+				<td>Load image frames from <b>path</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#LoadFrames(String,Int,Int,[Bool],[Float],[Float],[Int],[Shader])">LoadFrames</a><small> : Image[] ( path:String, cellWidth:Int, cellHeight:Int, padded:Bool=False, xhandle:Float=.5, yhandle:Float=.5, flags:Int=Image.Filter|Image.Mipmap, shader:Shader=Null )</small></code></td>
+				<td>Load image frames from <b>path</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetFlagsMask(Int)">SetFlagsMask</a><small> : Void ( mask:Int )</small></code></td>
+				<td>Sets an internal 'flags mask' that can be used to filter out specific image flags when creating images.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+An image is a rectangular area of pixels within a material, that can be drawn using one of the <a href="Modules_mojo2.graphics_DrawList.html#DrawImage(Image,Float,Float,Float)">DrawList.DrawImage</a> methods.
+</p>
+<p>
+You can create a new image using one of the <a href="#New(Image,Int,Int,Int,Int,[Float],[Float])">Image.New</a> methods, or load an image from file using <a href="#Load(String,[Float],[Float],[Int],[Shader])">Image.Load</a>.
+</p>
+<p>
+An image also has a handle, an offset within the image that represents it's origin whan it is drawn. Image handles are specified in fractional values, where 0,0 is the top-left of an image, 1,1 is the bottom-right and .5,.5 is the center.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="HandleX()"></a>
+				<pre class="declaration">Method <strong>HandleX</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get image x handle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="HandleY()"></a>
+				<pre class="declaration">Method <strong>HandleY</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get image y handle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Height()"></a>
+				<pre class="declaration">Method <strong>Height</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get image height.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Loading()"></a>
+				<pre class="declaration">Method <strong>Loading</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> () Property</pre>
+				<p>
+Returns true if image is currently busy loading.
+</p>
+<p>
+On targets other than html5, this will always return false.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ShadowCaster()"></a>
+				<pre class="declaration">Method <strong>ShadowCaster</strong> : <a href="#ShadowCaster()">ShadowCaster</a> () Property</pre>
+				<p>
+Get attached shadow caster.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Width()"></a>
+				<pre class="declaration">Method <strong>Width</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Get image width.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="X0()"></a>
+				<pre class="declaration">Method <strong>X0</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get x coordinate of the left edge of the image rect.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="X1()"></a>
+				<pre class="declaration">Method <strong>X1</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get x coordinate of the right edge of the image rect.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Y0()"></a>
+				<pre class="declaration">Method <strong>Y0</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get y coordinate of the top edge of the image rect.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Y1()"></a>
+				<pre class="declaration">Method <strong>Y1</strong> : <a href="Programming_Keywords_Float.html">Float</a> () Property</pre>
+				<p>
+Get y coordinate of the bottom edge of the image rect.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New(Image,Int,Int,Int,Int,[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( sourceImage:<a href="Modules_mojo2.graphics_Image.html">Image</a>, sourceX:<a href="Programming_Keywords_Int.html">Int</a>, sourceY:<a href="Programming_Keywords_Int.html">Int</a>, sourceWidth:<a href="Programming_Keywords_Int.html">Int</a>, sourceHeight:<a href="Programming_Keywords_Int.html">Int</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5 )</pre>
+				<p>
+Create a new image from a region within an existing image.
+</p>
+<p>
+The new image shares the same material and image flags as <b>sourceImage</b>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Int,Int,[Float],[Float],[Int])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.Filter )</pre>
+				<p>
+Create a new image for rendering. The new image can be used as a render target for a <a href="Modules_mojo2.graphics_Canvas.html">Canvas</a>.
+</p>
+<p>
+The <b>flags</b> parameter can be any bitwise combination of:
+</p>
+<table>
+<tr><th><b>Flags</b></th><th><b>Description</b></th></tr>
+<tr><td>Image.Filter</td><td>The image is filtered</td></tr>
+<tr><td>Image.Mipmap</td><td>The image is mipmapped</td></tr>
+<tr><td>Image.Managed</td><td>The image is managed</td></tr>
+</table>
+<p>
+The Image.Managed flag should be used if you want mojo2 to preserve the image contents when the graphics mode changes. This is not necessary if the image is being re-rendered every frame. Image.Managed consumes more memory, and slows down image rendering somewhat so should be avoided if possible.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Material,Int,Int,Int,Int,[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( material:<a href="Modules_mojo2.graphics_Material.html">Material</a>, x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5 )</pre>
+				<p>
+Create a new image representing a rect within a material.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(Material,[Float],[Float])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( material:<a href="Modules_mojo2.graphics_Material.html">Material</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5 )</pre>
+				<p>
+Create a new image from a material.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Discard()"></a>
+				<pre class="declaration">Method <strong>Discard</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Discard any internal resources such as videomem used by the image.
+</p>
+<p>
+ 
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetHandle(Float,Float)"></a>
+				<pre class="declaration">Method <strong>SetHandle</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( xhandle:<a href="Programming_Keywords_Float.html">Float</a>, yhandle:<a href="Programming_Keywords_Float.html">Float</a> )</pre>
+				<p>
+Set image handle.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetShadowCaster(ShadowCaster)"></a>
+				<pre class="declaration">Method <strong>SetShadowCaster</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( shadowCaster:<a href="#ShadowCaster()">ShadowCaster</a> )</pre>
+				<p>
+Set image shadow caster.
+</p>
+<p>
+Attaching a shadow caster to an image will cause the shadow caster to be automatically added to the drawlist whenever the image is drawn.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="WritePixels(Int,Int,Int,Int,DataBuffer,[Int],[Int])"></a>
+				<pre class="declaration">Method <strong>WritePixels</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( x:<a href="Programming_Keywords_Int.html">Int</a>, y:<a href="Programming_Keywords_Int.html">Int</a>, width:<a href="Programming_Keywords_Int.html">Int</a>, height:<a href="Programming_Keywords_Int.html">Int</a>, data:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, dataOffset:<a href="Programming_Keywords_Int.html">Int</a>=0, dataPitch:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Write pixel data to image.
+</p>
+<p>
+Pixels should be in premultiplied alpha format.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="FlagsMask()"></a>
+				<pre class="declaration">Function <strong>FlagsMask</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the current flags mask.
+</p>
+<p>
+See also:
+</p>
+<p>
+SetFlagsMask
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ImagesLoading()"></a>
+				<pre class="declaration">Function <strong>ImagesLoading</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ()</pre>
+				<p>
+Returns true if any images are currently busy loading.
+</p>
+<p>
+On targets other than html5, this will always return false.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Load(String,[Float],[Float],[Int],[Shader])"></a>
+				<pre class="declaration">Function <strong>Load</strong> : <a href="Modules_mojo2.graphics_Image.html">Image</a> ( path:<a href="Modules_cerberus.lang_String.html">String</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.Filter|Image.Mipmap, shader:<a href="Modules_mojo2.graphics_Shader.html">Shader</a>=Null )</pre>
+				<p>
+Load an image from <b>path</b>.
+</p>
+<p>
+The <b>flags</b> parameter can be a bitwise combination of:
+</p>
+<table>
+<tr><th><b>Flags</b></th><th><b>Description</b></th></tr>
+<tr><td>Image.Filter</td><td>The image is filtered</td></tr>
+<tr><td>Image.Mipmap</td><td>The image is mipmapped</td></tr>
+</table>
+<p>
+If <b>shader</b> is null, the default shader is used.
+</p>
+<p>
+Loaded images should not be used as render targets.
+</p>
+<p>
+See also: <a href="Modules_mojo2.graphics_Shader.html#DefaultShader()">Shader.DefaultShader</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadFrames(String,Int,Bool,[Float],[Float],[Int],[Shader])"></a>
+				<pre class="declaration">Function <strong>LoadFrames</strong> : <a href="Modules_mojo2.graphics_Image.html">Image</a>[] ( path:<a href="Modules_cerberus.lang_String.html">String</a>, numFrames:<a href="Programming_Keywords_Int.html">Int</a>, padded:<a href="Programming_Keywords_Bool.html">Bool</a>, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.Filter|Image.Mipmap, shader:<a href="Modules_mojo2.graphics_Shader.html">Shader</a>=Null )</pre>
+				<p>
+Load image frames from <b>path</b>.
+</p>
+<p>
+Image frames should be laid out horizontally within the source image.
+</p>
+<p>
+If <b>padded</b> is true, then each frame is assumed to have a transparent one pixel padding border around it.
+</p>
+<p>
+The <b>flags</b> parameter can be a bitwise combination of:
+</p>
+<table>
+<tr><th><b>Flags</b></th><th><b>Description</b></th></tr>
+<tr><td>Image.Filter</td><td>The image is filtered</td></tr>
+<tr><td>Image.Mipmap</td><td>The image is mipmapped</td></tr>
+<tr><td>Image.Managed</td><td>The image is managed</td></tr>
+</table>
+<p>
+If <b>shader</b> is null, the default shader is used.
+</p>
+<p>
+Loaded images should not be used as render targets.
+</p>
+<p>
+See also: <a href="Modules_mojo2.graphics_Shader.html#DefaultShader()">Shader.DefaultShader</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="LoadFrames(String,Int,Int,[Bool],[Float],[Float],[Int],[Shader])"></a>
+				<pre class="declaration">Function <strong>LoadFrames</strong> : <a href="Modules_mojo2.graphics_Image.html">Image</a>[] ( path:<a href="Modules_cerberus.lang_String.html">String</a>, cellWidth:<a href="Programming_Keywords_Int.html">Int</a>, cellHeight:<a href="Programming_Keywords_Int.html">Int</a>, padded:<a href="Programming_Keywords_Bool.html">Bool</a>=False, xhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, yhandle:<a href="Programming_Keywords_Float.html">Float</a>=.5, flags:<a href="Programming_Keywords_Int.html">Int</a>=Image.Filter|Image.Mipmap, shader:<a href="Modules_mojo2.graphics_Shader.html">Shader</a>=Null )</pre>
+				<p>
+Load image frames from <b>path</b>.
+</p>
+<p>
+Image frames should be laid out in a grid. You determine the size of one grid cell with <b>cellWidth</b> and <b>cellWidth</b>. 
+</p>
+<p>
+If <b>padded</b> is true, then each frame is assumed to have a transparent one pixel padding border around it.
+</p>
+<p>
+The <b>flags</b> parameter can be a bitwise combination of:
+</p>
+<table>
+<tr><th><b>Flags</b></th><th><b>Description</b></th></tr>
+<tr><td>Image.Filter</td><td>The image is filtered</td></tr>
+<tr><td>Image.Mipmap</td><td>The image is mipmapped</td></tr>
+<tr><td>Image.Managed</td><td>The image is managed</td></tr>
+</table>
+<p>
+If <b>shader</b> is null, the default shader is used.
+</p>
+<p>
+Loaded images should not be used as render targets.
+</p>
+<p>
+See also: <a href="Modules_mojo2.graphics_Shader.html#DefaultShader()">Shader.DefaultShader</a>
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetFlagsMask(Int)"></a>
+				<pre class="declaration">Function <strong>SetFlagsMask</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( mask:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Sets an internal 'flags mask' that can be used to filter out specific image flags when creating images. The flags mask value is 'anded' with any flags values passed to Image.New, Image.Load or Image.LoadFrames.
+</p>
+<p>
+For example, by setting the flags mask to just Image.Managed, the Image.Filter and Image.Mipmap flags will be effectively disabled for all images - useful for pixel art or retro style graphics.
+</p>
+<p>
+The default flags mask is Image.Filter|Image.Mipmap|Image.Managed, which effectively disables the filter.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

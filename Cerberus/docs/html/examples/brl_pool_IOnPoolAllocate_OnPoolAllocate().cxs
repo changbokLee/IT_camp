@@ -1,0 +1,15 @@
+
+Import brl.pool
+
+Class Actor Implements IOnPoolAllocate
+	Method OnPoolAllocate:Void()
+		Print( "A new actor appeared on the stage." )
+	End
+End
+
+Function Main:Int()
+	Local actorPool := New Pool<Actor>
+	
+	' create a new actor object
+	Local actor := actorPool.Allocate()
+End

@@ -1,0 +1,146 @@
+
+# Module brl.admob
+
+The admob module provides simple support for the Google Admob advertising system including interstitial ads, which allows you to add advertising to your games.
+
+Please see the [[Admob]] class for more information.
+
+(Note: Admob ads are only currently available on the android and ios targets.)
+
+
+# Class brl.admob.Admob
+
+The admob class provides simple support for the Google Admob advertising system, which allows you to add advertising to your games.
+
+To use Admob advertising in your game:
+
++ Create an Admob account and add a new site/app for your game. You can create an Admob account at http://www.admob.com
+
++ Add the app config setting ADMOB_PUBLISHER_ID to your game. This must be set to your app's Admob 'Publisher ID'. See [[App config settings]].
+
++ Import the brl.admob module into your game and use the Admob class to enable and disable ads as required.
+
+Example:
+
+#If TARGET<>"android" And TARGET<>"ios"
+#Error "Admob is only supported on Android and iOS targets"
+#End
+
+#ADMOB_PUBLISHER_ID="ca-app-pub-3940256099942544/6300978111"    'replace with id from your admob account
+#ADMOB_ANDROID_TEST_DEVICE1="TEST_EMULATOR"
+#ADMOB_ANDROID_TEST_DEVICE2="TEST_EMULATOR"
+
+Import mojo
+Import brl.admob
+
+Class MyApp Extends App
+
+  Field admob:Admob
+  Field interstitialAdmob:AdmobInterstitial
+  Field layout:=1
+  Field state:=1
+
+  Method OnCreate()
+    admob=Admob.GetAdmob()
+    admob.ShowAdView 1,layout
+    interstitialAdmob=AdmobInterstitial.GetAdmobInterstitial("ca-app-pub-3940256099942544/1033173712")
+    SetUpdateRate 60
+  End
+
+  Method OnUpdate()
+    If MouseHit( 0 )
+      If state = 3
+        admob.HideAdView
+        state+=1
+      Else If state = 1
+        layout+=1
+        If layout=7 layout=1
+        admob.ShowAdView 1,layout
+        state+=1
+      Else If state = 2
+        admob.HideAdView
+        interstitialAdmob.ShowAd
+        state+=1
+      End
+    End
+  End
+
+  Method OnRender()
+    Local en:="disabled"
+    If state=2 en="enabled"
+    Cls
+    PushMatrix
+      Scale 2,2
+      DrawText "Click to toggle ads! ads are currently "+en,DeviceWidth/4,DeviceHeight/4,.5,.5
+    PopMatrix
+  End
+
+End
+
+Function Main()
+  New MyApp
+End
+
+
+# Function GetAdmob:Admob()
+
+Get the global Admob object.
+
+
+# Method ShowAdView:Void( style:Int=1,layout:Int=2 )
+
+Shows the ad view and enables ads. The @style and @layout parameters should be one of the following:
+
+| Style	| Meaning
+| 1		| Standard banner
+| 2		| Smart banner portrait
+| 3		| Smart banner landscape
+
+
+| Layout | Meaning
+| 1      | Top left
+| 2      | Top center
+| 3      | Top right
+| 4      | Bottom left
+| 5      | Bottom center
+| 6      | Bottom right
+
+Links: [[HideAdView]]
+
+
+# Method HideAdView:Void()
+
+Hides the ad view and disables ads
+
+Links: [[ShowAdView]]
+
+
+# Method AdViewWidth:Int()
+
+Returns the width of the ad view, or 0 if the ad view is hidden.
+
+Links: [[AdViewHeight]]
+
+
+# Method AdViewHeight:Int()
+
+Returns the height of the ad view, or 0 if the ad view is hidden.
+
+Links: [[AdViewWidth]]
+
+
+# Class brl.admob.AdmobInterstitial
+
+The AdmobInterstitial class provides simple support for  Interstitial advertising with the Google Admob advertising system.
+
+
+# Function GetAdmobInterstitial:AdmobInterstitial(adUnitId:String)
+
+Get the global AdmobInterstitial object. The @adUnitId parameter needs your Admob Interstitial Publisher Id.
+
+Get the global Admob object.
+
+
+# Method ShowAdViewInterstitial:Void()
+
+Shows the interstitial ad view.

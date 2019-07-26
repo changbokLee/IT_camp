@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_cerberus.stack.html'>cerberus.stack</a>
+
+			<span>Stack</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Stack&lt;T&gt;</small></h1>
+
+
+	<p>
+		Stacks provide 2 basic operations - push and pop.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Extended By</th><th></th></tr>
+		<tr>
+			<td colspan="2">
+				
+					<code><a href="Modules_cerberus.stack_FloatStack.html">FloatStack</a></code> , 
+				
+					<code><a href="Modules_cerberus.stack_IntStack.html">IntStack</a></code> , 
+				
+					<code><a href="Modules_cerberus.stack_StringStack.html">StringStack</a></code>
+					
+			</td>
+		</tr>
+	</table>
+	<span class="note">Please note that only documented classes are listed here, there might be undocumented classes that extend this one.</span>
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#IsEmpty()">IsEmpty</a><small> : Bool ()</small></code></td>
+				<td>Return True if the stack is empty, ie: it contains no items, else False.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Length()">Length</a><small> : Int ()</small></code></td>
+				<td>Returns the number of items in the stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Length(Int)">Length</a><small> : Void ( length:Int )</small></code></td>
+				<td>Sets the number of items in the stack.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Creates a new empty Stack object.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(T[])">New</a><small> ( data:T[] )</small></code></td>
+				<td>Creates a new Stack object initialized with an array of values.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Backwards()">Backwards</a><small> : Object ()</small></code></td>
+				<td>Returns an object that may be used to iterate backwards through the stack with a For EachIn loop.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Clear()">Clear</a><small> : Void ()</small></code></td>
+				<td>Removes all items from the stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Compare(T,T)">Compare</a><small> : Int ( lhs:T, rhs:T )</small></code></td>
+				<td>This method is used by the <a href="#Sort([Int])">Sort</a> method to compare elements.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Contains(T)">Contains</a><small> : Bool ( value:T )</small></code></td>
+				<td>Returns true if <b>value</b> is contained in the stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Data()">Data</a><small> : T[] ()</small></code></td>
+				<td>Provides access to the underlying array used to store stack data.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Equals(T,T)">Equals</a><small> : Bool ( lhs:T, rhs:T )</small></code></td>
+				<td>This method is used by the <a href="#Contains(T)">Contains</a> and <a href="#RemoveEach(T)">RemoveEach</a> methods to determine element equality.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Find(T,[Int])">Find</a><small> : Int ( value:T, start:Int=0 )</small></code></td>
+				<td>Finds the index of the first element in the statch equal to <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FindLast(T)">FindLast</a><small> : Int ( value:T )</small></code></td>
+				<td>Finds the index of the last element in the statch equal to <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FindLast(T,Int)">FindLast</a><small> : Int ( value:T, start:Int )</small></code></td>
+				<td>Finds the index of the last element in the statch equal to <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Get(Int)">Get</a><small> : T ( index:Int )</small></code></td>
+				<td>Returns the element at the specified index.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Insert(Int,T)">Insert</a><small> : Void ( index:Int, value:T )</small></code></td>
+				<td>Inserts value into the stack, shifting existing elements up if necessary.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ObjectEnumerator()">ObjectEnumerator</a><small> : Object ()</small></code></td>
+				<td>Returns an enumerator object suitable for use with For EachIn loops.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Pop()">Pop</a><small> : T ()</small></code></td>
+				<td>Removes the item at the top of the stack and returns it.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Push(T)">Push</a><small> : Void ( value:T )</small></code></td>
+				<td>Pushes a value on the top of the stack.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Push(T[])">Push</a><small> : Void ( values:T[] )</small></code></td>
+				<td>Pushes an array of values on the top of the stack starting with element 0.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Remove(Int)">Remove</a><small> : Void ( index:Int )</small></code></td>
+				<td>Removes the value at the specified index from the stack, shifting existing elements down if necessary.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RemoveEach(T)">RemoveEach</a><small> : Void ( value:T )</small></code></td>
+				<td>Finds and removes all elements in the stack equal to value, shifting existing elements down if necessary.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RemoveFirst(T)">RemoveFirst</a><small> : Void ( value:T )</small></code></td>
+				<td>Finds and removes the first element in the stack equal to <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#RemoveLast(T)">RemoveLast</a><small> : Void ( value:T )</small></code></td>
+				<td>Finds and removes the last element in the stack equal to <b>value</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Set(Int,T)">Set</a><small> : Void ( index:Int, value:T )</small></code></td>
+				<td>Overwrites the existing value at index with value.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Sort([Int])">Sort</a><small> : Int ( ascending:Int=True )</small></code></td>
+				<td>Sorts the stack into ascending or descending order.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToArray()">ToArray</a><small> : T[] ()</small></code></td>
+				<td>Converts the stack to an array of values.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Top()">Top</a><small> : T ()</small></code></td>
+				<td>Returns the item at the top of the stack.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+Stacks provide 2 basic operations - push and pop. Pushing an item on a stack adds the item to the top of the stack, while popping an item removes the item from the top of the stack and returns it.
+</p>
+<p>
+Stacks may also be efficiently indexed using an integer index, and elements may be inserted and removed. This allows stacks to also be used as a dynamic array (an array where the length can change), much like a C++ vector.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="IsEmpty()"></a>
+				<pre class="declaration">Method <strong>IsEmpty</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> () Property</pre>
+				<p>
+Return True if the stack is empty, ie: it contains no items, else False.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Length()"></a>
+				<pre class="declaration">Method <strong>Length</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Returns the number of items in the stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Length(Int)"></a>
+				<pre class="declaration">Method <strong>Length</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( length:<a href="Programming_Keywords_Int.html">Int</a> ) Property</pre>
+				<p>
+Sets the number of items in the stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Creates a new empty Stack object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(T[])"></a>
+				<pre class="declaration">Method <strong>New</strong> ( data:T[] )</pre>
+				<p>
+Creates a new Stack object initialized with an array of values.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+values - an array of values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Backwards()"></a>
+				<pre class="declaration">Method <strong>Backwards</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Returns an object that may be used to iterate backwards through the stack with a For EachIn loop.
+</p>
+<p>
+Note that this does not actually reverse or modify the stack in any way.
+</p>
+				
+				
+				
+				
+					<span class="detail example"><b><a href="examples/cerberus_stack_Stack_Backwards().cxs">Example</a></b></span>
+					<div class="pretty">
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<br/>
+<code class="d">	</code><code class="k">Local </code><code class="i">stk</code><code class="d">:=</code><code class="k">New </code><code class="i">StringStack</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"Hello"</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"there"</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"this"</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"is"</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"a"</code><br/>
+<code class="d">	</code><code class="i">stk</code><code class="d">.</code><code class="i">Push </code><code class="l">"test"</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"Fowards:"</code><br/>
+<code class="d">	</code><code class="k">For Local </code><code class="i">t</code><code class="d">$=</code><code class="k">EachIn </code><code class="i">stk</code><br/>
+<code class="d">		</code><code class="i">Print t</code><br/>
+<code class="d">	</code><code class="k">Next</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">""</code><br/>
+<code class="d">	</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"Backwards:"</code><br/>
+<code class="d">	</code><code class="k">For Local </code><code class="i">t</code><code class="d">$=</code><code class="k">Eachin </code><code class="i">stk</code><code class="d">.</code><code class="i">Backwards</code><code class="d">()</code><br/>
+<code class="d">		</code><code class="i">Print t</code><br/>
+<code class="d">	</code><code class="k">Next</code><br/>
+<br/>
+<code class="k">End</code><br/>
+</div>
+				
+			</article>
+		
+			<article>
+				<a name="Clear()"></a>
+				<pre class="declaration">Method <strong>Clear</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Removes all items from the stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Compare(T,T)"></a>
+				<pre class="declaration">Method <strong>Compare</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( lhs:T, rhs:T )</pre>
+				<p>
+This method is used by the <a href="#Sort([Int])">Sort</a> method to compare elements.
+</p>
+<p>
+By default, this methods simply generates a runtime error. Extending classes should implement this method if they want to support <a href="#Sort([Int])">Sort</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Contains(T)"></a>
+				<pre class="declaration">Method <strong>Contains</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( value:T )</pre>
+				<p>
+Returns true if <b>value</b> is contained in the stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Data()"></a>
+				<pre class="declaration">Method <strong>Data</strong> : T[] ()</pre>
+				<p>
+Provides access to the underlying array used to store stack data.
+</p>
+<p>
+Note: The length of this array may be greater than the actual length of the stack.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Equals(T,T)"></a>
+				<pre class="declaration">Method <strong>Equals</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( lhs:T, rhs:T )</pre>
+				<p>
+This method is used by the <a href="#Contains(T)">Contains</a> and <a href="#RemoveEach(T)">RemoveEach</a> methods to determine element equality.
+</p>
+<p>
+By default, this method compares <b>lhs</b> and <b>rhs</b> using the '=' operator. Extending classes may override this method to provide their own equality test.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Find(T,[Int])"></a>
+				<pre class="declaration">Method <strong>Find</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( value:T, start:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Finds the index of the first element in the statch equal to <b>value</b>. The stack is searched starting at index <b>start</b>.
+</p>
+<p>
+If not matching element is found, -1 is returned.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FindLast(T)"></a>
+				<pre class="declaration">Method <strong>FindLast</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( value:T )</pre>
+				<p>
+Finds the index of the last element in the statch equal to <b>value</b>.
+</p>
+<p>
+If not matching element is found, -1 is returned.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FindLast(T,Int)"></a>
+				<pre class="declaration">Method <strong>FindLast</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( value:T, start:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Finds the index of the last element in the statch equal to <b>value</b>. The stack is searched starting at index <b>start</b>.
+</p>
+<p>
+If not matching element is found, -1 is returned.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Get(Int)"></a>
+				<pre class="declaration">Method <strong>Get</strong> : T ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the element at the specified index.
+</p>
+<p>
+An index of 0 represents the bottom of the stack, and an index of Length-1 represents the top.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+index - valid integer index. Must be >=0 and <length.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#Set(Int,T)">Set</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Insert(Int,T)"></a>
+				<pre class="declaration">Method <strong>Insert</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:T )</pre>
+				<p>
+Inserts value into the stack, shifting existing elements up if necessary.
+</p>
+<p>
+This will increase the length of the stack by 1.
+</p>
+<p>
+An index of 0 represents the bottom of the stack, and an index of length-1 represents the top.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+index - valid integer index. Must be >=0 and <length.
+</p>
+<p>
+value - value to insert.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ObjectEnumerator()"></a>
+				<pre class="declaration">Method <strong>ObjectEnumerator</strong> : <a href="Modules_cerberus.lang_Object.html">Object</a> ()</pre>
+				<p>
+Returns an enumerator object suitable for use with For EachIn loops.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Pop()"></a>
+				<pre class="declaration">Method <strong>Pop</strong> : T ()</pre>
+				<p>
+Removes the item at the top of the stack and returns it.
+</p>
+<p>
+This will decrease the length of the stack by 1.
+</p>
+<p>
+If the stack is empty, the behaviour of Pop is undefined.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Push(T)"></a>
+				<pre class="declaration">Method <strong>Push</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( value:T )</pre>
+				<p>
+Pushes a value on the top of the stack.
+</p>
+<p>
+This will increase the length of the stack by 1.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>value</b> - value to push.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Push(T[])"></a>
+				<pre class="declaration">Method <strong>Push</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( values:T[] )</pre>
+				<p>
+Pushes an array of values on the top of the stack starting with element 0.
+</p>
+<p>
+This will increase the length of the stack by the length of the array.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>values</b> - values to push.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Remove(Int)"></a>
+				<pre class="declaration">Method <strong>Remove</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Removes the value at the specified index from the stack, shifting existing elements down if necessary.
+</p>
+<p>
+This will decrease the length of the stack by 1.
+</p>
+<p>
+An index of 0 represents the bottom of the stack, and an index of length-1 represents the top.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+index - valid integer index. Must be>=0 and <length.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RemoveEach(T)"></a>
+				<pre class="declaration">Method <strong>RemoveEach</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( value:T )</pre>
+				<p>
+Finds and removes all elements in the stack equal to value, shifting existing elements down if necessary.
+</p>
+<p>
+This will decrease the length of the stack by the number of occurances of value in the stack.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+value - value to remove.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RemoveFirst(T)"></a>
+				<pre class="declaration">Method <strong>RemoveFirst</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( value:T )</pre>
+				<p>
+Finds and removes the first element in the stack equal to <b>value</b>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="RemoveLast(T)"></a>
+				<pre class="declaration">Method <strong>RemoveLast</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( value:T )</pre>
+				<p>
+Finds and removes the last element in the stack equal to <b>value</b>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Set(Int,T)"></a>
+				<pre class="declaration">Method <strong>Set</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( index:<a href="Programming_Keywords_Int.html">Int</a>, value:T )</pre>
+				<p>
+Overwrites the existing value at index with value.
+</p>
+<p>
+An index of 0 represents the bottom of the stack, and an index of stack length-1 represents the top.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+index - valid integer index. Must be >=0 and < stack length.
+</p>
+<p>
+value - value to set.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Sort([Int])"></a>
+				<pre class="declaration">Method <strong>Sort</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( ascending:<a href="Programming_Keywords_Int.html">Int</a>=True )</pre>
+				<p>
+Sorts the stack into ascending or descending order.
+</p>
+<p>
+The stack must implement the Compare method.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToArray()"></a>
+				<pre class="declaration">Method <strong>ToArray</strong> : T[] ()</pre>
+				<p>
+Converts the stack to an array of values.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Top()"></a>
+				<pre class="declaration">Method <strong>Top</strong> : T ()</pre>
+				<p>
+Returns the item at the top of the stack.
+</p>
+<p>
+If the stack is empty, the behaviour of Top is undefined.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

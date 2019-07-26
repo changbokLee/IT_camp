@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_cerberus.lang.html'>cerberus.lang</a>
+
+			<span>String</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>String</small></h1>
+
+
+	<p>
+		The String type is a fundamental cerberus type used to represent sequences of characters.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Length()">Length</a><small> : Int ()</small></code></td>
+				<td>Returns the number of characters contained in the string.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Compare(String)">Compare</a><small> : Int ( str:String )</small></code></td>
+				<td>Compares two strings.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Contains(String)">Contains</a><small> : Bool ( str:String )</small></code></td>
+				<td>Returns true if the string contains <b>str</b>, else false.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#EndsWith(String)">EndsWith</a><small> : Bool ( str:String )</small></code></td>
+				<td>Returns true if this string ends with <b>str</b>, else false.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Find(String,[Int])">Find</a><small> : Int ( str:String, start:Int=0 )</small></code></td>
+				<td>Returns the offset of the first occurrence of <b>str</b> within this string, starting at the specified start offset.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FindLast(String)">FindLast</a><small> : Int ( str:String )</small></code></td>
+				<td>Returns the offset of the last occurrence of <b>str</b> within this string.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FindLast(String,Int)">FindLast</a><small> : Int ( str:String, start:Int )</small></code></td>
+				<td>Returns the offset of the last occurrence of <b>str</b> within this string, starting at the optional offset specified by <b>start</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Join(String[])">Join</a><small> : String ( pieces:String[] )</small></code></td>
+				<td>Creates a single string by joining together each element of <b>pieces</b>, using the current string as a separator.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Replace(String,String)">Replace</a><small> : String ( findStr:String, replaceStr:String )</small></code></td>
+				<td>Replaces all occurrences of <b>findStr</b> with <b>replaceStr</b> and returns the result.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Split(String)">Split</a><small> : String[] ( separator:String )</small></code></td>
+				<td>Splits this string into an array of pieces, using the <b>separator</b> string to delimit each piece.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StartsWith(String)">StartsWith</a><small> : Bool ( str:String )</small></code></td>
+				<td>Returns true if the string starts with <b>str</b>, else false.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToChars()">ToChars</a><small> : Int[] ()</small></code></td>
+				<td>Converts string to an array of character codes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToLower()">ToLower</a><small> : String ()</small></code></td>
+				<td>Converts the string to lowercase and returns the result.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ToUpper()">ToUpper</a><small> : String ()</small></code></td>
+				<td>Converts the string to uppercase and returns the result.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Trim()">Trim</a><small> : String ()</small></code></td>
+				<td>Removes any leading and trailing whitespace from the string and returns the result.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#FromChar(Int)">FromChar</a><small> : String ( charCode:Int )</small></code></td>
+				<td>Creates and returns a string of length 1 containing the character code specified by <b>charCode</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#FromChars(Int[])">FromChars</a><small> : String ( charCodes:Int[] )</small></code></td>
+				<td>Creates and returns a string containing the character codes in the specified <b>charCode</b> array.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The String type is a fundamental cerberus type used to represent sequences of characters.
+</p>
+<p>
+Please see the Types section of the cerberus language reference for more information on the string type.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="Length()"></a>
+				<pre class="declaration">Method <strong>Length</strong> : <a href="Programming_Keywords_Int.html">Int</a> () Property</pre>
+				<p>
+Returns the number of characters contained in the string.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Compare(String)"></a>
+				<pre class="declaration">Method <strong>Compare</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Compares two strings. Returns a value &lt;0 if this string is less than <b>str</b>, a value &gt;0 if this string is greater than <b>str</b>, or 0 if the strings are equal.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to compare this string with.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Contains(String)"></a>
+				<pre class="declaration">Method <strong>Contains</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns true if the string contains <b>str</b>, else false.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to check for.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="EndsWith(String)"></a>
+				<pre class="declaration">Method <strong>EndsWith</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns true if this string ends with <b>str</b>, else false.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to check for.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Find(String,[Int])"></a>
+				<pre class="declaration">Method <strong>Find</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a>, start:<a href="Programming_Keywords_Int.html">Int</a>=0 )</pre>
+				<p>
+Returns the offset of the first occurrence of <b>str</b> within this string, starting at the specified start offset.
+</p>
+<p>
+Returns -1 if <b>str</b> is not found.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to find.
+</p>
+<p>
+<b>start</b> - offset to start search at.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FindLast(String)"></a>
+				<pre class="declaration">Method <strong>FindLast</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns the offset of the last occurrence of <b>str</b> within this string.
+</p>
+<p>
+Returns -1 if <b>str</b> is not found.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to search for.
+</p>
+<p>
+<b>start</b> - offset to start search.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FindLast(String,Int)"></a>
+				<pre class="declaration">Method <strong>FindLast</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a>, start:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Returns the offset of the last occurrence of <b>str</b> within this string, starting at the optional offset specified by <b>start</b>.
+</p>
+<p>
+Returns -1 if <b>str</b> is not found.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to search for.
+</p>
+<p>
+<b>start</b> - offset to start search.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Join(String[])"></a>
+				<pre class="declaration">Method <strong>Join</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( pieces:<a href="Modules_cerberus.lang_String.html">String</a>[] )</pre>
+				<p>
+Creates a single string by joining together each element of <b>pieces</b>, using the current string as a separator.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>pieces</b> - An array of string to be joined.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Replace(String,String)"></a>
+				<pre class="declaration">Method <strong>Replace</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( findStr:<a href="Modules_cerberus.lang_String.html">String</a>, replaceStr:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Replaces all occurrences of <b>findStr</b> with <b>replaceStr</b> and returns the result.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>findStr</b> - string to search for.
+</p>
+<p>
+<b>replaceStr</b> - string to replace with.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Split(String)"></a>
+				<pre class="declaration">Method <strong>Split</strong> : <a href="Modules_cerberus.lang_String.html">String</a>[] ( separator:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Splits this string into an array of pieces, using the <b>separator</b> string to delimit each piece.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>separator</b> - string to use to separate pieces.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StartsWith(String)"></a>
+				<pre class="declaration">Method <strong>StartsWith</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> ( str:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Returns true if the string starts with <b>str</b>, else false.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>str</b> - string to check for.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToChars()"></a>
+				<pre class="declaration">Method <strong>ToChars</strong> : <a href="Programming_Keywords_Int.html">Int</a>[] ()</pre>
+				<p>
+Converts string to an array of character codes.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToLower()"></a>
+				<pre class="declaration">Method <strong>ToLower</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Converts the string to lowercase and returns the result.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#ToUpper()">ToUpper</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="ToUpper()"></a>
+				<pre class="declaration">Method <strong>ToUpper</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Converts the string to uppercase and returns the result.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#ToLower()">ToLower</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="Trim()"></a>
+				<pre class="declaration">Method <strong>Trim</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+Removes any leading and trailing whitespace from the string and returns the result.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="FromChar(Int)"></a>
+				<pre class="declaration">Function <strong>FromChar</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( charCode:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Creates and returns a string of length 1 containing the character code specified by <b>charCode</b>.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>charCode</b> - character code to convert to a string.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="FromChars(Int[])"></a>
+				<pre class="declaration">Function <strong>FromChars</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( charCodes:<a href="Programming_Keywords_Int.html">Int</a>[] )</pre>
+				<p>
+Creates and returns a string containing the character codes in the specified <b>charCode</b> array.
+</p>
+				
+					<span class="detail parameters">Parameters</span>
+					<p>
+<b>charCodes</b> - array of character codes.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

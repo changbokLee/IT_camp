@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<span>App config settings</span>
+
+		</nav>
+
+		<main>
+
+<h1>App config settings</h1>
+<p>
+App config settings are settings that affect how a project is built.
+</p>
+<p>
+These are used for features that are highly target specific, or that somehow affect the build process in some way and can't be implemented using plain Cerberus X code.
+</p>
+<p>
+There are 3 ways to specify app config settings:
+</p>
+<ul>
+<li>With <a href="Tools_Trans.html">Trans</a> using the command line.</li>
+<ul></ul>
+<li>In Cerberus X source code using the preprocessor, eg: <code>#MOJO_AUTO_SUSPEND_ENABLED=False</code>. Settings made this way will not overwrite settings passed to Trans.</li>
+<ul></ul>
+<li>By editing the CONFIG.CXS text file in your apps .build/target folder. Settings in CONFIG.CXS will not overwrite any settings passed to Trans or in Cerberus X source code, so this provides a mechanism for defining 'default' settings.</li>
+<ul></ul>
+</ul>
+<p>
+The following app config settings are currently supported:
+</p>
+<div class="pretty">
+<code class="r">'Data file filters, examples shown, actual allowable values depend on target</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#TEXT_FILES=</code><code class="l">"*.txt|*.xml|*.json"</code><br/>
+<code class="d">#IMAGE_FILES=</code><code class="l">"*.png|*.jpg"</code><br/>
+<code class="d">#SOUND_FILES=</code><code class="l">"*.wav|*.ogg"</code><br/>
+<code class="d">#MUSIC_FILES=</code><code class="l">"*.wav|*.ogg"</code><br/>
+<code class="d">#BINARY_FILES=</code><code class="l">"*.bin|*.dat"</code><br/>
+<code class="d">#FAST_SYNC_PROJECT_DATA=</code><code class="k">True			</code><code class="r">'Set to True to enable 'fast syncing' of project data when building - warning: has problems with xcode, False by default.</code><br/>
+<br/>
+<code class="r">'Mojo settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#MOJO_AUTO_SUSPEND_ENABLED=</code><code class="k">True			</code><code class="r">'Set to True to cause app to suspend when desktop window loses focus.</code><br/>
+<code class="d">#MOJO_HICOLOR_TEXTURES=</code><code class="k">True	</code><br/>
+<code class="d">#MOJO_IMAGE_FILTERING_ENABLED=</code><code class="k">True</code><br/>
+<br/>
+<code class="r">'Html5 settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#HTML5_WEBAUDIO_ENABLED=</code><code class="k">True			</code><code class="r">'Set to false to disable webaudio support for mojo audio, and to use older multimedia audio system instead.</code><br/>
+<br/>
+<code class="r">'GLFW settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#GLFW_USE_MINGW=</code><code class="k">True					</code><code class="r">'Set to false on Windows to use MSVC instead of MinGW to build glfw apps. Needs VS 2015 installed.</code><br/>
+<code class="d">#GLFW_GCC_MSIZE_WINNT=</code><code class="l">"32"				</code><code class="r">'When building glfw apps with mingw/gcc, controls whether 32 or 64 bit apps are generated.</code><br/>
+<code class="d">										</code><code class="r">'Set to "64" to force 64 bit builds on Windows (needs mingw64), or "" to use compiler default.</code><br/>
+<code class="d">#GLFW_GCC_MSIZE_LINUX=</code><code class="l">""				</code><code class="r">'Ditto for Linux.</code><br/>
+<code class="d">#GLFW_GCC_CC_OPTS=</code><code class="l">""					</code><code class="r">'Pass compiler options to GCC type compilers</code><br/>
+<code class="d">#GLFW_GCC_LD_OPTS=</code><code class="l">""					</code><code class="r">'Pass linker options to GCC type compilers</code><br/>
+<code class="d">#GLFW_GCC_LIB_OPTS=</code><code class="l">""				    </code><code class="r">'Pass additional libraries to link against for GCC type compilers.</code><br/>
+<code class="d">#GLFW_COPY_LIBS=</code><code class="l">""						</code><code class="r">'Copy external libraries to build directory. Windows GCC only for now!</code><br/>
+<br/>
+<code class="d">#GLFW_WINDOW_TITLE=</code><code class="l">"Cerberus X Game"</code><br/>
+<code class="d">#GLFW_WINDOW_WIDTH=</code><code class="l">640					</code><code class="r">'Set this and HEIGHT to 0 for a 'windowless' glfw app</code><br/>
+<code class="d">#GLFW_WINDOW_HEIGHT=</code><code class="l">480	</code><br/>
+<code class="d">#GLFW_WINDOW_RESIZABLE=</code><code class="k">False</code><br/>
+<code class="d">#GLFW_WINDOW_FULLSCREEN=</code><code class="k">False</code><br/>
+<code class="d">#GLFW_WINDOW_SAMPLES=</code><code class="l">0					</code><code class="r">'Set to number of samples for multisampling (glfw3 only).</code><br/>
+<code class="d">#GLFW_WINDOW_DECORATED=</code><code class="k">True				</code><code class="r">'Set to false to create a broderless window (glfw3 only).</code><br/>
+<code class="d">#GLFW_VERSION=</code><code class="l">2							</code><code class="r">'Set to GLFW version, ie: 2 or 3.			</code><br/>
+<br/>
+<code class="d">#GLFW_APP_LABEL=</code><code class="l">"My App"				</code><code class="r">'Human readable label for app. </code><br/>
+<code class="d">										</code><code class="r">'Must be set for cerberus://internal to map to 'per user' app data dir.</code><br/>
+<code class="d">										</code><code class="r">'If not set (the default), cerberus://internal is shared by all users of app.</code><br/>
+<code class="d">										</code><code class="r">'cerberus://external is ALWAYS shared by all users of app.</code><br/>
+<code class="d">										</code><code class="r">'Must contain filesystem friendly chars only - generally, [A-Z], [a-z], [0-9], </code><br/>
+<code class="d">										</code><code class="r">'&lt;space&gt;, &lt;underscore&gt; &lt;minus&gt;, &lt;dot&gt; should be OK.</code><br/>
+<code class="d">#GLFW_APP_PUBLISHER=</code><code class="l">"My Company"		</code><code class="r">'Optional human readable publisher name for app. Must be filesystem friendly.</code><br/>
+<code class="d">										</code><code class="r">'Not defined by default.</code><br/>
+<br/>
+<br/>
+<code class="r">'IOS settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#IOS_RETINA_ENABLED=</code><code class="k">True</code><br/>
+<code class="d">#IOS_ACCELEROMETER_ENABLED=</code><code class="k">True</code><br/>
+<code class="d">#IOS_DISPLAY_LINK_ENABLED=</code><code class="k">False</code><br/>
+<br/>
+<code class="r">'Android settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#ANDROID_APP_LABEL=</code><code class="l">"Cerberus X Game"</code><br/>
+<code class="d">#ANDROID_APP_PACKAGE=</code><code class="l">"com.Cerberus_X.cxgame"</code><br/>
+<code class="d">#ANDROID_SCREEN_ORIENTATION=</code><code class="l">"portrait"  			</code><code class="r">'one of: user, portrait, landscape</code><br/>
+<code class="d">#ANDROID_VERSION_CODE=</code><code class="l">"1"</code><br/>
+<code class="d">#ANDROID_VERSION_NAME=</code><code class="l">"1.0"</code><br/>
+<code class="d">#ANDROID_NATIVE_GL_ENABLED=</code><code class="k">False					</code><code class="r">'for use with the opengl modules</code><br/>
+<code class="d">#ANDROID_KEY_STORE=</code><code class="l">"../../release-key.keystore"</code><br/>
+<code class="d">#ANDROID_KEY_ALIAS=</code><code class="l">"release-key-alias"</code><br/>
+<code class="d">#ANDROID_KEY_STORE_PASSWORD=</code><code class="l">"password"</code><br/>
+<code class="d">#ANDROID_KEY_ALIAS_PASSWORD=</code><code class="l">"password"</code><br/>
+<code class="d">#ANDROID_SIGN_APP=</code><code class="k">False</code><br/>
+<br/>
+<code class="r">'OpenGL settings. To override, set these in your code BEFORE importing opengl.gles11 or opengl.gles20</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#OPENGL_DEPTH_BUFFER_ENABLED=</code><code class="k">True</code><br/>
+<br/>
+<code class="r">'Reflection settings</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#REFLECTION_FILTER=</code><code class="l">""</code><br/>
+<br/>
+<code class="r">'Admob settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#ADMOB_PUBLISHER_ID=</code><code class="l">"abcdabcdabcdabc"							</code><code class="r">'from your admob account</code><br/>
+<code class="d">#ADMOB_ANDROID_TEST_DEVICE1=</code><code class="l">"TEST_EMULATOR"</code><br/>
+<code class="d">#ADMOB_ANDROID_TEST_DEVICE2=</code><code class="l">"ABCDABCDABCDABCDABCDABCDABCDABCD"	</code><code class="r">'your device's admob ID for test mode</code><br/>
+<code class="d">#ADMOB_ANDROID_TEST_DEVICE3=</code><code class="l">""</code><br/>
+<code class="d">#ADMOB_ANDROID_TEST_DEVICE4=</code><code class="l">""</code><br/>
+<br/>
+<code class="r">'C++ settings, defaults shown</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#CPP_DOUBLE_PRECISION_FLOATS=</code><code class="k">False	</code><code class="r">'Set to True to enable 64 bit floats.</code><br/>
+<code class="d">#CPP_GC_MODE=</code><code class="l">1  					</code><code class="r">'0 disable GC, 1=incremental collect after every OnWhatever, 2=Incremental collect every GC allocation</code><br/>
+<code class="d">#CPP_GC_TRIGGER=</code><code class="l">8388608 			</code><code class="r">'Allocated memory (in bytes) before a GC 'sweep' occurs. Defaults to 8 MiB</code><br/>
+<code class="d">#CPP_GC_MAX_LOCALS=</code><code class="l">8192 			</code><code class="r">'This is used with GC_MODE 2 to track local object vars and defaults to 8192</code><br/>
+<br/>
+<code class="r">'Misc</code><br/>
+<code class="r">'</code><br/>
+<code class="d">#CC_OPTS=</code><code class="l">""							</code><code class="r">'additional gcc options for stdcpp target, eg: #CC_OPTS+="-DMyDefine"</code><br/>
+<br/>
+</div>
+<p>
+Not all settings are supported by all targets, and when not supported they will silently fail.
+</p>
+
+		</main>
+	</div>
+</body>
+</html>

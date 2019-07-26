@@ -1,0 +1,20 @@
+'
+Import mojo.app
+
+Class MyApp Extends App
+
+	Method CreateImage()
+
+	End
+	
+	Method OnUpdate()
+		Print MouseZ()
+	End
+	
+	Method OnRender()
+	End
+End
+
+Function Main()
+	New MyApp
+End

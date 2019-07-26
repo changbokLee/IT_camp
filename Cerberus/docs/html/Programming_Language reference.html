@@ -1,0 +1,2139 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<span>Language reference</span>
+
+		</nav>
+
+		<main>
+
+<h1>Cerberus&nbsp;X language reference</h1>
+<p>
+This manual describes the syntax and general concepts behind the core Cerberus&nbsp;X language.
+</p>
+<h2>Contents</h2>
+<p>
+<div class="multicolumn">
+<a href="#about">About this reference</a><br>
+<a href="#programs">Programs</a><br>
+<a href="#declarations">Declarations</a><br>
+<a href="#strict">Strict mode</a><br>
+<a href="#codelines">Lines of code</a><br>
+<a href="#comments">Comments</a><br>
+<a href="#identifiers">Identifiers</a><br>
+&emsp;<a href="#keywords">Language keywords</a><br>
+&emsp;<a href="#keywords">Reserved identifiers</a><br>
+&emsp;<a href="#naming">Cerberus X naming conventions</a><br>
+<a href="#literals">Literals</a><br>
+<a href="#types">Types</a><br>
+&emsp;<a href="#type_bool">The Bool type</a><br>
+&emsp;&emsp;<a href="#literal_bool">Boolean literals</a><br>
+&emsp;<a href="#type_int">The Int type</a><br>
+&emsp;&emsp;<a href="#literal_int">Integer literals</a><br>
+&emsp;&emsp;<a href="#literal_hex">Hexadecimal literals</a><br>
+&emsp;<a href="#type_float">The Float type</a><br>
+&emsp;&emsp;<a href="#literal_float">Floating point literals</a><br>
+&emsp;<a href="#type_string">The String type</a><br>
+&emsp;&emsp;<a href="#string_indexing">String indexing and slicing</a><br>
+&emsp;&emsp;<a href="#string_methods">String methods</a><br>
+&emsp;&emsp;<a href="#literal_string">String literals</a><br>
+&emsp;&emsp;<a href="#string_escaping">String escape sequences</a><br>
+&emsp;&emsp;<a href="#literal_char">Character literals</a><br>
+&emsp;<a href="#type_array">The Array type</a><br>
+&emsp;&emsp;<a href="#array_indexing">Array indexing and slicing</a><br>
+&emsp;&emsp;<a href="#array_methods">Array methods</a><br>
+&emsp;&emsp;<a href="#literal_array">Array literals</a><br>
+&emsp;<a href="#type_object">The Object type</a><br>
+&emsp;&emsp;<a href="#literal_object">Object literals</a><br>
+<a href="#variables">Variables</a><br>
+&emsp;<a href="#locals">Local variables</a><br>
+&emsp;<a href="#globals">Global variables</a><br>
+&emsp;<a href="#fields">Field variables</a><br>
+<a href="#constants">Constants</a><br>
+<a href="#enumerates">Enumerations</a><br>
+<a href="#expressions">Expressions</a><br>
+&emsp;<a href="#operators">Operators</a><br>
+&emsp;<a href="#operators">Order of operations (Precedence)</a><br>
+&emsp;<a href="#balancing">Balancing argument types</a><br>
+&emsp;<a href="#conditional_ops">Conditional operators</a><br>
+&emsp;<a href="#bitwise_ops">Bitwise operators</a><br>
+&emsp;<a href="#implicit_conversions">Implicit conversions</a><br>
+&emsp;<a href="#explicit_conversions">Explicit conversions</a><br>
+&emsp;<a href="#boxing">Boxing and unboxing conversions</a><br>
+<a href="#statements">Statements</a><br>
+&emsp;<a href="#statement_if">The If statement</a><br>
+&emsp;<a href="#statement_select">The Select statement</a><br>
+&emsp;<a href="#loop_while">The While loop</a><br>
+&emsp;<a href="#loop_repeat">The Repeat loop</a><br>
+&emsp;<a href="#loop_for">The numeric For loop</a><br>
+&emsp;<a href="#loop_eachin">The For EachIn loop</a><br>
+&emsp;<a href="#exit_continue">Exit and Continue</a><br>
+&emsp;<a href="#assignments">Assignment statements</a><br>
+&emsp;<a href="#assignments">Update assignment statements</a><br>
+&emsp;<a href="#exp_statements">Expression statements</a><br>
+<a href="#functions">Functions</a><br>
+&emsp;<a href="#overloading">Function overloading</a><br>
+<a href="#methods">Methods</a><br>
+&emsp;<a href="#properties">Property Methods</a><br>
+<a href="#classes">Classes</a><br>
+&emsp;<a href="#constructors">Constructors</a><br>
+<a href="#generics">Generics</a><br>
+<a href="#interfaces">Interfaces</a><br>
+<a href="#exceptions">Exceptions</a><br>
+<a href="#modules">Modules</a><br>
+&emsp;<a href="#alias">Alias</a><br>
+<a href="#visibility">Public and private</a><br>
+<a href="#extern">External declarations</a><br>
+<a href="#preprocessor">Preprocessor</a><br>
+&emsp;<a href="#preprocessor_customs">Custom preprocessor directives</a><br>
+<a href="#iveseen">I've Seen...</a><br>
+<a href="#glossary">Glossary</a><br>
+</div>
+</p>
+<h2><a name="about"></a> About this reference</h2>
+<p>
+A monospaced font is used for program code examples, for example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"Hello World!"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Language syntax explanations are generally formatted as follows:
+</p>
+<ul>
+<li>Anything that appears in monospaced font indicates syntax and pseudo-code. For example: <code>Print <i>StringLiteral</i></code> means the keyword 'Print' followed by a string literal.</li>
+<li>Anything that appears in <b>bold</b> indicates literal text. For example: <b>Function</b> means the actual text 'Function'.</li>
+<li>Anything that appears in <i>italics</i> indicates other syntax. For example: <i>Identifier</i> means any text that is a valid identifier.</li>
+<li>Anything that appears in square brackets [ ] is optional. For example: [ <b>Step</b> ] means the literal text <b>Step</b> is optional.</li>
+<li>The pipe character | is use for alternatives. For example: <b>To</b> | <b>Until</b> means you can use <b>To</b> or <b>Until</b> - but not both.</li>
+<li>A three dots ellipsis is used to indicate repetition.</li>
+<ul></ul>
+</ul>
+<p>
+These rules are not strictly followed. Where it makes sense to do so, syntax may be shown in a simplified form with explanatory notes.
+</p>
+<h2><a name="programs"></a> Programs</h2>
+<p>
+Every Cerberus&nbsp;X program has a 'main module' that must contain a public function called <code><b>Main</b></code> that takes no parameters and returns an integer. For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Main</code><code class="d">:</code><code class="k">Int</code><code class="d">()             </code><code class="r">' take nothing</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"That's all folks!"   </code><code class="r">' do something</code><br/>
+<code class="d">	</code><code class="k">Return </code><code class="l">0                    </code><code class="r">' return 0 to indicate everything went fine</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+This is the entry point of the program and is where program execution begins. 
+</p>
+<p>
+If you are using the mojo framework of modules, you must create a new class (which extends the base mojo.app class) and create a new instance of it in the <code>Main</code> function. See the <a href="Modules_mojo.app.html">mojo.app Module Reference</a> for more information. An example of this is:
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">mojo</code><code class="d">.</code><code class="i">app</code><br/>
+<code class="k">Import </code><code class="i">mojo</code><code class="d">.</code><code class="i">graphics</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">MyApp </code><code class="k">Extends </code><code class="i">App</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">OnRender</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="i">DrawText </code><code class="l">"Hello World!"</code><code class="d">,</code><code class="l">0</code><code class="d">,</code><code class="l">0</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">New </code><code class="i">MyApp</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h2><a name="declarations"></a> Declarations</h2>
+<p>
+A Cerberus&nbsp;X program consists of one or more modules, each of which is a separate file, consisting of a series of declarations. 
+</p>
+<p>
+A declaration associates a 'meaning' with an identifier. For example, this declaration...
+</p>
+<div class="pretty">
+<code class="k">Global </code><code class="i">x</code><code class="d">:</code><code class="k">Int</code><br/>
+</div>
+<p>
+...indicates that the identifier <code>x</code> is a global variable of type 'Int' (an integer).
+</p>
+<p>
+Cerberus&nbsp;X supports the following kinds of declarations:
+</p>
+<ul>
+<li><a href="#modules">Modules</a></li>
+<li><a href="#constants">Constants</a></li>
+<li><a href="#enumerates">Integer enumerations</a></li>
+<li><a href="#locals">Local</a>, <a href="#globals">Global</a> and <a href="#fields">Field</a> variables</li>
+<li><a href="#classes">Classes</a></li>
+<li><a href="#functions">Functions</a></li>
+<li><a href="#methods">Methods</a></li>
+<ul></ul>
+</ul>
+<p>
+A module is itself a kind of declaration and is represented by a single source file. The name of the module is taken from the name of the source file. For example, if your file is named "particles.cxs" then the module will be called "particles".
+</p>
+<p>
+Modules may 'import' other modules, which may in turn import other modules and so on. For more details about that, refer to the <a href="#modules">Modules</a> section.
+</p>
+<h2><a name="strict"></a> Strict mode</h2>
+<p>
+By default, Cerberus&nbsp;X allows you to take certain shortcuts when programming.
+</p>
+<p>
+However, Cerberus&nbsp;X also offers a strict mode for programmers who prefer a stricter language definition.
+</p>
+<p>
+The differences between strict and non-strict mode are:
+</p>
+<ul>
+<li>In non-strict mode, variable type, function return type and function parameter types can be optionally omitted. In this case they will default to Int. In strict mode, you must always specify the type of all variables, functions return values and function parameters.</li>
+<li>In non-strict mode, Return statements can be omitted at the end of a function. In this case, a Return statement will be automatically generated that will return an appropriate default value for the function type. That is, False for bool, 0 for int and float, "" for string, [] for arrays and Null for objects. In strict mode, a function that does not return Void must end with a Return statement.</li>
+<li>In non-strict mode, the brackets around function call parameters are optional if the function is being used as a statement, or if the function can be called with no parameters. In strict mode, functions returning a value must have their call parameters enclosed in brackets.</li>
+<ul></ul>
+</ul>
+<p>
+To use strict mode, the <code>Strict</code> directive must be placed at the very top of your module. For example:
+</p>
+<div class="pretty">
+<code class="k">Strict</code><br/>
+<br/>
+<code class="k">Import </code><code class="i">mojo</code><br/>
+<br/>
+<code class="r">' in Strict mode, type definition for functions is compulsory:</code><br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">:</code><code class="k">Int</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="r">' in Strict mode, functions returning a value must be invoked with brackets:</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"the year is "</code><code class="d">+</code><code class="i">GetDate</code><code class="d">()[</code><code class="l">0</code><code class="d">]</code><br/>
+<code class="d">    </code><code class="r">' in Strict mode, functions returning a value must use the Return keyword:</code><br/>
+<code class="d">    </code><code class="k">Return </code><code class="l">0</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Most of the examples in this document will be presented in non-strict form.
+</p>
+<h2><a name="codelines"></a> Lines of code</h2>
+<p>
+Lines of code are terminated by a newline character. Usually, you want to put one statement per line, but it's possible to put multiple statements on one line using the <code><b>;</b></code> character.
+</p>
+<p>
+It's also possible to break long lines of code into multiple lines, but only after:
+</p>
+<ul>
+<li>commas (<code><b>,</b></code> in parameter lists, array element lists and enumerations)</li>
+<li>opening brackets</li>
+<li>the scope member access operator <code>.</code></li>
+<li>all mathematical and logical <a href="#operators">operators</a> </li>
+<ul></ul>
+<ul></ul>
+</ul><h2><a name="comments"></a> Comments</h2>
+<p>
+You can add line comments to your programs using the <code><b>'</b></code> (apostrophe) character. Everything following the <code>'</code> character until the end of the line will be ignored.
+</p>
+<p>
+You can add block comments to your programs using the <code>#Rem</code> and <code>#End</code> <a href="#preprocessor">preprocessor directives</a>. These must appear at the start of a new line, although they may optionally have whitespace characters in front. Everything between <code>#Rem</code> and <code>#End</code> will be ignored. Block comments can also be nested.
+</p>
+<p>
+Here is an example of using comments:
+</p>
+<div class="pretty">
+<code class="i">Print </code><code class="l">"Hello World"                 </code><code class="r">'This is a line comment!</code><br/>
+<br/>
+<code class="r">#Rem                                'start of a block comment</code><br/>
+<code class="r">Print "The sound of silence!"       'inside a block comment</code><br/>
+<code class="r">#End</code><br/>
+</div>
+<h2><a name="identifiers"></a> Identifiers</h2>
+<p>
+Identifiers must start with an alphabetic character, or a single underscore followed by an alphabetic character. The rest of the identifier may contain any combination of alphanumeric characters and/or underscores.
+</p>
+<p>
+Identifiers are case sensitive (except for language keywords - see below). For example, <code>player</code>, <code>Player</code>, <code>PLAYER</code> and <code>PLayER</code> are all different identifiers. This allows you to reuse the same name for different purposes. For example, <code>Actor</code> may refer to a class while <code>actor</code> refers to an object of that class.
+</p>
+<p>
+Here are some examples of valid Cerberus&nbsp;X identifiers:
+</p>
+<div class="pretty">
+<code class="i">score</code><br/>
+<code class="i">player1</code><br/>
+<code class="i">player_up</code><br/>
+<code class="i">_internal</code><br/>
+<code class="i">helloworld</code><br/>
+<code class="i">HelloWorld</code><br/>
+</div>
+<h3><a name="keywords"></a> Language keywords and reserved identifiers</h3>
+<p>
+The following identifiers are <a href="Programming_Keywords.html">Language keywords</a> and are reserved for use by the Cerberus&nbsp;X language:
+</p>
+<div class="pretty">
+<code class="k">Void Strict Public Private Property Bool Int Float String Array</code><br/>
+<code class="k">Object Mod Continue Exit Import Extern New Self Super Try Catch</code><br/>
+<code class="k">Eachin True False Not Extends Abstract Final Select Case Default</code><br/>
+<code class="k">Const Enumerate Local Global Field Method Function Class And Or Shl Shr</code><br/>
+<code class="k">End If Then Else ElseIf EndIf While Wend Repeat Until Forever </code><br/>
+<code class="k">For To Step Next Return Module Interface Implements Inline Throw</code><br/>
+</div>
+<p>
+Language keywords are case insensitive - for example, you may use the keyword <code>function</code>, <code>Function</code> or indeed even <code>fUNCTION</code> (not recommended) to declare a function.
+</p>
+<p>
+The keywords <code>Module</code>, <code>Inline</code> and <code>Array</code> are not currently used by the Cerberus&nbsp;X language but are reserved for future use.
+</p>
+<h3><a name="naming"></a> Cerberus X naming conventions</h3>
+<p>
+The standard Cerberus&nbsp;X modules use a simple naming convention:
+</p>
+<ul>
+<li>All-caps case (eg: '<code>ALLCAPS</code>' ): <a href="#constants">Constants</a>.</li>
+<li>Pascal case (eg: '<code>PascalCase</code>' ): <a href="#globals">Globals</a>, <a href="#functions">functions</a>, <a href="#classes">classes</a>, <a href="#methods">methods</a>, <a href="#properties">properties</a>.</li>
+<li>Camel case (eg: '<code>camelCase</code>' ): <a href="#fields">Fields</a>, <a href="#locals">locals</a> and function parameters.</li>
+<ul></ul>
+</ul>
+<p>
+You are of course free to use your own convention, but for the sake of consistency it is recommended that this convention be used for the public interface of any modules you create which are intended for use by the Cerberus&nbsp;X community.
+</p>
+<h2><a name="literals"></a> Literals</h2>
+<p>
+Literals are values within the code used in assignments or comparisons.
+</p>
+<div class="pretty">
+<code class="k">True            </code><code class="r">' Bool literal</code><br/>
+<code class="l">1234            </code><code class="r">' Integer literal</code><br/>
+<code class="l">$CAFEBABE       </code><code class="r">' Hexadecimal literal</code><br/>
+<code class="l">9.81            </code><code class="r">' Floating point literal</code><br/>
+<code class="l">"Hello World"   </code><code class="r">' String literal</code><br/>
+<code class="l">`A`             </code><code class="r">' Character literal</code><br/>
+<code class="d">[</code><code class="l">2</code><code class="d">,</code><code class="l">4</code><code class="d">,</code><code class="l">6</code><code class="d">]         </code><code class="r">' Array literal</code><br/>
+</div>
+<p>
+See also: <a href="#literal_bool">Boolean literals</a>, <a href="#literal_int">Integer literals</a>, <a href="#literal_hex">Hexadecimal literals</a>, <a href="#literal_float">Floating point literals</a>, <a href="#literal_string">String literals</a>, <a href="#literal_char">Character literals</a>, <a href="#literal_array">Array literals</a>, <a href="#literal_object">Object literals</a>
+</p>
+<h2><a name="types"></a> Types</h2>
+<p>
+Cerberus&nbsp;X is a statically typed language, which means that all variables, function parameters, function return values and expressions have an associated type that is known at compile time.
+</p>
+<p>
+The following types are supported:
+</p>
+<table>
+<tr><th>Type</th><th>Long notation</th><th>Short notation</th></tr>
+<tr><td><a href="#type_bool">Boolean</a></td><td><code><b>:Bool</b></code></td><td><code><b>?</b></code></td></tr>
+<tr><td><a href="#type_int">Integer</a></td><td><code><b>:Int</b></code></td><td><code><b>%</b></code></td></tr>
+<tr><td><a href="#type_float">Floating Point</a></td><td><code><b>:Float</b></code></td><td><code><b>#</b></code></td></tr>
+<tr><td><a href="#type_string">String</a></td><td><code><b>:String</b></code></td><td><code><b>$</b></code></td></tr>
+<tr><td><a href="#type_array">Array</a></td><td><code><b>:</b><i>ElementType</i><b>[]</b></code></td><td></td></tr>
+<tr><td><a href="#type_object">Object</a></td><td><code><b>:</b><i>ClassIdentifier</i></code></td><td></td></tr>
+</table>
+<h3><a name="type_bool"></a> The Bool type</h3>
+<p>
+Values of type 'Bool' are boolean values used to express the result of conditional expressions, such as the comparison operators, and to represent a true/false 'state' in general. A boolean value can only be either true or false. 
+</p>
+<p>
+The syntax used for declaring values and variables of boolean type is <code><b>:Bool</b></code>. For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">gamePaused</code><code class="d">:</code><code class="k">Bool </code><code class="d">= </code><code class="k">False</code><br/>
+</div>
+<p>
+Boolean values are usually generated by the use of the comparison operators, for example:
+</p>
+<div class="pretty">
+<code class="k">If </code><code class="i">livesLeft</code><code class="d">&lt;&gt;</code><code class="l">0</code><br/>
+<code class="d">    </code><code class="i">doSomething</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+However, in some circumstances Cerberus&nbsp;X will automatically convert a non-bool value to bool. This will occur when evaluating an expression for use with the <code>If</code> or <code>While</code> statements; the <code>Until</code> part of a <code>Repeat</code> loop; and when evaluating the arguments for the <code>Not</code>, <code>Or</code> and <code>And</code> operators. For example:
+</p>
+<div class="pretty">
+<code class="k">If </code><code class="i">livesLeft</code><br/>
+<code class="d">    </code><code class="i">doSomething</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+See the <a href="#implicit_conversions">conversions section in the expressions chapter</a> for more information.
+</p>
+<p>
+Also, notice that boolean identifiers can also be declared by using the <code><b>?</b></code> character. This two lines of source code are both valid and syntactically correct:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">myVariable</code><code class="d">:</code><code class="k">Bool </code><code class="d">= </code><code class="k">True</code><br/>
+<code class="k">Local </code><code class="i">myVariable</code><code class="d">? = </code><code class="k">True</code><br/>
+</div>
+<h4><a name="literal_bool"></a> Boolean literals</h4>
+<p>
+The keywords <code>True</code> and <code>False</code> can be used as 'pseudo' boolean literals:
+</p>
+<div class="pretty">
+<code class="k">True</code><br/>
+<code class="k">False</code><br/>
+</div>
+<h3><a name="type_int"></a> The Int type</h3>
+<p>
+Values of type 'Int' are signed integer values - that is, values with no fractional part. The range of integer values supported is target dependent, but is at least 32 bits. A 32 bit integer can represent a range of values from: -2,147,483,648 to 2,147,483,647
+</p>
+<p>
+The syntax used for declaring values and variables of integer type is <code><b>:Int</b></code>. For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">x</code><code class="d">:</code><code class="k">Int </code><code class="d">= </code><code class="l">5</code><br/>
+</div>
+<p>
+Also, notice that integer identifiers can also be declared by using the <code><b>%</b></code> character. This two lines of source code are both valid and syntactically correct:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">myVariable</code><code class="d">:</code><code class="k">Int </code><code class="d">= </code><code class="l">1024</code><br/>
+<code class="k">Local </code><code class="i">myVariable</code><code class="d">% = </code><code class="l">1024</code><br/>
+</div>
+<h4><a name="literal_int"></a> Integer literals</h4>
+<p>
+Integer literals are sequences of digits without a fractional part:
+</p>
+<div class="pretty">
+<code class="l">0</code><br/>
+<code class="l">1234</code><br/>
+</div>
+<h4><a name="literal_hex"></a> Hexadecimal literals</h4>
+<p>
+Hexadecimal literals are also supported with the <code><b>$</b></code> prefix. For example, the following are also valid integer literals:
+</p>
+<div class="pretty">
+<code class="l">$3D0DEAD</code><br/>
+<code class="l">$CAFEBABE</code><br/>
+</div>
+<h3><a name="type_float"></a> The Float type</h3>
+<p>
+Values of type 'Float' are signed numeric values with both an integer and fractional part. The range of floating point values support is target dependent, but is at least 32 bits.
+</p>
+<p>
+The syntax used for declaring values and variables of floating point type is <code><b>:Float</b></code>.  For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">gravity</code><code class="d">:</code><code class="k">Float </code><code class="d">= </code><code class="l">9.81</code><br/>
+</div>
+<p>
+Also, notice that floating point identifiers can also be declared by using the <code><b>#</b></code> character. This two lines of source code are both valid and syntactically correct:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">myVariable</code><code class="d">:</code><code class="k">Float </code><code class="d">= </code><code class="l">3.141516</code><br/>
+<code class="k">Local </code><code class="i">myVariable</code><code class="d"># = </code><code class="l">3.141516</code><br/>
+</div>
+<h4><a name="literal_float"></a> Floating point literals</h4>
+<p>
+Floating point literals are sequences of digits that include a fractional part, for example:
+</p>
+<div class="pretty">
+<code class="l">.0</code><br/>
+<code class="l">0.0</code><br/>
+<code class="l">.5</code><br/>
+<code class="l">0.5</code><br/>
+<code class="l">1.0</code><br/>
+<code class="l">1.5</code><br/>
+<code class="l">1.00001</code><br/>
+<code class="l">3.14159265</code><br/>
+</div>
+<h3><a name="type_string"></a> The String type</h3>
+<p>
+Values of type 'String' are used to represent sequences of characters, such as text. The size of each character in a string value is target dependent, but is at least 8 bits.
+</p>
+<p>
+The syntax used for declaring values and variables of string type is <code><b>:String</b></code>. For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">name</code><code class="d">:</code><code class="k">String </code><code class="d">= </code><code class="l">"John Smith"</code><br/>
+</div>
+<p>
+Also, notice that string identifiers can also be declared by using the <code><b>$</b></code> character. This two lines of source code are both valid and syntactically correct:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">message</code><code class="d">:</code><code class="k">String </code><code class="d">= </code><code class="l">"Hello world"</code><br/>
+<code class="k">Local </code><code class="i">message</code><code class="d">$ = </code><code class="l">"Hello world"</code><br/>
+</div>
+<p>
+Strings are immutable meaning that once they are created they cannot be modified. Operations that 'modify' a string will always return a new string.
+</p>
+<h4><a name="string_indexing"></a> String indexing and slicing</h4>
+<p>
+Strings can also be indexed and sliced.
+</p>
+<p>
+The syntax for indexing a string is: <code><i>StringExpression</i> <b>[</b> <i>IndexExpression</i> <b>]</b></code>
+</p>
+<p>
+Indexing a string returns the character code of the character at <i>IndexExpression</i>. Index 0 is the first character in the string.
+</p>
+<p>
+<i>IndexExpression</i> must be greater than or equal to 0 and less than the length of <i>StringExpression</i> otherwise an error occurs.
+</p>
+<p>
+Here are some examples of indexing a string:
+</p>
+<div class="pretty">
+<code class="i">Print </code><code class="l">"ABC"</code><code class="d">[</code><code class="l">0</code><code class="d">]                </code><code class="r">' prints 65 - the character code of 'A'</code><br/>
+<code class="i">Print </code><code class="l">"ABC"</code><code class="d">[</code><code class="l">1</code><code class="d">]                </code><code class="r">' prints 66 - the character code of 'B'</code><br/>
+<code class="i">Print </code><code class="l">"Hi~n"</code><code class="d">[</code><code class="l">2</code><code class="d">]               </code><code class="r">' prints 10 - the character code of '~n'</code><br/>
+</div>
+<p>
+The syntax for slicing a string is: <code><i>StringExpression</i> <b>[</b> <i>StartExpression</i> <b>..</b> <i>EndExpression</i> <b>]</b></code>
+</p>
+<p>
+Slicing a string returns a new string consisting of the characters within <i>StringExpression</i> from index <i>StartExpression</i> (inclusively) to index <i>EndExpression</i> (exclusively).
+</p>
+<p>
+Both <i>StartExpression</i> and <i>EndExpression</i> are optional. If <i>StartExpression</i> is omitted, it defaults to 0. If <i>EndExpression</i> is omitted, it defaults to the length of the string.
+</p>
+<p>
+<i>StartExpression</i> and <i>EndExpression</i> can also be negative, in which case they refer to offsets from the end of the string.
+</p>
+<p>
+Here are some examples of slicing a string:
+</p>
+<div class="pretty">
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">[</code><code class="l">4</code><code class="d">..</code><code class="l">7</code><code class="d">]     </code><code class="r">' prints "o W'</code><br/>
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">[..</code><code class="l">5</code><code class="d">]      </code><code class="r">' prints "Hello"</code><br/>
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">[</code><code class="l">6</code><code class="d">..]      </code><code class="r">' prints "World"</code><br/>
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">[..]       </code><code class="r">' prints "Hello World"</code><br/>
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">[-</code><code class="l">4</code><code class="d">..-</code><code class="l">2</code><code class="d">]   </code><code class="r">' prints "or"</code><br/>
+</div>
+<h4><a name="string_methods"></a> String Methods</h4>
+<p>
+Strings can be concatenated (joined) using the <code><b>+</b></code> operator. Additionally, Strings support a number of 'pseudo' methods and functions, as documented in the <a href="Modules_cerberus.lang_String.html">String class</a>.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="i">Print </code><code class="l">"Hello "</code><code class="d">+</code><code class="l">"World"				</code><code class="r">'prints "Hello World"</code><br/>
+<code class="i">Print </code><code class="l">"  Hello World  ~n"</code><code class="d">.</code><code class="i">Trim</code><code class="d">()	</code><code class="r">'prints "Hello World"</code><br/>
+<code class="i">Print </code><code class="l">"Hello World"</code><code class="d">.</code><code class="i">ToUpper</code><code class="d">()		</code><code class="r">'prints "HELLO WORLD"</code><br/>
+</div>
+<h4><a name="literal_string"></a> String literals</h4>
+<p>
+String literals are sequences of characters enclosed in <code><b>""</b></code> (quotation marks):
+</p>
+<div class="pretty">
+<code class="l">"Hello world"</code><br/>
+<code class="l">"1234"</code><br/>
+</div>
+<h4><a name="string_escaping"></a> String escape sequences</h4>
+<p>
+String literals may also include escape sequences - sequences of characters used to represent unprintable characters.
+</p>
+<p>
+You can use the following escape sequences in string literals:
+</p>
+<table>
+<tr><th>Escape sequence</th><th>Character code</th></tr>
+<tr><td><code>~q</code></td><td>34 (quotation mark ")</td></tr>
+<tr><td><code>~g</code></td><td>96 (back-tick &#96;)</td></tr>
+<tr><td><code>~n</code></td><td>10 (newline)</td></tr>
+<tr><td><code>~r</code></td><td>13 (return)</td></tr>
+<tr><td><code>~t</code></td><td>9 (tabulator)</td></tr>
+<tr><td><code>~z</code></td><td>0 (null)</td></tr>
+<tr><td><code>~u006F</code></td><td>unicode char 0x006F</td></tr>
+<tr><td><code>~~</code></td><td>126 (tilde ~)</td></tr>
+</table>
+<p>
+Here are some examples of string literals using escape sequences:
+</p>
+<div class="pretty">
+<code class="l">"~qHello World~q"</code><br/>
+<code class="l">"~tIndented~n"</code><br/>
+</div>
+<h4><a name="literal_char"></a> Character literals</h4>
+<p>
+Character literals are single printable characters enclosed in <code><b>&#96;&#96;</b></code> (grave accents or back-ticks). They allow you to put character codes directly into the code:
+</p>
+<div class="pretty">
+<code class="l">`A`</code><br/>
+</div>
+<p>
+Character literals support the same <a href="#string_escaping">escape sequences</a> as strings do.
+They're typically used for string analysis:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">txt</code><code class="d">$ = </code><code class="l">"ABC"</code><br/>
+<code class="k">If </code><code class="i">txt</code><code class="d">[</code><code class="l">0</code><code class="d">] = </code><code class="l">`A` </code><code class="k">Then </code><code class="i">Print </code><code class="l">"Yes, that string starts with 'A'"</code><br/>
+</div>
+<h3><a name="type_array"></a> The Array type</h3>
+<p>
+An array is a linear sequence of values that can be addressed using an integer index. Arrays in Cerberus&nbsp;X cannot be multi-dimensional.
+</p>
+<p>
+Each array has an associated element type - that is, the type of the elements actually contained in the array. Due to the nature of Cerberus&nbsp;X, an array's element type is a purely static property. It is only known at compile time so arrays cannot be downcast at runtime.
+</p>
+<p>
+The syntax used for declaring values and variables of array type is: <code><b>:</b> <i>ElementType</i> <b>[]</b></code>
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">box</code><code class="d">:</code><code class="k">Int</code><code class="d">[]            </code><code class="r">' an array of ints</code><br/>
+<code class="k">Local </code><code class="i">ratio</code><code class="d">:</code><code class="k">Float</code><code class="d">[]        </code><code class="r">' an array of floats</code><br/>
+<code class="k">Local </code><code class="i">thing</code><code class="d">:</code><code class="k">Int</code><code class="d">[][]        </code><code class="r">' an array of arrays of ints</code><br/>
+</div>
+<h4><a name="array_indexing"></a> Array indexing and slicing</h4>
+<p>
+The syntax for indexing an array is: <code><i>ArrayExpression</i> <b>[</b> <i>IndexExpression</i> <b>]</b></code>. For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">score</code><code class="d">:</code><code class="k">Int</code><code class="d">[]=[</code><code class="l">10</code><code class="d">,</code><code class="l">20</code><code class="d">,</code><code class="l">30</code><code class="d">]  </code><code class="r">'a comma separated sequence</code><br/>
+<code class="i">Print score</code><code class="d">[</code><code class="l">1</code><code class="d">]                </code><code class="r">'prints "20"</code><br/>
+</div>
+<p>
+Indexing an array yields a 'pseudo variable' of the array's element type that can be both read from and written to.
+</p>
+<p>
+<i>IndexExpression</i> must be an integer expression greater than or equal to 0 and less than the length of the array otherwise an error occurs.
+</p>
+<p>
+Like strings, arrays can also be sliced. The syntax for slicing an array is: <code><i>ArrayExpression</i> <b>[</b> <i>StartExpression</i> <b>..</b> <i>EndExpression</i> <b>]</b></code>.
+</p>
+<p>
+Slicing an array returns 'sub array' of <i>ArrayExpression</i> from index <i>StartExpression</i> (inclusively) to index <i>EndExpression</i> (exclusively).
+</p>
+<p>
+Both <i>StartExpression</i> and <i>EndExpression</i> are optional. If <i>StartExpression</i> is omitted, it defaults to 0. If <i>EndExpression</i> is omitted, it defaults to the length of the array.
+</p>
+<p>
+<i>StartExpression</i> and <i>EndExpression</i> can also be negative, in which case they refer to offsets from the end of the array.
+</p>
+<p>
+Here is an example of slicing an array:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">text</code><code class="d">:</code><code class="k">String</code><code class="d">[]=[</code><code class="l">"Cruel"</code><code class="d">,</code><code class="l">"Hello"</code><code class="d">,</code><code class="l">"World"</code><code class="d">,</code><code class="l">"There"</code><code class="d">]    </code><code class="r">'a comma separated sequence</code><br/>
+<code class="k">Local </code><code class="i">helloWorld</code><code class="d">:=</code><code class="i">text</code><code class="d">[</code><code class="l">1</code><code class="d">..</code><code class="l">3</code><code class="d">]                             </code><code class="r">'contains ["Hello","World"]</code><br/>
+</div>
+<h4><a name="array_methods"></a> Array methods</h4>
+<p>
+Arrays also support a number of 'pseudo' methods, as documented in the <a href="Modules_cerberus.lang_Array.html">Array class</a>:
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">text</code><code class="d">:</code><code class="k">String</code><code class="d">[]=[</code><code class="l">"Hello"</code><code class="d">,</code><code class="l">"There"</code><code class="d">,</code><code class="l">"World"</code><code class="d">]   </code><code class="r">' a comma separated sequence</code><br/>
+<code class="i">Print text</code><code class="d">.</code><code class="i">Length                               </code><code class="r">' prints '3'</code><br/>
+<code class="i">text</code><code class="d">=</code><code class="i">text</code><code class="d">.</code><code class="i">Resize</code><code class="d">( </code><code class="l">2 </code><code class="d">)</code><br/>
+<code class="i">Print text</code><code class="d">.</code><code class="i">Length                               </code><code class="r">' prints '2'</code><br/>
+</div>
+<h4><a name="literal_array"></a> Array literals</h4>
+<p>
+An array literal is a (possibly empty) comma separated sequence of expressions enclosed with <code><b>[</b></code> and <code><b>]</b></code>. The expressions used in an array literal must be of the same type. For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">box</code><code class="d">:</code><code class="k">Int</code><code class="d">[]=[]                              </code><code class="r">' an empty array literal</code><br/>
+<code class="k">Local </code><code class="i">scores</code><code class="d">:</code><code class="k">Int</code><code class="d">[]=[</code><code class="l">10</code><code class="d">,</code><code class="l">20</code><code class="d">,</code><code class="l">30</code><code class="d">]                   </code><code class="r">' a comma separated sequence</code><br/>
+<code class="k">Local </code><code class="i">text</code><code class="d">:</code><code class="k">String</code><code class="d">[]=[</code><code class="l">"Hello"</code><code class="d">,</code><code class="l">"There"</code><code class="d">,</code><code class="l">"World"</code><code class="d">]   </code><code class="r">' a comma separated sequence</code><br/>
+</div>
+<h3><a name="type_object"></a> The Object type</h3>
+<p>
+An object is an instance of a class, and contains a set of constants, variables, methods and functions.
+</p>
+<p>
+The syntax used for declaring values and variables of object type is: <code><b>:</b> <i>ClassIdentifier</i></code>
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">mine</code><code class="d">:</code><code class="i">MyClass </code><code class="d">= </code><code class="k">New </code><code class="i">MyClass</code><br/>
+</div>
+<p>
+Please see the <a href="#classes">classes</a> section for more information on declaring classes and creating objects.
+</p>
+<h4><a name="literal_object"></a> Object literals</h4>
+<p>
+The keyword <code>Null</code> can be used as 'pseudo' object literal, representing the null object, which can be used for comparisons or to 'reset' a reference:
+</p>
+<div class="pretty">
+<code class="k">Null</code><br/>
+</div>
+<h2><a name="variables"></a> Variables</h2>
+<p>
+A variable is a storage location used to hold values that change while your program runs.
+</p>
+<p>
+All variables have an identifier, a type, and an optional initialiser - an expression used to set the variable to an initial value.
+</p>
+<p>
+The type of a variable can either be declared literally, or can be deduced from the variable's initialiser.
+</p>
+<h3><a name="locals"></a> Local variables</h3>
+<p>
+Local variables are temporary variables that disappear when the local scope they are declared in is destroyed.
+</p>
+<p>
+Local variables may be declared within any local scope.
+</p>
+<p>
+Each of the following creates a local scope:
+</p>
+<ul>
+<li>The statements inside a function or method.</li>
+<li>The statements inside an If, Else If or If block.</li>
+<li>The statements inside a Case or Default block.</li>
+<li>The statements inside a While, Repeat or For loop.</li>
+<ul></ul>
+</ul>
+<p>
+The syntax for declaring a local variable is:
+</p>
+<p>
+<code><b>Local</b> <i>Identifier</i> <b>:</b> <i>Type</i> [ <b>=</b> <i>Expression</i> ]</code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Local</b> <i>Identifier</i> <b>:=</b> <i>Expression</i></code>
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">age</code><code class="d">:</code><code class="k">Int</code><code class="d">=</code><code class="l">10</code><br/>
+<code class="k">Local </code><code class="i">age</code><code class="d">:=</code><code class="l">10</code><br/>
+</div>
+<h3><a name="globals"></a> Global variables</h3>
+<p>
+Global variables are variables that persist during the execution of your program.
+</p>
+<p>
+Global variables may be declared at module scope, or within a class declaration.
+</p>
+<p>
+The syntax for declaring a global variable is:
+</p>
+<p>
+<code><b>Global</b> <i>Identifier</i> <b>:</b> <i>Type</i> [ <b>=</b> <i>Expression</i> ]</code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Global</b> <i>Identifier</i> <b>:=</b> <i>Expression</i></code>
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Global </code><code class="i">isPlayerAlive</code><code class="d">:</code><code class="k">Bool </code><code class="d">= </code><code class="k">True</code><br/>
+</div>
+<h3><a name="fields"></a> Field variables</h3>
+<p>
+Field variables are variables that persist as long as the object they belong to. 
+</p>
+<p>
+Field variables can only be declared within a class declaration.
+</p>
+<p>
+The syntax for declaring a field variable is:
+</p>
+<p>
+<code><b>Field</b> <i>Identifier</i> <b>:</b> <i>Type</i> [ <b>=</b> <i>Expression</i> ]</code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Field</b> <i>Identifier</i> <b>:=</b> <i>Expression</i></code>
+</p>
+<h2><a name="constants"></a> Constants</h2>
+<p>
+A constant is a value that is evaluated at compile time, and that does not change throughout the execution of a program.
+</p>
+<p>
+Constants may be declared at module scope, within class scope or within any local scope.
+</p>
+<p>
+The syntax for declaring a constant is:
+</p>
+<p>
+<code><b>Const</b> <i>Identifier</i> <b>:</b> <i>Type</i> <b>=</b> <i>Expression</i></code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Const</b> <i>Identifier</i> <b>:=</b> <i>Expression</i></code>
+</p>
+<h2><a name="enumerates"></a> Integer enumerations</h2>
+<p>
+An enumeration is a sequence of constant integer values that are evaluated at compile time, and that do not change throughout the execution of a program.
+</p>
+<p>
+Enumerations may be declared at module scope, within class scope or within any local scope. 
+</p>
+<p>
+Their corresponding values are assigned automatically and unless you state a specific value, start with 0.
+</p>
+<p>
+The syntax for declaring an enumeration is:
+</p>
+<p>
+<code><b>Enumerate</b> <i>Identifier</i> <b>,</b> <i>Identifier</i> <b>,</b> <i>Identifier</i> [ <b>,</b> ...]</code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Enumerate</b> <i>Identifier</i> <b>=</b> <i>Startvalue</i> <b>,</b> <i>Identifier</i> <b>,</b> <i>Identifier</i> <b>=</b> <i>Startvalue</i> [ <b>,</b> ...]</code>
+</p>
+<h2><a name="expressions"></a> Expressions</h2>
+<p>
+Expressions are the parts of a program that perform calculations, make logical comparisons and return values from methods or functions. Expressions always evaluate to - or are used to evaluate to - a value of certain type.
+</p>
+<h3><a name="operators"></a> Operators and Order of Operations (Precedence)</h3>
+<p>
+The following table shows the order of operators in Cerberus&nbsp;X:
+</p>
+<table>
+<tr><th>Operator syntax</th><th>Description</th><th><a href="#assignments">Update assignment</a> equivalent</th></tr>
+<tr><td><code>New</code> <i>ClassType</i></td><td>Create a new object</td><td></td></tr>
+<tr><td><code>Null</code></td><td>The null object</td><td></td></tr>
+<tr><td><code>True</code></td><td>Boolean true</td><td></td></tr>
+<tr><td><code>False</code></td><td>Boolean false</td><td></td></tr>
+<tr><td><code>Self</code></td><td>Self object reference</td><td></td></tr>
+<tr><td><code>Super</code></td><td>Super object reference</td><td></td></tr>
+<tr><td><i>Literal</i></td><td>Literal</td><td></td></tr>
+<tr><td><i>Identifier</i></td><td>Identifier</td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>.</code> <i>Identifier</i></td><td>Scope member access</td><td></td></tr>
+<tr><td><code>(</code> <i>ExpressionSeq</i> <code>)</code></td><td>Invoke</td><td></td></tr>
+<tr><td><code>[</code> <i>IndexExpression</i> <code>]</code></td><td>Index</td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>+</code></td><td>Unary plus</td><td></td></tr>
+<tr><td><code>-</code></td><td>Unary minus</td><td></td></tr>
+<tr><td><code>~</code></td><td>Bitwise complement</td><td></td></tr>
+<tr><td><code>Not</code></td><td>Boolean inverse</td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>*</code></td><td>Multiplication</td><td><code>*=</code></td></tr>
+<tr><td><code>/</code></td><td>Division</td><td><code>/=</code></td></tr>
+<tr><td><code>Mod</code></td><td>Modulus</td><td><code>Mod=</code></td></tr>
+<tr><td><code>Shl</code></td><td>Bitwise shift left</td><td><code>Shl=</code></td></tr>
+<tr><td><code>Shr</code></td><td>Bitwise shift right (signed)</td><td><code>Shr=</code></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>+</code></td><td>Addition</td><td><code>+=</code></td></tr>
+<tr><td><code>-</code></td><td>Subtraction</td><td><code>-=</code></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>&</code></td><td>Bitwise 'and'</td><td><code>&=</code></td></tr>
+<tr><td><code>~</code></td><td>Bitwise 'xor'</td><td><code>~=</code></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>&#124;</code></td><td>Bitwise 'or'</td><td><code>&#124;=</code></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>=</code></td><td>Equals</td><td></td></tr>
+<tr><td><code>&lt;</code></td><td>Less than</td><td></td></tr>
+<tr><td><code>&gt;</code></td><td>Greater than</td><td></td></tr>
+<tr><td><code>&lt;=</code></td><td>Less than or equals</td><td></td></tr>
+<tr><td><code>&gt;=</code></td><td>Greater than or equals</td><td></td></tr>
+<tr><td><code>&lt;&gt;</code></td><td>Not equals</td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>And</code></td><td>Conditional 'and'</td><td></td></tr>
+<tr><td></td><td></td><td></td></tr>
+<tr><td><code>Or</code></td><td>Conditional 'or'</td><td></td></tr>
+</table>
+<p>
+From <code>+</code> (unary plus) onward, the operator may be followed by a line break.
+</p>
+<p>
+Note that in update assignments the right-hand-side is completely evaluated first before the update takes place.
+</p>
+<h3><a name="balancing"></a> Balancing argument types</h3>
+<p>
+When performing binary arithmetic (<code>*</code>, <code>/</code>, <code>Mod</code>, <code>+</code>, <code>-</code>) or comparison operations (<code>=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;&gt;</code>), operator arguments are 'balanced' according to the following rules:
+</p>
+<ul>
+<li>If either operand is not string, float or int, then error,</li>
+<li>else if either operand is a string, then the balanced type is string,</li>
+<li>else if either operand is a float, then the balanced type is float,</li>
+<li>else the balanced type is int.</li>
+<ul></ul>
+</ul>
+<p>
+In the case of arithmetic operations, arguments are first implicitly converted to the balanced type if necessary, and the result is also of the balanced type.
+</p>
+<p>
+In the case of comparison operations, arguments are first implicitly converted to the balanced type if necessary, and the result is boolean.
+</p>
+<p>
+The only valid arithmetic operation that can be performed on strings is addition, which performs string concatenation on the arguments.
+</p>
+<h3><a name="conditional_ops"></a> Conditional operators</h3>
+<p>
+The arguments of conditional operations (<code>And</code>, <code>Or</code>) are first converted to boolean if necessary and the result is boolean.
+</p>
+<p>
+In the case of <code>Or</code>, if the left-hand-side expression evaluates to true, the right-hand-side expression is not evaluated.  
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">If </code><code class="i">car</code><code class="d">&lt;&gt;</code><code class="k">Null Or </code><code class="i">GetSpeed</code><code class="d">()&gt;</code><code class="l">10 </code><code class="k">Then</code><code class="d">...</code><br/>
+</div>
+<p>
+In the above example, if car is not null, then the right-hand-side of the <code>Or</code> is not evaluated - ie: the <code>GetSpeed</code> function is never called.
+</p>
+<p>
+In the case of <code>And</code>, if the left-hand-side expression evaluates to false, the right-hand-side expression is not evaluated.  
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">If </code><code class="i">enemies</code><code class="d">.</code><code class="i">Count </code><code class="d">&gt; </code><code class="l">0 </code><code class="k">And </code><code class="i">HasEnemyInSight</code><code class="d">() </code><code class="k">Then </code><code class="d">...</code><br/>
+</div>
+<p>
+In the above example, if <code>enemies.Count</code> is &lt;= 0, then the right-hand-side of the And is not evaluated - ie: the <code>HasEnemyInSight</code> function is never called.
+</p>
+<h3><a name="bitwise_ops"></a> Bitwise operators</h3>
+<p>
+When performing bitwise operations (<code>Shl</code>, <code>Shr</code>, <code>&</code>, <code>|</code>, <code>~</code>), arguments are first implicitly converted to integers if necessary before the operation is performed. The result is also an integer.
+</p>
+<h3><a name="implicit_conversions"></a> Implicit conversions</h3>
+<p>
+Implicit conversions are automatic conversions performed when assigning a value to a variable, passing parameters to a function, returning a value from a function or when balancing operator operands.
+</p>
+<p>
+Cerberus&nbsp;X supports the following implicit conversions:
+</p>
+<table>
+<tr><th>Source type</th><th>Target type</th><th>Notes</th></tr>
+<tr><td>Boolean</td><td>Integer</td><td>Result is 1 if source is true, 0 if false.</td></tr>
+<tr><td>Integer</td><td>Floating point</td><td></td></tr>
+<tr><td>Integer</td><td>String</td><td></td></tr>
+<tr><td>Floating point</td><td>Integer</td><td>Value is converted by discarding fractional part.</td></tr>
+<tr><td>Floating point</td><td>String</td><td>Conversion is target dependent.</td></tr>
+<tr><td>Derived class object</td><td>Base class object</td><td>Upcast operation.</td></tr>
+</table>
+<h3><a name="explicit_conversions"></a> Explicit conversions</h3>
+<p>
+Explicit conversions are conversions from one type to another type which can be performed manually by the programmer .
+</p>
+<p>
+The syntax for performing an explicit conversion is: <code><i>TargetType</i> <b>(</b> <i>Expression</i> <b>)</b></code>
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Local </code><code class="i">energyFloat</code><code class="d">:</code><code class="k">Float </code><code class="d">= </code><code class="l">120.1000002001</code><br/>
+<br/>
+<code class="k">Local </code><code class="i">energyInt</code><code class="d">:</code><code class="k">Int </code><code class="d">= </code><code class="k">Int</code><code class="d">(</code><code class="i">energyFloat</code><code class="d">)         </code><code class="r">'Is 120 now</code><br/>
+</div>
+<p>
+You can perform the following explicit conversions in Cerberus&nbsp;X:
+</p>
+<table>
+<tr><th>Source type</th><th>Target type</th><th>Notes</th></tr>
+<tr><td>Integer</td><td>Boolean</td><td>Result is true if source &lt;&gt; 0, else false.</td></tr>
+<tr><td>Floating point</td><td>Boolean</td><td>Result is true if source &lt;&gt; 0.0, else false.</td></tr>
+<tr><td>Array</td><td>Boolean</td><td>Result is true if source.Length &lt;&gt; 0, else false.</td></tr>
+<tr><td>Object</td><td>Boolean</td><td>Result is true if source &lt;&gt; null, else false.</td></tr>
+<tr><td>String</td><td>Boolean</td><td>Result is true if source &lt;&gt; "", else false.</td></tr>
+<tr><td>String</td><td>Integer</td><td>Conversion is target dependent.</td></tr>
+<tr><td>String</td><td>Floating point</td><td>Conversion is target dependent.</td></tr>
+<tr><td>Base class object</td><td>Derived class object</td><td>Result is null if source is not a superclass of derived class.</td></tr>
+</table>
+<p>
+In some circumstances, Cerberus&nbsp;X will automatically perform an explicit conversion of a non-bool value to bool for you. This will occur when evaluating an expression for use with the <code>If</code> and <code>While</code> statements; the <code>Until</code> part of a <code>Repeat</code> loop; and when evaluating the arguments for the <code>Not</code>, <code>Or</code> and <code>And</code> operators. This allows you to use 'shortcut' code such as: <code>If x Then y</code> without the need to compare <code>x</code> with <code>0</code>, <code>""</code>, <code>[]</code> or <code>Null</code>.
+</p>
+<h3><a name="boxing"></a> Boxing and unboxing conversions</h3>
+<p>
+A 'box' object is an object designed to contain a single primitive int, float or string value. The process of placing a value into a box object is known as 'boxing', while extracting a value from an object is known as 'unboxing'. To help with writing box objects, Cerberus&nbsp;X provides some simple features for boxing and unboxing values:
+</p>
+<ul>
+<li>An int, float or string value will be automatically converted to a new box object if that object provides a suitable <code>New( <i>Int</i> )</code>, <code>New( <i>Float</i> )</code> or <code>New( <i>String</i> )</code> constructor.</li>
+<li>An object will be automatically converted to an int, float or string value if that object provides a suitable <code>ToInt:Int()</code>, <code>ToFloat:Float()</code> or <code>ToString:String()</code> method.</li>
+<ul></ul>
+</ul>
+<p>
+For example, here is a simple box class designed to hold an integer value:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">IntBox</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">value</code><code class="d">:</code><code class="k">Int</code><br/>
+<br/>
+<code class="d">    </code><code class="k">Method New</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">Int </code><code class="d">)</code><br/>
+<code class="d">        </code><code class="k">Self</code><code class="d">.</code><code class="i">value</code><code class="d">=</code><code class="i">value</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">ToInt</code><code class="d">:</code><code class="k">Int</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="k">Return </code><code class="i">value</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">box</code><code class="d">:</code><code class="i">IntBox</code><br/>
+<code class="d">    </code><code class="i">box</code><code class="d">=</code><code class="l">10</code><br/>
+<br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">t</code><code class="d">:</code><code class="k">Int</code><code class="d">=</code><code class="i">box</code><br/>
+<code class="d">    </code><code class="i">Print t</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h2><a name="statements"></a> Statements</h2>
+<p>
+Program statements may only appear within method or function declarations.
+</p>
+<p>
+A <code><b>;</b></code> character may optionally appear after any statement, and multiple statements may be placed on the same source code line if separated by the <code><b>;</b></code> character.
+</p>
+<h3><a name="statement_if"></a> The If statement</h3>
+<p>
+The <code>If</code> statement allows you to conditionally execute a block of statements depending on the result of a series of boolean expressions.
+</p>
+<p>
+The first boolean expression that evaluates to true will cause the associated block of statements to be executed. No further boolean expressions will be evaluated.
+</p>
+<p>
+If no boolean expression evaluates to true, then the final <code>Else</code> block will be executed if present.
+</p>
+<p>
+The syntax for the If statement is:
+</p>
+<p>
+<code><b>If</b> <i>Expression</i> [ <b>Then</b> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>ElseIf</b> <i>Expression</i> [ <b>Then</b> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Else</b></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>EndIf</b></code>
+</p>
+<p>
+There may be any number of <code>ElseIf</code> blocks, or none. The final <code>Else</code> block is optional.
+</p>
+<p>
+<code><b>End</b></code> or <code><b>End If</b></code> may be used instead of <code><b>EndIf</b></code>, and <code><b>Else If</b></code> may be used instead of <code><b>ElseIf</b></code>.
+</p>
+<p>
+In addtion, a simple one line version of If is also supported:
+</p>
+<p>
+<code><b>If</b> <i>Expression</i> [ <b>Then</b> ] <i>Statement</i> [ <b>Else</b> <i>Statement</i> ]</code>
+</p>
+<h3><a name="statement_select"></a> The Select statement</h3>
+<p>
+The <code>Select</code> statement allows you to execute a block of statements depending on a series of comparisons.
+</p>
+<p>
+The first comparison to produce a match will cause the associated block of statements to be executed.
+</p>
+<p>
+If no comparisons produce a match, then the final <code>Default</code> block will be executed if present.
+</p>
+<p>
+The syntax for the Select statement is:
+</p>
+<p>
+<code><b>Select</b> <i>Expression</i></code><br>
+<code><b>Case</b> <i>Expression</i> [ <b>,</b> <i>Expression</i>... ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Default</b></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>End</b> [ <b>Select</b> ]</code>
+</p>
+<p>
+There may be any number of <code>Case</code> blocks, or none. The final <code>Default</code> block is optional. If the <code>Default</code> block is present, it must appear after all <code>Case</code> blocks.
+</p>
+<h3><a name="loop_while"></a> The While loop</h3>
+<p>
+The <code>While</code> loop allows you to execute a block of statements repeatedly while a boolean expression evaluates to true.
+</p>
+<p>
+Note that a <code>While</code> loop may never actually execute any of it's statements if the expression evaluates to false when the loop is entered.
+</p>
+<p>
+The syntax for the <code>While</code> loop is:
+</p>
+<p>
+<code><b>While</b> <i>Expression</i></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Wend</b></code>
+</p>
+<p>
+<code><b>End</b></code> or <code><b>End While</b></code> may be used instead of <code><b>Wend</b></code>.
+</p>
+<p>
+<a href="#exit_continue">Exit and Continue</a> may be used within a <code>While</code> loop to abruptly terminate or continue loop execution.
+</p>
+<h3><a name="loop_repeat"></a> The Repeat loop</h3>
+<p>
+Like the <code>While</code> loop, the <code>Repeat</code> loop also allows you to execute a block of statement repeatedly while a boolean expression evaluates to true.
+</p>
+<p>
+However, unlike a <code>While</code> loop, a <code>Repeat</code> loop is guaranteed to execute at least once, as the boolean expression is not evaluated until the end of the loop.
+</p>
+<p>
+The syntax for <code>Repeat</code>/<code>Until</code> loops is:
+</p>
+<p>
+<code><b>Repeat</b></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Until</b> <i>Expression</i></code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><b>Repeat</b></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Forever</b></code>
+</p>
+<p>
+<a href="#exit_continue">Exit and Continue</a> may be used within a <code>Repeat</code> loop to abruptly terminate or continue loop execution.
+</p>
+<h3><a name="loop_for"></a> The numeric For loop</h3>
+<p>
+A numeric <code>For</code> loop will continue executing until the value of a numeric index variable reaches an exit value.
+</p>
+<p>
+The index variable is automatically updated every loop iteration by adding a constant step value.
+</p>
+<p>
+The syntax for a numeric <code>For</code> loop is:
+</p>
+<p>
+<code><b>For</b> [ <b>Local</b> ] <i>IndexVariable</i> <b>=</b> <i>FirstValue</i> <b>To</b> | <b>Until</b> <i>LastValue</i> [ <b>Step</b> <i>StepValue</i> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Next</b></code>
+</p>
+<p>
+<code><b>End</b></code> or <code><b>End For</b></code> may be used instead of <code><b>Next</b></code>.
+</p>
+<p>
+If present, <code>Local</code> will create a new local index variable that only exists for the duration of the loop. In addition, <i>IndexVariable</i> must include the variable type, or <code>:=</code> must be used instead of <code>=</code> to implicitly set the variable's type.
+</p>
+<p>
+If <code>Local</code> is not present, <i>IndexVariable</i> must be a valid, existing variable.
+</p>
+<p>
+The use of <code>To</code> or <code>Until</code> determines whether <i>LastValue</i> should be inclusive or exclusive.
+</p>
+<p>
+If <code>To</code> is used, the loop will exit once the index variable is greater than <i>LastValue</i> (or less than if <i>StepValue</i> is negative).
+</p>
+<p>
+If <code>Until</code> is used, the loop will exit once the index variable is greater than or equal to <i>LastValue</i> (or less than or equal to if <i>StepValue</i> is negative).
+</p>
+<p>
+If omitted, <i>StepValue</i> defaults to 1.
+</p>
+<p>
+<a href="#exit_continue">Exit and Continue</a> may be used within a numeric <code>For</code> loop to abruptly terminate or continue loop execution.
+</p>
+<h3><a name="loop_eachin"></a> The For EachIn loop</h3>
+<p>
+A <code>For</code> <code>EachIn</code> loop allows you to iterate through the elements of a collection.
+</p>
+<p>
+A collection is either an array, a string, or a specially designed object.
+</p>
+<p>
+The syntax for a For EachIn loop is:
+</p>
+<p>
+<code><b>For</b> [ <b>Local</b> ] <i>IndexVariable</i> <b>=</b> <b>EachIn</b> <i>Collection</i></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>Next</b></code>
+</p>
+<p>
+<code><b>End</b></code> or <code><b>End For</b></code> may be used instead of <code><b>Next</b></code>.
+</p>
+<p>
+If present, <code><b>Local</b></code> will create a new local index variable that only exists for the duration of the loop. In addition, <i>IndexVariable</i> must include the variable type, or <code>:=</code> must be used instead of <code>=</code> to implicitly set the variable's type.
+</p>
+<p>
+If <code>Local</code> is not present, <i>IndexVariable</i> must be a valid, existing variable.
+</p>
+<p>
+If <i>Collection</i> is an array, the loop will iterate through each element of the array, and the type of the index variable must match the element type of the array.
+</p>
+<p>
+If <i>Collection</i> is a string, the loop will iterate through each each character code of the string, and the type of the index variable must be numeric.
+</p>
+<p>
+If <i>Collection</i> is an object, it must provide the following method:
+</p>
+<div class="pretty">
+<code class="k">Method </code><code class="i">ObjectEnumerator</code><code class="d">:</code><code class="k">Object</code><code class="d">()</code><br/>
+</div>
+<p>
+The object returned by this method must itself provide the following methods:
+</p>
+<div class="pretty">
+<code class="k">Method </code><code class="i">HasNext</code><code class="d">:</code><code class="k">Bool</code><code class="d">()</code><br/>
+<code class="k">Method </code><code class="i">NextObject</code><code class="d">:</code><code class="k">Object</code><code class="d">()</code><br/>
+</div>
+<p>
+This allows you to build 'collection' style objects, such as the <a href="Modules_cerberus.list.html">List</a> and <a href="Modules_cerberus.map.html">Map</a> classes included in the standard Cerberus&nbsp;X modules that can be iterated through using For EachIn loops.
+</p>
+<h3><a name="exit_continue"></a> Exit and Continue</h3>
+<p>
+<code><b>Exit</b></code> can be used within <code>While</code>, <code>Repeat</code> and <code>For</code> loops to abruptly exit the loop before the loop termination condition has been met.
+</p>
+<p>
+<code><b>Continue</b></code> can be used within <code>While</code>, <code>Repeat</code> and <code>For</code> loops to force the loop to abruptly skip to the next loop iteration, skipping over any statements that may be remaining in the current loop iteration.
+</p>
+<h3><a name="assignments"></a> Assignment and Update Assignment statements</h3>
+<p>
+An assignment statement modifies a variable's value, and has the syntax:
+</p>
+<p>
+<code><i>VarExpression</i> <i>Operator</i> <i>Expression</i></code>
+</p>
+<p>
+Where <i>VarExpression</i> is an expression that evaluates to a variable, and <i>Operator</i> is one of the following:
+</p>
+<table>
+<tr><th>Operator</th><th>Description</th></tr>
+<tr><td><code>=</code></td><td>Assignment</td></tr>
+<tr><td><code>*=</code></td><td>Multiplication update assignment</td></tr>
+<tr><td><code>/=</code></td><td>Division update assignment</td></tr>
+<tr><td><code>Mod=</code></td><td>Modulus update assignment</td></tr>
+<tr><td><code>Shl=</code></td><td>Bitwise shift left update assignment</td></tr>
+<tr><td><code>Shr=</code></td><td>Bitwise shift right (signed) update assignment</td></tr>
+<tr><td><code>+=</code></td><td>Addition update assignment</td></tr>
+<tr><td><code>-=</code></td><td>Subtraction update assignment</td></tr>
+<tr><td><code>&=</code></td><td>Bitwise 'and' update assignment</td></tr>
+<tr><td><code>~=</code></td><td>Bitwise 'xor' update assignment</td></tr>
+<tr><td><code>&#124;=</code></td><td>Bitwise 'or' update assignment</td></tr>
+</table>
+<p>
+The <code><b>=</b></code> operator is used for plain assignment, while the remaining operators are used for update assignments. An update assignment is a short notation equivalent to:
+</p>
+<p>
+<code><i>VarExpression</i> <b>=</b> <i>VarExpression</i> <i>Operator</i> <b>(</b> <i>Expression</i> <b>)</b></code>
+</p>
+<h3><a name="exp_statements"></a> Expression statements</h3>
+<p>
+You may also use certain expressions as program statements. These are:
+</p>
+<ul>
+<li>Function or method call expressions.</li>
+<li><code><b>New</b></code> expression.</li>
+<ul></ul>
+<ul></ul>
+</ul><h2><a name="functions"></a> Functions</h2>
+<p>
+A function is a self contained block of statements that can be called (or invoked) repeatedly from elsewhere in the program. Functions can also be passed parameters and return a result.
+</p>
+<p>
+The syntax for declaring a function is:
+</p>
+<p>
+<code><b>Function</b> <i>Identifier</i> <b>:</b> <i>ReturnType</i> <b>(</b> <i>Parameters</i> <b>)</b></code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>End</b> [ <b>Function</b> ]</code>
+</p>
+<p>
+Functions that don't return a value use <code><b>:Void</b></code> as <i>ReturnType</i>.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Eat</code><code class="d">:</code><code class="k">Void</code><code class="d">( </code><code class="i">amount</code><code class="d">:</code><code class="k">Int </code><code class="d">)</code><br/>
+<code class="d">    ...</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+<i>Parameters</i> is a comma separated sequence of function parameters:
+</p>
+<p>
+<code><i>Identifier</i> <b>:</b> <i>Type</i> [ <b>=</b> <i>InitExpression</i> ]</code>
+</p>
+<p>
+Or...
+</p>
+<p>
+<code><i>Identifier</i> <b>:=</b> <i>InitExpression</i></code>
+</p>
+<p>
+If you provide an <i>InitExpression</i> when declaring a function parameter, this means that the parameter has a default value and that the parameter can be optionally omitted when the function is called.
+</p>
+<p>
+Once you have declared a function, it can be called with the syntax: 
+</p>
+<p>
+<code><b>FunctionIdentifier</b> <b>(</b> <i>Arguments</i> <b>)</b></code>
+</p>
+<p>
+where <i>Arguments</i> is a comma separated sequence of expressions.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Sum</code><code class="d">:</code><code class="k">Int</code><code class="d">( </code><code class="i">x</code><code class="d">:</code><code class="k">Int</code><code class="d">,</code><code class="i">y</code><code class="d">:</code><code class="k">Int </code><code class="d">)</code><br/>
+<code class="d">    </code><code class="k">Return </code><code class="i">x</code><code class="d">+</code><code class="i">y</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print Sum</code><code class="d">( </code><code class="l">10</code><code class="d">,</code><code class="l">20 </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Here is an example of using default parameters:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Sum</code><code class="d">( </code><code class="i">x</code><code class="d">:</code><code class="k">Int</code><code class="d">=</code><code class="l">0</code><code class="d">,</code><code class="i">y</code><code class="d">:</code><code class="k">Int</code><code class="d">=</code><code class="l">0</code><code class="d">,</code><code class="i">z</code><code class="d">:</code><code class="k">Int</code><code class="d">=</code><code class="l">0 </code><code class="d">)</code><br/>
+<code class="d">    </code><code class="i">Print x</code><code class="d">+</code><code class="i">y</code><code class="d">+</code><code class="i">z</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print Sum</code><code class="d">()         </code><code class="r">'same as calling Sum( 0,0,0 )</code><br/>
+<code class="d">    </code><code class="i">Print Sum</code><code class="d">( </code><code class="l">10</code><code class="d">,</code><code class="l">20 </code><code class="d">)  </code><code class="r">'same as calling Sum( 10,20,0 )</code><br/>
+<code class="d">    </code><code class="i">Print Sum</code><code class="d">( </code><code class="l">10</code><code class="d">,,</code><code class="l">30 </code><code class="d">) </code><code class="r">'same as calling Sum( 10,0,30 )</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h3><a name="overloading"></a> Function overloading</h3>
+<p>
+Functions can also be overloaded. This means that multiple declarations can share the same name, as long as they each have different parameters. Methods can be overloaded in exactly the same way as functions.
+</p>
+<p>
+When a function is called, Cerberus&nbsp;X looks at the number and type of the parameters used in the call and looks for a matching overloaded version to use. For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Add</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">Int </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Add</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">Float </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Add</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">String </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">10 </code><code class="d">)   </code><code class="r">'calls first version as 10 is of type Int</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">10.0 </code><code class="d">) </code><code class="r">'calls second version as 10.0 is of type Float</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">"10" </code><code class="d">) </code><code class="r">'calls third version as "10" is of type String</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+The number of parameters can also be used to differentiate between overloaded functions. For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Set</code><code class="d">( </code><code class="i">x </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Set</code><code class="d">( </code><code class="i">x</code><code class="d">, </code><code class="i">y </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Set</code><code class="d">( </code><code class="l">10 </code><code class="d">)    </code><code class="r">'calls first version</code><br/>
+<code class="d">    </code><code class="i">Set</code><code class="d">( </code><code class="l">10</code><code class="d">,</code><code class="l">20 </code><code class="d">) </code><code class="r">'calls second version as it has two parameters</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+When determining which overloaded version to actually use, Cerberus&nbsp;X uses the following logic:
+</p>
+<ul>
+<li>If an overloaded version is found that is an exact match for the number and type of function call parameters, that version is used. Note that if the function call involves the use of any default parameters, it is not considered an exact match.</li>
+<li>Otherwise, if there is exactly one overloaded version that can be called by <a href="#implicit_conversions">implicitly converting</a> the function call parameters, that version is used.</li>
+<li>Otherwise, an error is generated. In this case, you will need to manually cast some or all of the function call parameters to create an exact match.</li>
+<ul></ul>
+</ul>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Add</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">Int </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Add</code><code class="d">( </code><code class="i">value</code><code class="d">:</code><code class="k">String </code><code class="d">)</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">10 </code><code class="d">)   </code><code class="r">'OK, calls first version</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">"10" </code><code class="d">) </code><code class="r">'OK, calls second version</code><br/>
+<code class="d">    </code><code class="i">Add</code><code class="d">( </code><code class="l">10.0 </code><code class="d">) </code><code class="r">'error - unable to determine which version to call</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+The error is caused by the fact that the function call parameter  - '10.0' - is a floating point value and can therefore be implicitly converted to either an integer or a string, so Cerberus&nbsp;X cannot decide which overload to use.
+</p>
+<p>
+To solve this problem, you would need to explicitly cast the parameter to either an integer or a string to give Cerberus&nbsp;X a 'hint' about which version you want used.  For example:
+</p>
+<div class="pretty">
+<code class="i">Add</code><code class="d">( </code><code class="k">Int</code><code class="d">(</code><code class="l">10.0</code><code class="d">) )        </code><code class="r">'Casts the float to an integer, calls first version</code><br/>
+</div>
+<h2><a name="methods"></a> Methods</h2>
+<p>
+A Method is a function that is bound to a class. A method has implicit access to all members of its class, such as fields, globals and other methods and functions. Methods can be <a href="#overloading">overloaded</a> in exactly the same way as functions.
+</p>
+<p>
+The syntax for declaring a method is similar to that for declaring a function:
+</p>
+<p>
+<code><b>Method</b> <i>Identifier</i> <b>:</b> <i>ReturnType</i> <b>(</b> <i>Parameters</i> <b>)</b> [ <b>Property</b> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Statements...</i></code><br>
+<code><b>End</b> [ <b>Method</b> ]</code>
+</p>
+<p>
+Within a method you can also use the <code>Self</code> and <code>Super</code> keywords:
+</p>
+<ul>
+<li><code><b>Self</b></code> may be used within a method to access the object the method is associated with.</li>
+<li><code><b>Super</b></code> may be used within a method to call 'super class' methods.</li>
+<ul></ul>
+<ul></ul>
+</ul><h3><a name="properties"></a> Property methods</h3>
+<p>
+The optional <code><b>Property</b></code> keyword can be used to declare a 'property method'.
+</p>
+<p>
+A property method with 0 parameters can be invoked without any brackets. A property method with 1 parameter can be invoked be using it as the left-hand-side of an assignment statement, in which case the right-hand-side expression of the assignment is passed to the property method.
+</p>
+<p>
+You can therefore create methods that behave like fields, but actually execute code when they are read or written. You can use <a href="#overloading">method overloading</a> to provide both read and write property methods, or provide just a read method, or even just a write method. For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">_value</code><code class="d">:</code><code class="k">Int</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Value</code><code class="d">( </code><code class="i">val</code><code class="d">:</code><code class="k">Int </code><code class="d">) </code><code class="k">Property</code><br/>
+<code class="d">        </code><code class="i">_value </code><code class="d">= </code><code class="i">val</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Set _value to "</code><code class="d">+</code><code class="i">_value</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">myObject </code><code class="d">:= </code><code class="k">New </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="i">myObject</code><code class="d">.</code><code class="i">Value </code><code class="d">= </code><code class="l">100          </code><code class="r">' sets _value and outputs "Set _value to 100"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+It is illegal to declare a property method with 2 or more parameters.
+</p>
+<h2><a name="classes"></a> Classes</h2>
+<p>
+A class is a kind of 'blueprint' for creating objects at runtime.
+</p>
+<p>
+The syntax for declaring a class is:
+</p>
+<p>
+<code><b>Class</b> <i>Identifier</i> [ <b><</b> <i>Parameters</i> <b>></b> ] [ <b>Extends</b> <i>BaseClass</i> ] [ <b>Implements</b> <i>Interfaces</i> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Declarations...</i></code><br>
+<code><b>End</b> [ <b>Class</b> ]</code>
+</p>
+<p>
+Classes can contain <a href="#fields">field</a>, <a href="#methods">method</a>, <a href="#constants">constant</a>, <a href="#globals">global</a> and <a href="#functions">function</a> declarations.
+</p>
+<p>
+If no base class is specified using <code>Extends</code>, the class defaults to extending the built in Object class.
+</p>
+<p>
+The <code>Implements</code> keyword is used to implement interfaces, and must be followed by a comma separated list of interface names. Please refer to the <a href="#interfaces">Interfaces</a> section for more on interfaces. 
+</p>
+<p>
+Fields and methods are class members only accessible via a valid object reference of that class. But constants, globals and functions can be accessed via the class identifier itself. As a class is also a valid scope, any non-private constants, globals and functions declared within a class can be accessed outside of the class using the scope member access operator '<code>.</code>'. For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">C</code><br/>
+<code class="d">   </code><code class="k">Global </code><code class="i">T</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">C</code><code class="d">.</code><code class="i">T</code><code class="d">=</code><code class="l">10</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Once you have declared a class, you can create objects of that class at runtime using the <code>New</code> operator. For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">x</code><code class="d">,</code><code class="i">y</code><code class="d">,</code><code class="i">z</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">myObject</code><code class="d">:=</code><code class="k">New </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="i">myObject</code><code class="d">.</code><code class="i">x</code><code class="d">=</code><code class="l">10</code><br/>
+<code class="d">    </code><code class="i">myObject</code><code class="d">.</code><code class="i">y</code><code class="d">=</code><code class="l">20</code><br/>
+<code class="d">    </code><code class="i">myObject</code><code class="d">.</code><code class="i">z</code><code class="d">=</code><code class="l">30</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h3><a name="constructors"></a> Constructors</h3>
+<p>
+Constructors are methods that are called each time an object is created with <code>New</code>.
+</p>
+<p>
+To declare a constructor, you simply declare a class method and name it <code><b>New</b></code>. Constructors may not have a type declaration nor a return statement.
+</p>
+<p>
+Constructors can take parameters and can be overloaded.
+</p>
+<p>
+To invoke a super class constructor within a constructor, use the <code><b>Super</b></code> keyword.
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">_value</code><code class="d">:</code><code class="k">Int</code><br/>
+<code class="d">    </code><code class="k">Method New</code><code class="d">( </code><code class="i">val</code><code class="d">:</code><code class="k">Int </code><code class="d">)               </code><code class="r">' constructor or MyClass</code><br/>
+<code class="d">        </code><code class="i">_value </code><code class="d">= </code><code class="i">val</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">myObject </code><code class="d">:= </code><code class="k">New </code><code class="i">MyClass</code><code class="d">(</code><code class="l">100</code><code class="d">)  </code><code class="r">' calls the constructor of MyClass</code><br/>
+<code class="d">    </code><code class="i">Print myObject</code><code class="d">.</code><code class="i">_value               </code><code class="r">' prints "100"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h2><a name="generics"></a> Generic classes</h2>
+<p>
+Generic classes allow you to write code that is not specific to a single data type.
+</p>
+<p>
+A generic class is declared in a similar way to a normal class, only with an additional set of 'type parameters' enclosed within <code><b><</b></code> and <code><b>></b></code>.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">Pointer</code><code class="d">&lt;</code><code class="i">T</code><code class="d">&gt;</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Set</code><code class="d">( </code><code class="i">data</code><code class="d">:</code><code class="i">T </code><code class="d">)</code><br/>
+<code class="d">        </code><code class="i">_data</code><code class="d">=</code><code class="i">data</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="d">    </code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Get</code><code class="d">:</code><code class="i">T</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="k">Return </code><code class="i">_data</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="d">    </code><br/>
+<code class="d">    </code><code class="k">Private</code><br/>
+<br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">_data</code><code class="d">:</code><code class="i">T</code><br/>
+<br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Type parameters can be any valid identifier. Here, <code>T</code> is such a type parameter.
+</p>
+<p>
+Within the declaration of a generic class, type parameters may be used anywhere a type is normally expected, for example, when declaring variables and function return types, and when creating new objects or arrays.
+</p>
+<p>
+When it comes to actually using a generic class, you must provide actual types to be used in place of type parameters. Types parameters can be of any valid type, including int, float, string and array.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">Actor</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">pointer</code><code class="d">:</code><code class="i">Pointer</code><code class="d">&lt;</code><code class="i">Actor</code><code class="d">&gt;</code><br/>
+<code class="d">    </code><code class="i">pointer</code><code class="d">=</code><code class="k">New </code><code class="i">Pointer</code><code class="d">&lt;</code><code class="i">Actor</code><code class="d">&gt;</code><br/>
+<code class="d">    </code><code class="i">pointer</code><code class="d">.</code><code class="i">Set </code><code class="k">New </code><code class="i">Actor</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">actor</code><code class="d">:=</code><code class="i">pointer</code><code class="d">.</code><code class="i">Get</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+The syntax <code>Pointer&lt;Actor&gt;</code> indicates an 'instantiation' of the generic class <code>Pointer&lt;T&gt;</code>.
+</p>
+<p>
+This is in itself a unique class, so each time you use the <code>Pointer&lt;T&gt;</code> class with a different type for <code>T</code>, you are actually creating a whole new class.
+</p>
+<p>
+Generic classes are commonly used for writing container classes such as lists, stacks and so on, and the standard Cerberus&nbsp;X modules provide a set of simple generic container classes.
+</p>
+<h2><a name="interfaces"></a> Interfaces</h2>
+<p>
+An interface is similar to a class, except that it can only contain constants and abstract methods.
+</p>
+<p>
+Classes can implement an interface using the <code><b>Implements</b></code> keyword in the class declaration.
+</p>
+<p>
+Classes that implement an interface must declare each method declared in the interface.
+</p>
+<p>
+An interface can be used where ever a class is expected, for example when declaring the types of variables, or function return types. An interface cannot however be used with <code>New</code>.
+</p>
+<p>
+An Interface can also optionally extend existing interfaces, in which cases all methods in all extended interfaces must be declared by any implementing classes.
+</p>
+<p>
+Interfaces can not be generic.
+</p>
+<p>
+The syntax for declaring an interface is:
+</p>
+<p>
+<code><b>Interface</b> <i>Identifier</i> [ <b>Extends</b> <i>Interfaces</i> ]</code><br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp; <i>Declarations...</i></code><br>
+<code><b>End</b> [ <b>Interface</b> ]</code>
+</p>
+<p>
+All methods declared inside an interface are automatically treated as <a href="Programming_Keywords_Abstract.html">abstract</a>, and can therefore have no 'body'.
+</p>
+<p>
+Here is an example of using interfaces:
+</p>
+<div class="pretty">
+<code class="k">Interface </code><code class="i">Moveable</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Move</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Interface </code><code class="i">Drawable</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Draw</code><code class="d">()</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">Actor </code><code class="k">Implements </code><code class="i">Moveable</code><code class="d">,</code><code class="i">Drawable</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Move</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Actor.Move()"</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Draw</code><code class="d">()</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Actor.Draw()"</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Move</code><code class="d">( </code><code class="i">moveable</code><code class="d">:</code><code class="i">Moveable </code><code class="d">) </code><code class="r">' moveable can be any class, as long as it implements 'Moveable'</code><br/>
+<code class="d">    </code><code class="i">moveable</code><code class="d">.</code><code class="i">Move</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Draw</code><code class="d">( </code><code class="i">drawable</code><code class="d">:</code><code class="i">Drawable </code><code class="d">) </code><code class="r">' drawable can be any class, as long as it implements 'Drawable'</code><br/>
+<code class="d">    </code><code class="i">drawable</code><code class="d">.</code><code class="i">Draw</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Local </code><code class="i">actor</code><code class="d">:=</code><code class="k">New </code><code class="i">Actor</code><br/>
+<br/>
+<code class="d">    </code><code class="i">Move actor</code><br/>
+<code class="d">    </code><code class="i">Draw actor</code><br/>
+<code class="k">End</code><br/>
+</div>
+<h2><a name="exceptions"></a> Exceptions</h2>
+<p>
+Exceptions are objects that can be 'thrown' to inform your program of unusual or abnormal behaviour.
+</p>
+<p>
+By placing code inside a <code>Try</code> block, you can catch thrown exceptions with a corresponding <code>Catch</code> block. For example...
+</p>
+<div class="pretty">
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="k">Try</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Hello World!"</code><br/>
+<code class="d">        </code><code class="k">Throw New Throwable</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Where am I?"</code><br/>
+<code class="d">    </code><code class="k">Catch </code><code class="i">ex</code><code class="d">:</code><code class="k">Throwable</code><br/>
+<code class="d">        </code><code class="i">Print </code><code class="l">"Caught a Throwable!"</code><br/>
+<code class="d">    </code><code class="k">End</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Try this with and without the throw statement.
+</p>
+<p>
+<code>Throw</code> statements may appear anywhere in your application, not just inside a <code>Try</code> block. When an object is thrown, it is thrown to the most recently executed <code>Try</code> block capable of catching the object.
+</p>
+<p>
+The class of objects used with throw and catch must extend the built-in class <code>Throwable</code>. The <code>Throwable</code> class itself simply extends Object and provides no new methods or fields, so you may wish to extend <code>Throwable</code> to create your own exception classes with more functionality.
+</p>
+<p>
+You can also catch multiple classes of exception object per <code>Try</code> block, for example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">Ex1 </code><code class="k">Extends Throwable</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">Ex2 </code><code class="k">Extends Throwable</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">	</code><code class="k">For Local </code><code class="i">i</code><code class="d">:=</code><code class="l">1 </code><code class="k">To </code><code class="l">10</code><br/>
+<code class="d">		</code><code class="k">Try</code><br/>
+<code class="d">            </code><code class="k">If </code><code class="d">(</code><code class="i">i </code><code class="d">&amp; </code><code class="l">1</code><code class="d">) </code><code class="k">Throw New </code><code class="i">Ex1 </code><code class="k">Else Throw New </code><code class="i">Ex2</code><br/>
+<code class="d">		</code><code class="k">Catch </code><code class="i">ex</code><code class="d">:</code><code class="i">Ex1</code><br/>
+<code class="d">			</code><code class="i">Print </code><code class="l">"Caught an ex1!"</code><br/>
+<code class="d">		</code><code class="k">Catch </code><code class="i">ex</code><code class="d">:</code><code class="i">Ex2</code><br/>
+<code class="d">			</code><code class="i">Print </code><code class="l">"Caught an ex2!"</code><br/>
+<code class="d">		</code><code class="k">End</code><br/>
+<code class="d">	</code><code class="k">Next</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+When a <code>Try</code> block has multiple <code>Catch</code> blocks and an exception is thrown, the first <code>Catch</code> block capable of handling the exception is executed. If no suitable <code>Catch</code> block can be found, the exception is passed to the next most recently executed <code>Try</code> block, and so on.
+</p>
+<p>
+If no <code>Catch</code> block can be found to catch an exception, a runtime error occurs and the application is terminated.
+</p>
+<h2><a name="modules"></a> Modules</h2>
+<p>
+A Cerberus&nbsp;X module corresponds to a single Cerberus&nbsp;X source file, and provides a named scope for the constants, globals, functions and classes declared in that file. Every Cerberus&nbsp;X source file declares a module, and every module has an associated source file.
+</p>
+<p>
+The name of the module scope is the same as the name of the file (minus the directory path and file extension), so the names of Cerberus&nbsp;X source files must also be <a href="#identifiers">valid Cerberus&nbsp;X identifiers</a>.
+</p>
+<p>
+It is also strongly recommend that file/module names be completely lower-case - both to prevent any issues with cased/uncased file systems and to provide consistency with the standard module set.
+</p>
+<p>
+One module may import another using the import statement. All import statements must appear at the top of a module before any declarations. The syntax for an import statement is:
+</p>
+<p>
+<code><b>Import</b> <i>ModulePath</i></code>
+</p>
+<p>
+Where <i>ModulePath</i> describes the file location of the Cerberus&nbsp;X module to import. This must be a sequence of 'dot' separated identifiers, and is treated as a relative file system path with dots representing directory separators. The last component in the path represents either an actual .cxs source file, or a directory containing a .cxs source file of the same name.
+</p>
+<p>
+Given a module's relative path, Cerberus&nbsp;X will look for an actual module to import in the following locations (and in this order):
+</p>
+<ul>
+<li>The current directory - ie: the directory the importing file is in.</li>
+<li>The project directory - ie: the directory the main source file is in. This is the source file that was passed to the 'trans' compiler, and that contains the declaration for Main().</li>
+<li>The modules directory - ie: the directory named 'modules' in the Cerberus&nbsp;X distribution.</li>
+<ul></ul>
+</ul>
+<p>
+For example, given the following import directive:
+</p>
+<div class="pretty">
+<code class="k">Import </code><code class="i">myutil</code><code class="d">.</code><code class="i">mycolor</code><br/>
+</div>
+<p>
+Cerberus&nbsp;X will first look for the files myutil/mycolor.cxs and myutil/mycolor/mycolor.cxs in the current directory.
+</p>
+<p>
+(Note: the reason modules are allowed to be represented as either a single .cxs file, or as a .cxs file within a directory of the same name is for pure convenience. Sometimes it's more convenient for a module to consist of a single file, while sometimes it's more convenient for a module to have its own directory.)
+</p>
+<p>
+If either is found, it is imported into the current module and the search ends.
+</p>
+<p>
+If both are found, an error is generated.
+</p>
+<p>
+If neither is found the search continues with the project directory and, failing that, the modules directory.
+</p>
+<p>
+If the module is not found anywhere, an error is generated.
+</p>
+<p>
+Once successfully imported, the importing module can access the declarations made in the imported module, by using the imported module's name as a scope.
+</p>
+<p>
+Here is a simple import example:
+</p>
+<div class="pretty">
+<code class="r">'----- file1.cxs -----</code><br/>
+<code class="k">Import </code><code class="i">file2                </code><code class="r">'after this, file2 can be used as a scope</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print file2</code><code class="d">.</code><code class="i">X           </code><code class="r">'access global X in file2 module</code><br/>
+<br/>
+<code class="d">    </code><code class="i">file2</code><code class="d">.</code><code class="i">Test              </code><code class="r">'access function Test in file2 module</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">'---- file2.cxs ----</code><br/>
+<code class="k">Global </code><code class="i">X</code><code class="d">:=</code><code class="l">1</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Test</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"file2.Test"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+When accessing identifiers in imported modules, Cerberus&nbsp;X allows you to omit the module scope as long as there are no 'clashes' between identifiers in multiple modules. For example:
+</p>
+<div class="pretty">
+<code class="r">'----- file1.cxs ----</code><br/>
+<code class="k">Import </code><code class="i">file2</code><br/>
+<code class="k">Import </code><code class="i">file3</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<br/>
+<code class="d">    </code><code class="i">Print X     </code><code class="r">'OK, accesses file2.X</code><br/>
+<code class="d">    </code><code class="i">Print Y     </code><code class="r">'OK, accesses file3.Y</code><br/>
+<code class="d">    </code><code class="i">Test        </code><code class="r">'ERROR! Which Test? file2.Test or file3.Test?</code><br/>
+<code class="d">    </code><code class="i">file2</code><code class="d">.</code><code class="i">Test  </code><code class="r">'OK, I now know which module to get Test from</code><br/>
+<br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">'----- file2.cxs  -----</code><br/>
+<code class="k">Global </code><code class="i">X</code><code class="d">:=</code><code class="l">1</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Test</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"file2.Test"</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">'----- file3.cxs -----</code><br/>
+<code class="k">Global </code><code class="i">Y</code><code class="d">:=</code><code class="l">2</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Test</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print </code><code class="l">"file3.Test"</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+By default, any imports made by a module are automatically made available to importers of that module. That is, if module X imports module Y, and module Y imports module Z, the result is that module X effectively imports module Z.
+</p>
+<p>
+However, if an import is declared to be private, that import is NOT made available. For example:
+</p>
+<div class="pretty">
+<code class="r">'----- file1.cxs -----</code><br/>
+<code class="k">Import </code><code class="i">file2</code><br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<br/>
+<code class="d">    </code><code class="i">Print X  </code><code class="r">'OK, accesses file2.X</code><br/>
+<code class="d">    </code><code class="i">Print Y  </code><code class="r">'OK, accesses file3.Y</code><br/>
+<code class="d">    </code><code class="i">Print Z  </code><code class="r">'ERROR! can't see file.Z</code><br/>
+<br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">'----- file2.cxs -----</code><br/>
+<code class="k">Import </code><code class="i">file3                </code><code class="r">'Public import: When you import file2, you also import file3</code><br/>
+<br/>
+<code class="k">Private</code><br/>
+<code class="k">Import </code><code class="i">file4                </code><code class="r">'Private - ie: internal use only. Only file2 can access file4.  file1 cannot access file4.</code><br/>
+<br/>
+<code class="k">Public</code><br/>
+<code class="k">Global </code><code class="i">X</code><code class="d">:=</code><code class="l">1</code><br/>
+<br/>
+<code class="r">'----- file3.cxs -----</code><br/>
+<code class="k">Global </code><code class="i">Y</code><code class="d">:=</code><code class="l">2</code><br/>
+<br/>
+<code class="r">'----- file4.cxs -----</code><br/>
+<code class="k">Global </code><code class="i">Z</code><code class="d">:=</code><code class="l">3</code><br/>
+</div>
+<p>
+Modules can be stored in a directory hierarchy and imported using a 'dotted' module path, for example:
+</p>
+<div class="pretty">
+<code class="r">'----- file1.cxs  -----</code><br/>
+<code class="k">Import </code><code class="i">file2</code><br/>
+<code class="k">Import </code><code class="i">util</code><code class="d">.</code><code class="i">file3</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print file2</code><code class="d">.</code><code class="i">X</code><br/>
+<code class="d">    </code><code class="i">Print file3</code><code class="d">.</code><code class="i">Y</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<br/>
+<code class="r">'----- util/file2.cxs  ----</code><br/>
+<code class="k">Global </code><code class="i">X</code><code class="d">:=</code><code class="l">1</code><br/>
+<br/>
+<code class="r">'----- util/file3.cxs -----</code><br/>
+<code class="k">Global </code><code class="i">Y</code><code class="d">:=</code><code class="l">2</code><br/>
+</div>
+<p>
+Note that the directory path (in this case, 'util') is not used in any way except to locate the module. The module name is still just 'file3' - not 'util.file3'.
+</p>
+<h3><a name="alias"></a> The Alias directive</h3>
+<p>
+The <code>Alias</code> directive allows you to assign a local name to a constant, global, function or class declared in another module. This can be used to create 'shortcuts' for clashing identifiers.
+</p>
+<p>
+The syntax for <code>Alias</code> is:
+</p>
+<p>
+<code><b>Alias</b> <i>Identifier</i> <b>=</b> <i>ModulePath</i> <b>.</b> <i>Identifier</i></code>
+</p>
+<p>
+<code>Alias</code> directives must appear in the 'import' section of a module, before any code.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="r">'----- file1.cxs  -----</code><br/>
+<code class="k">Import </code><code class="i">file2</code><br/>
+<code class="k">Import </code><code class="i">file3</code><br/>
+<br/>
+<code class="k">Alias </code><code class="i">T</code><code class="d">=</code><code class="i">file2</code><code class="d">.</code><code class="i">T               </code><code class="r">'which 'T' to use</code><br/>
+<br/>
+<code class="k">Function </code><code class="i">Main</code><code class="d">()</code><br/>
+<code class="d">    </code><code class="i">Print T                   </code><code class="r">'Prints '1'</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="r">'----- file2.cxs  -----</code><br/>
+<code class="k">Global </code><code class="i">T</code><code class="d">:=</code><code class="l">1</code><br/>
+<br/>
+<code class="r">'----- file3.cxs -----</code><br/>
+<code class="k">Global </code><code class="i">T</code><code class="d">:=</code><code class="l">2</code><br/>
+</div>
+<h2><a name="visibility"></a> Public and Private</h2>
+<p>
+The <code>Public</code> and <code>Private</code> directives are used to control the visibility of subsequent declarations in a module or class.
+</p>
+<p>
+If the <code>Public</code> directive is used in the main body of a module, all subsequent declarations will be public, and will be visible outside of the current module.
+</p>
+<p>
+If the <code>Private</code> directive is used in the main body of a module, all subsequent declarations will be private and will not be visible outside of the current module.
+</p>
+<p>
+For example:
+</p>
+<div class="pretty">
+<code class="k">Private</code><br/>
+<code class="k">Global </code><code class="i">x</code><code class="d">,</code><code class="i">y</code><code class="d">,</code><code class="i">z        </code><code class="r">'These are private to the current module</code><br/>
+<br/>
+<code class="k">Public</code><br/>
+<code class="k">Global </code><code class="i">P</code><code class="d">,</code><code class="i">Q</code><code class="d">,</code><code class="i">R        </code><code class="r">'These can be used by any module</code><br/>
+</div>
+<p>
+When used inside a class declaration, <code>Public</code> and <code>Private</code> work in a similar way to control the visibility of subsequent member declarations. For example:
+</p>
+<div class="pretty">
+<code class="k">Class </code><code class="i">MyClass</code><br/>
+<code class="d">    </code><code class="k">Private</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">x</code><code class="d">,</code><code class="i">y</code><code class="d">,</code><code class="i">z        </code><code class="r">'these are NOT visible outside of this module.</code><br/>
+<code class="d">    </code><br/>
+<code class="d">    </code><code class="k">Public</code><br/>
+<code class="d">    </code><code class="k">Field </code><code class="i">P</code><code class="d">,</code><code class="i">Q</code><code class="d">,</code><code class="i">R        </code><code class="r">'these ARE visible outside of this module.</code><br/>
+<code class="k">End</code><br/>
+</div>
+<p>
+Note that private class members are not private to the class, but to the entire module. This means that code outside of the class but within the same module can still access class private members.
+</p>
+<h2><a name="extern"></a> External declarations</h2>
+<p>
+The <code>Extern</code> directive is used to connect Cerberus&nbsp;X code to non-Cerberus&nbsp;X code. It lets you mix Cerberus&nbsp;X code (to be translated into the target platform language) with native target platform code.
+</p>
+<p>
+When the <code>Extern</code> directive is used in the main body of a module, all subsequent global, function and class declarations will be treated as external declarations.
+</p>
+<p>
+External declarations are assumed to be implemented elsewhere in native code, and as such may not contain a 'body'.
+</p>
+<p>
+In the case of external global variables, this means the global may not be initialized - it is assumed to be initialized by native code.
+</p>
+<p>
+In the case of external functions, this means the function may not contain any code, and must not be terminated with an End directive.
+</p>
+<p>
+In the case of external classes, this means any globals or methods declared in the class may not contain a 'body' either.
+</p>
+<p>
+External declarations may however be assigned a 'symbol' in the form of a string literal. This is the native symbol to be used by the Cerberus&nbsp;X translator when the declaration is referenced by Cerberus&nbsp;X code.
+</p>
+<p>
+By default, external declarations are public. You can use <code>Extern Private</code> to prevent external declarations from being visible outside the current module.
+</p>
+<p>
+Here are some examples of using extern:
+</p>
+<div class="pretty">
+<code class="k">Extern</code><br/>
+<br/>
+<code class="k">Global </code><code class="i">ActiveDriver</code><code class="d">:</code><code class="i">Driver</code><code class="d">=</code><code class="l">"xyzActiveDriver"  </code><code class="r">'Native name of this global is xyzActiveDriver</code><br/>
+<br/>
+<code class="k">Class </code><code class="i">Driver</code><code class="d">=</code><code class="l">"xyzDriver"   </code><code class="r">'The native name of this class is 'xyzDriver'.</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Method1</code><code class="d">()       </code><code class="r">'By default, native name is same as declaration name - Method1 here.</code><br/>
+<code class="d">    </code><code class="k">Method </code><code class="i">Method2</code><code class="d">()       </code><code class="r">'native name is Method2</code><br/>
+<code class="k">End</code><br/>
+<br/>
+<code class="k">Public        </code><code class="r">'return to public declarations</code><br/>
+</div>
+<h2><a name="preprocessor"></a> The preprocessor</h2>
+<p>
+Cerberus&nbsp;X contains a very simple built-in preprocessor based on the syntax of the Cerberus&nbsp;X If statement that allows you to enable or disable blocks of code from being generated or translated, based on certain conditions.
+</p>
+<p>
+The following preprocessor directives are supported:
+</p>
+<table>
+<tr><th>Directive</th><th>Description</th></tr>
+<tr><td><code>#If</code></td><td>Start of conditional directive block</td></tr>
+<tr><td><code>#ElseIf</code></td><td>Alternative conditional directive block</td></tr>
+<tr><td><code>#Else</code></td><td>Alternative conditional directive block</td></tr>
+<tr><td><code>#End</code></td><td>End of directive block</td></tr>
+<tr><td><code>#Rem</code></td><td>Start of block comment</td></tr>
+<tr><td><code>#Print</code></td><td>Writes to the 'build log'</td></tr>
+<tr><td><code>#Error</code></td><td>Writes to the 'build log' and aborts the building process</td></tr>
+</table>
+<p>
+Preprocessor directives must appear at the start of a line, and may be preceded by optional whitespace.
+</p>
+<p>
+The <code>#If</code> and <code>#ElseIf</code> directives must be followed by a constant Cerberus&nbsp;X expression. If this expression evaluates to true, then code generation is enabled, otherwise it is disabled.
+</p>
+<p>
+The following built in constants may be used in preprocessor expressions:
+</p>
+<table>
+<tr><th>Constant</th><th>Description</th></tr>
+<tr><td>HOST</td><td>Host operating system, one of: <b>winnt</b> , <b>macos</b> , <b>linux</b></td></tr>
+<tr><td>LANG</td><td>Target language, one of: <b>js</b> , <b>as</b> , <b>cs</b> , <b>cpp</b> , <b>java</b></td></tr>
+<tr><td>TARGET</td><td>Target system, one of: <b>ios</b> , <b>android</b> , <b>winrt</b> , <b>glfw</b> , <b>html5</b> , <b>flash</b></td></tr>
+<tr><td>CONFIG</td><td>Target build config, one of: <b>debug</b> , <b>release</b></td></tr>
+<tr><td>CD</td><td>Directory of source file being built</td></tr>
+<tr><td>MODPATH</td><td>Module being built</td></tr>
+</table>
+<p>
+The <code>#Rem</code> directive is exactly the same as <code>#If False</code> - it unconditionally disables code generation. Note that this allows 'block rems' to be 'nested'.
+</p>
+<h3><a name="preprocessor_customs"></a> Custom preprocessor directives</h3>
+<p>
+It is possible to add your own preprocessor directives in your code to make it customisable:
+</p>
+<div class="pretty">
+<code class="d">#BLOCK_TO_RUN = </code><code class="l">1</code><br/>
+<br/>
+<code class="d">#If </code><code class="i">BLOCK_TO_RUN </code><code class="d">= </code><code class="l">0</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"Do this."</code><br/>
+<code class="d">#Else</code><br/>
+<code class="d">	</code><code class="i">Print </code><code class="l">"Do that."</code><br/>
+<code class="d">#End</code><br/>
+</div>
+<h2><a name="iveseen"></a> I've seen...</h2>
+<p>
+Have you seen a strange notation in a Cerberus&nbsp;X source file and don’t know what it means? This condensed overview will help you:
+</p>
+<table>
+<tr><th>Notation</th><th>Description</th></tr>
+<tr><td><code><i>Identifier</i> ?</code></td><td>Short notation for <a href="#type_bool">the Bool type</a></td></tr>
+<tr><td><code><i>Identifier</i> %</code></td><td>Short notation for <a href="#type_int">the Int type</a></td></tr>
+<tr><td><code><i>Identifier</i> #</code></td><td>Short notation for <a href="#type_float">the Float type</a></td></tr>
+<tr><td><code><i>Identifier</i> $</code></td><td>Short notation for <a href="#type_string">the String type</a></td></tr>
+<tr><td><code>:=</code></td><td>Implicit typing when declaring <a href="#variables">variables</a></td></tr>
+<tr><td><code>$ <i>Literal</i></code></td><td><a href="#literal_hex">Hexadecimal literal</a></td></tr>
+<tr><td><code>&#96; <i>Character</i> &#96;</code></td><td><a href="#literal_char">Character literal</a></td></tr>
+<tr><td><code>&#91; .. &#93;</code></td><td><a href="#array_indexing">Array slicing</a> used to copy an array</td></tr>
+<tr><td><code>&#91; <i>Index0</i> .. <i>Index1</i> &#93;</code></td><td><a href="#string_indexing">String slicing</a> or <a href="#array_indexing">array slicing</a></td></tr>
+<tr><td><code>&lt; <i>Identifier</i> &gt;</code></td><td><a href="#generics">Generic class</a></td></tr>
+<tr><td><code>.<i>Identifier</i></code></td><td>Global access (when <code><i>Identifier</i></code> exists both as local and global, this accesses the global one)</td></tr>
+<tr><td><code>Extern</code><br/><code><i>Identifier</i> = "<i>AltIdentifier</i>"</code></td><td>Native name of object in <a href="#extern">external code</a></td></tr>
+<tr><td><code>*=</code></td><td>Multiplication <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>/=</code></td><td>Division <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>Mod=</code></td><td>Modulus <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>Shl=</code></td><td>Bitwise shift left <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>Shr=</code></td><td>Bitwise shift right (signed) <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>+=</code></td><td>Addition <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>-=</code></td><td>Subtraction <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>&=</code></td><td>Bitwise 'and' <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>~=</code></td><td>Bitwise 'xor' <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code>&#124;=</code></td><td>Bitwise 'or' <a href="#assignments">update assignment</a></td></tr>
+<tr><td><code><i>Statement</i> ; <i>Statement</i></code></td><td>The <code>;</code> character is used to put multiple statements on one line</td></tr>
+<tr><td><code>#If</code></td><td><a href="#preprocessor">Preprocessor directive</a></td></tr>
+</table>
+<h2><a name="glossary"></a> Glossary</h2>
+<p>
+If you didn't read the language documentation attentive enough to find what you were looking for, you can try to find a cue in this alphabetically index.
+</p>
+<p>
+<div class="multicolumn">
+<a href="#alias">Alias</a><br>
+<a href="#operators">Arithmetic operations</a><br>
+<a href="#type_array">Array</a><br>
+<a href="Programming_Asset import.html">Assets</a><br>
+<a href="#assignments">Assignments</a><br>
+<a href="#balancing">Balancing</a><br>
+<a href="#bitwise_ops">Bitwise operators</a><br>
+<a href="#type_bool">Bool</a><br>
+<a href="#boxing">Boxing</a><br>
+<a href="#explicit_conversions">Casting</a><br>
+<a href="#exceptions">Catch</a><br>
+<a href="#literal_char">Char literals</a><br>
+<a href="#classes">Classes</a><br>
+<a href="#loop_eachin">Collections</a><br>
+<a href="#comments">Comments</a><br>
+<a href="#operators">Comparison operators</a><br>
+<a href="#operators">Conditional operators</a><br>
+<a href="#constants">Constants</a><br>
+<a href="#constructors">Constructors</a><br>
+<a href="#exit_continue">Continue</a><br>
+<a href="#implicit_conversions">Conversions</a><br>
+<a href="#types">Datatypes</a><br>
+<a href="#declarations">Declarations</a><br>
+<a href="#loop_eachin">EachIn</a><br>
+<a href="#enumerates">Enumerations</a><br>
+<a href="#string_escaping">Escape sequences</a><br>
+<a href="#exceptions">Exceptions</a><br>
+<a href="#exit_continue">Exit</a><br>
+<a href="#classes">Extends</a><br>
+<a href="#extern">Extern</a><br>
+<a href="#extern">External declaration</a><br>
+<a href="#fields">Field</a><br>
+<a href="#type_float">Float</a><br>
+<a href="#loop_for">For</a><br>
+<a href="Programming_Memory management.html">Garbage collector</a><br>
+<a href="#generics">Generics</a><br>
+<a href="#globals">Global</a><br>
+<a href="#loop_eachin">HasNext</a><br>
+<a href="#literal_hex">Hexadecimal literals</a><br>
+<a href="#identifiers">Identifiers</a><br>
+<a href="#statement_if">If</a><br>
+<a href="Programming_Asset import.html">Import assets</a><br>
+<a href="#modules">Import modules</a><br>
+<a href="#classes">Inheritance</a><br>
+<a href="#type_int">Int</a><br>
+<a href="#interfaces">Interfaces</a><br>
+<a href="#literals">Literals</a><br>
+<a href="#locals">Local</a><br>
+<a href="#operators">Logical operators</a><br>
+<a href="#programs">Main</a><br>
+<a href="#assetimport">Media</a><br>
+<a href="Programming_Memory management.html">Memory management</a><br>
+<a href="#modules">Module Paths</a><br>
+<a href="#modules">Modules</a><br>
+<a href="#naming">Naming Conventions</a><br>
+<a href="#loop_eachin">NextObject</a><br>
+<a href="#type_object">Object</a><br>
+<a href="#loop_eachin">ObjectEnumerator</a><br>
+<a href="#operators">Operators</a><br>
+<a href="Programming_Optimisation.html">Optimisation</a><br>
+<a href="#functions">Optional parameters</a><br>
+<a href="#operators">Order of operations</a><br>
+<a href="#overloading">Overloading</a><br>
+<a href="#operators">Precedence</a><br>
+<a href="#preprocessor">Preprocessor</a><br>
+<a href="#visibility">Private</a><br>
+<a href="#properties">Properties</a><br>
+<a href="#visibility">Public</a><br>
+<a href="#loop_repeat">Repeat</a><br>
+<a href="#assetimport">Resources</a><br>
+<a href="#statement_select">Select</a><br>
+<a href="#methods">Self</a><br>
+<a href="#assignments">Short notation for assignments</a><br>
+<a href="#types">Short notation for types</a><br>
+<a href="#array_indexing">Slicing (Arrays)</a><br>
+<a href="#string_indexing">Slicing (Strings)</a><br>
+<a href="#strict">Strict</a><br>
+<a href="#type_string">String</a><br>
+<a href="#methods">Super</a><br>
+<a href="#exceptions">Throw</a><br>
+<a href="#exceptions">Try</a><br>
+<a href="#types">Types</a><br>
+<a href="#assignments">Update assignments</a><br>
+<a href="#visibility">Visibility</a><br>
+<a href="#functions">Void functions</a><br>
+<a href="#loop_while">While</a><br>
+</div>
+</p>
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.httprequest.html'>brl.httprequest</a>
+
+			<span>HttpRequest</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>HttpRequest</small></h1>
+
+
+	<p>
+		The httprequest module allows you to perform http requests such as GET and POST.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Constructors</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#New()">New</a><small> ()</small></code></td>
+				<td>Creates a new HttpRequest object.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#New(String,String,IOnHttpRequestComplete)">New</a><small> ( requestMethod:String, url:String, onComplete:IOnHttpRequestComplete )</small></code></td>
+				<td>Creates a new http request object and opens it.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#BytesReceived()">BytesReceived</a><small> : Int ()</small></code></td>
+				<td>Returns the total number of bytes received.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Open(String,String,IOnHttpRequestComplete)">Open</a><small> : Void ( requestMethod:String, url:String, onComplete:IOnHttpRequestComplete )</small></code></td>
+				<td>Opens an http request.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ResponseText()">ResponseText</a><small> : String ()</small></code></td>
+				<td>The response text returned by the server once the request has completed.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Send()">Send</a><small> : Void ()</small></code></td>
+				<td>Sends an http request.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Send(String,[String],[String])">Send</a><small> : Void ( data:String, mimeType:String="text/plain;charset=UTF-8", encoding:String="utf8" )</small></code></td>
+				<td>Sends an http request with data.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#SetHeader(String,String)">SetHeader</a><small> : Void ( name:String, value:String )</small></code></td>
+				<td>Sets an http request header option.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Status()">Status</a><small> : Int ()</small></code></td>
+				<td>The status returned by the server once the request has completed.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+The httprequest module allows you to perform http requests such as GET and POST.
+</p>
+		
+		
+			<span class="detail example"><b><a href="examples/brl_httprequest_HttpRequest.cxs">Example</a></b></span>
+			<p>
+Import mojo
+</p>
+<p>
+Import brl.httprequest
+</p>
+<p>
+Class MyApp Extends App Implements IOnHttpRequestComplete
+</p>
+<p>
+	Field get_req:HttpRequest,post_req:HttpRequest
+	
+	Method OnHttpRequestComplete:Void( req:HttpRequest )
+	
+		If req=get_req
+			Print "Http GET complete!"
+		Else
+			Print "Http POST complete!"
+		Endif
+</p>
+<p>
+		Print "Status="+req.Status()
+		Print "ResponseText="+req.ResponseText()
+		
+	End
+	
+	Method OnCreate()
+	
+		get_req=New HttpRequest( "GET","http://posttestserver.com",Self )
+		get_req.Send
+		
+		post_req=New HttpRequest( "POST","http://posttestserver.com/post.php",Self )
+		post_req.Send "Hello World!"
+			
+		SetUpdateRate 60
+	End
+	
+	Method OnUpdate()
+</p>
+<p>
+		If KeyHit( KEY_CLOSE ) Error ""
+</p>
+<p>
+		UpdateAsyncEvents
+	End
+</p>
+<p>
+	Method OnRender()
+	
+		Cls
+		
+		DrawText "Http GET bytes received="+get_req.BytesReceived(),0,0
+		DrawText "Http POST bytes received="+post_req.BytesReceived(),0,12
+</p>
+<p>
+	End	
+End
+</p>
+<p>
+Function Main()
+</p>
+<p>
+	New MyApp
+</p>
+<p>
+End
+</p>
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Constructors Documentation</h2>
+		
+			<article>
+				<a name="New()"></a>
+				<pre class="declaration">Method <strong>New</strong> ()</pre>
+				<p>
+Creates a new HttpRequest object.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="New(String,String,IOnHttpRequestComplete)"></a>
+				<pre class="declaration">Method <strong>New</strong> ( requestMethod:<a href="Modules_cerberus.lang_String.html">String</a>, url:<a href="Modules_cerberus.lang_String.html">String</a>, onComplete:<a href="Modules_brl.httprequest_IOnHttpRequestComplete.html">IOnHttpRequestComplete</a> )</pre>
+				<p>
+Creates a new http request object and opens it.
+</p>
+<p>
+The <b>requestMethod</b> parameter should be GET, HEAD, POST, PUT, DELETE or any http method recognized by the server.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+ <a href="#Open(String,String,IOnHttpRequestComplete)">Open</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="BytesReceived()"></a>
+				<pre class="declaration">Method <strong>BytesReceived</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the total number of bytes received.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Open(String,String,IOnHttpRequestComplete)"></a>
+				<pre class="declaration">Method <strong>Open</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( requestMethod:<a href="Modules_cerberus.lang_String.html">String</a>, url:<a href="Modules_cerberus.lang_String.html">String</a>, onComplete:<a href="Modules_brl.httprequest_IOnHttpRequestComplete.html">IOnHttpRequestComplete</a> )</pre>
+				<p>
+Opens an http request.
+</p>
+<p>
+This effectively 'resets' the internal state of the http request.
+</p>
+<p>
+The <b>requestMethod</b> parameter should be GET, HEAD, POST, PUT, DELETE or any http method recognized by the server.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ResponseText()"></a>
+				<pre class="declaration">Method <strong>ResponseText</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ()</pre>
+				<p>
+The response text returned by the server once the request has completed.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Send()"></a>
+				<pre class="declaration">Method <strong>Send</strong> : <a href="Programming_Keywords_Void.html">Void</a> ()</pre>
+				<p>
+Sends an http request.
+</p>
+<p>
+Once complete, the OnHttpRequestComplete method of the IOnHttpRequestComplete object passed to the construtor will be called.
+</p>
+<p>
+Your application must continously call <a href="Modules_brl.asyncevent.html#UpdateAsyncEvents()">UpdateAsyncEvents</a> at regular intervals (for example, once per OnUpdate) while an http request operation is in progress.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Send(String,[String],[String])"></a>
+				<pre class="declaration">Method <strong>Send</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( data:<a href="Modules_cerberus.lang_String.html">String</a>, mimeType:<a href="Modules_cerberus.lang_String.html">String</a>="text/plain;charset=UTF-8", encoding:<a href="Modules_cerberus.lang_String.html">String</a>="utf8" )</pre>
+				<p>
+Sends an http request with data.
+</p>
+<p>
+Send sets the request's Content-Length header to the encoded length of <b>data</b>.
+</p>
+<p>
+If <b>mimeType</b> is not an empty string, Send also sets the request <b>Content</b>-Type header.
+</p>
+<p>
+Once complete, the OnHttpRequestComplete method of the IOnHttpRequestComplete object passed to the construtor will be called.
+</p>
+<p>
+Your application must continously call <a href="Modules_brl.asyncevent.html#UpdateAsyncEvents()">UpdateAsyncEvents</a> at regular intervals (for example, once per OnUpdate) while an http request operation is in progress for it to complete.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="SetHeader(String,String)"></a>
+				<pre class="declaration">Method <strong>SetHeader</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( name:<a href="Modules_cerberus.lang_String.html">String</a>, value:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Sets an http request header option.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Status()"></a>
+				<pre class="declaration">Method <strong>Status</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+The status returned by the server once the request has completed.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>

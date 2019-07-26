@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_brl.process.html'>brl.process</a>
+
+			<span>Process</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>Process</small></h1>
+
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Properties</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#IsRunning()">IsRunning</a><small> : Bool ()</small></code></td>
+				<td>Returns true is process is currently running.</td>
+			</tr>
+		
+	</table>
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Kill(Int)">Kill</a><small> : Void ( exitCode:Int )</small></code></td>
+				<td>Kills process.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ReadStderr(DataBuffer,Int,Int)">ReadStderr</a><small> : Int ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Reads bytes from process stderr into <b>buffer</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#ReadStdout(DataBuffer,Int,Int)">ReadStdout</a><small> : Int ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Reads bytes from process stdout into <b>buffer</b>.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Start(String)">Start</a><small> : Void ( cmd:String )</small></code></td>
+				<td>Starts process.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StderrAvail()">StderrAvail</a><small> : Int ()</small></code></td>
+				<td>Returns the number of bytes available to be read from process stderr.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#StdoutAvail()">StdoutAvail</a><small> : Int ()</small></code></td>
+				<td>Returns the number of bytes available to be read from process stdout.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#Wait()">Wait</a><small> : Int ()</small></code></td>
+				<td>Waits for process to finish and returns process exit code.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#WriteStdin(DataBuffer,Int,Int)">WriteStdin</a><small> : Int ( buffer:DataBuffer, offset:Int, count:Int )</small></code></td>
+				<td>Writes bytes from <b>buffer</b> to process stdin.</td>
+			</tr>
+		
+	</table>
+
+
+	<table class="index">
+		<tr><th>Functions</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#Execute(String)">Execute</a><small> : String ( cmd:String )</small></code></td>
+				<td>Runs a process, waits for it to finish, and returns the process stdout output.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Properties Documentation</h2>
+		
+			<article>
+				<a name="IsRunning()"></a>
+				<pre class="declaration">Method <strong>IsRunning</strong> : <a href="Programming_Keywords_Bool.html">Bool</a> () Property</pre>
+				<p>
+Returns true is process is currently running.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="Kill(Int)"></a>
+				<pre class="declaration">Method <strong>Kill</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( exitCode:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Kills process.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ReadStderr(DataBuffer,Int,Int)"></a>
+				<pre class="declaration">Method <strong>ReadStderr</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( buffer:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, offset:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Reads bytes from process stderr into <b>buffer</b>.
+</p>
+<p>
+Returns the number of bytes read.
+</p>
+<p>
+If the process is running and no bytes are available to be read, this method will block until at least 1 byte has been read.
+</p>
+<p>
+If the process has finished and no bytes are available to be read, this method will return 0.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="ReadStdout(DataBuffer,Int,Int)"></a>
+				<pre class="declaration">Method <strong>ReadStdout</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( buffer:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, offset:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Reads bytes from process stdout into <b>buffer</b>.
+</p>
+<p>
+Returns the number of bytes read.
+</p>
+<p>
+If the process is running and no bytes are available to be read, this method will block until at least 1 byte has been read.
+</p>
+<p>
+If the process has finished and no bytes are available to be read, this method will return 0.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Start(String)"></a>
+				<pre class="declaration">Method <strong>Start</strong> : <a href="Programming_Keywords_Void.html">Void</a> ( cmd:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Starts process.
+</p>
+<p>
+Returns true if process started successfully.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StderrAvail()"></a>
+				<pre class="declaration">Method <strong>StderrAvail</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the number of bytes available to be read from process stderr.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="StdoutAvail()"></a>
+				<pre class="declaration">Method <strong>StdoutAvail</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Returns the number of bytes available to be read from process stdout.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="Wait()"></a>
+				<pre class="declaration">Method <strong>Wait</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+Waits for process to finish and returns process exit code.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="WriteStdin(DataBuffer,Int,Int)"></a>
+				<pre class="declaration">Method <strong>WriteStdin</strong> : <a href="Programming_Keywords_Int.html">Int</a> ( buffer:<a href="Modules_brl.databuffer_DataBuffer.html">DataBuffer</a>, offset:<a href="Programming_Keywords_Int.html">Int</a>, count:<a href="Programming_Keywords_Int.html">Int</a> )</pre>
+				<p>
+Writes bytes from <b>buffer</b> to process stdin.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+	<section>
+		<h2>Functions Documentation</h2>
+		
+			<article>
+				<a name="Execute(String)"></a>
+				<pre class="declaration">Function <strong>Execute</strong> : <a href="Modules_cerberus.lang_String.html">String</a> ( cmd:<a href="Modules_cerberus.lang_String.html">String</a> )</pre>
+				<p>
+Runs a process, waits for it to finish, and returns the process stdout output.
+</p>
+				
+				
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+		</main>
+	</div>
+</body>
+</html>

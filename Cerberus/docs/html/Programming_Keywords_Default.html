@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Programming.html'>Programming</a>
+
+			<a href='Programming_Keywords.html'>Keywords</a>
+
+			<span>Default</span>
+
+		</nav>
+
+		<main>
+
+<h1>Keyword Default</h1>
+<p>
+Default is part of the conditional Select block.  
+</p>
+<p>
+Program flow goes to the Default statement when none of the supplied Case expressions matches the Select statement. It is therefore very useful for handling 'unexpected' situations.  
+</p>
+<h2>Syntax</h2>
+<p>
+Default<br>
+		<b>statement</b>  
+</p>
+<h2>Description</h2>
+<p>
+See Select for more information on using Default.  
+</p>
+<h2>See also</h2>
+<p>
+<a href="Programming_Keywords_Select.html">Select</a> | <a href="Programming_Keywords_Case.html">Case</a><br>
+<a href="Programming_Language reference.html">Language reference</a>  
+</p>
+<h2>Example  </h2>
+<div class="pretty">
+<br/>
+<code class="k">Local </code><code class="i">bananas</code><code class="d">:</code><code class="k">Int </code><code class="d">= </code><code class="l">2</code><br/>
+<br/>
+<code class="k">Select </code><code class="i">bananas</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="l">0</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"No bananas? I feel bad for you."</code><br/>
+<code class="d">	</code><code class="k">Case </code><code class="l">1</code><code class="d">, </code><code class="l">2</code><code class="d">, </code><code class="l">3</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"You have between one and three bananas. That's reasonable."</code><br/>
+<code class="d">	</code><code class="k">Default</code><br/>
+<code class="d">		</code><code class="i">Print </code><code class="l">"You have too many bananas! Nobody can eat " </code><code class="d">+ </code><code class="i">bananas </code><code class="d">+ </code><code class="l">" bananas!"</code><br/>
+<code class="k">End</code><br/>
+<br/>
+</div>
+
+		</main>
+	</div>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Cerberus X Documentation</title>
+	<link rel="stylesheet" type="text/css" href="pagestyle.css" />
+</head>
+<body>
+	<div class="page">
+		<header>
+			<h1>
+				<a href="Home.html"><img src="data/cerberusx.png"/></a>Cerberus X Documentation
+			</h1>
+
+		</header>
+
+		<nav class="main">
+			<a href="Home.html">Home</a>
+			<a href="API Reference.html">API Reference</a>
+			<a href="Programming_Language reference.html">Language Reference</a>
+			<a href="Modules.html">Modules</a>
+			<a href="Indexes.html">Indexes</a>
+		</nav>
+		
+		<nav class="location">
+			<a href='Home.html'>Home</a>
+
+			<a href='Modules.html'>Modules</a>
+
+			<a href='Modules_mojo.app.html'>mojo.app</a>
+
+			<span>App</span>
+
+		</nav>
+
+		<main>
+
+
+<h1>Class <small>App</small></h1>
+
+
+	<p>
+		This is the main application class.<a href="#description"> More...</a>
+	</p>
+
+
+<h2>Declarations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="index">
+		<tr><th>Methods</th><th></th></tr>
+		
+			<tr>
+				<td><code><a href="#OnBack()">OnBack</a><small> : Int ()</small></code></td>
+				<td>This method is called when the application's 'back' button is pressed.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnClose()">OnClose</a><small> : Int ()</small></code></td>
+				<td>This method is called when the application's 'close' button is pressed.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnCreate()">OnCreate</a><small> : Int ()</small></code></td>
+				<td>The OnCreate method is called when mojo has been initialized and the application has been successfully created.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnLoading()">OnLoading</a><small> : Int ()</small></code></td>
+				<td>This method is called instead of OnRender when the application should render itself, but there are still resources such as images or sounds in the process of being loaded.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnRender()">OnRender</a><small> : Int ()</small></code></td>
+				<td>This method is automatically called when the application should render itself, such as when the application first starts, or following an OnUpdate call.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnResize()">OnResize</a><small> : Int ()</small></code></td>
+				<td>This method is called when the application's device window size changes.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnResume()">OnResume</a><small> : Int ()</small></code></td>
+				<td>OnResume is called when your application is made active again after having been in a suspended state.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnSuspend()">OnSuspend</a><small> : Int ()</small></code></td>
+				<td>OnSuspend is called when your application is about to be suspended.</td>
+			</tr>
+		
+			<tr>
+				<td><code><a href="#OnUpdate()">OnUpdate</a><small> : Int ()</small></code></td>
+				<td>This method is automatically called when the application's update timer ticks.</td>
+			</tr>
+		
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<section>
+		<a name="description"></a>
+		<h2>Detailed Discussion</h2>
+		<p>
+This is the main application class.
+</p>
+<p>
+All mojo based applications must declare a class that extends App and that implements the OnCreate, OnUpdate, OnRender and OnLoading methods.
+</p>
+<p>
+A new instance of this class must be then created inside your applications Main function. The OnCreate, OnUpdate, OnRender and OnLoading methods will be called as necessary while your application runs.
+</p>
+<p>
+OnCreate is called when mojo has been initialized and your app can safely start using mojo functions. This is generally where code to load resources such and images and sounds goes. This is where the application's update rate is initially set too - see: SetUpdateRate.
+</p>
+<p>
+OnUpdate is called when the update timer ticks, and is where your game logic code should go. The update timer is set using the SetUpdateRate function.
+</p>
+<p>
+OnRender is called when your application should render itself. If the update timer is ticking, this is also called as soon as possible after OnUpdate, however OnRender may be called at any time in generally if your application requires refreshing.
+</p>
+<p>
+OnLoading is called insetad of OnRender when your application should render itself, but there are still resources being loaded.
+</p>
+<p>
+Import note: 
+</p>
+<p>
+No mojo functions or methods should be used before OnCreate is called! Before this, mojo is not fully initialized and cannot be safely used. This means that global variables cannot be initialied using Millisecs, LoadImage or indeed ANY mojo functions.
+</p>
+		
+		
+	</section>
+	<hr>
+
+
+
+
+
+
+
+
+
+	<section>
+		<h2>Methods Documentation</h2>
+		
+			<article>
+				<a name="OnBack()"></a>
+				<pre class="declaration">Method <strong>OnBack</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is called when the application's 'back' button is pressed.
+</p>
+<p>
+This method is only used by the android and windows phone 8 targets.
+</p>
+<p>
+By default, the OnBack method calls OnClose. To override this behavior, you must provide your own OnBack method when extending the App class.
+</p>
+<p>
+Important! On Windows Phone 8, The only time you can end an application is when the OS calls your app's OnClose or OnBack method. To end an application, use <a href="Modules_mojo.app.html#EndApp()">EndApp</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnClose()"></a>
+				<pre class="declaration">Method <strong>OnClose</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is called when the application's 'close' button is pressed.
+</p>
+<p>
+This method is only used by the glfw, android and windows 8 targets.
+</p>
+<p>
+By default, the OnClose method calls EndApp. To override this behavior, you must provide your own OnClose method when extending the App class.
+</p>
+<p>
+Important! On Windows Phone 8, The only time you can end an application is when the OS calls your app's OnClose or OnBack method. To end an application, use <a href="Modules_mojo.app.html#EndApp()">EndApp</a>.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnCreate()"></a>
+				<pre class="declaration">Method <strong>OnCreate</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+The OnCreate method is called when mojo has been initialized and the application has been successfully created.
+</p>
+<p>
+At this point, applications can start loading resources such as images and sounds, and set the update rate using SetUpdateRate.
+</p>
+<p>
+The return value of this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnLoading()"></a>
+				<pre class="declaration">Method <strong>OnLoading</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is called instead of OnRender when the application should render itself, but there are still resources such as images or sounds in the process of being loaded.
+</p>
+<p>
+The return value of this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#OnRender()">OnRender</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnRender()"></a>
+				<pre class="declaration">Method <strong>OnRender</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is automatically called when the application should render itself, such as when the application first starts, or following an OnUpdate call.
+</p>
+<p>
+If your application is taking to long to update and/render itself, OnRender calls may be skipped to allow it to 'catch up'.
+</p>
+<p>
+The return value of this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#OnUpdate()">OnUpdate</a>, <a href="#OnLoading()">OnLoading</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnResize()"></a>
+				<pre class="declaration">Method <strong>OnResize</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is called when the application's device window size changes.
+</p>
+<p>
+This can occur on the desktop target when a window is resized, or on portable targets when the device is rotated.
+</p>
+<p>
+To determine the new window size, use the <a href="Modules_mojo.app.html#DeviceWidth()">DeviceWidth</a> and <a href="Modules_mojo.app.html#DeviceHeight()">DeviceHeight</a> functions.
+</p>
+				
+				
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnResume()"></a>
+				<pre class="declaration">Method <strong>OnResume</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+OnResume is called when your application is made active again after having been in a suspended state.
+</p>
+<p>
+The return value of this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#OnSuspend()">OnSuspend</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnSuspend()"></a>
+				<pre class="declaration">Method <strong>OnSuspend</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+OnSuspend is called when your application is about to be suspended. 
+</p>
+<p>
+While suspended, Mojo will make no further calls to any applications 'On' methods, except for OnResume.
+</p>
+<p>
+Note that on some targets such as iOS and Android, OnSuspend represents a 'last chance' to save application data before your application is terminated.
+</p>
+<p>
+The return value from this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="#OnResume()">OnResume</a>
+</p>
+				
+				
+			</article>
+		
+			<article>
+				<a name="OnUpdate()"></a>
+				<pre class="declaration">Method <strong>OnUpdate</strong> : <a href="Programming_Keywords_Int.html">Int</a> ()</pre>
+				<p>
+This method is automatically called when the application's update timer ticks. Once OnUpdate has been called, mojo will then attempt to call OnRender as soon as possible.
+</p>
+<p>
+Note that OnUpdate is only called if SetUpdateRate has been called to start the update timer. Otherwise, your application will receive OnRender calls only.
+</p>
+<p>
+OnUpdate is commonly used in conjunction with OnRender to manage the main game loop. OnUpdate is typically used to update objects and game state, while OnRender is used to draw graphics. 
+</p>
+<p>
+The return value from this method is currently ignored, but should be 0 for future compatibility.
+</p>
+				
+				
+				
+					<span class="detail links">See also</span>
+					<p>
+<a href="Modules_mojo.app.html#SetUpdateRate(Int)">SetUpdateRate</a>
+</p>
+				
+				
+			</article>
+		
+	</section>
+	<hr>
+
+
+
+
+		</main>
+	</div>
+</body>
+</html>
