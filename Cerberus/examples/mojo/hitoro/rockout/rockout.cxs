@@ -42,7 +42,6 @@ Import imports.game			' Main game logic ' IMPORTS GAME, LEVEL, etc.
 Import imports.sprite			' Graphical objects
 Import imports.rocket			' Player (rocket) object
 Import imports.shot			' Shot object
-Import imports.block			' Block object
 Import imports.scorebubble		' Score bubbles
 
 Import imports.constants		' Various game constants

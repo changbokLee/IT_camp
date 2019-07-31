@@ -2,7 +2,6 @@
 //${CONFIG_BEGIN}
 CFG_BINARY_FILES="*.bin|*.dat";
 CFG_BRL_GAMETARGET_IMPLEMENTED="1";
-CFG_BRL_THREAD_IMPLEMENTED="1";
 CFG_CD="";
 CFG_CONFIG="debug";
 CFG_GLFW_COPY_LIBS="openal32";
@@ -23,7 +22,7 @@ CFG_TEXT_FILES="*.txt|*.xml|*.json";
 //${CONFIG_END}
 
 //${METADATA_BEGIN}
-var META_DATA="[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
+var META_DATA="[mojo_font.png];type=image/png;width=864;height=13;\n";
 //${METADATA_END}
 
 //${TRANSCODE_BEGIN}
@@ -2127,158 +2126,6 @@ gxtkSample.prototype.Discard=function(){
 
 }
 
-
-function BBThread(){
-	this.result=null;
-	this.running=false;
-}
-
-BBThread.prototype.Start=function(){
-	this.result=null;
-	this.running=true;
-	this.Run__UNSAFE__();
-}
-
-BBThread.prototype.IsRunning=function(){
-	return this.running;
-}
-
-BBThread.prototype.Result=function(){
-	return this.result;
-}
-
-BBThread.prototype.Run__UNSAFE__=function(){
-	this.running=false;
-}
-
-
-function BBAsyncImageLoaderThread(){
-	this._running=false;
-}
-
-BBAsyncImageLoaderThread.prototype.Start=function(){
-
-	var thread=this;
-
-	thread._surface=null;
-	thread._result=false;
-	thread._running=true;
-
-	var image=new Image();
-
-	image.onload=function( e ){
-		image.meta_width=image.width;
-		image.meta_height=image.height;
-		thread._surface=new gxtkSurface( image,thread._device )
-		thread._result=true;
-		thread._running=false;
-	}
-	
-	image.onerror=function( e ){
-		thread._running=false;
-	}
-	
-	image.src=BBGame.Game().PathToUrl( thread._path );
-}
-
-BBAsyncImageLoaderThread.prototype.IsRunning=function(){
-	return this._running;
-}
-
-
-
-function BBAsyncSoundLoaderThread(){
-	this._running=false;
-}
-  
-if( CFG_HTML5_WEBAUDIO_ENABLED=="1" && (window.AudioContext || window.webkitAudioContext) ){
-
-BBAsyncSoundLoaderThread.prototype.Start=function(){
-
-	this._sample=null;
-	if( !this._device.okay ) return;
-	
-	var thread=this;
-	
-	thread._sample=null;
-	thread._result=false;
-	thread._running=true;
-
-	var req=new XMLHttpRequest();
-	req.open( "get",BBGame.Game().PathToUrl( this._path ),true );
-	req.responseType="arraybuffer";
-	
-	req.onload=function(){
-		//load success!
-		wa.decodeAudioData( req.response,function( buffer ){
-			//decode success!
-			thread._sample=new gxtkSample();
-			thread._sample.waBuffer=buffer;
-			thread._sample.state=1;
-			thread._result=true;
-			thread._running=false;
-		},function(){	
-			//decode fail!
-			thread._running=false;
-		} );
-	}
-	
-	req.onerror=function(){
-		//load fail!
-		thread._running=false;
-	}
-	
-	req.send();
-}
-	
-}else{
- 
-BBAsyncSoundLoaderThread.prototype.Start=function(){
-
-	this._sample=null;
-	if( !this._device.okay ) return;
-	
-	var audio=new Audio();
-	if( !audio ) return;
-	
-	var thread=this;
-	
-	thread._sample=null;
-	thread._result=false;
-	thread._running=true;
-
-	audio.src=BBGame.Game().PathToUrl( this._path );
-	audio.preload='auto';	
-	
-	var success=function( e ){
-		thread._sample=new gxtkSample( audio );
-		thread._result=true;
-		thread._running=false;
-		audio.removeEventListener( 'canplaythrough',success,false );
-		audio.removeEventListener( 'error',error,false );
-	}
-	
-	var error=function( e ){
-		thread._running=false;
-		audio.removeEventListener( 'canplaythrough',success,false );
-		audio.removeEventListener( 'error',error,false );
-	}
-	
-	audio.addEventListener( 'canplaythrough',success,false );
-	audio.addEventListener( 'error',error,false );
-	
-	//voodoo fix for Chrome!
-	var timer=setInterval( function(){ if( !thread._running ) clearInterval( timer ); },200 );
-	
-	audio.load();
-}
-
-}
-  
-BBAsyncSoundLoaderThread.prototype.IsRunning=function(){
-	return this._running;
-}
-
 function c_App(){
 	Object.call(this);
 }
@@ -2347,49 +2194,44 @@ c_App.prototype.p_OnBack=function(){
 	pop_err();
 	return 0;
 }
-function c_RocketGame(){
+function c_MyApp(){
 	c_App.call(this);
-	this.m_player=null;
-	this.m_mx=.0;
-	this.m_my=.0;
+	this.m_Circle=0;
 }
-c_RocketGame.prototype=extend_class(c_App);
-c_RocketGame.m_new=function(){
+c_MyApp.prototype=extend_class(c_App);
+c_MyApp.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<6>";
 	c_App.m_new.call(this);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<6>";
 	pop_err();
 	return this;
 }
-c_RocketGame.prototype.p_OnCreate=function(){
+c_MyApp.prototype.p_LoadGame=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<19>";
-	this.m_player=c_Rocket.m_new.call(new c_Rocket);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<23>";
-	dbg_object(this.m_player).m_image=bb_graphics_LoadImage("player.png",1,1);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<27>";
-	bb_app_SetUpdateRate(60);
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnUpdate=function(){
+c_MyApp.prototype.p_OnCreate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<35>";
-	this.m_mx=bb_input_MouseX();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<36>";
-	this.m_my=bb_input_MouseY();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<38>";
-	this.m_player.p_MovePlayer(this.m_mx,this.m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<12>";
+	this.p_LoadGame();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<13>";
+	bb_app_SetUpdateRate(0);
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnRender=function(){
+c_MyApp.prototype.p_OnUpdate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<46>";
-	bb_graphics_Cls(32.0,64.0,128.0);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<50>";
-	bb_graphics_DrawImage2(dbg_object(this.m_player).m_image,dbg_object(this.m_player).m_x,dbg_object(this.m_player).m_y,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<24>";
+	this.p_LoadGame();
+	pop_err();
+	return 0;
+}
+c_MyApp.prototype.p_OnRender=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<29>";
+	this.m_Circle=bb_graphics_DrawCircle(30.0,30.0,30.0);
 	pop_err();
 	return 0;
 }
@@ -2539,8 +2381,8 @@ var bb_app__delegate=null;
 var bb_app__game=null;
 function bbMain(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<87>";
-	c_RocketGame.m_new.call(new c_RocketGame);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/game_turtorial/game.cxs<36>";
+	c_MyApp.m_new.call(new c_MyApp);
 	pop_err();
 	return 0;
 }
@@ -2974,7 +2816,6 @@ function c_GraphicsContext(){
 	this.m_scissor_y=.0;
 	this.m_scissor_width=.0;
 	this.m_scissor_height=.0;
-	this.m_matrixStack=new_number_array(192);
 }
 c_GraphicsContext.m_new=function(){
 	push_err();
@@ -3801,18 +3642,6 @@ c_InputDevice.prototype.p_MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	this.m__accelZ=t_z;
 	pop_err();
 }
-c_InputDevice.prototype.p_MouseX=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<69>";
-	pop_err();
-	return this.m__mouseX;
-}
-c_InputDevice.prototype.p_MouseY=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<73>";
-	pop_err();
-	return this.m__mouseY;
-}
 function c_JoyState(){
 	Object.call(this);
 	this.m_joyx=new_number_array(2);
@@ -4428,36 +4257,6 @@ function bb_app_EndApp(){
 	error("");
 	pop_err();
 }
-function c_Rocket(){
-	Object.call(this);
-	this.m_image=null;
-	this.m_x=.0;
-	this.m_y=.0;
-	this.m_mousediv=12.0;
-}
-c_Rocket.m_new=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<58>";
-	pop_err();
-	return this;
-}
-c_Rocket.prototype.p_MovePlayer=function(t_towardsx,t_towardsy){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<71>";
-	var t_xdist=t_towardsx-this.m_x;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<72>";
-	var t_ydist=t_towardsy-this.m_y;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<74>";
-	var t_xstep=t_xdist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<75>";
-	var t_ystep=t_ydist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<77>";
-	this.m_x=this.m_x+t_xstep;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<78>";
-	this.m_y=this.m_y+t_ystep;
-	pop_err();
-	return 0;
-}
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
 	push_err();
@@ -4466,20 +4265,6 @@ function bb_app_SetUpdateRate(t_hertz){
 	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<225>";
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
-}
-function bb_input_MouseX(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<58>";
-	var t_=bb_input_device.p_MouseX();
-	pop_err();
-	return t_;
-}
-function bb_input_MouseY(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<62>";
-	var t_=bb_input_device.p_MouseY();
-	pop_err();
-	return t_;
 }
 function bb_graphics_DebugRenderDevice(){
 	push_err();
@@ -4491,180 +4276,14 @@ function bb_graphics_DebugRenderDevice(){
 	pop_err();
 	return 0;
 }
-function bb_graphics_Cls(t_r,t_g,t_b){
+function bb_graphics_DrawCircle(t_x,t_y,t_r){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<672>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<730>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<674>";
-	bb_graphics_renderDevice.Cls(t_r,t_g,t_b);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Cls2(t_col){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<680>";
-	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<682>";
-	bb_graphics_renderDevice.Cls((dbg_object(t_col).m_r),(dbg_object(t_col).m_g),(dbg_object(t_col).m_b));
-	pop_err();
-	return 0;
-}
-function bb_graphics_Cls3(t_rgb){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<688>";
-	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<690>";
-	var t_r=t_rgb>>16&255;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<691>";
-	var t_g=t_rgb>>8&255;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<692>";
-	var t_b=t_rgb&255;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<693>";
-	bb_graphics_renderDevice.Cls((t_r),(t_g),(t_b));
-	pop_err();
-	return 0;
-}
-function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
-	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-		error("Invalid image frame");
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<732>";
 	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
-	}
-	pop_err();
-	return 0;
-}
-function bb_graphics_PushMatrix(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<627>";
-	var t_sp=dbg_object(bb_graphics_context).m_matrixSp;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
-	if(t_sp==dbg_object(bb_graphics_context).m_matrixStack.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
-		dbg_object(bb_graphics_context).m_matrixStack=resize_number_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp*2);
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<629>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index]=dbg_object(bb_graphics_context).m_ix;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<630>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index]=dbg_object(bb_graphics_context).m_iy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<631>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index]=dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<632>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index]=dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<633>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index]=dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<634>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]=dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<635>";
-	dbg_object(bb_graphics_context).m_matrixSp=t_sp+6;
-	pop_err();
-	return 0;
-}
-function bb_graphics_Transform(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<649>";
-	var t_ix2=t_ix*dbg_object(bb_graphics_context).m_ix+t_iy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<650>";
-	var t_iy2=t_ix*dbg_object(bb_graphics_context).m_iy+t_iy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<651>";
-	var t_jx2=t_jx*dbg_object(bb_graphics_context).m_ix+t_jy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<652>";
-	var t_jy2=t_jx*dbg_object(bb_graphics_context).m_iy+t_jy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<653>";
-	var t_tx2=t_tx*dbg_object(bb_graphics_context).m_ix+t_ty*dbg_object(bb_graphics_context).m_jx+dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<654>";
-	var t_ty2=t_tx*dbg_object(bb_graphics_context).m_iy+t_ty*dbg_object(bb_graphics_context).m_jy+dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<655>";
-	bb_graphics_SetMatrix(t_ix2,t_iy2,t_jx2,t_jy2,t_tx2,t_ty2);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Transform2(t_m){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<645>";
-	bb_graphics_Transform(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Translate(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<659>";
-	bb_graphics_Transform(1.0,0.0,0.0,1.0,t_x,t_y);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Rotate(t_angle){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<667>";
-	bb_graphics_Transform(Math.cos((t_angle)*D2R),-Math.sin((t_angle)*D2R),Math.sin((t_angle)*D2R),Math.cos((t_angle)*D2R),0.0,0.0);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Scale(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
-	bb_graphics_Transform(t_x,0.0,0.0,t_y,0.0,0.0);
-	pop_err();
-	return 0;
-}
-function bb_graphics_PopMatrix(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<639>";
-	var t_sp=dbg_object(bb_graphics_context).m_matrixSp-6;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<640>";
-	bb_graphics_SetMatrix(dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<641>";
-	dbg_object(bb_graphics_context).m_matrixSp=t_sp;
-	pop_err();
-	return 0;
-}
-function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_frame){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<783>";
-	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
-	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
-		error("Invalid image frame");
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<787>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<789>";
-	bb_graphics_PushMatrix();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<791>";
-	bb_graphics_Translate(t_x,t_y);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<792>";
-	bb_graphics_Rotate(t_rotation);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<793>";
-	bb_graphics_Scale(t_scaleX,t_scaleY);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<795>";
-	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<797>";
-	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<799>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<800>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,0.0,0.0);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<802>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<805>";
-	bb_graphics_PopMatrix();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<733>";
+	bb_graphics_renderDevice.DrawOval(t_x-t_r,t_y-t_r,t_r*2.0,t_r*2.0);
 	pop_err();
 	return 0;
 }

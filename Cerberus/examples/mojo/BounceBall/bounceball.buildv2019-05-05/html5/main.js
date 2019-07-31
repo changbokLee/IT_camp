@@ -23,7 +23,7 @@ CFG_TEXT_FILES="*.txt|*.xml|*.json";
 //${CONFIG_END}
 
 //${METADATA_BEGIN}
-var META_DATA="[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
+var META_DATA="[mojo_font.png];type=image/png;width=864;height=13;\n";
 //${METADATA_END}
 
 //${TRANSCODE_BEGIN}
@@ -2347,49 +2347,93 @@ c_App.prototype.p_OnBack=function(){
 	pop_err();
 	return 0;
 }
-function c_RocketGame(){
+function c_ballbounce(){
 	c_App.call(this);
-	this.m_player=null;
-	this.m_mx=.0;
-	this.m_my=.0;
 }
-c_RocketGame.prototype=extend_class(c_App);
-c_RocketGame.m_new=function(){
+c_ballbounce.prototype=extend_class(c_App);
+c_ballbounce.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<37>";
 	c_App.m_new.call(this);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<37>";
 	pop_err();
 	return this;
 }
-c_RocketGame.prototype.p_OnCreate=function(){
+c_ballbounce.prototype.p_OnCreate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<19>";
-	this.m_player=c_Rocket.m_new.call(new c_Rocket);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<23>";
-	dbg_object(this.m_player).m_image=bb_graphics_LoadImage("player.png",1,1);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<27>";
-	bb_app_SetUpdateRate(60);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<42>";
+	bb_app_SetUpdateRate((bb_bounceball_UR)|0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<43>";
+	bb_bounceball_w=600.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<44>";
+	bb_bounceball_h=480.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<45>";
+	bb_bounceball_XP=(dbg_array(dbg_array(bb_bounceball_SR,((bb_bounceball_SN)|0))[dbg_index],0)[dbg_index]);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<46>";
+	bb_bounceball_YP=(dbg_array(dbg_array(bb_bounceball_SR,((bb_bounceball_SN)|0))[dbg_index],1)[dbg_index]);
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnUpdate=function(){
+c_ballbounce.prototype.p_OnUpdate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<35>";
-	this.m_mx=bb_input_MouseX();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<36>";
-	this.m_my=bb_input_MouseY();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<38>";
-	this.m_player.p_MovePlayer(this.m_mx,this.m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<50>";
+	if((bb_input_KeyDown(37))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<51>";
+		bb_bounceball_XP-=bb_bounceball_TL;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<53>";
+	if((bb_input_KeyDown(39))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<54>";
+		bb_bounceball_XP+=bb_bounceball_TR;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<56>";
+	bb_bounceball_i=bb_bounceball_i-1.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<57>";
+	if(dbg_array(dbg_array(bb_bounceball_STAGE1,((bb_bounceball_YP/30.0)|0))[dbg_index],((bb_bounceball_XP/30.0-0.1)|0))[dbg_index]==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<58>";
+		bb_bounceball_TL=0.0;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<60>";
+		bb_bounceball_TL=3.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<62>";
+	if(dbg_array(dbg_array(bb_bounceball_STAGE1,((bb_bounceball_YP/30.0)|0))[dbg_index],((bb_bounceball_XP/30.0+0.1)|0))[dbg_index]==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<63>";
+		bb_bounceball_TR=0.0;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<65>";
+		bb_bounceball_TR=3.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<67>";
+	if(dbg_array(dbg_array(bb_bounceball_STAGE1,((bb_bounceball_YP/30.0+1.0)|0))[dbg_index],((bb_bounceball_XP/30.0)|0))[dbg_index]==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<68>";
+		print("run");
+		err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<69>";
+		bb_bounceball_i=10.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<71>";
+	bb_bounceball_YP-=bb_bounceball_i;
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnRender=function(){
+c_ballbounce.prototype.p_OnRender=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<46>";
-	bb_graphics_Cls(32.0,64.0,128.0);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<50>";
-	bb_graphics_DrawImage2(dbg_object(this.m_player).m_image,dbg_object(this.m_player).m_x,dbg_object(this.m_player).m_y,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<82>";
+	bb_graphics_Cls(bb_bounceball_R,bb_bounceball_G,bb_bounceball_B);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<83>";
+	bb_graphics_SetColor(0.0,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<85>";
+	bb_graphics_SetColor(0.0,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<86>";
+	bb_graphics_DrawCircle(bb_bounceball_XP,bb_bounceball_YP,bb_bounceball_BS+2.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<87>";
+	bb_graphics_SetColor(255.0,255.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<88>";
+	bb_graphics_DrawCircle(bb_bounceball_XP,bb_bounceball_YP,bb_bounceball_BS);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<89>";
+	bb_graphics_DrawLine(bb_bounceball_XP,bb_bounceball_YP,bb_bounceball_SqS,bb_bounceball_SqS);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<90>";
+	print("XP "+String(bb_bounceball_XP)+"YP"+String(bb_bounceball_YP));
 	pop_err();
 	return 0;
 }
@@ -2539,8 +2583,8 @@ var bb_app__delegate=null;
 var bb_app__game=null;
 function bbMain(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<87>";
-	c_RocketGame.m_new.call(new c_RocketGame);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/BounceBall/bounceball.cxs<99>";
+	c_ballbounce.m_new.call(new c_ballbounce);
 	pop_err();
 	return 0;
 }
@@ -2974,7 +3018,6 @@ function c_GraphicsContext(){
 	this.m_scissor_y=.0;
 	this.m_scissor_width=.0;
 	this.m_scissor_height=.0;
-	this.m_matrixStack=new_number_array(192);
 }
 c_GraphicsContext.m_new=function(){
 	push_err();
@@ -3801,17 +3844,17 @@ c_InputDevice.prototype.p_MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	this.m__accelZ=t_z;
 	pop_err();
 }
-c_InputDevice.prototype.p_MouseX=function(){
+c_InputDevice.prototype.p_KeyDown=function(t_key){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<69>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+	if(t_key>0 && t_key<512){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+		pop_err();
+		return dbg_array(this.m__keyDown,t_key)[dbg_index];
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<48>";
 	pop_err();
-	return this.m__mouseX;
-}
-c_InputDevice.prototype.p_MouseY=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<73>";
-	pop_err();
-	return this.m__mouseY;
+	return false;
 }
 function c_JoyState(){
 	Object.call(this);
@@ -4428,36 +4471,7 @@ function bb_app_EndApp(){
 	error("");
 	pop_err();
 }
-function c_Rocket(){
-	Object.call(this);
-	this.m_image=null;
-	this.m_x=.0;
-	this.m_y=.0;
-	this.m_mousediv=12.0;
-}
-c_Rocket.m_new=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<58>";
-	pop_err();
-	return this;
-}
-c_Rocket.prototype.p_MovePlayer=function(t_towardsx,t_towardsy){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<71>";
-	var t_xdist=t_towardsx-this.m_x;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<72>";
-	var t_ydist=t_towardsy-this.m_y;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<74>";
-	var t_xstep=t_xdist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<75>";
-	var t_ystep=t_ydist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<77>";
-	this.m_x=this.m_x+t_xstep;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<78>";
-	this.m_y=this.m_y+t_ystep;
-	pop_err();
-	return 0;
-}
+var bb_bounceball_UR=0;
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
 	push_err();
@@ -4467,20 +4481,26 @@ function bb_app_SetUpdateRate(t_hertz){
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
 }
-function bb_input_MouseX(){
+var bb_bounceball_w=0;
+var bb_bounceball_h=0;
+var bb_bounceball_SR=[];
+var bb_bounceball_SN=0;
+var bb_bounceball_XP=0;
+var bb_bounceball_YP=0;
+function bb_input_KeyDown(t_key){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<58>";
-	var t_=bb_input_device.p_MouseX();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<40>";
+	var t_=((bb_input_device.p_KeyDown(t_key))?1:0);
 	pop_err();
 	return t_;
 }
-function bb_input_MouseY(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<62>";
-	var t_=bb_input_device.p_MouseY();
-	pop_err();
-	return t_;
-}
+var bb_bounceball_TL=0;
+var bb_bounceball_TR=0;
+var bb_bounceball_i=0;
+var bb_bounceball_STAGE1=[];
+var bb_bounceball_R=0;
+var bb_bounceball_G=0;
+var bb_bounceball_B=0;
 function bb_graphics_DebugRenderDevice(){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<57>";
@@ -4524,147 +4544,27 @@ function bb_graphics_Cls3(t_rgb){
 	pop_err();
 	return 0;
 }
-function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
+var bb_bounceball_BS=0;
+function bb_graphics_DrawCircle(t_x,t_y,t_r){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<730>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-		error("Invalid image frame");
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<732>";
 	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
-	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<733>";
+	bb_graphics_renderDevice.DrawOval(t_x-t_r,t_y-t_r,t_r*2.0,t_r*2.0);
 	pop_err();
 	return 0;
 }
-function bb_graphics_PushMatrix(){
+var bb_bounceball_SqS=0;
+function bb_graphics_DrawLine(t_x1,t_y1,t_x2,t_y2){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<627>";
-	var t_sp=dbg_object(bb_graphics_context).m_matrixSp;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
-	if(t_sp==dbg_object(bb_graphics_context).m_matrixStack.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
-		dbg_object(bb_graphics_context).m_matrixStack=resize_number_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp*2);
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<629>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index]=dbg_object(bb_graphics_context).m_ix;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<630>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index]=dbg_object(bb_graphics_context).m_iy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<631>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index]=dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<632>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index]=dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<633>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index]=dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<634>";
-	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]=dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<635>";
-	dbg_object(bb_graphics_context).m_matrixSp=t_sp+6;
-	pop_err();
-	return 0;
-}
-function bb_graphics_Transform(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<649>";
-	var t_ix2=t_ix*dbg_object(bb_graphics_context).m_ix+t_iy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<650>";
-	var t_iy2=t_ix*dbg_object(bb_graphics_context).m_iy+t_iy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<651>";
-	var t_jx2=t_jx*dbg_object(bb_graphics_context).m_ix+t_jy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<652>";
-	var t_jy2=t_jx*dbg_object(bb_graphics_context).m_iy+t_jy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<653>";
-	var t_tx2=t_tx*dbg_object(bb_graphics_context).m_ix+t_ty*dbg_object(bb_graphics_context).m_jx+dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<654>";
-	var t_ty2=t_tx*dbg_object(bb_graphics_context).m_iy+t_ty*dbg_object(bb_graphics_context).m_jy+dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<655>";
-	bb_graphics_SetMatrix(t_ix2,t_iy2,t_jx2,t_jy2,t_tx2,t_ty2);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Transform2(t_m){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<645>";
-	bb_graphics_Transform(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Translate(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<659>";
-	bb_graphics_Transform(1.0,0.0,0.0,1.0,t_x,t_y);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Rotate(t_angle){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<667>";
-	bb_graphics_Transform(Math.cos((t_angle)*D2R),-Math.sin((t_angle)*D2R),Math.sin((t_angle)*D2R),Math.cos((t_angle)*D2R),0.0,0.0);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Scale(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
-	bb_graphics_Transform(t_x,0.0,0.0,t_y,0.0,0.0);
-	pop_err();
-	return 0;
-}
-function bb_graphics_PopMatrix(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<639>";
-	var t_sp=dbg_object(bb_graphics_context).m_matrixSp-6;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<640>";
-	bb_graphics_SetMatrix(dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<641>";
-	dbg_object(bb_graphics_context).m_matrixSp=t_sp;
-	pop_err();
-	return 0;
-}
-function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_frame){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<783>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<714>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
-	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
-		error("Invalid image frame");
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<787>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<789>";
-	bb_graphics_PushMatrix();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<791>";
-	bb_graphics_Translate(t_x,t_y);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<792>";
-	bb_graphics_Rotate(t_rotation);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<793>";
-	bb_graphics_Scale(t_scaleX,t_scaleY);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<795>";
-	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<797>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<716>";
 	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<799>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<800>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,0.0,0.0);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<802>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<805>";
-	bb_graphics_PopMatrix();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<717>";
+	bb_graphics_renderDevice.DrawLine(t_x1,t_y1,t_x2,t_y2);
 	pop_err();
 	return 0;
 }
@@ -4682,6 +4582,22 @@ function bbInit(){
 	bb_app__displayModes=[];
 	bb_app__desktopMode=null;
 	bb_graphics_renderDevice=null;
+	bb_bounceball_UR=60.0;
 	bb_app__updateRate=0;
+	bb_bounceball_w=.0;
+	bb_bounceball_h=.0;
+	bb_bounceball_SR=[[100,100],[200,100],[300,100]];
+	bb_bounceball_SN=2.0;
+	bb_bounceball_XP=300.0;
+	bb_bounceball_YP=300.0;
+	bb_bounceball_TL=3.0;
+	bb_bounceball_TR=3.0;
+	bb_bounceball_i=10.0;
+	bb_bounceball_STAGE1=[[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]];
+	bb_bounceball_R=187.0;
+	bb_bounceball_G=222.0;
+	bb_bounceball_B=251.0;
+	bb_bounceball_BS=5.0;
+	bb_bounceball_SqS=30.0;
 }
 //${TRANSCODE_END}

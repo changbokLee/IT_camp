@@ -2131,16 +2131,16 @@ function c_App(){
 }
 c_App.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<152>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<152>";
 	if((bb_app__app)!=null){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<152>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<152>";
 		error("App has already been created");
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<153>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<153>";
 	bb_app__app=this;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<154>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<154>";
 	bb_app__delegate=c_GameDelegate.m_new.call(new c_GameDelegate);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<155>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<155>";
 	bb_app__game.SetDelegate(bb_app__delegate);
 	pop_err();
 	return this;
@@ -2182,14 +2182,14 @@ c_App.prototype.p_OnRender=function(){
 }
 c_App.prototype.p_OnClose=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<177>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<177>";
 	bb_app_EndApp();
 	pop_err();
 	return 0;
 }
 c_App.prototype.p_OnBack=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<181>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<181>";
 	this.p_OnClose();
 	pop_err();
 	return 0;
@@ -2202,35 +2202,35 @@ function c_blob_monster(){
 c_blob_monster.prototype=extend_class(c_App);
 c_blob_monster.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<203>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<203>";
 	c_App.m_new.call(this);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<203>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<203>";
 	pop_err();
 	return this;
 }
 c_blob_monster.prototype.p_OnCreate=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<211>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<211>";
 	this.m_blobimage=bb_graphics_LoadImage("blob.png",1,c_Image.m_DefaultFlags);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<213>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<213>";
 	this.m_theMonster=c_BlobMonster.m_new.call(new c_BlobMonster,10.0,10.0,this.m_blobimage);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<215>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<215>";
 	bb_app_SetUpdateRate(60);
 	pop_err();
 	return 0;
 }
 c_blob_monster.prototype.p_OnUpdate=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<222>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<222>";
 	this.m_theMonster.p_Update();
 	pop_err();
 	return 0;
 }
 c_blob_monster.prototype.p_OnRender=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<227>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<227>";
 	bb_graphics_Cls(0.0,0.0,0.0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<229>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<229>";
 	this.m_theMonster.p_Draw();
 	pop_err();
 	return 0;
@@ -2245,109 +2245,109 @@ function c_GameDelegate(){
 c_GameDelegate.prototype=extend_class(BBGameDelegate);
 c_GameDelegate.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<65>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<65>";
 	pop_err();
 	return this;
 }
 c_GameDelegate.prototype.StartGame=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<75>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<75>";
 	this.m__graphics=(new gxtkGraphics);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<76>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<76>";
 	bb_graphics_SetGraphicsDevice(this.m__graphics);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<77>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<77>";
 	bb_graphics_SetFont(null);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<79>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<79>";
 	this.m__audio=(new gxtkAudio);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<80>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<80>";
 	bb_audio_SetAudioDevice(this.m__audio);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<82>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<82>";
 	this.m__input=c_InputDevice.m_new.call(new c_InputDevice);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<83>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<83>";
 	bb_input_SetInputDevice(this.m__input);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<85>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<85>";
 	bb_app_ValidateDeviceWindow(false);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<87>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<87>";
 	bb_app_EnumDisplayModes();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<89>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<89>";
 	bb_app__app.p_OnCreate();
 	pop_err();
 }
 c_GameDelegate.prototype.SuspendGame=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<93>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<93>";
 	bb_app__app.p_OnSuspend();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<94>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<94>";
 	this.m__audio.Suspend();
 	pop_err();
 }
 c_GameDelegate.prototype.ResumeGame=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<98>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<98>";
 	this.m__audio.Resume();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<99>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<99>";
 	bb_app__app.p_OnResume();
 	pop_err();
 }
 c_GameDelegate.prototype.UpdateGame=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<103>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<103>";
 	bb_app_ValidateDeviceWindow(true);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<104>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<104>";
 	this.m__input.p_BeginUpdate();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<105>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<105>";
 	bb_app__app.p_OnUpdate();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<106>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<106>";
 	this.m__input.p_EndUpdate();
 	pop_err();
 }
 c_GameDelegate.prototype.RenderGame=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<110>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<110>";
 	bb_app_ValidateDeviceWindow(true);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<111>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<111>";
 	var t_mode=this.m__graphics.BeginRender();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<112>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<112>";
 	if((t_mode)!=0){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<112>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<112>";
 		bb_graphics_BeginRender();
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<113>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<113>";
 	if(t_mode==2){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<113>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<113>";
 		bb_app__app.p_OnLoading();
 	}else{
-		err_info="C:/Cerberus/modules/mojo/app.cxs<113>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<113>";
 		bb_app__app.p_OnRender();
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<114>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<114>";
 	if((t_mode)!=0){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<114>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<114>";
 		bb_graphics_EndRender();
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<115>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<115>";
 	this.m__graphics.EndRender();
 	pop_err();
 }
 c_GameDelegate.prototype.KeyEvent=function(t_event,t_data){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<119>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<119>";
 	this.m__input.p_KeyEvent(t_event,t_data);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<120>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<120>";
 	if(t_event!=1){
 		pop_err();
 		return;
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<121>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<121>";
 	var t_1=t_data;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<122>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<122>";
 	if(t_1==432){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<123>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<123>";
 		bb_app__app.p_OnClose();
 	}else{
-		err_info="C:/Cerberus/modules/mojo/app.cxs<124>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<124>";
 		if(t_1==416){
-			err_info="C:/Cerberus/modules/mojo/app.cxs<125>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<125>";
 			bb_app__app.p_OnBack();
 		}
 	}
@@ -2355,25 +2355,25 @@ c_GameDelegate.prototype.KeyEvent=function(t_event,t_data){
 }
 c_GameDelegate.prototype.MouseEvent=function(t_event,t_data,t_x,t_y,t_z){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<130>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<130>";
 	this.m__input.p_MouseEvent(t_event,t_data,t_x,t_y,t_z);
 	pop_err();
 }
 c_GameDelegate.prototype.TouchEvent=function(t_event,t_data,t_x,t_y){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<134>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<134>";
 	this.m__input.p_TouchEvent(t_event,t_data,t_x,t_y);
 	pop_err();
 }
 c_GameDelegate.prototype.MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<138>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<138>";
 	this.m__input.p_MotionEvent(t_event,t_data,t_x,t_y,t_z);
 	pop_err();
 }
 c_GameDelegate.prototype.DiscardGraphics=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<142>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<142>";
 	this.m__graphics.DiscardGraphics();
 	pop_err();
 }
@@ -2381,7 +2381,7 @@ var bb_app__delegate=null;
 var bb_app__game=null;
 function bbMain(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<238>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<238>";
 	c_blob_monster.m_new.call(new c_blob_monster);
 	pop_err();
 	return 0;
@@ -2389,7 +2389,7 @@ function bbMain(){
 var bb_graphics_device=null;
 function bb_graphics_SetGraphicsDevice(t_dev){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<67>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<67>";
 	bb_graphics_device=t_dev;
 	pop_err();
 	return 0;
@@ -2404,392 +2404,392 @@ function c_Font(){
 }
 c_Font.m_new=function(t_pages,t_pageCount,t_chars,t_firstChar,t_height){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<104>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<104>";
 	dbg_object(this).m__pages=t_pages;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<105>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<105>";
 	dbg_object(this).m__pageCount=t_pageCount;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<106>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<106>";
 	dbg_object(this).m__firstChar=t_firstChar;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<107>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<107>";
 	dbg_object(this).m__height=t_height;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<108>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<108>";
 	dbg_object(this).m__charMap=t_chars;
 	pop_err();
 	return this;
 }
 c_Font.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<101>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<101>";
 	pop_err();
 	return this;
 }
 c_Font.m_Load=function(t_path,t_firstChar,t_numChars,t_padded){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<132>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<132>";
 	var t_image=bb_graphics_LoadImage(t_path,1,c_Image.m_DefaultFlags);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<133>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<133>";
 	var t__pages=new_object_array(1);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<134>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<134>";
 	dbg_array(t__pages,0)[dbg_index]=t_image;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<135>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<135>";
 	var t__charMap=c_IntMap.m_new.call(new c_IntMap);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<137>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<137>";
 	var t__pageCount=1;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<138>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<138>";
 	if(!((t_image)!=null)){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<138>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<138>";
 		pop_err();
 		return null;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<140>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<140>";
 	var t_cellWidth=((t_image.p_Width()/t_numChars)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<141>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<141>";
 	var t_cellHeight=t_image.p_Height();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<142>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<142>";
 	var t_glyphX=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<142>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<142>";
 	var t_glyphY=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<142>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<142>";
 	var t_glyphWidth=t_cellWidth;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<142>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<142>";
 	var t_glyphHeight=t_cellHeight;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<143>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<143>";
 	if(t_padded==true){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<144>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<144>";
 		t_glyphX+=1;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<145>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<145>";
 		t_glyphY+=1;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<146>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<146>";
 		t_glyphWidth-=2;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<147>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<147>";
 		t_glyphHeight-=2;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<150>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<150>";
 	var t_w=((t_image.p_Width()/t_cellWidth)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<151>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<151>";
 	var t_h=((t_image.p_Height()/t_cellHeight)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<153>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<153>";
 	for(var t_i=0;t_i<t_numChars;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<154>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<154>";
 		var t_y=((t_i/t_w)|0);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<155>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<155>";
 		var t_x=t_i % t_w;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<156>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<156>";
 		var t_glyph=c_Glyph.m_new.call(new c_Glyph,0,t_firstChar+t_i,t_x*t_cellWidth+t_glyphX,t_y*t_cellHeight+t_glyphY,t_glyphWidth,t_glyphHeight,t_glyphWidth);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<157>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<157>";
 		t__charMap.p_Add(t_firstChar+t_i,t_glyph);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<160>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<160>";
 	var t_=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,t_firstChar,(t_glyphHeight));
 	pop_err();
 	return t_;
 }
 c_Font.m_Load2=function(t_path,t_cellWidth,t_cellHeight,t_glyphX,t_glyphY,t_glyphWidth,t_glyphHeight,t_firstChar,t_numChars){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<164>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<164>";
 	var t_image=bb_graphics_LoadImage(t_path,1,c_Image.m_DefaultFlags);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<165>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<165>";
 	var t__pages=new_object_array(1);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<166>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<166>";
 	dbg_array(t__pages,0)[dbg_index]=t_image;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<167>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<167>";
 	var t__charMap=c_IntMap.m_new.call(new c_IntMap);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<169>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<169>";
 	var t__pageCount=1;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<170>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<170>";
 	if(!((t_image)!=null)){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<170>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<170>";
 		pop_err();
 		return null;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<172>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<172>";
 	var t_w=((t_image.p_Width()/t_cellWidth)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<173>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<173>";
 	var t_h=((t_image.p_Height()/t_cellHeight)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<175>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<175>";
 	for(var t_i=0;t_i<t_numChars;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<176>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<176>";
 		var t_y=((t_i/t_w)|0);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<177>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<177>";
 		var t_x=t_i % t_w;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<178>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<178>";
 		var t_glyph=c_Glyph.m_new.call(new c_Glyph,0,t_firstChar+t_i,t_x*t_cellWidth+t_glyphX,t_y*t_cellHeight+t_glyphY,t_glyphWidth,t_glyphHeight,t_glyphWidth);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<179>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<179>";
 		t__charMap.p_Add(t_firstChar+t_i,t_glyph);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<182>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<182>";
 	var t_=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,t_firstChar,(t_glyphHeight));
 	pop_err();
 	return t_;
 }
 c_Font.m_Load3=function(t_url){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<187>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<187>";
 	var t_iniText="";
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<188>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<188>";
 	var t_pageNum=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<189>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<189>";
 	var t_idnum=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<190>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<190>";
 	var t_tmpChar=null;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<191>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<191>";
 	var t_plLen=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<192>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<192>";
 	var t_lines=[];
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<194>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<194>";
 	var t_filename="";
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<195>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<195>";
 	var t_lineHeight=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<197>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<197>";
 	var t__pages=[];
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<198>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<198>";
 	var t__charMap=c_IntMap.m_new.call(new c_IntMap);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<199>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<199>";
 	var t__pageCount=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<201>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<201>";
 	var t_path="";
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<203>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<203>";
 	if(t_url.indexOf("/",0)>-1){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<204>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<204>";
 		var t_pl=t_url.split("/");
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<205>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<205>";
 		t_plLen=t_pl.length;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<206>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<206>";
 		for(var t_pi=0;t_pi<=t_plLen-2;t_pi=t_pi+1){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<207>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<207>";
 			t_path=t_path+dbg_array(t_pl,t_pi)[dbg_index]+"/";
 		}
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<210>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<210>";
 	var t_ts=t_url.toLowerCase();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<211>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<211>";
 	if(t_ts.indexOf(".txt",0)>0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<212>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<212>";
 		t_iniText=bb_app_LoadString(t_url);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<214>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<214>";
 		t_iniText=bb_app_LoadString(t_url+".txt");
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<217>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<217>";
 	t_lines=t_iniText.split(String.fromCharCode(13)+String.fromCharCode(10));
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<218>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<218>";
 	if(t_lines.length<2){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<219>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<219>";
 		t_lines=t_iniText.split(String.fromCharCode(10));
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
 	var t_=t_lines;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
 	var t_2=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
 	while(t_2<t_.length){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
 		var t_line=dbg_array(t_,t_2)[dbg_index];
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<222>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<222>";
 		t_2=t_2+1;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<224>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<224>";
 		t_line=string_trim(t_line);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<225>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<225>";
 		if(string_startswith(t_line,"info") || t_line==""){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<225>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<225>";
 			continue;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<226>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<226>";
 		if(string_startswith(t_line,"padding")){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<226>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<226>";
 			continue;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<227>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<227>";
 		if(string_startswith(t_line,"common")){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<228>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<228>";
 			var t_commondata=t_line.split(String.fromCharCode(32));
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
 			var t_3=t_commondata;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
 			var t_4=0;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
 			while(t_4<t_3.length){
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
 				var t_common=dbg_array(t_3,t_4)[dbg_index];
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<229>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<229>";
 				t_4=t_4+1;
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<231>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<231>";
 				if(string_startswith(t_common,"lineHeight=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<232>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<232>";
 					var t_lnh=t_common.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<233>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<233>";
 					dbg_array(t_lnh,1)[dbg_index]=string_trim(dbg_array(t_lnh,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<234>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<234>";
 					t_lineHeight=parseInt((dbg_array(t_lnh,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<237>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<237>";
 				if(string_startswith(t_common,"pages=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<238>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<238>";
 					var t_lnh2=t_common.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<239>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<239>";
 					dbg_array(t_lnh2,1)[dbg_index]=string_trim(dbg_array(t_lnh2,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<240>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<240>";
 					t__pageCount=parseInt((dbg_array(t_lnh2,1)[dbg_index]),10);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<241>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<241>";
 					t__pages=new_object_array(t__pageCount);
 				}
 			}
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<247>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<247>";
 		if(string_startswith(t_line,"page")){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<248>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<248>";
 			var t_pagedata=t_line.split(String.fromCharCode(32));
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
 			var t_5=t_pagedata;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
 			var t_6=0;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
 			while(t_6<t_5.length){
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
 				var t_data=dbg_array(t_5,t_6)[dbg_index];
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<249>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<249>";
 				t_6=t_6+1;
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<250>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<250>";
 				if(string_startswith(t_data,"file=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<251>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<251>";
 					var t_fn=t_data.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<252>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<252>";
 					dbg_array(t_fn,1)[dbg_index]=string_trim(dbg_array(t_fn,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<253>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<253>";
 					t_filename=dbg_array(t_fn,1)[dbg_index];
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<254>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<254>";
 					if(dbg_charCodeAt(t_filename,0)==34){
-						err_info="C:/Cerberus/modules/mojo/graphics.cxs<255>";
+						err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<255>";
 						t_filename=t_filename.slice(1,t_filename.length-1);
 					}
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<257>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<257>";
 					t_filename=t_path+string_trim(t_filename);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<259>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<259>";
 					dbg_array(t__pages,t_pageNum)[dbg_index]=bb_graphics_LoadImage(t_filename,1,c_Image.m_DefaultFlags);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<261>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<261>";
 					if(dbg_array(t__pages,t_pageNum)[dbg_index]==null){
-						err_info="C:/Cerberus/modules/mojo/graphics.cxs<261>";
+						err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<261>";
 						error("\n\nError in file graphics.cxs, Method Font.Load:Font(url:String)\n\nCan not load page image: "+t_filename);
 					}
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<263>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<263>";
 					t_pageNum=t_pageNum+1;
 				}
 			}
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<268>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<268>";
 		if(string_startswith(t_line,"chars")){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<268>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<268>";
 			continue;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<270>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<270>";
 		if(string_startswith(t_line,"char")){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<271>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<271>";
 			t_tmpChar=c_Glyph.m_new2.call(new c_Glyph);
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<272>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<272>";
 			var t_linedata=t_line.split(String.fromCharCode(32));
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
 			var t_7=t_linedata;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
 			var t_8=0;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
 			while(t_8<t_7.length){
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
 				var t_data2=dbg_array(t_7,t_8)[dbg_index];
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<273>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<273>";
 				t_8=t_8+1;
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<274>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<274>";
 				if(string_startswith(t_data2,"id=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<275>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<275>";
 					var t_idc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<276>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<276>";
 					dbg_array(t_idc,1)[dbg_index]=string_trim(dbg_array(t_idc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<277>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<277>";
 					dbg_object(t_tmpChar).m_id=parseInt((dbg_array(t_idc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<279>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<279>";
 				if(string_startswith(t_data2,"x=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<280>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<280>";
 					var t_xc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<281>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<281>";
 					dbg_array(t_xc,1)[dbg_index]=string_trim(dbg_array(t_xc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<282>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<282>";
 					dbg_object(t_tmpChar).m_x=parseInt((dbg_array(t_xc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<284>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<284>";
 				if(string_startswith(t_data2,"y=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<285>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<285>";
 					var t_yc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<286>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<286>";
 					dbg_array(t_yc,1)[dbg_index]=string_trim(dbg_array(t_yc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<287>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<287>";
 					dbg_object(t_tmpChar).m_y=parseInt((dbg_array(t_yc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<289>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<289>";
 				if(string_startswith(t_data2,"width=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<290>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<290>";
 					var t_wc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<291>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<291>";
 					dbg_array(t_wc,1)[dbg_index]=string_trim(dbg_array(t_wc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<292>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<292>";
 					dbg_object(t_tmpChar).m_width=parseInt((dbg_array(t_wc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<294>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<294>";
 				if(string_startswith(t_data2,"height=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<295>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<295>";
 					var t_hc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<296>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<296>";
 					dbg_array(t_hc,1)[dbg_index]=string_trim(dbg_array(t_hc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<297>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<297>";
 					dbg_object(t_tmpChar).m_height=parseInt((dbg_array(t_hc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<299>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<299>";
 				if(string_startswith(t_data2,"xoffset=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<300>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<300>";
 					var t_xoc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<301>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<301>";
 					dbg_array(t_xoc,1)[dbg_index]=string_trim(dbg_array(t_xoc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<302>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<302>";
 					dbg_object(t_tmpChar).m_xoff=parseInt((dbg_array(t_xoc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<304>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<304>";
 				if(string_startswith(t_data2,"yoffset=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<305>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<305>";
 					var t_yoc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<306>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<306>";
 					dbg_array(t_yoc,1)[dbg_index]=string_trim(dbg_array(t_yoc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<307>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<307>";
 					dbg_object(t_tmpChar).m_yoff=parseInt((dbg_array(t_yoc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<309>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<309>";
 				if(string_startswith(t_data2,"xadvance=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<310>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<310>";
 					var t_advc=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<311>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<311>";
 					dbg_array(t_advc,1)[dbg_index]=string_trim(dbg_array(t_advc,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<312>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<312>";
 					dbg_object(t_tmpChar).m_advance=parseInt((dbg_array(t_advc,1)[dbg_index]),10);
 				}
-				err_info="C:/Cerberus/modules/mojo/graphics.cxs<314>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<314>";
 				if(string_startswith(t_data2,"page=")){
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<315>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<315>";
 					var t_advc2=t_data2.split("=");
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<316>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<316>";
 					dbg_array(t_advc2,1)[dbg_index]=string_trim(dbg_array(t_advc2,1)[dbg_index]);
-					err_info="C:/Cerberus/modules/mojo/graphics.cxs<317>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<317>";
 					dbg_object(t_tmpChar).m_page=parseInt((dbg_array(t_advc2,1)[dbg_index]),10);
 				}
 			}
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<320>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<320>";
 			t__charMap.p_Add(dbg_object(t_tmpChar).m_id,t_tmpChar);
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<322>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<322>";
 		continue;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<324>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<324>";
 	var t_9=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,-1,(t_lineHeight));
 	pop_err();
 	return t_9;
@@ -2820,17 +2820,17 @@ function c_GraphicsContext(){
 }
 c_GraphicsContext.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<33>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<33>";
 	pop_err();
 	return this;
 }
 c_GraphicsContext.prototype.p_Validate=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<44>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<44>";
 	if((this.m_matDirty)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<45>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<45>";
 		bb_graphics_renderDevice.SetMatrix(dbg_object(bb_graphics_context).m_ix,dbg_object(bb_graphics_context).m_iy,dbg_object(bb_graphics_context).m_jx,dbg_object(bb_graphics_context).m_jy,dbg_object(bb_graphics_context).m_tx,dbg_object(bb_graphics_context).m_ty);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<46>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<46>";
 		this.m_matDirty=0;
 	}
 	pop_err();
@@ -2851,71 +2851,71 @@ function c_Image(){
 c_Image.m_DefaultFlags=0;
 c_Image.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<336>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<336>";
 	pop_err();
 	return this;
 }
 c_Image.prototype.p_SetHandle=function(t_tx,t_ty){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<380>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<380>";
 	dbg_object(this).m_tx=t_tx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<381>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<381>";
 	dbg_object(this).m_ty=t_ty;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<382>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<382>";
 	dbg_object(this).m_flags=dbg_object(this).m_flags&-2;
 	pop_err();
 	return 0;
 }
 c_Image.prototype.p_ApplyFlags=function(t_iflags){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<464>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<464>";
 	this.m_flags=t_iflags;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<466>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<466>";
 	if((this.m_flags&2)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
 		var t_=this.m_frames;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
 		var t_2=0;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
 		while(t_2<t_.length){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
 			var t_f=dbg_array(t_,t_2)[dbg_index];
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<467>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<467>";
 			t_2=t_2+1;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<468>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<468>";
 			dbg_object(t_f).m_x+=1;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<470>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<470>";
 		this.m_width-=2;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<473>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<473>";
 	if((this.m_flags&4)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
 		var t_3=this.m_frames;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
 		var t_4=0;
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
 		while(t_4<t_3.length){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
 			var t_f2=dbg_array(t_3,t_4)[dbg_index];
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<474>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<474>";
 			t_4=t_4+1;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<475>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<475>";
 			dbg_object(t_f2).m_y+=1;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<477>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<477>";
 		this.m_height-=2;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<480>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<480>";
 	if((this.m_flags&1)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<481>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<481>";
 		this.p_SetHandle((this.m_width)/2.0,(this.m_height)/2.0);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<484>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<484>";
 	if(this.m_frames.length==1 && dbg_object(dbg_array(this.m_frames,0)[dbg_index]).m_x==0 && dbg_object(dbg_array(this.m_frames,0)[dbg_index]).m_y==0 && this.m_width==this.m_surface.Width() && this.m_height==this.m_surface.Height()){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<485>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<485>";
 		this.m_flags|=65536;
 	}
 	pop_err();
@@ -2923,105 +2923,105 @@ c_Image.prototype.p_ApplyFlags=function(t_iflags){
 }
 c_Image.prototype.p_Init=function(t_surf,t_nframes,t_iflags){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<410>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<410>";
 	if((this.m_surface)!=null){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<410>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<410>";
 		error("Image already initialized");
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<411>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<411>";
 	this.m_surface=t_surf;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<413>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<413>";
 	this.m_width=((this.m_surface.Width()/t_nframes)|0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<414>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<414>";
 	this.m_height=this.m_surface.Height();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<416>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<416>";
 	this.m_frames=new_object_array(t_nframes);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<417>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<417>";
 	for(var t_i=0;t_i<t_nframes;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<418>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<418>";
 		dbg_array(this.m_frames,t_i)[dbg_index]=c_Frame.m_new.call(new c_Frame,t_i*this.m_width,0);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<421>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<421>";
 	this.p_ApplyFlags(t_iflags);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<422>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<422>";
 	pop_err();
 	return this;
 }
 c_Image.prototype.p_Init2=function(t_surf,t_x,t_y,t_iwidth,t_iheight,t_nframes,t_iflags,t_src,t_srcx,t_srcy,t_srcw,t_srch){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<426>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<426>";
 	if((this.m_surface)!=null){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<426>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<426>";
 		error("Image already initialized");
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<427>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<427>";
 	this.m_surface=t_surf;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<428>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<428>";
 	this.m_source=t_src;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<430>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<430>";
 	this.m_width=t_iwidth;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<431>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<431>";
 	this.m_height=t_iheight;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<433>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<433>";
 	this.m_frames=new_object_array(t_nframes);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<435>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<435>";
 	var t_ix=t_x;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<435>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<435>";
 	var t_iy=t_y;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<437>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<437>";
 	for(var t_i=0;t_i<t_nframes;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<438>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<438>";
 		if(t_ix+this.m_width>t_srcw){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<439>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<439>";
 			t_ix=0;
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<440>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<440>";
 			t_iy+=this.m_height;
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<442>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<442>";
 		if(t_ix+this.m_width>t_srcw || t_iy+this.m_height>t_srch){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<443>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<443>";
 			error("Image frame outside surface");
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<445>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<445>";
 		dbg_array(this.m_frames,t_i)[dbg_index]=c_Frame.m_new.call(new c_Frame,t_ix+t_srcx,t_iy+t_srcy);
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<446>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<446>";
 		t_ix+=this.m_width;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<449>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<449>";
 	this.p_ApplyFlags(t_iflags);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<450>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<450>";
 	pop_err();
 	return this;
 }
 c_Image.prototype.p_Width=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<347>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<347>";
 	pop_err();
 	return this.m_width;
 }
 c_Image.prototype.p_Height=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<351>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<351>";
 	pop_err();
 	return this.m_height;
 }
 function bb_data_FixDataPath(t_path){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/data.cxs<7>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<7>";
 	var t_i=t_path.indexOf(":/",0);
-	err_info="C:/Cerberus/modules/mojo/data.cxs<8>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<8>";
 	if(t_i!=-1 && t_path.indexOf("/",0)==t_i+1){
-		err_info="C:/Cerberus/modules/mojo/data.cxs<8>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<8>";
 		pop_err();
 		return t_path;
 	}
-	err_info="C:/Cerberus/modules/mojo/data.cxs<9>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<9>";
 	if(string_startswith(t_path,"./") || string_startswith(t_path,"/")){
-		err_info="C:/Cerberus/modules/mojo/data.cxs<9>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<9>";
 		pop_err();
 		return t_path;
 	}
-	err_info="C:/Cerberus/modules/mojo/data.cxs<10>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/data.cxs<10>";
 	var t_="cerberus://data/"+t_path;
 	pop_err();
 	return t_;
@@ -3033,31 +3033,31 @@ function c_Frame(){
 }
 c_Frame.m_new=function(t_x,t_y){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<27>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<27>";
 	dbg_object(this).m_x=t_x;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<28>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<28>";
 	dbg_object(this).m_y=t_y;
 	pop_err();
 	return this;
 }
 c_Frame.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<22>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<22>";
 	pop_err();
 	return this;
 }
 function bb_graphics_LoadImage(t_path,t_frameCount,t_flags){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<506>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<506>";
 	var t_surf=bb_graphics_device.LoadSurface(bb_data_FixDataPath(t_path));
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<507>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<507>";
 	if((t_surf)!=null){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<508>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<508>";
 		var t_=(c_Image.m_new.call(new c_Image)).p_Init(t_surf,t_frameCount,t_flags);
 		pop_err();
 		return t_;
 	}else{
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<510>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<510>";
 		debugLog("Error - Unable to load image: "+t_path);
 	}
 	pop_err();
@@ -3065,16 +3065,16 @@ function bb_graphics_LoadImage(t_path,t_frameCount,t_flags){
 }
 function bb_graphics_LoadImage2(t_path,t_frameWidth,t_frameHeight,t_frameCount,t_flags){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<515>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<515>";
 	var t_surf=bb_graphics_device.LoadSurface(bb_data_FixDataPath(t_path));
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<516>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<516>";
 	if((t_surf)!=null){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<517>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<517>";
 		var t_=(c_Image.m_new.call(new c_Image)).p_Init2(t_surf,0,0,t_frameWidth,t_frameHeight,t_frameCount,t_flags,null,0,0,t_surf.Width(),t_surf.Height());
 		pop_err();
 		return t_;
 	}else{
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<519>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<519>";
 		debugLog("Error - Unable to load image: "+t_path);
 	}
 	pop_err();
@@ -3094,30 +3094,30 @@ function c_Glyph(){
 }
 c_Glyph.m_new=function(t_page,t_id,t_x,t_y,t_width,t_height,t_advance){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<89>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<89>";
 	dbg_object(this).m_page=t_page;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<90>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<90>";
 	dbg_object(this).m_id=t_id;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<91>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<91>";
 	dbg_object(this).m_x=t_x;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<92>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<92>";
 	dbg_object(this).m_y=t_y;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<93>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<93>";
 	dbg_object(this).m_width=t_width;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<94>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<94>";
 	dbg_object(this).m_height=t_height;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<95>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<95>";
 	dbg_object(this).m_advance=t_advance;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<96>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<96>";
 	dbg_object(this).m_xoff=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<97>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<97>";
 	dbg_object(this).m_yoff=0;
 	pop_err();
 	return this;
 }
 c_Glyph.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<76>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<76>";
 	pop_err();
 	return this;
 }
@@ -3127,7 +3127,7 @@ function c_Map(){
 }
 c_Map.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<7>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<7>";
 	pop_err();
 	return this;
 }
@@ -3135,189 +3135,189 @@ c_Map.prototype.p_Compare=function(t_lhs,t_rhs){
 }
 c_Map.prototype.p_RotateLeft=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<251>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<251>";
 	var t_child=dbg_object(t_node).m_right;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<252>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<252>";
 	dbg_object(t_node).m_right=dbg_object(t_child).m_left;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<253>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<253>";
 	if((dbg_object(t_child).m_left)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<254>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<254>";
 		dbg_object(dbg_object(t_child).m_left).m_parent=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<256>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<256>";
 	dbg_object(t_child).m_parent=dbg_object(t_node).m_parent;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<257>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<257>";
 	if((dbg_object(t_node).m_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<258>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<258>";
 		if(t_node==dbg_object(dbg_object(t_node).m_parent).m_left){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<259>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<259>";
 			dbg_object(dbg_object(t_node).m_parent).m_left=t_child;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<261>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<261>";
 			dbg_object(dbg_object(t_node).m_parent).m_right=t_child;
 		}
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<264>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<264>";
 		this.m_root=t_child;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<266>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<266>";
 	dbg_object(t_child).m_left=t_node;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<267>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<267>";
 	dbg_object(t_node).m_parent=t_child;
 	pop_err();
 	return 0;
 }
 c_Map.prototype.p_RotateRight=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<271>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<271>";
 	var t_child=dbg_object(t_node).m_left;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<272>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<272>";
 	dbg_object(t_node).m_left=dbg_object(t_child).m_right;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<273>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<273>";
 	if((dbg_object(t_child).m_right)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<274>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<274>";
 		dbg_object(dbg_object(t_child).m_right).m_parent=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<276>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<276>";
 	dbg_object(t_child).m_parent=dbg_object(t_node).m_parent;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<277>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<277>";
 	if((dbg_object(t_node).m_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<278>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<278>";
 		if(t_node==dbg_object(dbg_object(t_node).m_parent).m_right){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<279>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<279>";
 			dbg_object(dbg_object(t_node).m_parent).m_right=t_child;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<281>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<281>";
 			dbg_object(dbg_object(t_node).m_parent).m_left=t_child;
 		}
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<284>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<284>";
 		this.m_root=t_child;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<286>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<286>";
 	dbg_object(t_child).m_right=t_node;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<287>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<287>";
 	dbg_object(t_node).m_parent=t_child;
 	pop_err();
 	return 0;
 }
 c_Map.prototype.p_InsertFixup=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<212>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<212>";
 	while(((dbg_object(t_node).m_parent)!=null) && dbg_object(dbg_object(t_node).m_parent).m_color==-1 && ((dbg_object(dbg_object(t_node).m_parent).m_parent)!=null)){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<213>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<213>";
 		if(dbg_object(t_node).m_parent==dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_left){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<214>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<214>";
 			var t_uncle=dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_right;
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<215>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<215>";
 			if(((t_uncle)!=null) && dbg_object(t_uncle).m_color==-1){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<216>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<216>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<217>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<217>";
 				dbg_object(t_uncle).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<218>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<218>";
 				dbg_object(dbg_object(t_uncle).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<219>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<219>";
 				t_node=dbg_object(t_uncle).m_parent;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<221>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<221>";
 				if(t_node==dbg_object(dbg_object(t_node).m_parent).m_right){
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<222>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<222>";
 					t_node=dbg_object(t_node).m_parent;
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<223>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<223>";
 					this.p_RotateLeft(t_node);
 				}
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<225>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<225>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<226>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<226>";
 				dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<227>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<227>";
 				this.p_RotateRight(dbg_object(dbg_object(t_node).m_parent).m_parent);
 			}
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<230>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<230>";
 			var t_uncle2=dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_left;
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<231>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<231>";
 			if(((t_uncle2)!=null) && dbg_object(t_uncle2).m_color==-1){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<232>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<232>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<233>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<233>";
 				dbg_object(t_uncle2).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<234>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<234>";
 				dbg_object(dbg_object(t_uncle2).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<235>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<235>";
 				t_node=dbg_object(t_uncle2).m_parent;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<237>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<237>";
 				if(t_node==dbg_object(dbg_object(t_node).m_parent).m_left){
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<238>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<238>";
 					t_node=dbg_object(t_node).m_parent;
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<239>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<239>";
 					this.p_RotateRight(t_node);
 				}
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<241>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<241>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<242>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<242>";
 				dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<243>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<243>";
 				this.p_RotateLeft(dbg_object(dbg_object(t_node).m_parent).m_parent);
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<247>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<247>";
 	dbg_object(this.m_root).m_color=1;
 	pop_err();
 	return 0;
 }
 c_Map.prototype.p_Add=function(t_key,t_value){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<61>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<61>";
 	var t_node=this.m_root;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<62>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<62>";
 	var t_parent=null;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<62>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<62>";
 	var t_cmp=0;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<64>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<64>";
 	while((t_node)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<65>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<65>";
 		t_parent=t_node;
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<66>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<66>";
 		t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<67>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<67>";
 		if(t_cmp>0){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<68>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<68>";
 			t_node=dbg_object(t_node).m_right;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<69>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<69>";
 			if(t_cmp<0){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<70>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<70>";
 				t_node=dbg_object(t_node).m_left;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<72>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<72>";
 				pop_err();
 				return false;
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<76>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<76>";
 	t_node=c_Node.m_new.call(new c_Node,t_key,t_value,-1,t_parent);
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<78>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<78>";
 	if((t_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<79>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<79>";
 		if(t_cmp>0){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<80>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<80>";
 			dbg_object(t_parent).m_right=t_node;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<82>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<82>";
 			dbg_object(t_parent).m_left=t_node;
 		}
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<84>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<84>";
 		this.p_InsertFixup(t_node);
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<86>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<86>";
 		this.m_root=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<88>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<88>";
 	pop_err();
 	return true;
 }
@@ -3327,15 +3327,15 @@ function c_IntMap(){
 c_IntMap.prototype=extend_class(c_Map);
 c_IntMap.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<534>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<534>";
 	c_Map.m_new.call(this);
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<534>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<534>";
 	pop_err();
 	return this;
 }
 c_IntMap.prototype.p_Compare=function(t_lhs,t_rhs){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<537>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<537>";
 	var t_=t_lhs-t_rhs;
 	pop_err();
 	return t_;
@@ -3351,50 +3351,50 @@ function c_Node(){
 }
 c_Node.m_new=function(t_key,t_value,t_color,t_parent){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<364>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<364>";
 	dbg_object(this).m_key=t_key;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<365>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<365>";
 	dbg_object(this).m_value=t_value;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<366>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<366>";
 	dbg_object(this).m_color=t_color;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<367>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<367>";
 	dbg_object(this).m_parent=t_parent;
 	pop_err();
 	return this;
 }
 c_Node.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<361>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<361>";
 	pop_err();
 	return this;
 }
 function bb_app_LoadString(t_path){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<220>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<220>";
 	var t_=bb_app__game.LoadString(bb_data_FixDataPath(t_path));
 	pop_err();
 	return t_;
 }
 function bb_graphics_SetFont(t_font){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<924>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<924>";
 	if(!((t_font)!=null)){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<925>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<925>";
 		if(!((dbg_object(bb_graphics_context).m_defaultFont)!=null)){
-			err_info="C:/Cerberus/modules/mojo/graphics.cxs<926>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<926>";
 			dbg_object(bb_graphics_context).m_defaultFont=c_Font.m_Load("mojo_font.png",32,96,true);
 		}
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<928>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<928>";
 		t_font=dbg_object(bb_graphics_context).m_defaultFont;
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<930>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<930>";
 	dbg_object(bb_graphics_context).m_font=t_font;
 	pop_err();
 }
 var bb_audio_device=null;
 function bb_audio_SetAudioDevice(t_dev){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/audio.cxs<30>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/audio.cxs<30>";
 	bb_audio_device=t_dev;
 	pop_err();
 	return 0;
@@ -3420,9 +3420,9 @@ function c_InputDevice(){
 }
 c_InputDevice.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<26>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<26>";
 	for(var t_i=0;t_i<4;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<27>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<27>";
 		dbg_array(this.m__joyStates,t_i)[dbg_index]=c_JoyState.m_new.call(new c_JoyState);
 	}
 	pop_err();
@@ -3430,45 +3430,45 @@ c_InputDevice.m_new=function(){
 }
 c_InputDevice.prototype.p_PutKeyHit=function(t_key){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<262>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<262>";
 	if(this.m__keyHitPut==this.m__keyHitQueue.length){
 		pop_err();
 		return;
 	}
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<263>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<263>";
 	dbg_array(this.m__keyHit,t_key)[dbg_index]+=1;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<264>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<264>";
 	dbg_array(this.m__keyHitQueue,this.m__keyHitPut)[dbg_index]=t_key;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<265>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<265>";
 	this.m__keyHitPut+=1;
 	pop_err();
 }
 c_InputDevice.prototype.p_BeginUpdate=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<213>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<213>";
 	for(var t_i=0;t_i<4;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<214>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<214>";
 		var t_state=dbg_array(this.m__joyStates,t_i)[dbg_index];
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<215>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<215>";
 		if(!BBGame.Game().PollJoystick(t_i,dbg_object(t_state).m_joyx,dbg_object(t_state).m_joyy,dbg_object(t_state).m_joyz,dbg_object(t_state).m_buttons)){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<215>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<215>";
 			break;
 		}
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<216>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<216>";
 		for(var t_j=0;t_j<32;t_j=t_j+1){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<217>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<217>";
 			var t_key=256+t_i*32+t_j;
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<218>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<218>";
 			if(dbg_array(dbg_object(t_state).m_buttons,t_j)[dbg_index]){
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<219>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<219>";
 				if(!dbg_array(this.m__keyDown,t_key)[dbg_index]){
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<220>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<220>";
 					dbg_array(this.m__keyDown,t_key)[dbg_index]=true;
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<221>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<221>";
 					this.p_PutKeyHit(t_key);
 				}
 			}else{
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<224>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<224>";
 				dbg_array(this.m__keyDown,t_key)[dbg_index]=false;
 			}
 		}
@@ -3477,74 +3477,74 @@ c_InputDevice.prototype.p_BeginUpdate=function(){
 }
 c_InputDevice.prototype.p_EndUpdate=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<231>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<231>";
 	for(var t_i=0;t_i<this.m__keyHitPut;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<232>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<232>";
 		dbg_array(this.m__keyHit,dbg_array(this.m__keyHitQueue,t_i)[dbg_index])[dbg_index]=0;
 	}
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<234>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<234>";
 	this.m__keyHitPut=0;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<235>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<235>";
 	this.m__charGet=0;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<236>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<236>";
 	this.m__charPut=0;
 	pop_err();
 }
 c_InputDevice.prototype.p_KeyEvent=function(t_event,t_data){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<134>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<134>";
 	var t_1=t_event;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<135>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<135>";
 	if(t_1==1){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<136>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<136>";
 		if(!dbg_array(this.m__keyDown,t_data)[dbg_index]){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<137>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<137>";
 			dbg_array(this.m__keyDown,t_data)[dbg_index]=true;
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<138>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<138>";
 			this.p_PutKeyHit(t_data);
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<139>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<139>";
 			if(t_data==1){
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<140>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<140>";
 				dbg_array(this.m__keyDown,384)[dbg_index]=true;
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<141>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<141>";
 				this.p_PutKeyHit(384);
 			}else{
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<142>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<142>";
 				if(t_data==384){
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<143>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<143>";
 					dbg_array(this.m__keyDown,1)[dbg_index]=true;
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<144>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<144>";
 					this.p_PutKeyHit(1);
 				}
 			}
 		}
 	}else{
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<147>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<147>";
 		if(t_1==2){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<148>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<148>";
 			if(dbg_array(this.m__keyDown,t_data)[dbg_index]){
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<149>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<149>";
 				dbg_array(this.m__keyDown,t_data)[dbg_index]=false;
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<150>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<150>";
 				if(t_data==1){
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<151>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<151>";
 					dbg_array(this.m__keyDown,384)[dbg_index]=false;
 				}else{
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<152>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<152>";
 					if(t_data==384){
-						err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<153>";
+						err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<153>";
 						dbg_array(this.m__keyDown,1)[dbg_index]=false;
 					}
 				}
 			}
 		}else{
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<156>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<156>";
 			if(t_1==3){
-				err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<157>";
+				err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<157>";
 				if(this.m__charPut<this.m__charQueue.length){
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<158>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<158>";
 					dbg_array(this.m__charQueue,this.m__charPut)[dbg_index]=t_data;
-					err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<159>";
+					err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<159>";
 					this.m__charPut+=1;
 				}
 			}
@@ -3554,21 +3554,21 @@ c_InputDevice.prototype.p_KeyEvent=function(t_event,t_data){
 }
 c_InputDevice.prototype.p_MouseEvent=function(t_event,t_data,t_x,t_y,t_z){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<165>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<165>";
 	var t_2=t_event;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<166>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<166>";
 	if(t_2==4){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<167>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<167>";
 		this.p_KeyEvent(1,1+t_data);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<168>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<168>";
 		if(t_2==5){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<169>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<169>";
 			this.p_KeyEvent(2,1+t_data);
 			pop_err();
 			return;
 		}else{
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<171>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<171>";
 			if(t_2==6){
 			}else{
 				pop_err();
@@ -3576,35 +3576,35 @@ c_InputDevice.prototype.p_MouseEvent=function(t_event,t_data,t_x,t_y,t_z){
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<175>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<175>";
 	this.m__mouseX=t_x;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<176>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<176>";
 	this.m__mouseY=t_y;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<177>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<177>";
 	this.m__mouseZ=t_z;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<178>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<178>";
 	dbg_array(this.m__touchX,0)[dbg_index]=t_x;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<179>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<179>";
 	dbg_array(this.m__touchY,0)[dbg_index]=t_y;
 	pop_err();
 }
 c_InputDevice.prototype.p_TouchEvent=function(t_event,t_data,t_x,t_y){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<183>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<183>";
 	var t_3=t_event;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<184>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<184>";
 	if(t_3==7){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<185>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<185>";
 		this.p_KeyEvent(1,384+t_data);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<186>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<186>";
 		if(t_3==8){
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<187>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<187>";
 			this.p_KeyEvent(2,384+t_data);
 			pop_err();
 			return;
 		}else{
-			err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<189>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<189>";
 			if(t_3==9){
 			}else{
 				pop_err();
@@ -3612,34 +3612,34 @@ c_InputDevice.prototype.p_TouchEvent=function(t_event,t_data,t_x,t_y){
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<193>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<193>";
 	dbg_array(this.m__touchX,t_data)[dbg_index]=t_x;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<194>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<194>";
 	dbg_array(this.m__touchY,t_data)[dbg_index]=t_y;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<195>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<195>";
 	if(t_data==0){
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<196>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<196>";
 		this.m__mouseX=t_x;
-		err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<197>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<197>";
 		this.m__mouseY=t_y;
 	}
 	pop_err();
 }
 c_InputDevice.prototype.p_MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<202>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<202>";
 	var t_4=t_event;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<203>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<203>";
 	if(t_4==10){
 	}else{
 		pop_err();
 		return;
 	}
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<207>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<207>";
 	this.m__accelX=t_x;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<208>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<208>";
 	this.m__accelY=t_y;
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<209>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<209>";
 	this.m__accelZ=t_z;
 	pop_err();
 }
@@ -3652,14 +3652,14 @@ function c_JoyState(){
 }
 c_JoyState.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/inputdevice.cxs<14>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<14>";
 	pop_err();
 	return this;
 }
 var bb_input_device=null;
 function bb_input_SetInputDevice(t_dev){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/input.cxs<22>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<22>";
 	bb_input_device=t_dev;
 	pop_err();
 	return 0;
@@ -3668,22 +3668,22 @@ var bb_app__devWidth=0;
 var bb_app__devHeight=0;
 function bb_app_ValidateDeviceWindow(t_notifyApp){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<57>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<57>";
 	var t_w=bb_app__game.GetDeviceWidth();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<58>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<58>";
 	var t_h=bb_app__game.GetDeviceHeight();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<59>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<59>";
 	if(t_w==bb_app__devWidth && t_h==bb_app__devHeight){
 		pop_err();
 		return;
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<60>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<60>";
 	bb_app__devWidth=t_w;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<61>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<61>";
 	bb_app__devHeight=t_h;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<62>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<62>";
 	if(t_notifyApp){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<62>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<62>";
 		bb_app__app.p_OnResize();
 	}
 	pop_err();
@@ -3695,16 +3695,16 @@ function c_DisplayMode(){
 }
 c_DisplayMode.m_new=function(t_width,t_height){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<192>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<192>";
 	this.m__width=t_width;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<193>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<193>";
 	this.m__height=t_height;
 	pop_err();
 	return this;
 }
 c_DisplayMode.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<189>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<189>";
 	pop_err();
 	return this;
 }
@@ -3714,7 +3714,7 @@ function c_Map2(){
 }
 c_Map2.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<7>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<7>";
 	pop_err();
 	return this;
 }
@@ -3722,232 +3722,232 @@ c_Map2.prototype.p_Compare=function(t_lhs,t_rhs){
 }
 c_Map2.prototype.p_FindNode=function(t_key){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<157>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<157>";
 	var t_node=this.m_root;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<159>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<159>";
 	while((t_node)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<160>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<160>";
 		var t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<161>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<161>";
 		if(t_cmp>0){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<162>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<162>";
 			t_node=dbg_object(t_node).m_right;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<163>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<163>";
 			if(t_cmp<0){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<164>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<164>";
 				t_node=dbg_object(t_node).m_left;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<166>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<166>";
 				pop_err();
 				return t_node;
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<169>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<169>";
 	pop_err();
 	return t_node;
 }
 c_Map2.prototype.p_Contains=function(t_key){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<25>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<25>";
 	var t_=this.p_FindNode(t_key)!=null;
 	pop_err();
 	return t_;
 }
 c_Map2.prototype.p_RotateLeft2=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<251>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<251>";
 	var t_child=dbg_object(t_node).m_right;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<252>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<252>";
 	dbg_object(t_node).m_right=dbg_object(t_child).m_left;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<253>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<253>";
 	if((dbg_object(t_child).m_left)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<254>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<254>";
 		dbg_object(dbg_object(t_child).m_left).m_parent=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<256>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<256>";
 	dbg_object(t_child).m_parent=dbg_object(t_node).m_parent;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<257>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<257>";
 	if((dbg_object(t_node).m_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<258>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<258>";
 		if(t_node==dbg_object(dbg_object(t_node).m_parent).m_left){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<259>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<259>";
 			dbg_object(dbg_object(t_node).m_parent).m_left=t_child;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<261>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<261>";
 			dbg_object(dbg_object(t_node).m_parent).m_right=t_child;
 		}
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<264>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<264>";
 		this.m_root=t_child;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<266>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<266>";
 	dbg_object(t_child).m_left=t_node;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<267>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<267>";
 	dbg_object(t_node).m_parent=t_child;
 	pop_err();
 	return 0;
 }
 c_Map2.prototype.p_RotateRight2=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<271>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<271>";
 	var t_child=dbg_object(t_node).m_left;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<272>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<272>";
 	dbg_object(t_node).m_left=dbg_object(t_child).m_right;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<273>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<273>";
 	if((dbg_object(t_child).m_right)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<274>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<274>";
 		dbg_object(dbg_object(t_child).m_right).m_parent=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<276>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<276>";
 	dbg_object(t_child).m_parent=dbg_object(t_node).m_parent;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<277>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<277>";
 	if((dbg_object(t_node).m_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<278>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<278>";
 		if(t_node==dbg_object(dbg_object(t_node).m_parent).m_right){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<279>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<279>";
 			dbg_object(dbg_object(t_node).m_parent).m_right=t_child;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<281>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<281>";
 			dbg_object(dbg_object(t_node).m_parent).m_left=t_child;
 		}
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<284>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<284>";
 		this.m_root=t_child;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<286>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<286>";
 	dbg_object(t_child).m_right=t_node;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<287>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<287>";
 	dbg_object(t_node).m_parent=t_child;
 	pop_err();
 	return 0;
 }
 c_Map2.prototype.p_InsertFixup2=function(t_node){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<212>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<212>";
 	while(((dbg_object(t_node).m_parent)!=null) && dbg_object(dbg_object(t_node).m_parent).m_color==-1 && ((dbg_object(dbg_object(t_node).m_parent).m_parent)!=null)){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<213>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<213>";
 		if(dbg_object(t_node).m_parent==dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_left){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<214>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<214>";
 			var t_uncle=dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_right;
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<215>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<215>";
 			if(((t_uncle)!=null) && dbg_object(t_uncle).m_color==-1){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<216>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<216>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<217>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<217>";
 				dbg_object(t_uncle).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<218>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<218>";
 				dbg_object(dbg_object(t_uncle).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<219>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<219>";
 				t_node=dbg_object(t_uncle).m_parent;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<221>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<221>";
 				if(t_node==dbg_object(dbg_object(t_node).m_parent).m_right){
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<222>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<222>";
 					t_node=dbg_object(t_node).m_parent;
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<223>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<223>";
 					this.p_RotateLeft2(t_node);
 				}
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<225>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<225>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<226>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<226>";
 				dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<227>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<227>";
 				this.p_RotateRight2(dbg_object(dbg_object(t_node).m_parent).m_parent);
 			}
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<230>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<230>";
 			var t_uncle2=dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_left;
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<231>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<231>";
 			if(((t_uncle2)!=null) && dbg_object(t_uncle2).m_color==-1){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<232>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<232>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<233>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<233>";
 				dbg_object(t_uncle2).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<234>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<234>";
 				dbg_object(dbg_object(t_uncle2).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<235>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<235>";
 				t_node=dbg_object(t_uncle2).m_parent;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<237>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<237>";
 				if(t_node==dbg_object(dbg_object(t_node).m_parent).m_left){
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<238>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<238>";
 					t_node=dbg_object(t_node).m_parent;
-					err_info="C:/Cerberus/modules/cerberus/map.cxs<239>";
+					err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<239>";
 					this.p_RotateRight2(t_node);
 				}
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<241>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<241>";
 				dbg_object(dbg_object(t_node).m_parent).m_color=1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<242>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<242>";
 				dbg_object(dbg_object(dbg_object(t_node).m_parent).m_parent).m_color=-1;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<243>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<243>";
 				this.p_RotateLeft2(dbg_object(dbg_object(t_node).m_parent).m_parent);
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<247>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<247>";
 	dbg_object(this.m_root).m_color=1;
 	pop_err();
 	return 0;
 }
 c_Map2.prototype.p_Set=function(t_key,t_value){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<29>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<29>";
 	var t_node=this.m_root;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<30>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<30>";
 	var t_parent=null;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<30>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<30>";
 	var t_cmp=0;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<32>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<32>";
 	while((t_node)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<33>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<33>";
 		t_parent=t_node;
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<34>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<34>";
 		t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<35>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<35>";
 		if(t_cmp>0){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<36>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<36>";
 			t_node=dbg_object(t_node).m_right;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<37>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<37>";
 			if(t_cmp<0){
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<38>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<38>";
 				t_node=dbg_object(t_node).m_left;
 			}else{
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<40>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<40>";
 				dbg_object(t_node).m_value=t_value;
-				err_info="C:/Cerberus/modules/cerberus/map.cxs<41>";
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<41>";
 				pop_err();
 				return false;
 			}
 		}
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<45>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<45>";
 	t_node=c_Node2.m_new.call(new c_Node2,t_key,t_value,-1,t_parent);
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<47>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<47>";
 	if((t_parent)!=null){
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<48>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<48>";
 		if(t_cmp>0){
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<49>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<49>";
 			dbg_object(t_parent).m_right=t_node;
 		}else{
-			err_info="C:/Cerberus/modules/cerberus/map.cxs<51>";
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<51>";
 			dbg_object(t_parent).m_left=t_node;
 		}
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<53>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<53>";
 		this.p_InsertFixup2(t_node);
 	}else{
-		err_info="C:/Cerberus/modules/cerberus/map.cxs<55>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<55>";
 		this.m_root=t_node;
 	}
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<57>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<57>";
 	pop_err();
 	return true;
 }
 c_Map2.prototype.p_Insert=function(t_key,t_value){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<146>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<146>";
 	var t_=this.p_Set(t_key,t_value);
 	pop_err();
 	return t_;
@@ -3958,15 +3958,15 @@ function c_IntMap2(){
 c_IntMap2.prototype=extend_class(c_Map2);
 c_IntMap2.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<534>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<534>";
 	c_Map2.m_new.call(this);
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<534>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<534>";
 	pop_err();
 	return this;
 }
 c_IntMap2.prototype.p_Compare=function(t_lhs,t_rhs){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<537>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<537>";
 	var t_=t_lhs-t_rhs;
 	pop_err();
 	return t_;
@@ -3983,51 +3983,51 @@ c_Stack.m_new=function(){
 }
 c_Stack.m_new2=function(t_data){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<13>";
 	dbg_object(this).m_data=t_data.slice(0);
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<14>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<14>";
 	dbg_object(this).m_length=t_data.length;
 	pop_err();
 	return this;
 }
 c_Stack.prototype.p_Push=function(t_value){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<71>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<71>";
 	if(this.m_length==this.m_data.length){
-		err_info="C:/Cerberus/modules/cerberus/stack.cxs<72>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<72>";
 		this.m_data=resize_object_array(this.m_data,this.m_length*2+10);
 	}
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<74>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<74>";
 	dbg_array(this.m_data,this.m_length)[dbg_index]=t_value;
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<75>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<75>";
 	this.m_length+=1;
 	pop_err();
 }
 c_Stack.prototype.p_Push2=function(t_values,t_offset,t_count){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<83>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<83>";
 	for(var t_i=0;t_i<t_count;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/cerberus/stack.cxs<84>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<84>";
 		this.p_Push(dbg_array(t_values,t_offset+t_i)[dbg_index]);
 	}
 	pop_err();
 }
 c_Stack.prototype.p_Push3=function(t_values,t_offset){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<79>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<79>";
 	this.p_Push2(t_values,t_offset,t_values.length-t_offset);
 	pop_err();
 }
 c_Stack.prototype.p_ToArray=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<18>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<18>";
 	var t_t=new_object_array(this.m_length);
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<19>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<19>";
 	for(var t_i=0;t_i<this.m_length;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/cerberus/stack.cxs<20>";
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<20>";
 		dbg_array(t_t,t_i)[dbg_index]=dbg_array(this.m_data,t_i)[dbg_index];
 	}
-	err_info="C:/Cerberus/modules/cerberus/stack.cxs<22>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/stack.cxs<22>";
 	pop_err();
 	return t_t;
 }
@@ -4042,20 +4042,20 @@ function c_Node2(){
 }
 c_Node2.m_new=function(t_key,t_value,t_color,t_parent){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<364>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<364>";
 	dbg_object(this).m_key=t_key;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<365>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<365>";
 	dbg_object(this).m_value=t_value;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<366>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<366>";
 	dbg_object(this).m_color=t_color;
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<367>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<367>";
 	dbg_object(this).m_parent=t_parent;
 	pop_err();
 	return this;
 }
 c_Node2.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/modules/cerberus/map.cxs<361>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<361>";
 	pop_err();
 	return this;
 }
@@ -4063,53 +4063,53 @@ var bb_app__displayModes=[];
 var bb_app__desktopMode=null;
 function bb_app_DeviceWidth(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<263>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<263>";
 	pop_err();
 	return bb_app__devWidth;
 }
 function bb_app_DeviceHeight(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<267>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<267>";
 	pop_err();
 	return bb_app__devHeight;
 }
 function bb_app_EnumDisplayModes(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<33>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<33>";
 	var t_modes=bb_app__game.GetDisplayModes();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<34>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<34>";
 	var t_mmap=c_IntMap2.m_new.call(new c_IntMap2);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<35>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<35>";
 	var t_mstack=c_Stack.m_new.call(new c_Stack);
-	err_info="C:/Cerberus/modules/mojo/app.cxs<36>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<36>";
 	for(var t_i=0;t_i<t_modes.length;t_i=t_i+1){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<37>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<37>";
 		var t_w=dbg_object(dbg_array(t_modes,t_i)[dbg_index]).width;
-		err_info="C:/Cerberus/modules/mojo/app.cxs<38>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<38>";
 		var t_h=dbg_object(dbg_array(t_modes,t_i)[dbg_index]).height;
-		err_info="C:/Cerberus/modules/mojo/app.cxs<39>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<39>";
 		var t_size=t_w<<16|t_h;
-		err_info="C:/Cerberus/modules/mojo/app.cxs<40>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<40>";
 		if(t_mmap.p_Contains(t_size)){
 		}else{
-			err_info="C:/Cerberus/modules/mojo/app.cxs<42>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<42>";
 			var t_mode=c_DisplayMode.m_new.call(new c_DisplayMode,dbg_object(dbg_array(t_modes,t_i)[dbg_index]).width,dbg_object(dbg_array(t_modes,t_i)[dbg_index]).height);
-			err_info="C:/Cerberus/modules/mojo/app.cxs<43>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<43>";
 			t_mmap.p_Insert(t_size,t_mode);
-			err_info="C:/Cerberus/modules/mojo/app.cxs<44>";
+			err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<44>";
 			t_mstack.p_Push(t_mode);
 		}
 	}
-	err_info="C:/Cerberus/modules/mojo/app.cxs<47>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<47>";
 	bb_app__displayModes=t_mstack.p_ToArray();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<48>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<48>";
 	var t_mode2=bb_app__game.GetDesktopMode();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<49>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<49>";
 	if((t_mode2)!=null){
-		err_info="C:/Cerberus/modules/mojo/app.cxs<50>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<50>";
 		bb_app__desktopMode=c_DisplayMode.m_new.call(new c_DisplayMode,dbg_object(t_mode2).width,dbg_object(t_mode2).height);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/app.cxs<52>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<52>";
 		bb_app__desktopMode=c_DisplayMode.m_new.call(new c_DisplayMode,bb_app_DeviceWidth(),bb_app_DeviceHeight());
 	}
 	pop_err();
@@ -4117,54 +4117,54 @@ function bb_app_EnumDisplayModes(){
 var bb_graphics_renderDevice=null;
 function bb_graphics_SetMatrix(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<606>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<606>";
 	dbg_object(bb_graphics_context).m_ix=t_ix;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<607>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<607>";
 	dbg_object(bb_graphics_context).m_iy=t_iy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<608>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<608>";
 	dbg_object(bb_graphics_context).m_jx=t_jx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<609>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<609>";
 	dbg_object(bb_graphics_context).m_jy=t_jy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<610>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<610>";
 	dbg_object(bb_graphics_context).m_tx=t_tx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<611>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<611>";
 	dbg_object(bb_graphics_context).m_ty=t_ty;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<612>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<612>";
 	dbg_object(bb_graphics_context).m_tformed=((t_ix!=1.0 || t_iy!=0.0 || t_jx!=0.0 || t_jy!=1.0 || t_tx!=0.0 || t_ty!=0.0)?1:0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<613>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<613>";
 	dbg_object(bb_graphics_context).m_matDirty=1;
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetMatrix2(t_m){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<602>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<602>";
 	bb_graphics_SetMatrix(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetColor(t_r,t_g,t_b){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<529>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<529>";
 	dbg_object(bb_graphics_context).m_color_r=t_r;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<530>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<530>";
 	dbg_object(bb_graphics_context).m_color_g=t_g;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<531>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<531>";
 	dbg_object(bb_graphics_context).m_color_b=t_b;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<532>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<532>";
 	bb_graphics_renderDevice.SetColor(t_r,t_g,t_b);
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetColor2(t_rgb){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<538>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<538>";
 	dbg_object(bb_graphics_context).m_color_r=(t_rgb>>16&255);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<539>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<539>";
 	dbg_object(bb_graphics_context).m_color_g=(t_rgb>>8&255);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<540>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<540>";
 	dbg_object(bb_graphics_context).m_color_b=(t_rgb&255);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<541>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<541>";
 	bb_graphics_renderDevice.SetColor(dbg_object(bb_graphics_context).m_color_r,dbg_object(bb_graphics_context).m_color_g,dbg_object(bb_graphics_context).m_color_b);
 	pop_err();
 	return 0;
@@ -4177,74 +4177,74 @@ function c_Color(){
 }
 function bb_graphics_SetColor3(t_col){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<547>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<547>";
 	dbg_object(bb_graphics_context).m_color_r=(dbg_object(t_col).m_r);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<548>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<548>";
 	dbg_object(bb_graphics_context).m_color_g=(dbg_object(t_col).m_g);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<549>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<549>";
 	dbg_object(bb_graphics_context).m_color_b=(dbg_object(t_col).m_b);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<550>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<550>";
 	bb_graphics_renderDevice.SetColor(dbg_object(bb_graphics_context).m_color_r,dbg_object(bb_graphics_context).m_color_g,dbg_object(bb_graphics_context).m_color_b);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<551>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<551>";
 	bb_graphics_renderDevice.SetAlpha(dbg_object(bb_graphics_context).m_alpha);
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetAlpha(t_alpha){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<565>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<565>";
 	dbg_object(bb_graphics_context).m_alpha=t_alpha;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<566>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<566>";
 	bb_graphics_renderDevice.SetAlpha(t_alpha);
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetBlend(t_blend){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<574>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<574>";
 	dbg_object(bb_graphics_context).m_blend=t_blend;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<575>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<575>";
 	bb_graphics_renderDevice.SetBlend(t_blend);
 	pop_err();
 	return 0;
 }
 function bb_graphics_SetScissor(t_x,t_y,t_width,t_height){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<583>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<583>";
 	dbg_object(bb_graphics_context).m_scissor_x=t_x;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<584>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<584>";
 	dbg_object(bb_graphics_context).m_scissor_y=t_y;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<585>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<585>";
 	dbg_object(bb_graphics_context).m_scissor_width=t_width;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<586>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<586>";
 	dbg_object(bb_graphics_context).m_scissor_height=t_height;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<587>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<587>";
 	bb_graphics_renderDevice.SetScissor(((t_x)|0),((t_y)|0),((t_width)|0),((t_height)|0));
 	pop_err();
 	return 0;
 }
 function bb_graphics_BeginRender(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<492>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<492>";
 	bb_graphics_renderDevice=bb_graphics_device;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<493>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<493>";
 	dbg_object(bb_graphics_context).m_matrixSp=0;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<494>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<494>";
 	bb_graphics_SetMatrix(1.0,0.0,0.0,1.0,0.0,0.0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<495>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<495>";
 	bb_graphics_SetColor(255.0,255.0,255.0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<496>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<496>";
 	bb_graphics_SetAlpha(1.0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<497>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<497>";
 	bb_graphics_SetBlend(0);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<498>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<498>";
 	bb_graphics_SetScissor(0.0,0.0,(bb_app_DeviceWidth()),(bb_app_DeviceHeight()));
 	pop_err();
 	return 0;
 }
 function bb_graphics_EndRender(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<502>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<502>";
 	bb_graphics_renderDevice=null;
 	pop_err();
 	return 0;
@@ -4254,7 +4254,7 @@ function c_BBGameEvent(){
 }
 function bb_app_EndApp(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<259>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<259>";
 	error("");
 	pop_err();
 }
@@ -4270,121 +4270,121 @@ function c_BlobMonster(){
 }
 c_BlobMonster.m_new=function(t_inx,t_iny,t_inimage){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<33>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<33>";
 	this.m_x=t_inx;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<34>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<34>";
 	this.m_y=t_iny;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<36>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<36>";
 	for(var t_i=0;(t_i)<=this.m_segments-1.0;t_i=t_i+1){
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<37>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<37>";
 		dbg_array(this.m_tail,t_i)[dbg_index]=c_point.m_new.call(new c_point);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<38>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<38>";
 		dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x=t_inx;
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<39>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<39>";
 		dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y=t_iny;
 	}
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<41>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<41>";
 	this.m_blob=t_inimage;
 	pop_err();
 	return this;
 }
 c_BlobMonster.m_new2=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<16>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<16>";
 	pop_err();
 	return this;
 }
 c_BlobMonster.prototype.p_Update=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<46>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<46>";
 	this.m_time+=this.m_speed;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<58>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<58>";
 	this.m_y=15.0*Math.cos((this.m_time*-6.0)*D2R)+(((bb_app_DeviceHeight()/2)|0)+180.0*Math.sin((this.m_time*1.3)*D2R));
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<59>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<59>";
 	this.m_x=15.0*Math.sin((this.m_time*-6.0)*D2R)+(((bb_app_DeviceWidth()/2)|0)+200.0*Math.cos((this.m_time/1.5)*D2R));
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<62>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<62>";
 	dbg_object(dbg_array(this.m_tail,0)[dbg_index]).m_x=this.m_x;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<63>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<63>";
 	dbg_object(dbg_array(this.m_tail,0)[dbg_index]).m_y=this.m_y;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<69>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<69>";
 	for(var t_i=1;(t_i)<=this.m_segments-1.0;t_i=t_i+1){
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<71>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<71>";
 		var t_distX=dbg_object(dbg_array(this.m_tail,t_i-1)[dbg_index]).m_x-dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x;
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<72>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<72>";
 		var t_distY=dbg_object(dbg_array(this.m_tail,t_i-1)[dbg_index]).m_y-dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y;
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<73>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<73>";
 		var t_dist=Math.sqrt(t_distX*t_distX+t_distY*t_distY);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<75>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<75>";
 		if(t_dist>7.0){
-			err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<81>";
+			err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<81>";
 			dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x=dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x+t_distX*0.3;
-			err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<82>";
+			err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<82>";
 			dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y=dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y+t_distY*0.3;
 		}
 	}
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<87>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<87>";
 	pop_err();
 	return 0;
 }
 c_BlobMonster.prototype.p_Draw=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<95>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<95>";
 	bb_graphics_SetBlend(1);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<99>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<99>";
 	this.m_blob.p_SetHandle((this.m_blob.p_Width())*0.5,(this.m_blob.p_Height())*0.5);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<103>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<103>";
 	for(var t_i=0;(t_i)<=this.m_segments-1.0;t_i=t_i+1){
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<105>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<105>";
 		bb_graphics_SetAlpha(0.15);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<111>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<111>";
 		bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y,0.0,1.0+0.5*Math.sin((t_i*35)*D2R),1.0+0.5*Math.sin((t_i*35)*D2R),0);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<114>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<114>";
 		bb_graphics_SetAlpha(0.8);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<116>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<116>";
 		bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i)[dbg_index]).m_y,0.0,0.1,0.1,0);
 	}
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<126>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<126>";
 	this.m_blob.p_SetHandle(0.0,(this.m_blob.p_Height())*0.5);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<133>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<133>";
 	bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_y,10.0*Math.sin((this.m_time*10.0)*D2R)+-bb_blobmonster_calculateAngle(dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_y,dbg_object(dbg_array(this.m_tail,((this.m_segments-5.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-5.0)|0))[dbg_index]).m_y)+270.0,0.6,0.1,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<137>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<137>";
 	bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_y,10.0*Math.sin((-this.m_time*10.0)*D2R)+-bb_blobmonster_calculateAngle(dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-1.0)|0))[dbg_index]).m_y,dbg_object(dbg_array(this.m_tail,((this.m_segments-5.0)|0))[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,((this.m_segments-5.0)|0))[dbg_index]).m_y)+270.0,0.6,0.1,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<143>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<143>";
 	bb_graphics_SetAlpha(1.0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<147>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<147>";
 	for(var t_i2=1;(t_i2)<=this.m_segments-2.0;t_i2=t_i2+1){
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<156>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<156>";
 		bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_y,33.0*Math.sin((this.m_time*5.0+(t_i2*30))*D2R)+-bb_blobmonster_calculateAngle(dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_y,dbg_object(dbg_array(this.m_tail,t_i2-1)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2-1)[dbg_index]).m_y),0.1+0.6*Math.sin((t_i2*30)*D2R),0.05,0);
-		err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<161>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<161>";
 		bb_graphics_DrawImage2(this.m_blob,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_y,33.0*Math.sin((-this.m_time*5.0-(t_i2*30))*D2R)+-bb_blobmonster_calculateAngle(dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2)[dbg_index]).m_y,dbg_object(dbg_array(this.m_tail,t_i2-1)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,t_i2-1)[dbg_index]).m_y)+180.0,0.1+0.6*Math.sin((t_i2*30)*D2R),0.05,0);
 	}
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<169>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<169>";
 	bb_blobmonster_MidHandle(this.m_blob);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<171>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<171>";
 	bb_graphics_SetAlpha(0.1);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<172>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<172>";
 	var t_ang=bb_blobmonster_calculateAngle(dbg_object(dbg_array(this.m_tail,0)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,0)[dbg_index]).m_y,dbg_object(dbg_array(this.m_tail,1)[dbg_index]).m_x,dbg_object(dbg_array(this.m_tail,1)[dbg_index]).m_y);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<173>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<173>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x+7.0*Math.cos((t_ang+50.0)*D2R),this.m_y+7.0*Math.sin((t_ang+50.0)*D2R),0.0,0.6,0.6,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<174>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<174>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x+7.0*Math.cos((t_ang+140.0)*D2R),this.m_y+7.0*Math.sin((t_ang+140.0)*D2R),0.0,0.6,0.6,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<176>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<176>";
 	bb_graphics_SetAlpha(0.5);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<177>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<177>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x+7.0*Math.cos((t_ang+50.0)*D2R),this.m_y+7.0*Math.sin((t_ang+50.0)*D2R),0.0,0.1,0.1,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<178>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<178>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x+7.0*Math.cos((t_ang+140.0)*D2R),this.m_y+7.0*Math.sin((t_ang+140.0)*D2R),0.0,0.1,0.1,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<181>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<181>";
 	bb_graphics_SetAlpha(0.8);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<182>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<182>";
 	this.m_blob.p_SetHandle(0.0,(this.m_blob.p_Height())*0.5);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<184>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<184>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x,this.m_y,-t_ang+275.0,0.3,0.1,0);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<187>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<187>";
 	bb_blobmonster_MidHandle(this.m_blob);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<188>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<188>";
 	bb_graphics_SetAlpha(0.2);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<189>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<189>";
 	bb_graphics_DrawImage2(this.m_blob,this.m_x,this.m_y,0.0,4.0,4.0,0);
 	pop_err();
 	return 0;
@@ -4396,24 +4396,24 @@ function c_point(){
 }
 c_point.m_new=function(){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<8>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<8>";
 	pop_err();
 	return this;
 }
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/app.cxs<224>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<224>";
 	bb_app__updateRate=t_hertz;
-	err_info="C:/Cerberus/modules/mojo/app.cxs<225>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<225>";
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
 }
 function bb_graphics_DebugRenderDevice(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<57>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<57>";
 	if(!((bb_graphics_renderDevice)!=null)){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<57>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<57>";
 		error("Rendering operations can only be performed inside OnRender");
 	}
 	pop_err();
@@ -4421,56 +4421,56 @@ function bb_graphics_DebugRenderDevice(){
 }
 function bb_graphics_Cls(t_r,t_g,t_b){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<672>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<672>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<674>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<674>";
 	bb_graphics_renderDevice.Cls(t_r,t_g,t_b);
 	pop_err();
 	return 0;
 }
 function bb_graphics_Cls2(t_col){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<680>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<680>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<682>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<682>";
 	bb_graphics_renderDevice.Cls((dbg_object(t_col).m_r),(dbg_object(t_col).m_g),(dbg_object(t_col).m_b));
 	pop_err();
 	return 0;
 }
 function bb_graphics_Cls3(t_rgb){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<688>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<688>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<690>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<690>";
 	var t_r=t_rgb>>16&255;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<691>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<691>";
 	var t_g=t_rgb>>8&255;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<692>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<692>";
 	var t_b=t_rgb&255;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<693>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<693>";
 	bb_graphics_renderDevice.Cls((t_r),(t_g),(t_b));
 	pop_err();
 	return 0;
 }
 function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<765>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<766>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
 	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<766>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
 		error("Invalid image frame");
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<769>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
 	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<771>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
 	bb_graphics_context.p_Validate();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<773>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
 	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<774>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
 		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<776>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
 		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
 	}
 	pop_err();
@@ -4478,139 +4478,139 @@ function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
 }
 function bb_graphics_PushMatrix(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<627>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<627>";
 	var t_sp=dbg_object(bb_graphics_context).m_matrixSp;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<628>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
 	if(t_sp==dbg_object(bb_graphics_context).m_matrixStack.length){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<628>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<628>";
 		dbg_object(bb_graphics_context).m_matrixStack=resize_number_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp*2);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<629>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<629>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index]=dbg_object(bb_graphics_context).m_ix;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<630>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<630>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index]=dbg_object(bb_graphics_context).m_iy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<631>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<631>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index]=dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<632>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<632>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index]=dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<633>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<633>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index]=dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<634>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<634>";
 	dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]=dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<635>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<635>";
 	dbg_object(bb_graphics_context).m_matrixSp=t_sp+6;
 	pop_err();
 	return 0;
 }
 function bb_graphics_Transform(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<649>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<649>";
 	var t_ix2=t_ix*dbg_object(bb_graphics_context).m_ix+t_iy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<650>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<650>";
 	var t_iy2=t_ix*dbg_object(bb_graphics_context).m_iy+t_iy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<651>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<651>";
 	var t_jx2=t_jx*dbg_object(bb_graphics_context).m_ix+t_jy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<652>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<652>";
 	var t_jy2=t_jx*dbg_object(bb_graphics_context).m_iy+t_jy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<653>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<653>";
 	var t_tx2=t_tx*dbg_object(bb_graphics_context).m_ix+t_ty*dbg_object(bb_graphics_context).m_jx+dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<654>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<654>";
 	var t_ty2=t_tx*dbg_object(bb_graphics_context).m_iy+t_ty*dbg_object(bb_graphics_context).m_jy+dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<655>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<655>";
 	bb_graphics_SetMatrix(t_ix2,t_iy2,t_jx2,t_jy2,t_tx2,t_ty2);
 	pop_err();
 	return 0;
 }
 function bb_graphics_Transform2(t_m){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<645>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<645>";
 	bb_graphics_Transform(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
 	pop_err();
 	return 0;
 }
 function bb_graphics_Translate(t_x,t_y){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<659>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<659>";
 	bb_graphics_Transform(1.0,0.0,0.0,1.0,t_x,t_y);
 	pop_err();
 	return 0;
 }
 function bb_graphics_Rotate(t_angle){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<667>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<667>";
 	bb_graphics_Transform(Math.cos((t_angle)*D2R),-Math.sin((t_angle)*D2R),Math.sin((t_angle)*D2R),Math.cos((t_angle)*D2R),0.0,0.0);
 	pop_err();
 	return 0;
 }
 function bb_graphics_Scale(t_x,t_y){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<663>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
 	bb_graphics_Transform(t_x,0.0,0.0,t_y,0.0,0.0);
 	pop_err();
 	return 0;
 }
 function bb_graphics_PopMatrix(){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<639>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<639>";
 	var t_sp=dbg_object(bb_graphics_context).m_matrixSp-6;
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<640>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<640>";
 	bb_graphics_SetMatrix(dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<641>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<641>";
 	dbg_object(bb_graphics_context).m_matrixSp=t_sp;
 	pop_err();
 	return 0;
 }
 function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_frame){
 	push_err();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<783>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<783>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<784>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
 	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<784>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
 		error("Invalid image frame");
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<787>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<787>";
 	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<789>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<789>";
 	bb_graphics_PushMatrix();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<791>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<791>";
 	bb_graphics_Translate(t_x,t_y);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<792>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<792>";
 	bb_graphics_Rotate(t_rotation);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<793>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<793>";
 	bb_graphics_Scale(t_scaleX,t_scaleY);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<795>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<795>";
 	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<797>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<797>";
 	bb_graphics_context.p_Validate();
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<799>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<799>";
 	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<800>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<800>";
 		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,0.0,0.0);
 	}else{
-		err_info="C:/Cerberus/modules/mojo/graphics.cxs<802>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<802>";
 		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
 	}
-	err_info="C:/Cerberus/modules/mojo/graphics.cxs<805>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<805>";
 	bb_graphics_PopMatrix();
 	pop_err();
 	return 0;
 }
 function bb_blobmonster_calculateAngle(t_x1,t_y1,t_x2,t_y2){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<197>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<197>";
 	var t_theX=t_x1-t_x2;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<198>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<198>";
 	var t_theY=t_y1-t_y2;
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<199>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<199>";
 	var t_theAngle=-(Math.atan2(t_theX,t_theY)*R2D);
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<200>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<200>";
 	pop_err();
 	return t_theAngle;
 }
 function bb_blobmonster_MidHandle(t_image){
 	push_err();
-	err_info="C:/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/charlie/blobmonster/blobmonster.cxs<13>";
 	t_image.p_SetHandle((t_image.p_Width())*0.5,(t_image.p_Height())*0.5);
 	pop_err();
 	return 0;

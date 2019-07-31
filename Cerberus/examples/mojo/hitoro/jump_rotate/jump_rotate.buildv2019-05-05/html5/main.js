@@ -23,7 +23,7 @@ CFG_TEXT_FILES="*.txt|*.xml|*.json";
 //${CONFIG_END}
 
 //${METADATA_BEGIN}
-var META_DATA="[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
+var META_DATA="[block.png];type=image/png;width=256;height=128;\n[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
 //${METADATA_END}
 
 //${TRANSCODE_BEGIN}
@@ -2347,49 +2347,177 @@ c_App.prototype.p_OnBack=function(){
 	pop_err();
 	return 0;
 }
-function c_RocketGame(){
+function c_Game(){
 	c_App.call(this);
+	this.m_py=.0;
 	this.m_player=null;
-	this.m_mx=.0;
-	this.m_my=.0;
+	this.m_block=null;
+	this.m_blocklist=null;
+	this.m_groundy=.0;
+	this.m_rotating=false;
+	this.m_pxs=.0;
+	this.m_pys=.0;
+	this.m_px=.0;
+	this.m_gravity=0.05;
+	this.m_ang=.0;
 }
-c_RocketGame.prototype=extend_class(c_App);
-c_RocketGame.m_new=function(){
+c_Game.prototype=extend_class(c_App);
+c_Game.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<79>";
 	c_App.m_new.call(this);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<79>";
 	pop_err();
 	return this;
 }
-c_RocketGame.prototype.p_OnCreate=function(){
+c_Game.prototype.p_OnCreate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<19>";
-	this.m_player=c_Rocket.m_new.call(new c_Rocket);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<23>";
-	dbg_object(this.m_player).m_image=bb_graphics_LoadImage("player.png",1,1);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<27>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<104>";
+	this.m_py=(bb_app_DeviceHeight())*0.5;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<106>";
+	this.m_player=bb_jump_rotate_LoadCenteredImage("player.png");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<107>";
+	this.m_block=bb_jump_rotate_LoadCenteredImage("block.png");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<109>";
+	this.m_blocklist=c_List.m_new.call(new c_List);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<111>";
+	for(var t_loop=1;t_loop<=100;t_loop=t_loop+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<112>";
+		var t_temp=c_Block.m_new.call(new c_Block);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<113>";
+		dbg_object(t_temp).m_Image=this.m_block;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<114>";
+		dbg_object(t_temp).m_X=bb_random_Rnd2((-bb_app_DeviceWidth()),(bb_app_DeviceWidth()));
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<115>";
+		dbg_object(t_temp).m_Y=bb_random_Rnd2((-bb_app_DeviceHeight()),(bb_app_DeviceHeight()));
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<116>";
+		this.m_blocklist.p_AddLast(t_temp);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<119>";
+	this.m_groundy=300.0+(this.m_player.p_Height())*0.5*0.25;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<121>";
 	bb_app_SetUpdateRate(60);
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnUpdate=function(){
+c_Game.prototype.p_OnUpdate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<35>";
-	this.m_mx=bb_input_MouseX();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<36>";
-	this.m_my=bb_input_MouseY();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<38>";
-	this.m_player.p_MovePlayer(this.m_mx,this.m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<127>";
+	var t_movinglr=false;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<129>";
+	if(!this.m_rotating){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<131>";
+		if((bb_input_KeyDown(37))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<132>";
+			this.m_pxs=this.m_pxs-0.1;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<133>";
+			t_movinglr=true;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<136>";
+		if((bb_input_KeyDown(39))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<137>";
+			this.m_pxs=this.m_pxs+0.1;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<138>";
+			t_movinglr=true;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<141>";
+		if(this.m_py>=295.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<142>";
+			if((bb_input_KeyDown(32))!=0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<143>";
+				this.m_pys=-3.0;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<144>";
+				this.m_rotating=true;
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<150>";
+	if(this.m_pxs>2.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<150>";
+		this.m_pxs=2.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<151>";
+	if(this.m_pxs<-2.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<151>";
+		this.m_pxs=-2.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<152>";
+	this.m_px=this.m_px+this.m_pxs;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<154>";
+	if(!t_movinglr && this.m_py>=295.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<154>";
+		this.m_pxs=this.m_pxs*0.99;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<156>";
+	this.m_pys=this.m_pys+this.m_gravity;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<157>";
+	this.m_py=this.m_py+this.m_pys;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<158>";
+	if(this.m_py>300.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<159>";
+		this.m_py=300.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<160>";
+		this.m_pys=-this.m_pys*0.5;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<163>";
+	if(this.m_px<0.0 || this.m_px>(bb_app_DeviceWidth())){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<164>";
+		this.m_pxs=-this.m_pxs;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<165>";
+		this.m_px=this.m_px+this.m_pxs;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<168>";
+	if(this.m_py<0.0 || this.m_py>(bb_app_DeviceHeight())){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<169>";
+		this.m_pys=-this.m_pys;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<170>";
+		this.m_py=this.m_py+this.m_pys;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<173>";
+	if(this.m_rotating){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<174>";
+		this.m_ang=this.m_ang+3.0*bb_math_Sgn2(this.m_pxs);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<175>";
+		if(this.m_ang<-360.0 || this.m_ang>360.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<176>";
+			this.m_ang=0.0;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<177>";
+			this.m_rotating=false;
+		}
+	}
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnRender=function(){
+c_Game.prototype.p_OnRender=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<46>";
-	bb_graphics_Cls(32.0,64.0,128.0);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<50>";
-	bb_graphics_DrawImage2(dbg_object(this.m_player).m_image,dbg_object(this.m_player).m_x,dbg_object(this.m_player).m_y,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<185>";
+	bb_graphics_Cls(64.0,96.0,128.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<190>";
+	bb_jump_rotate_RotateDisplay(this.m_px,this.m_py,this.m_ang);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<195>";
+	bb_graphics_SetColor(0.0,64.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<196>";
+	bb_graphics_DrawRect((-bb_app_DeviceWidth()),this.m_groundy,(bb_app_DeviceWidth())*4.0,(bb_app_DeviceHeight())*3.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<198>";
+	bb_graphics_SetColor(255.0,255.0,255.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<199>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<199>";
+	var t_=this.m_blocklist.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<199>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<199>";
+		var t_B=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<200>";
+		bb_graphics_DrawImage2(dbg_object(t_B).m_Image,dbg_object(t_B).m_X,dbg_object(t_B).m_Y,0.0,0.25,0.25,0);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<203>";
+	bb_graphics_DrawText("-11 -10 -09 -08 -07 -06 -05 -04 -03 -02 -01 000 +01 +02 +03 +04 +05 +06 +07 +08 +09 +10 + 11",0,((this.m_groundy)|0),0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<208>";
+	bb_jump_rotate_ResetDisplay();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<213>";
+	bb_graphics_DrawImage2(this.m_player,this.m_px,this.m_py,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<214>";
+	bb_graphics_DrawText("[CURSORS - move player] [SPACE - jump]",20,20,0.0,0.0);
 	pop_err();
 	return 0;
 }
@@ -2539,8 +2667,8 @@ var bb_app__delegate=null;
 var bb_app__game=null;
 function bbMain(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<87>";
-	c_RocketGame.m_new.call(new c_RocketGame);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<223>";
+	c_Game.m_new.call(new c_Game);
 	pop_err();
 	return 0;
 }
@@ -2951,6 +3079,50 @@ c_Font.m_Load3=function(t_url){
 	var t_9=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,-1,(t_lineHeight));
 	pop_err();
 	return t_9;
+}
+c_Font.prototype.p_GetGlyph=function(t_char){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<112>";
+	var t_=dbg_object(this).m__charMap.p_Get(t_char);
+	pop_err();
+	return t_;
+}
+c_Font.prototype.p_TextWidth=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<116>";
+	var t_w=0.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<117>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<119>";
+		var t_glyph=this.p_GetGlyph(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+		if(!((t_glyph)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<121>";
+		t_w=t_w+(dbg_object(t_glyph).m_advance);
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<123>";
+	pop_err();
+	return t_w;
+}
+c_Font.prototype.p_TextHeight=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<127>";
+	pop_err();
+	return this.m__height;
 }
 function c_GraphicsContext(){
 	Object.call(this);
@@ -3479,6 +3651,47 @@ c_Map.prototype.p_Add=function(t_key,t_value){
 	pop_err();
 	return true;
 }
+c_Map.prototype.p_FindNode=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<157>";
+	var t_node=this.m_root;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<159>";
+	while((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<160>";
+		var t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<161>";
+		if(t_cmp>0){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<162>";
+			t_node=dbg_object(t_node).m_right;
+		}else{
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<163>";
+			if(t_cmp<0){
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<164>";
+				t_node=dbg_object(t_node).m_left;
+			}else{
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<166>";
+				pop_err();
+				return t_node;
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<169>";
+	pop_err();
+	return t_node;
+}
+c_Map.prototype.p_Get=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<101>";
+	var t_node=this.p_FindNode(t_key);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+	if((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+		pop_err();
+		return dbg_object(t_node).m_value;
+	}
+	pop_err();
+	return null;
+}
 function c_IntMap(){
 	c_Map.call(this);
 }
@@ -3801,17 +4014,17 @@ c_InputDevice.prototype.p_MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	this.m__accelZ=t_z;
 	pop_err();
 }
-c_InputDevice.prototype.p_MouseX=function(){
+c_InputDevice.prototype.p_KeyDown=function(t_key){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<69>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+	if(t_key>0 && t_key<512){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+		pop_err();
+		return dbg_array(this.m__keyDown,t_key)[dbg_index];
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<48>";
 	pop_err();
-	return this.m__mouseX;
-}
-c_InputDevice.prototype.p_MouseY=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<73>";
-	pop_err();
-	return this.m__mouseY;
+	return false;
 }
 function c_JoyState(){
 	Object.call(this);
@@ -4428,35 +4641,142 @@ function bb_app_EndApp(){
 	error("");
 	pop_err();
 }
-function c_Rocket(){
-	Object.call(this);
-	this.m_image=null;
-	this.m_x=.0;
-	this.m_y=.0;
-	this.m_mousediv=12.0;
-}
-c_Rocket.m_new=function(){
+function bb_jump_rotate_MidHandle(t_Image){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<58>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<229>";
+	t_Image.p_SetHandle((t_Image.p_Width())*0.5,(t_Image.p_Height())*0.5);
+	pop_err();
+	return 0;
+}
+function bb_jump_rotate_LoadCenteredImage(t_Image){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<235>";
+	var t_img=bb_graphics_LoadImage(t_Image,1,c_Image.m_DefaultFlags);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<236>";
+	bb_jump_rotate_MidHandle(t_img);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<237>";
+	pop_err();
+	return t_img;
+}
+function c_Block(){
+	Object.call(this);
+	this.m_Image=null;
+	this.m_X=.0;
+	this.m_Y=.0;
+}
+c_Block.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<71>";
 	pop_err();
 	return this;
 }
-c_Rocket.prototype.p_MovePlayer=function(t_towardsx,t_towardsy){
+function c_List(){
+	Object.call(this);
+	this.m__head=(c_HeadNode.m_new.call(new c_HeadNode));
+}
+c_List.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<71>";
-	var t_xdist=t_towardsx-this.m_x;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<72>";
-	var t_ydist=t_towardsy-this.m_y;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<74>";
-	var t_xstep=t_xdist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<75>";
-	var t_ystep=t_ydist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<77>";
-	this.m_x=this.m_x+t_xstep;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<78>";
-	this.m_y=this.m_y+t_ystep;
 	pop_err();
-	return 0;
+	return this;
+}
+c_List.prototype.p_AddLast=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<108>";
+	var t_=c_Node3.m_new.call(new c_Node3,this.m__head,dbg_object(this.m__head).m__pred,t_data);
+	pop_err();
+	return t_;
+}
+c_List.m_new2=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_=t_data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		var t_t=dbg_array(t_,t_2)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<14>";
+		this.p_AddLast(t_t);
+	}
+	pop_err();
+	return this;
+}
+c_List.prototype.p_ObjectEnumerator=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<186>";
+	var t_=c_Enumerator.m_new.call(new c_Enumerator,this);
+	pop_err();
+	return t_;
+}
+function c_Node3(){
+	Object.call(this);
+	this.m__succ=null;
+	this.m__pred=null;
+	this.m__data=null;
+}
+c_Node3.m_new=function(t_succ,t_pred,t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<261>";
+	this.m__succ=t_succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<262>";
+	this.m__pred=t_pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<263>";
+	dbg_object(this.m__succ).m__pred=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<264>";
+	dbg_object(this.m__pred).m__succ=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<265>";
+	this.m__data=t_data;
+	pop_err();
+	return this;
+}
+c_Node3.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<258>";
+	pop_err();
+	return this;
+}
+function c_HeadNode(){
+	c_Node3.call(this);
+}
+c_HeadNode.prototype=extend_class(c_Node3);
+c_HeadNode.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<310>";
+	c_Node3.m_new2.call(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<311>";
+	this.m__succ=(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<312>";
+	this.m__pred=(this);
+	pop_err();
+	return this;
+}
+var bb_random_Seed=0;
+function bb_random_Rnd(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<37>";
+	bb_random_Seed=bb_random_Seed*1664525+1013904223|0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<38>";
+	var t_=(bb_random_Seed>>8&16777215)/16777216.0;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd2(t_low,t_high){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<46>";
+	var t_=bb_random_Rnd3(t_high-t_low)+t_low;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd3(t_range){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<42>";
+	var t_=bb_random_Rnd()*t_range;
+	pop_err();
+	return t_;
 }
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
@@ -4467,19 +4787,43 @@ function bb_app_SetUpdateRate(t_hertz){
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
 }
-function bb_input_MouseX(){
+function bb_input_KeyDown(t_key){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<58>";
-	var t_=bb_input_device.p_MouseX();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<40>";
+	var t_=((bb_input_device.p_KeyDown(t_key))?1:0);
 	pop_err();
 	return t_;
 }
-function bb_input_MouseY(){
+function bb_math_Sgn(t_x){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<62>";
-	var t_=bb_input_device.p_MouseY();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<41>";
+	if(t_x<0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<41>";
+		pop_err();
+		return -1;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<42>";
+	var t_=((t_x>0)?1:0);
 	pop_err();
 	return t_;
+}
+function bb_math_Sgn2(t_x){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<67>";
+	if(t_x<0.0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<67>";
+		pop_err();
+		return -1.0;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<68>";
+	if(t_x>0.0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<68>";
+		pop_err();
+		return 1.0;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<69>";
+	pop_err();
+	return 0.0;
 }
 function bb_graphics_DebugRenderDevice(){
 	push_err();
@@ -4521,30 +4865,6 @@ function bb_graphics_Cls3(t_rgb){
 	var t_b=t_rgb&255;
 	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<693>";
 	bb_graphics_renderDevice.Cls((t_r),(t_g),(t_b));
-	pop_err();
-	return 0;
-}
-function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
-	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
-		error("Invalid image frame");
-	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
-	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
-	}
 	pop_err();
 	return 0;
 }
@@ -4614,6 +4934,96 @@ function bb_graphics_Rotate(t_angle){
 	pop_err();
 	return 0;
 }
+function bb_jump_rotate_RotateDisplay(t_X,t_Y,t_angle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<31>";
+	bb_graphics_PushMatrix();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<32>";
+	bb_graphics_Translate(t_X,t_Y);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<33>";
+	bb_graphics_Rotate(t_angle);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<34>";
+	bb_graphics_Translate(-t_X,-t_Y);
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawRect(t_x,t_y,t_w,t_h){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<706>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<708>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<709>";
+	bb_graphics_renderDevice.DrawRect(t_x,t_y,t_w,t_h);
+	pop_err();
+	return 0;
+}
+function c_Enumerator(){
+	Object.call(this);
+	this.m__list=null;
+	this.m__curr=null;
+}
+c_Enumerator.m_new=function(t_list){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<326>";
+	this.m__list=t_list;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<327>";
+	this.m__curr=dbg_object(dbg_object(t_list).m__head).m__succ;
+	pop_err();
+	return this;
+}
+c_Enumerator.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<323>";
+	pop_err();
+	return this;
+}
+c_Enumerator.prototype.p_HasNext=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<331>";
+	while(dbg_object(dbg_object(this.m__curr).m__succ).m__pred!=this.m__curr){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<332>";
+		this.m__curr=dbg_object(this.m__curr).m__succ;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<334>";
+	var t_=this.m__curr!=dbg_object(this.m__list).m__head;
+	pop_err();
+	return t_;
+}
+c_Enumerator.prototype.p_NextObject=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<338>";
+	var t_data=dbg_object(this.m__curr).m__data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<339>";
+	this.m__curr=dbg_object(this.m__curr).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<340>";
+	pop_err();
+	return t_data;
+}
+function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+		error("Invalid image frame");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
+	if((dbg_object(t_image).m_flags&65536)!=0){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
+		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
+	}else{
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
+		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
+	}
+	pop_err();
+	return 0;
+}
 function bb_graphics_Scale(t_x,t_y){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
@@ -4668,6 +5078,167 @@ function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_f
 	pop_err();
 	return 0;
 }
+function bb_graphics_DrawImageRect(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<874>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
+	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
+		error("Invalid image frame");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+		error("Invalid image rectangle");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<879>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<881>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<883>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,-dbg_object(t_image).m_tx+t_x,-dbg_object(t_image).m_ty+t_y,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawImageRect2(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_rotation,t_scaleX,t_scaleY,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<889>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
+	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
+		error("Invalid image frame");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+		error("Invalid image rectangle");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<894>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<896>";
+	bb_graphics_PushMatrix();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<898>";
+	bb_graphics_Translate(t_x,t_y);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<899>";
+	bb_graphics_Rotate(t_rotation);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<900>";
+	bb_graphics_Scale(t_scaleX,t_scaleY);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<901>";
+	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<903>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<905>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<907>";
+	bb_graphics_PopMatrix();
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawText(t_text,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<951>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<953>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<954>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<955>";
+	if(!((dbg_object(bb_graphics_context).m_font)!=null)){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<957>";
+	t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<958>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text)*t_yhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<961>";
+		var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+		if(!((t_tmpChar2)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<963>";
+		bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<964>";
+		t_x+=dbg_object(t_tmpChar2).m_advance;
+	}
+	pop_err();
+}
+function bb_graphics_DrawText2(t_textLines,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<970>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<972>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<973>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<974>";
+	var t_currX=.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<975>";
+	var t_text="";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<977>";
+	var t_linesCount=t_textLines.length;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<979>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight("")*t_yhandle*(t_linesCount))|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<980>";
+	t_currX=(t_x);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<982>";
+	for(var t__y=1;t__y<=t_linesCount;t__y=t__y+1){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<983>";
+		t_text=dbg_array(t_textLines,t__y-1)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<984>";
+		t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_=t_text;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_2=0;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		while(t_2<t_.length){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_char=dbg_charCodeAt(t_,t_2);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_2=t_2+1;
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<986>";
+			var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+			if(!((t_tmpChar2)!=null)){
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+				continue;
+			}
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<988>";
+			bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<989>";
+			t_x+=dbg_object(t_tmpChar2).m_advance;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<991>";
+		t_y=(((t_y)+dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text))|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<992>";
+		t_x=((t_currX)|0);
+	}
+	pop_err();
+}
+function bb_jump_rotate_ResetDisplay(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/jump_rotate/jump_rotate.cxs<42>";
+	bb_graphics_PopMatrix();
+	pop_err();
+	return 0;
+}
 function bbInit(){
 	bb_app__app=null;
 	bb_app__delegate=null;
@@ -4682,6 +5253,7 @@ function bbInit(){
 	bb_app__displayModes=[];
 	bb_app__desktopMode=null;
 	bb_graphics_renderDevice=null;
+	bb_random_Seed=1234;
 	bb_app__updateRate=0;
 }
 //${TRANSCODE_END}

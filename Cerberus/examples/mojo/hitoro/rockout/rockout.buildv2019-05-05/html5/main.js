@@ -23,7 +23,7 @@ CFG_TEXT_FILES="*.txt|*.xml|*.json";
 //${CONFIG_END}
 
 //${METADATA_BEGIN}
-var META_DATA="[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
+var META_DATA="[defaultgfx/blue.png];type=image/png;width=48;height=24;\n[defaultgfx/default_player.png];type=image/png;width=64;height=64;\n[defaultgfx/default_shot.png];type=image/png;width=8;height=8;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
 //${METADATA_END}
 
 //${TRANSCODE_BEGIN}
@@ -2347,49 +2347,75 @@ c_App.prototype.p_OnBack=function(){
 	pop_err();
 	return 0;
 }
-function c_RocketGame(){
+function c_GameApp(){
 	c_App.call(this);
-	this.m_player=null;
+	this.m_GameWidth=0;
+	this.m_GameHeight=0;
+	this.m_temp=null;
 	this.m_mx=.0;
 	this.m_my=.0;
 }
-c_RocketGame.prototype=extend_class(c_App);
-c_RocketGame.m_new=function(){
+c_GameApp.prototype=extend_class(c_App);
+c_GameApp.m_new=function(t_width,t_height){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<45>";
 	c_App.m_new.call(this);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<46>";
+	this.m_GameWidth=t_width;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<47>";
+	this.m_GameHeight=t_height;
 	pop_err();
 	return this;
 }
-c_RocketGame.prototype.p_OnCreate=function(){
+c_GameApp.m_new2=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<19>";
-	this.m_player=c_Rocket.m_new.call(new c_Rocket);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<23>";
-	dbg_object(this.m_player).m_image=bb_graphics_LoadImage("player.png",1,1);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<27>";
-	bb_app_SetUpdateRate(60);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<35>";
+	c_App.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<35>";
+	pop_err();
+	return this;
+}
+c_GameApp.prototype.p_OnLoading=function(){
+	push_err();
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnUpdate=function(){
+c_GameApp.prototype.p_OnCreate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<35>";
-	this.m_mx=bb_input_MouseX();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<36>";
-	this.m_my=bb_input_MouseY();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<38>";
-	this.m_player.p_MovePlayer(this.m_mx,this.m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<60>";
+	bb_autofit_SetVirtualDisplay(this.m_GameWidth,this.m_GameHeight,1.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<64>";
+	bb_defaultmedia_DEFAULT_PLAYER=bb_functions_LoadCenteredImage("defaultgfx/default_player.png");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<65>";
+	bb_defaultmedia_DEFAULT_SHOT=bb_functions_LoadCenteredImage("defaultgfx/default_shot.png");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<66>";
+	bb_defaultmedia_DEFAULT_BLOCK=bb_functions_LoadCenteredImage("defaultgfx/blue.png");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<68>";
+	bb_session_GameSession=c_Session.m_new.call(new c_Session);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<69>";
+	bb_session_GameSession.p_SetState(1);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<71>";
+	bb_app_SetUpdateRate(bb_game_UPDATE_RATE);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<73>";
+	bb_graphics_SetFont(null);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<77>";
+	var t_start="Click HERE to START!";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<78>";
+	this.m_temp=c_Button.m_new.call(new c_Button,bb_autofit_VDeviceWidth()/2.0,bb_autofit_VDeviceHeight()-96.0,t_start);
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnRender=function(){
+c_GameApp.prototype.p_OnUpdate=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<46>";
-	bb_graphics_Cls(32.0,64.0,128.0);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<50>";
-	bb_graphics_DrawImage2(dbg_object(this.m_player).m_image,dbg_object(this.m_player).m_x,dbg_object(this.m_player).m_y,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<84>";
+	bb_updategame_UpdateGame();
+	pop_err();
+	return 0;
+}
+c_GameApp.prototype.p_OnRender=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<88>";
+	bb_rendergame_RenderStates();
 	pop_err();
 	return 0;
 }
@@ -2537,10 +2563,11 @@ c_GameDelegate.prototype.DiscardGraphics=function(){
 }
 var bb_app__delegate=null;
 var bb_app__game=null;
+var bb_rockout_RockOut=null;
 function bbMain(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<87>";
-	c_RocketGame.m_new.call(new c_RocketGame);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/rockout.cxs<69>";
+	bb_rockout_RockOut=c_GameApp.m_new.call(new c_GameApp,854,480);
 	pop_err();
 	return 0;
 }
@@ -2951,6 +2978,50 @@ c_Font.m_Load3=function(t_url){
 	var t_9=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,-1,(t_lineHeight));
 	pop_err();
 	return t_9;
+}
+c_Font.prototype.p_GetGlyph=function(t_char){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<112>";
+	var t_=dbg_object(this).m__charMap.p_Get(t_char);
+	pop_err();
+	return t_;
+}
+c_Font.prototype.p_TextWidth=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<116>";
+	var t_w=0.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<117>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<119>";
+		var t_glyph=this.p_GetGlyph(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+		if(!((t_glyph)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<121>";
+		t_w=t_w+(dbg_object(t_glyph).m_advance);
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<123>";
+	pop_err();
+	return t_w;
+}
+c_Font.prototype.p_TextHeight=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<127>";
+	pop_err();
+	return this.m__height;
 }
 function c_GraphicsContext(){
 	Object.call(this);
@@ -3479,6 +3550,47 @@ c_Map.prototype.p_Add=function(t_key,t_value){
 	pop_err();
 	return true;
 }
+c_Map.prototype.p_FindNode=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<157>";
+	var t_node=this.m_root;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<159>";
+	while((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<160>";
+		var t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<161>";
+		if(t_cmp>0){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<162>";
+			t_node=dbg_object(t_node).m_right;
+		}else{
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<163>";
+			if(t_cmp<0){
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<164>";
+				t_node=dbg_object(t_node).m_left;
+			}else{
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<166>";
+				pop_err();
+				return t_node;
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<169>";
+	pop_err();
+	return t_node;
+}
+c_Map.prototype.p_Get=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<101>";
+	var t_node=this.p_FindNode(t_key);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+	if((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+		pop_err();
+		return dbg_object(t_node).m_value;
+	}
+	pop_err();
+	return null;
+}
 function c_IntMap(){
 	c_Map.call(this);
 }
@@ -3812,6 +3924,30 @@ c_InputDevice.prototype.p_MouseY=function(){
 	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<73>";
 	pop_err();
 	return this.m__mouseY;
+}
+c_InputDevice.prototype.p_KeyHit=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<52>";
+	if(t_key>0 && t_key<512){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<52>";
+		pop_err();
+		return dbg_array(this.m__keyHit,t_key)[dbg_index];
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<53>";
+	pop_err();
+	return 0;
+}
+c_InputDevice.prototype.p_KeyDown=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+	if(t_key>0 && t_key<512){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<47>";
+		pop_err();
+		return dbg_array(this.m__keyDown,t_key)[dbg_index];
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<48>";
+	pop_err();
+	return false;
 }
 function c_JoyState(){
 	Object.call(this);
@@ -4428,36 +4564,653 @@ function bb_app_EndApp(){
 	error("");
 	pop_err();
 }
-function c_Rocket(){
+function c_VirtualDisplay(){
+	Object.call(this);
+	this.m_vwidth=.0;
+	this.m_vheight=.0;
+	this.m_vzoom=.0;
+	this.m_vratio=.0;
+	this.m_multi=.0;
+	this.m_fdw=.0;
+	this.m_fdh=.0;
+	this.m_heightborder=.0;
+	this.m_widthborder=.0;
+	this.m_scaledw=.0;
+	this.m_scaledh=.0;
+}
+c_VirtualDisplay.m_Display=null;
+c_VirtualDisplay.m_new=function(t_width,t_height,t_zoom){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<230>";
+	this.m_vwidth=(t_width);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<231>";
+	this.m_vheight=(t_height);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<233>";
+	this.m_vzoom=t_zoom;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<237>";
+	this.m_vratio=this.m_vheight/this.m_vwidth;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<241>";
+	c_VirtualDisplay.m_Display=this;
+	pop_err();
+	return this;
+}
+c_VirtualDisplay.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<187>";
+	pop_err();
+	return this;
+}
+c_VirtualDisplay.prototype.p_VMouseX=function(t_limit){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<263>";
+	var t_mouseoffset=bb_input_MouseX()-(bb_app_DeviceWidth())*0.5;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<267>";
+	var t_x=t_mouseoffset/this.m_multi/this.m_vzoom+bb_autofit_VDeviceWidth()*0.5;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<271>";
+	if(t_limit){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<273>";
+		var t_widthlimit=this.m_vwidth-1.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<275>";
+		if(t_x>0.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<276>";
+			if(t_x<t_widthlimit){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<277>";
+				pop_err();
+				return t_x;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<279>";
+				pop_err();
+				return t_widthlimit;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<282>";
+			pop_err();
+			return 0.0;
+		}
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<286>";
+		pop_err();
+		return t_x;
+	}
+}
+c_VirtualDisplay.prototype.p_VMouseY=function(t_limit){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<295>";
+	var t_mouseoffset=bb_input_MouseY()-(bb_app_DeviceHeight())*0.5;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<299>";
+	var t_y=t_mouseoffset/this.m_multi/this.m_vzoom+bb_autofit_VDeviceHeight()*0.5;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<303>";
+	if(t_limit){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<305>";
+		var t_heightlimit=this.m_vheight-1.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<307>";
+		if(t_y>0.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<308>";
+			if(t_y<t_heightlimit){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<309>";
+				pop_err();
+				return t_y;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<311>";
+				pop_err();
+				return t_heightlimit;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<314>";
+			pop_err();
+			return 0.0;
+		}
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<318>";
+		pop_err();
+		return t_y;
+	}
+}
+c_VirtualDisplay.prototype.p_AdjustZoom=function(t_amount){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<255>";
+	this.m_vzoom=this.m_vzoom+t_amount;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<256>";
+	if(this.m_vzoom<0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<256>";
+		this.m_vzoom=0.0;
+	}
+	pop_err();
+	return 0;
+}
+c_VirtualDisplay.prototype.p_SetZoom=function(t_zoomlevel){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<250>";
+	if(t_zoomlevel<0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<250>";
+		t_zoomlevel=0.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<251>";
+	this.m_vzoom=t_zoomlevel;
+	pop_err();
+	return 0;
+}
+c_VirtualDisplay.prototype.p_UpdateVirtualDisplay=function(t_zoomborders,t_keepborders){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<328>";
+	this.m_fdw=(bb_app_DeviceWidth());
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<329>";
+	this.m_fdh=(bb_app_DeviceHeight());
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<334>";
+	var t_dratio=this.m_fdh/this.m_fdw;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<338>";
+	if(t_dratio>=this.m_vratio){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<347>";
+		this.m_multi=this.m_fdw/this.m_vwidth;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<351>";
+		this.m_heightborder=(this.m_fdh-this.m_vheight*this.m_multi)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<352>";
+		this.m_widthborder=0.0;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<363>";
+		this.m_multi=this.m_fdh/this.m_vheight;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<367>";
+		this.m_widthborder=(this.m_fdw-this.m_vwidth*this.m_multi)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<368>";
+		this.m_heightborder=0.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<376>";
+	bb_graphics_SetScissor(0.0,0.0,(bb_app_DeviceWidth()),(bb_app_DeviceHeight()));
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<377>";
+	bb_graphics_Cls(0.0,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<383>";
+	var t_sx=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<383>";
+	var t_sy=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<383>";
+	var t_sw=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<383>";
+	var t_sh=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<385>";
+	if(t_zoomborders){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<389>";
+		var t_realx=this.m_vwidth*this.m_vzoom*this.m_multi;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<390>";
+		var t_realy=this.m_vheight*this.m_vzoom*this.m_multi;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<394>";
+		var t_offx=(this.m_fdw-t_realx)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<395>";
+		var t_offy=(this.m_fdh-t_realy)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<400>";
+		if(t_keepborders){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<402>";
+			if(t_offx<this.m_widthborder){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<403>";
+				t_sx=this.m_widthborder;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<404>";
+				t_sw=this.m_fdw-this.m_widthborder*2.0;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<406>";
+				t_sx=t_offx;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<407>";
+				t_sw=this.m_fdw-t_offx*2.0;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<412>";
+			t_sx=t_offx;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<413>";
+			t_sw=this.m_fdw-t_offx*2.0;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<417>";
+		if(t_keepborders){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<419>";
+			if(t_offy<this.m_heightborder){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<420>";
+				t_sy=this.m_heightborder;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<421>";
+				t_sh=this.m_fdh-this.m_heightborder*2.0;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<423>";
+				t_sy=t_offy;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<424>";
+				t_sh=this.m_fdh-t_offy*2.0;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<429>";
+			t_sy=t_offy;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<430>";
+			t_sh=this.m_fdh-t_offy*2.0;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<434>";
+		t_sx=bb_math_Max2(0.0,t_sx);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<435>";
+		t_sy=bb_math_Max2(0.0,t_sy);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<436>";
+		t_sw=bb_math_Min2(t_sw,this.m_fdw);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<437>";
+		t_sh=bb_math_Min2(t_sh,this.m_fdw);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<439>";
+		bb_graphics_SetScissor(t_sx,t_sy,t_sw,t_sh);
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<443>";
+		t_sx=bb_math_Max2(0.0,this.m_widthborder);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<444>";
+		t_sy=bb_math_Max2(0.0,this.m_heightborder);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<445>";
+		t_sw=bb_math_Min2(this.m_fdw-this.m_widthborder*2.0,this.m_fdw);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<446>";
+		t_sh=bb_math_Min2(this.m_fdh-this.m_heightborder*2.0,this.m_fdw);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<448>";
+		bb_graphics_SetScissor(t_sx,t_sy,t_sw,t_sh);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<456>";
+	bb_graphics_Scale(this.m_multi*this.m_vzoom,this.m_multi*this.m_vzoom);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<462>";
+	if((this.m_vzoom)!=0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<466>";
+		this.m_scaledw=this.m_vwidth*this.m_multi*this.m_vzoom;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<467>";
+		this.m_scaledh=this.m_vheight*this.m_multi*this.m_vzoom;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<471>";
+		var t_xoff=(this.m_fdw-this.m_scaledw)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<472>";
+		var t_yoff=(this.m_fdh-this.m_scaledh)*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<476>";
+		t_xoff=t_xoff/this.m_multi/this.m_vzoom;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<477>";
+		t_yoff=t_yoff/this.m_multi/this.m_vzoom;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<481>";
+		bb_graphics_Translate(t_xoff,t_yoff);
+	}
+	pop_err();
+	return 0;
+}
+function bb_autofit_SetVirtualDisplay(t_width,t_height,t_zoom){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<89>";
+	c_VirtualDisplay.m_new.call(new c_VirtualDisplay,t_width,t_height,t_zoom);
+	pop_err();
+	return 0;
+}
+function bb_functions_MidHandle(t_image){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<42>";
+	t_image.p_SetHandle((t_image.p_Width())*0.5,(t_image.p_Height())*0.5);
+	pop_err();
+	return 0;
+}
+function bb_functions_LoadCenteredImage(t_image){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<46>";
+	var t_img=bb_graphics_LoadImage(t_image,1,c_Image.m_DefaultFlags);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<47>";
+	bb_functions_MidHandle(t_img);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<48>";
+	pop_err();
+	return t_img;
+}
+var bb_defaultmedia_DEFAULT_PLAYER=null;
+var bb_defaultmedia_DEFAULT_SHOT=null;
+var bb_defaultmedia_DEFAULT_BLOCK=null;
+function c_Session(){
+	Object.call(this);
+}
+c_Session.m_CurrentLevel=null;
+c_Session.m_Score=0;
+c_Session.m_Player=null;
+c_Session.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<40>";
+	c_Level.m_Number=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<42>";
+	c_Session.m_Score=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<43>";
+	c_Level.m_Gravity=0.025;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<47>";
+	c_Session.m_Player=c_Rocket.m_new.call(new c_Rocket,bb_defaultmedia_DEFAULT_PLAYER,bb_autofit_VDeviceWidth()/2.0,bb_autofit_VDeviceHeight()+64.0,1.0,1.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<48>";
+	c_Timer.m_NewGame=c_Timer.m_new.call(new c_Timer);
+	pop_err();
+	return this;
+}
+c_Session.m_GameState=0;
+c_Session.prototype.p_SetState=function(t_state){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<58>";
+	c_Session.m_GameState=t_state;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<60>";
+	var t_1=c_Session.m_GameState;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<62>";
+	if(t_1==1){
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<65>";
+		if(t_1==4){
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<68>";
+			if(t_1==2){
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<71>";
+				if(t_1==3){
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<74>";
+					if(t_1==5){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/session.cxs<75>";
+						c_Timer.m_NewGame.p_Reset();
+					}
+				}
+			}
+		}
+	}
+	pop_err();
+	return 0;
+}
+function c_Level(){
+	Object.call(this);
+}
+c_Level.m_Number=0;
+c_Level.m_Gravity=0;
+c_Level.m_Shots=null;
+c_Level.m_Blocks=null;
+c_Level.m_FallingBlocks=null;
+c_Level.m_ScoreBubbles=null;
+c_Level.m_Name="";
+c_Level.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<22>";
+	c_Level.m_Shots=c_List.m_new.call(new c_List);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<23>";
+	c_Level.m_Blocks=c_List2.m_new.call(new c_List2);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<24>";
+	c_Level.m_FallingBlocks=c_List2.m_new.call(new c_List2);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<26>";
+	c_Level.m_ScoreBubbles=c_List3.m_new.call(new c_List3);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<28>";
+	c_Timer.m_ShotReload=c_Timer.m_new.call(new c_Timer);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<30>";
+	c_Level.m_Number=c_Level.m_Number+1;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<31>";
+	c_Level.m_Name="Level "+String(c_Level.m_Number);
+	pop_err();
+	return this;
+}
+c_Level.m_StartLine=0;
+c_Level.m_Graphics="";
+c_Level.m_LoadLevel=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<39>";
+	var t_level=c_Level.m_new.call(new c_Level);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<41>";
+	var t_levelstring=bb_app_LoadString("level"+String(c_Level.m_Number)+".txt");
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<43>";
+	if((t_levelstring).length!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<45>";
+		var t_leveldata=t_levelstring.split("\n");
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<47>";
+		var t_linecount=0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+		var t_=t_leveldata;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+		var t_2=0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+		while(t_2<t_.length){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+			var t_line=dbg_array(t_,t_2)[dbg_index];
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<49>";
+			t_2=t_2+1;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<51>";
+			t_linecount=t_linecount+1;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<55>";
+			if(string_startswith(t_line.toLowerCase(),"start")){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<56>";
+				c_Level.m_StartLine=t_linecount;
+			}
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<59>";
+			if(string_startswith(t_line.toLowerCase(),"gfx")){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<60>";
+				c_Level.m_Graphics="TEMP";
+			}
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<67>";
+			for(var t_temp=0;t_temp<=2;t_temp=t_temp+1){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<68>";
+				c_Block.m_new.call(new c_Block,bb_defaultmedia_DEFAULT_BLOCK,bb_random_Rnd3(bb_autofit_VDeviceWidth()),bb_random_Rnd3(bb_autofit_VDeviceHeight())*0.5,0.0,0.0,1.0,1.0);
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<73>";
+		if(c_Level.m_Blocks.p_IsEmpty()){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<73>";
+			error("No blocks found in level "+String(c_Level.m_Number)+"!");
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<75>";
+		pop_err();
+		return t_level;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/level.cxs<78>";
+		error("No new level found!");
+	}
+	pop_err();
+	return null;
+}
+function c_Sprite(){
 	Object.call(this);
 	this.m_image=null;
 	this.m_x=.0;
 	this.m_y=.0;
-	this.m_mousediv=12.0;
+	this.m_xscale=1.0;
+	this.m_yscale=1.0;
+	this.m_width=.0;
+	this.m_height=.0;
+	this.m_ys=.0;
+	this.m_xs=.0;
+	this.m_rotation=0.0;
 }
-c_Rocket.m_new=function(){
+c_Sprite.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<58>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/sprite.cxs<6>";
 	pop_err();
 	return this;
 }
-c_Rocket.prototype.p_MovePlayer=function(t_towardsx,t_towardsy){
+c_Sprite.prototype.p_Draw=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<71>";
-	var t_xdist=t_towardsx-this.m_x;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<72>";
-	var t_ydist=t_towardsy-this.m_y;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<74>";
-	var t_xstep=t_xdist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<75>";
-	var t_ystep=t_ydist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<77>";
-	this.m_x=this.m_x+t_xstep;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<78>";
-	this.m_y=this.m_y+t_ystep;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/sprite.cxs<31>";
+	bb_graphics_DrawImage2(this.m_image,this.m_x,this.m_y,this.m_rotation,this.m_xscale,this.m_yscale,0);
 	pop_err();
 	return 0;
 }
+function c_Rocket(){
+	c_Sprite.call(this);
+	this.m_firepoint=.0;
+	this.m_shields=100.0;
+	this.m_mousediv=0.083333;
+	this.m_inplay=0;
+	this.m_mass=4.0;
+}
+c_Rocket.prototype=extend_class(c_Sprite);
+c_Rocket.m_new=function(t_img,t_x,t_y,t_xscale,t_yscale){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<15>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<17>";
+	dbg_object(this).m_image=t_img;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<19>";
+	dbg_object(this).m_x=t_x;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<20>";
+	dbg_object(this).m_y=t_y;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<22>";
+	dbg_object(this).m_xscale=t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<23>";
+	dbg_object(this).m_yscale=t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<27>";
+	dbg_object(this).m_width=(t_img.p_Width())*t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<28>";
+	dbg_object(this).m_height=(t_img.p_Height())*t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<32>";
+	dbg_object(this).m_firepoint=dbg_object(this).m_height*0.5+8.0;
+	pop_err();
+	return this;
+}
+c_Rocket.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<4>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<4>";
+	pop_err();
+	return this;
+}
+c_Rocket.prototype.p_Damage=function(t_damage){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<42>";
+	this.m_shields=this.m_shields-t_damage;
+	pop_err();
+	return 0;
+}
+c_Rocket.prototype.p_Fire=function(t_img){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<122>";
+	c_Timer.m_ShotReload.p_Reset();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<124>";
+	c_Shot.m_new.call(new c_Shot,t_img,this.m_x,this.m_y-this.m_firepoint,this.m_xs,this.m_ys,1.0,1.0);
+	pop_err();
+	return 0;
+}
+c_Rocket.prototype.p_UpdatePlayer=function(t_state,t_shoot){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<53>";
+	var t_1=t_state;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<55>";
+	if(t_1==2){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<59>";
+		var t_xdist=dbg_object(bb_rockout_RockOut).m_mx-this.m_x;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<60>";
+		var t_ydist=dbg_object(bb_rockout_RockOut).m_my-this.m_y;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<64>";
+		this.m_xs=t_xdist*this.m_mousediv;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<65>";
+		this.m_ys=t_ydist*this.m_mousediv;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<69>";
+		this.m_x=this.m_x+bb_game_FrameScale(this.m_xs);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<70>";
+		this.m_y=this.m_y+bb_game_FrameScale(this.m_ys);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<74>";
+		if(!((this.m_inplay)!=0)){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<75>";
+			if(this.m_y<bb_autofit_VDeviceHeight()-this.m_height*0.5){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<75>";
+				this.m_inplay=1;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<80>";
+			if((t_shoot)!=0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<84>";
+				if((c_Timer.m_ShotReload.p_TimeOut(c_Shot.m_ReloadDelay))!=0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<85>";
+					this.p_Fire(bb_defaultmedia_DEFAULT_SHOT);
+				}
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<92>";
+				c_Shot.m_FirstShot=1;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<93>";
+				c_Shot.m_ReloadDelay=0;
+			}
+		}
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<99>";
+		if(t_1==5){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<103>";
+			this.m_x=this.m_x+bb_game_FrameScale(this.m_xs);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<105>";
+			if(this.m_x<0.0 || this.m_x>bb_autofit_VDeviceWidth()){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<106>";
+				this.m_xs=-this.m_xs;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<107>";
+				this.m_x=this.m_x+bb_game_FrameScale(this.m_xs);
+			}
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<110>";
+			this.m_ys=this.m_ys+bb_game_FrameScale(c_Level.m_Gravity)*this.m_mass;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<111>";
+			this.m_y=this.m_y+bb_game_FrameScale(this.m_ys);
+		}
+	}
+	pop_err();
+	return 0;
+}
+c_Rocket.prototype.p_Alive=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<46>";
+	if(this.m_shields>0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<47>";
+		pop_err();
+		return 1;
+	}
+	pop_err();
+	return 0;
+}
+c_Rocket.prototype.p_Render=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<129>";
+	this.p_Draw();
+	pop_err();
+	return 0;
+}
+c_Rocket.prototype.p_Shields=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<37>";
+	if(this.m_shields<0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<37>";
+		this.m_shields=0.0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rocket.cxs<38>";
+	var t_=((this.m_shields)|0);
+	pop_err();
+	return t_;
+}
+function bb_autofit_VDeviceWidth(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<170>";
+	pop_err();
+	return dbg_object(c_VirtualDisplay.m_Display).m_vwidth;
+}
+function bb_autofit_VDeviceHeight(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<174>";
+	pop_err();
+	return dbg_object(c_VirtualDisplay.m_Display).m_vheight;
+}
+function c_Timer(){
+	Object.call(this);
+	this.m_ticks=0;
+}
+c_Timer.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/timer.cxs<12>";
+	dbg_object(this).m_ticks=bb_app_Millisecs();
+	pop_err();
+	return this;
+}
+c_Timer.m_NewGame=null;
+c_Timer.prototype.p_Reset=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/timer.cxs<22>";
+	this.m_ticks=bb_app_Millisecs();
+	pop_err();
+	return 0;
+}
+c_Timer.m_ShotReload=null;
+c_Timer.prototype.p_TimeOut=function(t_timeout){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/timer.cxs<16>";
+	if(bb_app_Millisecs()>this.m_ticks+t_timeout){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/timer.cxs<17>";
+		pop_err();
+		return 1;
+	}
+	pop_err();
+	return 0;
+}
+function bb_app_Millisecs(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<233>";
+	var t_=bb_app__game.Millisecs();
+	pop_err();
+	return t_;
+}
+var bb_session_GameSession=null;
+var bb_game_UPDATE_RATE=0;
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
 	push_err();
@@ -4467,10 +5220,69 @@ function bb_app_SetUpdateRate(t_hertz){
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
 }
+function c_Button(){
+	Object.call(this);
+	this.m_width=0;
+	this.m_height=0;
+	this.m_x=0;
+	this.m_y=0;
+	this.m_text="";
+}
+c_Button.m_new=function(t_x,t_y,t_str){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<16>";
+	dbg_object(this).m_width=t_str.length*8;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<17>";
+	dbg_object(this).m_height=24;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<19>";
+	dbg_object(this).m_x=((t_x-(dbg_object(this).m_width)*0.5)|0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<20>";
+	dbg_object(this).m_y=((t_y-(dbg_object(this).m_height)*0.5)|0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<22>";
+	dbg_object(this).m_text=t_str;
+	pop_err();
+	return this;
+}
+c_Button.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<4>";
+	pop_err();
+	return this;
+}
+c_Button.prototype.p_Clicked=function(t_clickx,t_clicky){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<34>";
+	if((bb_collisions_PointInRect((t_clickx),(t_clicky),(this.m_x),(this.m_y),(this.m_x+this.m_width),(this.m_y+this.m_height)))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<35>";
+		if((bb_input_KeyHit(1))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<36>";
+			pop_err();
+			return 1;
+		}
+	}
+	pop_err();
+	return 0;
+}
+c_Button.prototype.p_Draw=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<28>";
+	bb_graphics_SetColor(255.0,255.0,255.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/button.cxs<29>";
+	bb_graphics_DrawText(this.m_text,this.m_x,this.m_y,0.0,0.0);
+	pop_err();
+	return 0;
+}
 function bb_input_MouseX(){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<58>";
 	var t_=bb_input_device.p_MouseX();
+	pop_err();
+	return t_;
+}
+function bb_autofit_VMouseX(t_limit){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<160>";
+	var t_=c_VirtualDisplay.m_Display.p_VMouseX(t_limit);
 	pop_err();
 	return t_;
 }
@@ -4480,6 +5292,1401 @@ function bb_input_MouseY(){
 	var t_=bb_input_device.p_MouseY();
 	pop_err();
 	return t_;
+}
+function bb_autofit_VMouseY(t_limit){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<164>";
+	var t_=c_VirtualDisplay.m_Display.p_VMouseY(t_limit);
+	pop_err();
+	return t_;
+}
+function bb_collisions_PointInRect(t_x,t_y,t_rx1,t_ry1,t_rx2,t_ry2){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<22>";
+	if(t_x>=t_rx1 && t_x<=t_rx2 && t_y>=t_ry1 && t_y<=t_ry2){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<22>";
+		pop_err();
+		return 1;
+	}
+	pop_err();
+	return 0;
+}
+function bb_input_KeyHit(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<44>";
+	var t_=bb_input_device.p_KeyHit(t_key);
+	pop_err();
+	return t_;
+}
+function c_Shot(){
+	c_Sprite.call(this);
+	this.m_inert=1;
+	this.m_parent=null;
+	this.m_lastx=.0;
+	this.m_lasty=.0;
+	this.m_hits=0;
+	this.m_player_damage=2.0;
+}
+c_Shot.prototype=extend_class(c_Sprite);
+c_Shot.m_UpdateAll=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<69>";
+	if(c_Level.m_Shots==null){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<69>";
+		pop_err();
+		return 0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<73>";
+	var t_vdw=bb_autofit_VDeviceWidth();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<74>";
+	var t_vdh=bb_autofit_VDeviceHeight();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<76>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<76>";
+	var t_=c_Level.m_Shots.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<76>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<76>";
+		var t_s=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<78>";
+		dbg_object(t_s).m_ys=dbg_object(t_s).m_ys+bb_game_FrameScale(c_Level.m_Gravity);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<80>";
+		if((dbg_object(t_s).m_inert)!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<81>";
+			if(dbg_object(t_s).m_ys>0.0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<82>";
+				dbg_object(t_s).m_inert=0;
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<86>";
+		dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<87>";
+		dbg_object(t_s).m_y=dbg_object(t_s).m_y+bb_game_FrameScale(dbg_object(t_s).m_ys);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<89>";
+		if(dbg_object(t_s).m_x<0.0 || dbg_object(t_s).m_x>t_vdw){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<90>";
+			dbg_object(t_s).m_xs=-dbg_object(t_s).m_xs;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<91>";
+			dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<94>";
+		if(dbg_object(t_s).m_y>t_vdh+64.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<95>";
+			c_Level.m_Shots.p_RemoveEach(t_s);
+		}
+	}
+	pop_err();
+	return 0;
+}
+c_Shot.m_ReloadDelay=0;
+c_Shot.m_FirstShot=0;
+c_Shot.m_new=function(t_img,t_x,t_y,t_xs,t_ys,t_xscale,t_yscale){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<24>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<30>";
+	if((c_Shot.m_FirstShot)!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<34>";
+		c_Shot.m_ReloadDelay=160;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<35>";
+		c_Shot.m_FirstShot=0;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<41>";
+		c_Shot.m_ReloadDelay=80;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<45>";
+	dbg_object(this).m_image=t_img;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<47>";
+	dbg_object(this).m_x=t_x;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<48>";
+	dbg_object(this).m_y=t_y;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<50>";
+	dbg_object(this).m_xs=t_xs*0.2;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<51>";
+	dbg_object(this).m_ys=-4.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<53>";
+	dbg_object(this).m_xscale=t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<54>";
+	dbg_object(this).m_yscale=t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<58>";
+	dbg_object(this).m_width=(t_img.p_Width())*t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<59>";
+	dbg_object(this).m_height=(t_img.p_Height())*t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<61>";
+	c_Level.m_Shots.p_AddLast(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<63>";
+	dbg_object(this).m_parent=c_Level.m_Shots;
+	pop_err();
+	return this;
+}
+c_Shot.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<4>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<4>";
+	pop_err();
+	return this;
+}
+c_Shot.prototype.p_Delete=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<16>";
+	this.m_parent.p_RemoveEach(this);
+	pop_err();
+	return 0;
+}
+c_Shot.m_Render=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<103>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<103>";
+	var t_=c_Level.m_Shots.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<103>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<103>";
+		var t_s=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/shot.cxs<104>";
+		t_s.p_Draw();
+	}
+	pop_err();
+	return 0;
+}
+function c_List(){
+	Object.call(this);
+	this.m__head=(c_HeadNode.m_new.call(new c_HeadNode));
+}
+c_List.m_new=function(){
+	push_err();
+	pop_err();
+	return this;
+}
+c_List.prototype.p_AddLast=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<108>";
+	var t_=c_Node3.m_new.call(new c_Node3,this.m__head,dbg_object(this.m__head).m__pred,t_data);
+	pop_err();
+	return t_;
+}
+c_List.m_new2=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_=t_data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		var t_t=dbg_array(t_,t_2)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<14>";
+		this.p_AddLast(t_t);
+	}
+	pop_err();
+	return this;
+}
+c_List.prototype.p_ObjectEnumerator=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<186>";
+	var t_=c_Enumerator.m_new.call(new c_Enumerator,this);
+	pop_err();
+	return t_;
+}
+c_List.prototype.p_Equals=function(t_lhs,t_rhs){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<28>";
+	var t_=t_lhs==t_rhs;
+	pop_err();
+	return t_;
+}
+c_List.prototype.p_RemoveEach=function(t_value){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<151>";
+	var t_node=dbg_object(this.m__head).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<152>";
+	while(t_node!=this.m__head){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<153>";
+		var t_succ=dbg_object(t_node).m__succ;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+		if(this.p_Equals(dbg_object(t_node).m__data,t_value)){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+			t_node.p_Remove();
+		}
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<155>";
+		t_node=t_succ;
+	}
+	pop_err();
+	return 0;
+}
+function c_Node3(){
+	Object.call(this);
+	this.m__succ=null;
+	this.m__pred=null;
+	this.m__data=null;
+}
+c_Node3.m_new=function(t_succ,t_pred,t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<261>";
+	this.m__succ=t_succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<262>";
+	this.m__pred=t_pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<263>";
+	dbg_object(this.m__succ).m__pred=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<264>";
+	dbg_object(this.m__pred).m__succ=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<265>";
+	this.m__data=t_data;
+	pop_err();
+	return this;
+}
+c_Node3.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<258>";
+	pop_err();
+	return this;
+}
+c_Node3.prototype.p_Remove=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+	if(dbg_object(this.m__succ).m__pred!=this){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+		error("Illegal operation on removed node");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<276>";
+	dbg_object(this.m__succ).m__pred=this.m__pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<277>";
+	dbg_object(this.m__pred).m__succ=this.m__succ;
+	pop_err();
+	return 0;
+}
+function c_HeadNode(){
+	c_Node3.call(this);
+}
+c_HeadNode.prototype=extend_class(c_Node3);
+c_HeadNode.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<310>";
+	c_Node3.m_new2.call(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<311>";
+	this.m__succ=(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<312>";
+	this.m__pred=(this);
+	pop_err();
+	return this;
+}
+function c_Block(){
+	c_Sprite.call(this);
+	this.m_parent=null;
+	this.m_strength=1;
+	this.m_hitcount=0;
+	this.m_hittime=0;
+	this.m_hitby=null;
+	this.m_hitx=.0;
+	this.m_hity=.0;
+}
+c_Block.prototype=extend_class(c_Sprite);
+c_Block.m_new=function(t_img,t_x,t_y,t_xs,t_ys,t_xscale,t_yscale){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<42>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<44>";
+	dbg_object(this).m_image=t_img;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<46>";
+	dbg_object(this).m_x=t_x;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<47>";
+	dbg_object(this).m_y=t_y;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<49>";
+	dbg_object(this).m_xscale=t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<50>";
+	dbg_object(this).m_yscale=t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<54>";
+	dbg_object(this).m_width=(t_img.p_Width())*t_xscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<55>";
+	dbg_object(this).m_height=(t_img.p_Height())*t_yscale;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<57>";
+	c_Level.m_Blocks.p_AddLast2(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<59>";
+	dbg_object(this).m_parent=c_Level.m_Blocks;
+	pop_err();
+	return this;
+}
+c_Block.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<6>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<6>";
+	pop_err();
+	return this;
+}
+c_Block.prototype.p_Delete=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<39>";
+	this.m_parent.p_RemoveEach2(this);
+	pop_err();
+	return 0;
+}
+c_Block.m_UpdateAll=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<65>";
+	var t_b=null;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<67>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<67>";
+	var t_=c_Level.m_FallingBlocks.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<67>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<67>";
+		t_b=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<69>";
+		dbg_object(t_b).m_x=dbg_object(t_b).m_x+bb_game_FrameScale(dbg_object(t_b).m_xs);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<71>";
+		dbg_object(t_b).m_ys=dbg_object(t_b).m_ys+bb_game_FrameScale(c_Level.m_Gravity)*2.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<72>";
+		dbg_object(t_b).m_y=dbg_object(t_b).m_y+bb_game_FrameScale(dbg_object(t_b).m_ys);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<74>";
+		if(dbg_object(t_b).m_y>bb_autofit_VDeviceHeight()+dbg_object(t_b).m_height){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<74>";
+			t_b.p_Delete();
+		}
+	}
+	pop_err();
+	return 0;
+}
+c_Block.prototype.p_Fall=function(t_forcexs,t_forceys){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<23>";
+	c_Level.m_FallingBlocks.p_AddLast2(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<24>";
+	dbg_object(this).m_parent=c_Level.m_FallingBlocks;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<26>";
+	c_Level.m_Blocks.p_RemoveEach2(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<28>";
+	if((dbg_object(this).m_hitby)!=null){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<29>";
+		dbg_object(this).m_xs=dbg_object(dbg_object(this).m_hitby).m_xs*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<30>";
+		dbg_object(this).m_ys=-dbg_object(dbg_object(this).m_hitby).m_ys*0.5;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<32>";
+		dbg_object(this).m_xs=t_forcexs;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<33>";
+		dbg_object(this).m_ys=t_forceys;
+	}
+	pop_err();
+	return 0;
+}
+c_Block.m_Render=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<82>";
+	var t_b=null;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<84>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<84>";
+	var t_=c_Level.m_Blocks.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<84>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<84>";
+		t_b=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<85>";
+		t_b.p_Draw();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<88>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<88>";
+	var t_2=c_Level.m_FallingBlocks.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<88>";
+	while(t_2.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<88>";
+		t_b=t_2.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/block.cxs<89>";
+		t_b.p_Draw();
+	}
+	pop_err();
+	return 0;
+}
+function c_List2(){
+	Object.call(this);
+	this.m__head=(c_HeadNode2.m_new.call(new c_HeadNode2));
+}
+c_List2.m_new=function(){
+	push_err();
+	pop_err();
+	return this;
+}
+c_List2.prototype.p_AddLast2=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<108>";
+	var t_=c_Node4.m_new.call(new c_Node4,this.m__head,dbg_object(this.m__head).m__pred,t_data);
+	pop_err();
+	return t_;
+}
+c_List2.m_new2=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_=t_data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		var t_t=dbg_array(t_,t_2)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<14>";
+		this.p_AddLast2(t_t);
+	}
+	pop_err();
+	return this;
+}
+c_List2.prototype.p_IsEmpty=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<50>";
+	var t_=dbg_object(this.m__head).m__succ==this.m__head;
+	pop_err();
+	return t_;
+}
+c_List2.prototype.p_ObjectEnumerator=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<186>";
+	var t_=c_Enumerator2.m_new.call(new c_Enumerator2,this);
+	pop_err();
+	return t_;
+}
+c_List2.prototype.p_Equals2=function(t_lhs,t_rhs){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<28>";
+	var t_=t_lhs==t_rhs;
+	pop_err();
+	return t_;
+}
+c_List2.prototype.p_RemoveEach2=function(t_value){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<151>";
+	var t_node=dbg_object(this.m__head).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<152>";
+	while(t_node!=this.m__head){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<153>";
+		var t_succ=dbg_object(t_node).m__succ;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+		if(this.p_Equals2(dbg_object(t_node).m__data,t_value)){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+			t_node.p_Remove();
+		}
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<155>";
+		t_node=t_succ;
+	}
+	pop_err();
+	return 0;
+}
+function c_Node4(){
+	Object.call(this);
+	this.m__succ=null;
+	this.m__pred=null;
+	this.m__data=null;
+}
+c_Node4.m_new=function(t_succ,t_pred,t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<261>";
+	this.m__succ=t_succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<262>";
+	this.m__pred=t_pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<263>";
+	dbg_object(this.m__succ).m__pred=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<264>";
+	dbg_object(this.m__pred).m__succ=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<265>";
+	this.m__data=t_data;
+	pop_err();
+	return this;
+}
+c_Node4.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<258>";
+	pop_err();
+	return this;
+}
+c_Node4.prototype.p_Remove=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+	if(dbg_object(this.m__succ).m__pred!=this){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+		error("Illegal operation on removed node");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<276>";
+	dbg_object(this.m__succ).m__pred=this.m__pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<277>";
+	dbg_object(this.m__pred).m__succ=this.m__succ;
+	pop_err();
+	return 0;
+}
+function c_HeadNode2(){
+	c_Node4.call(this);
+}
+c_HeadNode2.prototype=extend_class(c_Node4);
+c_HeadNode2.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<310>";
+	c_Node4.m_new2.call(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<311>";
+	this.m__succ=(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<312>";
+	this.m__pred=(this);
+	pop_err();
+	return this;
+}
+function c_ScoreBubble(){
+	c_Sprite.call(this);
+	this.m_parent=null;
+	this.m_score=0;
+}
+c_ScoreBubble.prototype=extend_class(c_Sprite);
+c_ScoreBubble.prototype.p_Delete=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<22>";
+	this.m_parent.p_RemoveEach3(this);
+	pop_err();
+	return 0;
+}
+c_ScoreBubble.m_UpdateAll=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<27>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<27>";
+	var t_=c_Level.m_ScoreBubbles.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<27>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<27>";
+		var t_score=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<28>";
+		dbg_object(t_score).m_ys=dbg_object(t_score).m_ys-bb_game_FrameScale(c_Level.m_Gravity)*4.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<29>";
+		dbg_object(t_score).m_y=dbg_object(t_score).m_y+bb_game_FrameScale(dbg_object(t_score).m_ys);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<30>";
+		if(dbg_object(t_score).m_y<-12.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<30>";
+			t_score.p_Delete();
+		}
+	}
+	pop_err();
+	return 0;
+}
+c_ScoreBubble.m_new=function(t_x,t_y,t_score){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<12>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<13>";
+	dbg_object(this).m_x=t_x;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<14>";
+	dbg_object(this).m_y=t_y;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<15>";
+	dbg_object(this).m_ys=1.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<16>";
+	dbg_object(this).m_score=t_score;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<17>";
+	c_Level.m_ScoreBubbles.p_AddLast3(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<18>";
+	dbg_object(this).m_parent=c_Level.m_ScoreBubbles;
+	pop_err();
+	return this;
+}
+c_ScoreBubble.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<6>";
+	c_Sprite.m_new.call(this);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<6>";
+	pop_err();
+	return this;
+}
+c_ScoreBubble.m_Render=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<36>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<36>";
+	var t_=c_Level.m_ScoreBubbles.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<36>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<36>";
+		var t_score=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/scorebubble.cxs<37>";
+		bb_graphics_DrawText(String(dbg_object(t_score).m_score),((dbg_object(t_score).m_x)|0),((dbg_object(t_score).m_y)|0),0.0,0.0);
+	}
+	pop_err();
+	return 0;
+}
+function c_List3(){
+	Object.call(this);
+	this.m__head=(c_HeadNode3.m_new.call(new c_HeadNode3));
+}
+c_List3.m_new=function(){
+	push_err();
+	pop_err();
+	return this;
+}
+c_List3.prototype.p_AddLast3=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<108>";
+	var t_=c_Node5.m_new.call(new c_Node5,this.m__head,dbg_object(this.m__head).m__pred,t_data);
+	pop_err();
+	return t_;
+}
+c_List3.m_new2=function(t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_=t_data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		var t_t=dbg_array(t_,t_2)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<13>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<14>";
+		this.p_AddLast3(t_t);
+	}
+	pop_err();
+	return this;
+}
+c_List3.prototype.p_ObjectEnumerator=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<186>";
+	var t_=c_Enumerator3.m_new.call(new c_Enumerator3,this);
+	pop_err();
+	return t_;
+}
+c_List3.prototype.p_Equals3=function(t_lhs,t_rhs){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<28>";
+	var t_=t_lhs==t_rhs;
+	pop_err();
+	return t_;
+}
+c_List3.prototype.p_RemoveEach3=function(t_value){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<151>";
+	var t_node=dbg_object(this.m__head).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<152>";
+	while(t_node!=this.m__head){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<153>";
+		var t_succ=dbg_object(t_node).m__succ;
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+		if(this.p_Equals3(dbg_object(t_node).m__data,t_value)){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<154>";
+			t_node.p_Remove();
+		}
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<155>";
+		t_node=t_succ;
+	}
+	pop_err();
+	return 0;
+}
+function c_Node5(){
+	Object.call(this);
+	this.m__succ=null;
+	this.m__pred=null;
+	this.m__data=null;
+}
+c_Node5.m_new=function(t_succ,t_pred,t_data){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<261>";
+	this.m__succ=t_succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<262>";
+	this.m__pred=t_pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<263>";
+	dbg_object(this.m__succ).m__pred=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<264>";
+	dbg_object(this.m__pred).m__succ=this;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<265>";
+	this.m__data=t_data;
+	pop_err();
+	return this;
+}
+c_Node5.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<258>";
+	pop_err();
+	return this;
+}
+c_Node5.prototype.p_Remove=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+	if(dbg_object(this.m__succ).m__pred!=this){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<274>";
+		error("Illegal operation on removed node");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<276>";
+	dbg_object(this.m__succ).m__pred=this.m__pred;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<277>";
+	dbg_object(this.m__pred).m__succ=this.m__succ;
+	pop_err();
+	return 0;
+}
+function c_HeadNode3(){
+	c_Node5.call(this);
+}
+c_HeadNode3.prototype=extend_class(c_Node5);
+c_HeadNode3.m_new=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<310>";
+	c_Node5.m_new2.call(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<311>";
+	this.m__succ=(this);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<312>";
+	this.m__pred=(this);
+	pop_err();
+	return this;
+}
+var bb_random_Seed=0;
+function bb_random_Rnd(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<37>";
+	bb_random_Seed=bb_random_Seed*1664525+1013904223|0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<38>";
+	var t_=(bb_random_Seed>>8&16777215)/16777216.0;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd2(t_low,t_high){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<46>";
+	var t_=bb_random_Rnd3(t_high-t_low)+t_low;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd3(t_range){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<42>";
+	var t_=bb_random_Rnd()*t_range;
+	pop_err();
+	return t_;
+}
+function c_Enumerator(){
+	Object.call(this);
+	this.m__list=null;
+	this.m__curr=null;
+}
+c_Enumerator.m_new=function(t_list){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<326>";
+	this.m__list=t_list;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<327>";
+	this.m__curr=dbg_object(dbg_object(t_list).m__head).m__succ;
+	pop_err();
+	return this;
+}
+c_Enumerator.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<323>";
+	pop_err();
+	return this;
+}
+c_Enumerator.prototype.p_HasNext=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<331>";
+	while(dbg_object(dbg_object(this.m__curr).m__succ).m__pred!=this.m__curr){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<332>";
+		this.m__curr=dbg_object(this.m__curr).m__succ;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<334>";
+	var t_=this.m__curr!=dbg_object(this.m__list).m__head;
+	pop_err();
+	return t_;
+}
+c_Enumerator.prototype.p_NextObject=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<338>";
+	var t_data=dbg_object(this.m__curr).m__data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<339>";
+	this.m__curr=dbg_object(this.m__curr).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<340>";
+	pop_err();
+	return t_data;
+}
+function bb_game_FrameScale(t_value){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/game.cxs<32>";
+	var t_=t_value*1.0/((bb_game_UPDATE_RATE)/60.0);
+	pop_err();
+	return t_;
+}
+function c_Enumerator2(){
+	Object.call(this);
+	this.m__list=null;
+	this.m__curr=null;
+}
+c_Enumerator2.m_new=function(t_list){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<326>";
+	this.m__list=t_list;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<327>";
+	this.m__curr=dbg_object(dbg_object(t_list).m__head).m__succ;
+	pop_err();
+	return this;
+}
+c_Enumerator2.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<323>";
+	pop_err();
+	return this;
+}
+c_Enumerator2.prototype.p_HasNext=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<331>";
+	while(dbg_object(dbg_object(this.m__curr).m__succ).m__pred!=this.m__curr){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<332>";
+		this.m__curr=dbg_object(this.m__curr).m__succ;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<334>";
+	var t_=this.m__curr!=dbg_object(this.m__list).m__head;
+	pop_err();
+	return t_;
+}
+c_Enumerator2.prototype.p_NextObject=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<338>";
+	var t_data=dbg_object(this.m__curr).m__data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<339>";
+	this.m__curr=dbg_object(this.m__curr).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<340>";
+	pop_err();
+	return t_data;
+}
+function c_Enumerator3(){
+	Object.call(this);
+	this.m__list=null;
+	this.m__curr=null;
+}
+c_Enumerator3.m_new=function(t_list){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<326>";
+	this.m__list=t_list;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<327>";
+	this.m__curr=dbg_object(dbg_object(t_list).m__head).m__succ;
+	pop_err();
+	return this;
+}
+c_Enumerator3.m_new2=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<323>";
+	pop_err();
+	return this;
+}
+c_Enumerator3.prototype.p_HasNext=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<331>";
+	while(dbg_object(dbg_object(this.m__curr).m__succ).m__pred!=this.m__curr){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<332>";
+		this.m__curr=dbg_object(this.m__curr).m__succ;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<334>";
+	var t_=this.m__curr!=dbg_object(this.m__list).m__head;
+	pop_err();
+	return t_;
+}
+c_Enumerator3.prototype.p_NextObject=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<338>";
+	var t_data=dbg_object(this.m__curr).m__data;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<339>";
+	this.m__curr=dbg_object(this.m__curr).m__succ;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/list.cxs<340>";
+	pop_err();
+	return t_data;
+}
+function bb_input_KeyDown(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<40>";
+	var t_=((bb_input_device.p_KeyDown(t_key))?1:0);
+	pop_err();
+	return t_;
+}
+function bb_autofit_AdjustVirtualZoom(t_amount){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<110>";
+	c_VirtualDisplay.m_Display.p_AdjustZoom(t_amount);
+	pop_err();
+	return 0;
+}
+function bb_autofit_SetVirtualZoom(t_zoom){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<99>";
+	c_VirtualDisplay.m_Display.p_SetZoom(t_zoom);
+	pop_err();
+	return 0;
+}
+function bb_checkkeys_CheckKeys(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<8>";
+	if((bb_input_KeyHit(27))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<9>";
+		bb_session_GameSession.p_SetState(1);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<12>";
+	if((bb_input_KeyHit(80))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<13>";
+		bb_session_GameSession.p_SetState(3);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<16>";
+	if((bb_input_KeyHit(32))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<17>";
+		c_Block.m_new.call(new c_Block,bb_defaultmedia_DEFAULT_BLOCK,bb_random_Rnd3(bb_autofit_VDeviceWidth()),bb_random_Rnd3(bb_autofit_VDeviceHeight()),0.0,0.0,0.2,0.2);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<20>";
+	if((bb_input_KeyHit(8))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<21>";
+		c_Session.m_Player.p_Damage(100.0);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<24>";
+	if((bb_input_KeyDown(37))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<25>";
+		bb_autofit_AdjustVirtualZoom(-0.01);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<28>";
+	if((bb_input_KeyDown(39))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<29>";
+		bb_autofit_AdjustVirtualZoom(0.01);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<32>";
+	if((bb_input_KeyHit(13))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<33>";
+		bb_autofit_SetVirtualZoom(1.0);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<36>";
+	if((bb_input_KeyHit(38))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<38>";
+		bb_game_UPDATE_RATE=bb_game_UPDATE_RATE+5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<39>";
+		bb_app_SetUpdateRate(bb_game_UPDATE_RATE);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<43>";
+	if((bb_input_KeyHit(40))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<45>";
+		bb_game_UPDATE_RATE=bb_game_UPDATE_RATE-5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<46>";
+		if(bb_game_UPDATE_RATE<5){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<46>";
+			bb_game_UPDATE_RATE=5;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/checkkeys.cxs<48>";
+		bb_app_SetUpdateRate(bb_game_UPDATE_RATE);
+	}
+	pop_err();
+	return 0;
+}
+function bb_collisions_LinesIntersect(t_ax,t_ay,t_bx,t_by,t_cx,t_cy,t_dx,t_dy){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<27>";
+	var t_lambda=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<28>";
+	var t_mu=.0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<30>";
+	t_bx=t_bx-t_ax;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<31>";
+	t_by=t_by-t_ay;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<32>";
+	t_dx=t_dx-t_cx;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<33>";
+	t_dy=t_dy-t_cy;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<35>";
+	if(t_dx!=0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<36>";
+		t_lambda=(t_cy-t_ay+(t_ax-t_cx)*t_dy/t_dx)/(t_by-t_bx*t_dy/t_dx);
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<38>";
+		t_lambda=(t_cx-t_ax+(t_ay-t_cy)*t_dx/t_dy)/(t_bx-t_by*t_dx/t_dy);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<41>";
+	if(t_bx!=0.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<42>";
+		t_mu=(t_ay-t_cy+(t_cx-t_ax)*t_by/t_bx)/(t_dy-t_dx*t_by/t_bx);
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<44>";
+		t_mu=(t_ax-t_cx+(t_cy-t_ay)*t_bx/t_by)/(t_dx-t_dy*t_bx/t_by);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<47>";
+	if(t_lambda>=0.0 && t_lambda<=1.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<48>";
+		if(t_mu>=0.0 && t_mu<=1.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<48>";
+			pop_err();
+			return t_lambda;
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<51>";
+	pop_err();
+	return -1.0;
+}
+function bb_collisions_RectHit(t_x,t_y,t_x1,t_y1,t_x2,t_y2,t_lastx,t_lasty){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<66>";
+	var t_cmask=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<68>";
+	if((bb_collisions_PointInRect(t_x,t_y,t_x1,t_y1,t_x2,t_y2))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<74>";
+		if(t_lastx<=t_x1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<75>";
+			if(bb_collisions_LinesIntersect(t_x,t_y,t_lastx,t_lasty,t_x1,t_y1,t_x1,t_y2)!=-1.0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<76>";
+				t_cmask=t_cmask|1;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<79>";
+			if(t_lastx>=t_x2){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<80>";
+				if(bb_collisions_LinesIntersect(t_x,t_y,t_lastx,t_lasty,t_x2,t_y1,t_x2,t_y2)!=-1.0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<81>";
+					t_cmask=t_cmask|2;
+				}
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<86>";
+		if(t_lasty<=t_y1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<87>";
+			if(bb_collisions_LinesIntersect(t_x,t_y,t_lastx,t_lasty,t_x1,t_y1,t_x2,t_y1)!=-1.0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<88>";
+				t_cmask=t_cmask|4;
+			}
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<91>";
+			if(t_lasty>=t_y2){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<92>";
+				if(bb_collisions_LinesIntersect(t_x,t_y,t_lastx,t_lasty,t_x1,t_y2,t_x2,t_y2)!=-1.0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<93>";
+					t_cmask=t_cmask|8;
+				}
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<100>";
+	pop_err();
+	return t_cmask;
+}
+function bb_collisions_Distance(t_x1,t_y1,t_x2,t_y2){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<5>";
+	var t_=Math.sqrt((t_x1-t_x2)*(t_x1-t_x2)+(t_y1-t_y2)*(t_y1-t_y2));
+	pop_err();
+	return t_;
+}
+function bb_collisions_CirclesCollide(t_go1,t_go2,t_go1jimmy,t_go2jimmy){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<10>";
+	var t_radius1=dbg_object(t_go1).m_width*t_go1jimmy;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<11>";
+	var t_radius2=dbg_object(t_go2).m_width*t_go2jimmy;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<13>";
+	var t_dist=bb_collisions_Distance(dbg_object(t_go1).m_x,dbg_object(t_go1).m_y,dbg_object(t_go2).m_x,dbg_object(t_go2).m_y);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<15>";
+	if(t_dist<t_radius1+t_radius2){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<16>";
+		pop_err();
+		return 1;
+	}
+	pop_err();
+	return 0;
+}
+function bb_collisions_CheckCollisions(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<122>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<122>";
+	var t_=c_Level.m_Shots.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<122>";
+	while(t_.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<122>";
+		var t_s=t_.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<130>";
+		dbg_object(t_s).m_lastx=dbg_object(t_s).m_x-bb_game_FrameScale(dbg_object(t_s).m_xs);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<131>";
+		dbg_object(t_s).m_lasty=dbg_object(t_s).m_y-bb_game_FrameScale(dbg_object(t_s).m_ys);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<135>";
+		var t_ox=dbg_object(t_s).m_x-dbg_object(t_s).m_width*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<136>";
+		var t_oy=dbg_object(t_s).m_y-dbg_object(t_s).m_height*0.5;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<138>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<138>";
+		var t_2=c_Level.m_Blocks.p_ObjectEnumerator();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<138>";
+		while(t_2.p_HasNext()){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<138>";
+			var t_b=t_2.p_NextObject();
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<142>";
+			var t_bx=((dbg_object(t_b).m_x-dbg_object(t_b).m_width*0.5)|0);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<143>";
+			var t_by=((dbg_object(t_b).m_y-dbg_object(t_b).m_height*0.5)|0);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<147>";
+			var t_collided=bb_collisions_RectHit(dbg_object(t_s).m_x,dbg_object(t_s).m_y,(t_bx),(t_by),(t_bx)+dbg_object(t_b).m_width,(t_by)+dbg_object(t_b).m_height,dbg_object(t_s).m_lastx,dbg_object(t_s).m_lasty);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<149>";
+			if((t_collided)!=0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<151>";
+				dbg_object(t_s).m_hits=dbg_object(t_s).m_hits+1;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<159>";
+				if((dbg_object(t_b).m_strength)!=0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<161>";
+					dbg_object(t_b).m_hitcount=dbg_object(t_b).m_hitcount+1;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<163>";
+					if(dbg_object(t_b).m_hitcount>=dbg_object(t_b).m_strength){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<165>";
+						dbg_object(t_b).m_hittime=bb_app_Millisecs();
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<167>";
+						dbg_object(t_b).m_hitby=t_s;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<171>";
+						dbg_object(t_b).m_hitx=dbg_object(t_b).m_x;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<172>";
+						dbg_object(t_b).m_hity=dbg_object(t_b).m_y;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<174>";
+						var t_score=dbg_object(t_s).m_hits*100;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<176>";
+						c_ScoreBubble.m_new.call(new c_ScoreBubble,dbg_object(t_b).m_x,dbg_object(t_b).m_y,t_score);
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<177>";
+						c_Session.m_Score=c_Session.m_Score+t_score;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<179>";
+						t_b.p_Fall(0.0,0.0);
+					}
+				}
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<187>";
+				if((t_collided&1)!=0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<188>";
+					dbg_object(t_s).m_xs=-dbg_object(t_s).m_xs;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<189>";
+					dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<191>";
+					if((t_collided&2)!=0){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<192>";
+						dbg_object(t_s).m_xs=-dbg_object(t_s).m_xs;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<193>";
+						dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+					}
+				}
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<197>";
+				if((t_collided&4)!=0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<198>";
+					if(dbg_object(t_s).m_ys>0.25){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<198>";
+						dbg_object(t_s).m_ys=-dbg_object(t_s).m_ys*0.75;
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<198>";
+						t_b.p_Delete();
+					}
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<199>";
+					dbg_object(t_s).m_y=dbg_object(t_s).m_y+bb_game_FrameScale(dbg_object(t_s).m_ys);
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<201>";
+					if((t_collided&8)!=0){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<202>";
+						dbg_object(t_s).m_ys=-dbg_object(t_s).m_ys;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<203>";
+						dbg_object(t_s).m_y=dbg_object(t_s).m_y+bb_game_FrameScale(dbg_object(t_s).m_ys);
+					}
+				}
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<215>";
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<215>";
+		var t_3=c_Level.m_FallingBlocks.p_ObjectEnumerator();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<215>";
+		while(t_3.p_HasNext()){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<215>";
+			var t_b2=t_3.p_NextObject();
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<219>";
+			if(bb_app_Millisecs()<dbg_object(t_b2).m_hittime+120){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<223>";
+				var t_bx2=((dbg_object(t_b2).m_hitx-dbg_object(t_b2).m_width*0.5)|0);
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<224>";
+				var t_by2=((dbg_object(t_b2).m_hity-dbg_object(t_b2).m_height*0.5)|0);
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<228>";
+				var t_collided2=bb_collisions_RectHit(dbg_object(t_s).m_x,dbg_object(t_s).m_y,(t_bx2),(t_by2),(t_bx2)+dbg_object(t_b2).m_width,(t_by2)+dbg_object(t_b2).m_height,dbg_object(t_s).m_lastx,dbg_object(t_s).m_lasty);
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<230>";
+				if((t_collided2)!=0){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<234>";
+					if((t_collided2&1)!=0){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<235>";
+						dbg_object(t_s).m_xs=-dbg_object(t_s).m_xs;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<236>";
+						dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<238>";
+						if((t_collided2&2)!=0){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<239>";
+							dbg_object(t_s).m_xs=-dbg_object(t_s).m_xs;
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<240>";
+							dbg_object(t_s).m_x=dbg_object(t_s).m_x+bb_game_FrameScale(dbg_object(t_s).m_xs);
+						}
+					}
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<244>";
+					if((t_collided2&4)!=0){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<245>";
+						if(dbg_object(t_s).m_ys>0.25){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<245>";
+							dbg_object(t_s).m_ys=-dbg_object(t_s).m_ys*0.75;
+						}else{
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<245>";
+							t_b2.p_Delete();
+						}
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<246>";
+						dbg_object(t_s).m_y=dbg_object(t_s).m_y+bb_game_FrameScale(dbg_object(t_s).m_ys);
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<248>";
+						if((t_collided2&8)!=0){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<249>";
+							dbg_object(t_s).m_ys=-dbg_object(t_s).m_ys;
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<250>";
+							dbg_object(t_s).m_y=dbg_object(t_s).m_y+bb_game_FrameScale(dbg_object(t_s).m_ys);
+						}
+					}
+				}
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<264>";
+		if(!((dbg_object(t_s).m_inert)!=0)){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<265>";
+			if((bb_collisions_CirclesCollide((t_s),(c_Session.m_Player),0.425,0.425))!=0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<266>";
+				c_Session.m_Player.p_Damage(dbg_object(t_s).m_player_damage);
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<267>";
+				t_s.p_Delete();
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<277>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<277>";
+	var t_4=c_Level.m_Blocks.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<277>";
+	while(t_4.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<277>";
+		var t_b3=t_4.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<278>";
+		if((bb_collisions_CirclesCollide((t_b3),(c_Session.m_Player),0.425,0.425))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<279>";
+			c_Session.m_Player.p_Damage(4.0);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<280>";
+			t_b3.p_Delete();
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<284>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<284>";
+	var t_5=c_Level.m_FallingBlocks.p_ObjectEnumerator();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<284>";
+	while(t_5.p_HasNext()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<284>";
+		var t_b4=t_5.p_NextObject();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<285>";
+		if((bb_collisions_CirclesCollide((t_b4),(c_Session.m_Player),0.425,0.425))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<286>";
+			c_Session.m_Player.p_Damage(4.0);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/collisions.cxs<287>";
+			t_b4.p_Delete();
+		}
+	}
+	pop_err();
+	return 0;
+}
+function bb_updategame_LevelComplete(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<136>";
+	if(c_Level.m_Blocks.p_IsEmpty()){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<136>";
+		pop_err();
+		return 1;
+	}
+	pop_err();
+	return 0;
+}
+function bb_updategame_UpdateGame(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<10>";
+	dbg_object(bb_rockout_RockOut).m_mx=bb_autofit_VMouseX(true);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<11>";
+	dbg_object(bb_rockout_RockOut).m_my=bb_autofit_VMouseY(true);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<17>";
+	var t_1=c_Session.m_GameState;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<23>";
+	if(t_1==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<25>";
+		if((dbg_object(bb_rockout_RockOut).m_temp.p_Clicked(((dbg_object(bb_rockout_RockOut).m_mx)|0),((dbg_object(bb_rockout_RockOut).m_my)|0)))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<26>";
+			bb_session_GameSession.p_SetState(6);
+		}
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<29>";
+		if(t_1==6){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<31>";
+			bb_session_GameSession=c_Session.m_new.call(new c_Session);
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<33>";
+			bb_session_GameSession.p_SetState(4);
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<39>";
+			if(t_1==4){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<41>";
+				c_Level.m_LoadLevel();
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<42>";
+				bb_session_GameSession.p_SetState(2);
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<48>";
+				if(t_1==2){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<54>";
+					c_Shot.m_UpdateAll();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<55>";
+					c_Block.m_UpdateAll();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<56>";
+					c_ScoreBubble.m_UpdateAll();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<64>";
+					bb_checkkeys_CheckKeys();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<66>";
+					c_Session.m_Player.p_UpdatePlayer(2,bb_input_KeyDown(1));
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<72>";
+					bb_collisions_CheckCollisions();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<78>";
+					if(!((c_Session.m_Player.p_Alive())!=0)){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<79>";
+						bb_session_GameSession.p_SetState(5);
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<81>";
+						if((bb_updategame_LevelComplete())!=0){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<82>";
+							bb_session_GameSession.p_SetState(4);
+						}
+					}
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<90>";
+					if(t_1==3){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<92>";
+						if(((bb_input_KeyHit(27))!=0) || ((bb_input_KeyHit(80))!=0)){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<93>";
+							bb_session_GameSession.p_SetState(2);
+						}
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<100>";
+						if(t_1==5){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<106>";
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<106>";
+							var t_=c_Level.m_Blocks.p_ObjectEnumerator();
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<106>";
+							while(t_.p_HasNext()){
+								err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<106>";
+								var t_b=t_.p_NextObject();
+								err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<107>";
+								t_b.p_Fall(bb_random_Rnd2(-4.0,4.0),bb_random_Rnd3(-8.0));
+							}
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<110>";
+							c_Shot.m_UpdateAll();
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<111>";
+							c_Block.m_UpdateAll();
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<112>";
+							c_ScoreBubble.m_UpdateAll();
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<114>";
+							c_Session.m_Player.p_UpdatePlayer(5,0);
+							err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<116>";
+							if((c_Timer.m_NewGame.p_TimeOut(2000))!=0){
+								err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<118>";
+								if((bb_input_KeyHit(1))!=0){
+									err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/updategame.cxs<119>";
+									bb_session_GameSession.p_SetState(1);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	pop_err();
+	return 0;
 }
 function bb_graphics_DebugRenderDevice(){
 	push_err();
@@ -4524,27 +6731,121 @@ function bb_graphics_Cls3(t_rgb){
 	pop_err();
 	return 0;
 }
-function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
+function bb_math_Max(t_x,t_y){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<56>";
+	if(t_x>t_y){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<56>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<57>";
+	pop_err();
+	return t_y;
+}
+function bb_math_Max2(t_x,t_y){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<83>";
+	if(t_x>t_y){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<83>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<84>";
+	pop_err();
+	return t_y;
+}
+function bb_math_Min(t_x,t_y){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<51>";
+	if(t_x<t_y){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<51>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<52>";
+	pop_err();
+	return t_y;
+}
+function bb_math_Min2(t_x,t_y){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<78>";
+	if(t_x<t_y){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<78>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<79>";
+	pop_err();
+	return t_y;
+}
+function bb_graphics_Transform(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<649>";
+	var t_ix2=t_ix*dbg_object(bb_graphics_context).m_ix+t_iy*dbg_object(bb_graphics_context).m_jx;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<650>";
+	var t_iy2=t_ix*dbg_object(bb_graphics_context).m_iy+t_iy*dbg_object(bb_graphics_context).m_jy;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<651>";
+	var t_jx2=t_jx*dbg_object(bb_graphics_context).m_ix+t_jy*dbg_object(bb_graphics_context).m_jx;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<652>";
+	var t_jy2=t_jx*dbg_object(bb_graphics_context).m_iy+t_jy*dbg_object(bb_graphics_context).m_jy;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<653>";
+	var t_tx2=t_tx*dbg_object(bb_graphics_context).m_ix+t_ty*dbg_object(bb_graphics_context).m_jx+dbg_object(bb_graphics_context).m_tx;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<654>";
+	var t_ty2=t_tx*dbg_object(bb_graphics_context).m_iy+t_ty*dbg_object(bb_graphics_context).m_jy+dbg_object(bb_graphics_context).m_ty;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<655>";
+	bb_graphics_SetMatrix(t_ix2,t_iy2,t_jx2,t_jy2,t_tx2,t_ty2);
+	pop_err();
+	return 0;
+}
+function bb_graphics_Transform2(t_m){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<645>";
+	bb_graphics_Transform(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
+	pop_err();
+	return 0;
+}
+function bb_graphics_Scale(t_x,t_y){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
+	bb_graphics_Transform(t_x,0.0,0.0,t_y,0.0,0.0);
+	pop_err();
+	return 0;
+}
+function bb_graphics_Translate(t_x,t_y){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<659>";
+	bb_graphics_Transform(1.0,0.0,0.0,1.0,t_x,t_y);
+	pop_err();
+	return 0;
+}
+function bb_autofit_UpdateVirtualDisplay(t_zoomborders,t_keepborders){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/autofit.cxs<144>";
+	c_VirtualDisplay.m_Display.p_UpdateVirtualDisplay(t_zoomborders,t_keepborders);
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawImageRect(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<874>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
 	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
 		error("Invalid image frame");
 	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
-	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+		error("Invalid image rectangle");
 	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<879>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<881>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<883>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,-dbg_object(t_image).m_tx+t_x,-dbg_object(t_image).m_ty+t_y,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
 	pop_err();
 	return 0;
 }
@@ -4574,50 +6875,10 @@ function bb_graphics_PushMatrix(){
 	pop_err();
 	return 0;
 }
-function bb_graphics_Transform(t_ix,t_iy,t_jx,t_jy,t_tx,t_ty){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<649>";
-	var t_ix2=t_ix*dbg_object(bb_graphics_context).m_ix+t_iy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<650>";
-	var t_iy2=t_ix*dbg_object(bb_graphics_context).m_iy+t_iy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<651>";
-	var t_jx2=t_jx*dbg_object(bb_graphics_context).m_ix+t_jy*dbg_object(bb_graphics_context).m_jx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<652>";
-	var t_jy2=t_jx*dbg_object(bb_graphics_context).m_iy+t_jy*dbg_object(bb_graphics_context).m_jy;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<653>";
-	var t_tx2=t_tx*dbg_object(bb_graphics_context).m_ix+t_ty*dbg_object(bb_graphics_context).m_jx+dbg_object(bb_graphics_context).m_tx;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<654>";
-	var t_ty2=t_tx*dbg_object(bb_graphics_context).m_iy+t_ty*dbg_object(bb_graphics_context).m_jy+dbg_object(bb_graphics_context).m_ty;
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<655>";
-	bb_graphics_SetMatrix(t_ix2,t_iy2,t_jx2,t_jy2,t_tx2,t_ty2);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Transform2(t_m){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<645>";
-	bb_graphics_Transform(dbg_array(t_m,0)[dbg_index],dbg_array(t_m,1)[dbg_index],dbg_array(t_m,2)[dbg_index],dbg_array(t_m,3)[dbg_index],dbg_array(t_m,4)[dbg_index],dbg_array(t_m,5)[dbg_index]);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Translate(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<659>";
-	bb_graphics_Transform(1.0,0.0,0.0,1.0,t_x,t_y);
-	pop_err();
-	return 0;
-}
 function bb_graphics_Rotate(t_angle){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<667>";
 	bb_graphics_Transform(Math.cos((t_angle)*D2R),-Math.sin((t_angle)*D2R),Math.sin((t_angle)*D2R),Math.cos((t_angle)*D2R),0.0,0.0);
-	pop_err();
-	return 0;
-}
-function bb_graphics_Scale(t_x,t_y){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<663>";
-	bb_graphics_Transform(t_x,0.0,0.0,t_y,0.0,0.0);
 	pop_err();
 	return 0;
 }
@@ -4629,6 +6890,183 @@ function bb_graphics_PopMatrix(){
 	bb_graphics_SetMatrix(dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+0)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+1)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+2)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+3)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+4)[dbg_index],dbg_array(dbg_object(bb_graphics_context).m_matrixStack,t_sp+5)[dbg_index]);
 	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<641>";
 	dbg_object(bb_graphics_context).m_matrixSp=t_sp;
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawImageRect2(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_rotation,t_scaleX,t_scaleY,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<889>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
+	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
+		error("Invalid image frame");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+		error("Invalid image rectangle");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<894>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<896>";
+	bb_graphics_PushMatrix();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<898>";
+	bb_graphics_Translate(t_x,t_y);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<899>";
+	bb_graphics_Rotate(t_rotation);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<900>";
+	bb_graphics_Scale(t_scaleX,t_scaleY);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<901>";
+	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<903>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<905>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<907>";
+	bb_graphics_PopMatrix();
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawText(t_text,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<951>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<953>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<954>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<955>";
+	if(!((dbg_object(bb_graphics_context).m_font)!=null)){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<957>";
+	t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<958>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text)*t_yhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<961>";
+		var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+		if(!((t_tmpChar2)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<963>";
+		bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<964>";
+		t_x+=dbg_object(t_tmpChar2).m_advance;
+	}
+	pop_err();
+}
+function bb_graphics_DrawText2(t_textLines,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<970>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<972>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<973>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<974>";
+	var t_currX=.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<975>";
+	var t_text="";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<977>";
+	var t_linesCount=t_textLines.length;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<979>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight("")*t_yhandle*(t_linesCount))|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<980>";
+	t_currX=(t_x);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<982>";
+	for(var t__y=1;t__y<=t_linesCount;t__y=t__y+1){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<983>";
+		t_text=dbg_array(t_textLines,t__y-1)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<984>";
+		t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_=t_text;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_2=0;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		while(t_2<t_.length){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_char=dbg_charCodeAt(t_,t_2);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_2=t_2+1;
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<986>";
+			var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+			if(!((t_tmpChar2)!=null)){
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+				continue;
+			}
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<988>";
+			bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<989>";
+			t_x+=dbg_object(t_tmpChar2).m_advance;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<991>";
+		t_y=(((t_y)+dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text))|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<992>";
+		t_x=((t_currX)|0);
+	}
+	pop_err();
+}
+function bb_graphics_DrawLine(t_x1,t_y1,t_x2,t_y2){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<714>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<716>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<717>";
+	bb_graphics_renderDevice.DrawLine(t_x1,t_y1,t_x2,t_y2);
+	pop_err();
+	return 0;
+}
+function bb_rendergame_DrawCursor(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<5>";
+	bb_graphics_SetColor(255.0,255.0,255.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<6>";
+	bb_graphics_DrawLine(dbg_object(bb_rockout_RockOut).m_mx-8.0,dbg_object(bb_rockout_RockOut).m_my,dbg_object(bb_rockout_RockOut).m_mx+8.0,dbg_object(bb_rockout_RockOut).m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<7>";
+	bb_graphics_DrawLine(dbg_object(bb_rockout_RockOut).m_mx,dbg_object(bb_rockout_RockOut).m_my-8.0,dbg_object(bb_rockout_RockOut).m_mx,dbg_object(bb_rockout_RockOut).m_my+8.0);
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+		error("Invalid image frame");
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
+	if((dbg_object(t_image).m_flags&65536)!=0){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
+		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
+	}else{
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
+		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
+	}
 	pop_err();
 	return 0;
 }
@@ -4668,10 +7106,108 @@ function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_f
 	pop_err();
 	return 0;
 }
+function bb_rendergame_RenderGame(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<12>";
+	bb_graphics_Cls(32.0,64.0,128.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<14>";
+	c_Block.m_Render();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<15>";
+	c_Shot.m_Render();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<16>";
+	c_ScoreBubble.m_Render();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<18>";
+	bb_rendergame_DrawCursor();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<20>";
+	c_Session.m_Player.p_Render();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<22>";
+	bb_graphics_DrawText("Shields: "+String(c_Session.m_Player.p_Shields()),20,20,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<23>";
+	bb_graphics_DrawText("Score:   "+String(c_Session.m_Score),20,40,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<24>";
+	bb_graphics_DrawText("Level: "+c_Level.m_Name,20,80,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<26>";
+	bb_graphics_DrawText("Use LEFT/RIGHT and ENTER to zoom",20,60,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<28>";
+	bb_graphics_DrawText("Update rate (UP/DOWN to change): "+String(bb_game_UPDATE_RATE),20,((bb_autofit_VDeviceHeight()-40.0)|0),0.0,0.0);
+	pop_err();
+	return 0;
+}
+function bb_functions_CenterStringX(t_str){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<5>";
+	var t_=bb_autofit_VDeviceWidth()*0.5-(t_str.length*8)*0.5;
+	pop_err();
+	return t_;
+}
+function bb_functions_CenterStringY(t_str){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<9>";
+	var t_=bb_autofit_VDeviceHeight()*0.5-6.0;
+	pop_err();
+	return t_;
+}
+function bb_functions_CenterText(t_str){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/functions.cxs<13>";
+	bb_graphics_DrawText(t_str,((bb_functions_CenterStringX(t_str))|0),((bb_functions_CenterStringY(t_str))|0),0.0,0.0);
+	pop_err();
+	return 0;
+}
+function bb_rendergame_RenderStates(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<38>";
+	bb_autofit_UpdateVirtualDisplay(true,true);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<44>";
+	var t_1=c_Session.m_GameState;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<50>";
+	if(t_1==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<52>";
+		bb_graphics_Cls(32.0,64.0,128.0);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<56>";
+		dbg_object(bb_rockout_RockOut).m_temp.p_Draw();
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<58>";
+		bb_rendergame_DrawCursor();
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<64>";
+		if(t_1==4){
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<72>";
+			if(t_1==2){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<74>";
+				bb_rendergame_RenderGame();
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<83>";
+				if(t_1==3){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<85>";
+					bb_rendergame_RenderGame();
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<86>";
+					bb_functions_CenterText("Paused - Press P to continue");
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<92>";
+					if(t_1==5){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<94>";
+						bb_rendergame_RenderGame();
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<95>";
+						bb_functions_CenterText("Game over! Click to play again...");
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<97>";
+						bb_rendergame_DrawCursor();
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/rockout/imports/rendergame.cxs<105>";
+						bb_graphics_Cls(1.0,0.0,0.0);
+					}
+				}
+			}
+		}
+	}
+	pop_err();
+	return 0;
+}
 function bbInit(){
 	bb_app__app=null;
 	bb_app__delegate=null;
 	bb_app__game=BBGame.Game();
+	bb_rockout_RockOut=null;
 	bb_graphics_device=null;
 	bb_graphics_context=c_GraphicsContext.m_new.call(new c_GraphicsContext);
 	c_Image.m_DefaultFlags=0;
@@ -4682,6 +7218,30 @@ function bbInit(){
 	bb_app__displayModes=[];
 	bb_app__desktopMode=null;
 	bb_graphics_renderDevice=null;
+	c_VirtualDisplay.m_Display=null;
+	bb_defaultmedia_DEFAULT_PLAYER=null;
+	bb_defaultmedia_DEFAULT_SHOT=null;
+	bb_defaultmedia_DEFAULT_BLOCK=null;
+	c_Session.m_CurrentLevel=null;
+	c_Level.m_Number=0;
+	c_Session.m_Score=0;
+	c_Level.m_Gravity=.0;
+	c_Session.m_Player=null;
+	c_Timer.m_NewGame=null;
+	bb_session_GameSession=null;
+	c_Session.m_GameState=0;
+	bb_game_UPDATE_RATE=60;
 	bb_app__updateRate=0;
+	c_Level.m_Shots=null;
+	c_Level.m_Blocks=null;
+	c_Level.m_FallingBlocks=null;
+	c_Level.m_ScoreBubbles=null;
+	c_Timer.m_ShotReload=null;
+	c_Level.m_Name="";
+	c_Level.m_StartLine=0;
+	c_Level.m_Graphics="";
+	bb_random_Seed=1234;
+	c_Shot.m_ReloadDelay=0;
+	c_Shot.m_FirstShot=0;
 }
 //${TRANSCODE_END}

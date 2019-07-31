@@ -1,5 +1,5 @@
+Import ballBounce
 
-Import mojo
 
 Class Level
 
@@ -19,7 +19,7 @@ Class Level
 
 	Method New ()
 	
-		Shots		         = New List <Shot>
+		Shots				= New List <Shot>
 		Blocks			= New List <Block>
 		FallingBlocks		= New List <Block>
 	
@@ -84,20 +84,6 @@ End
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Function Main()
+	
+End

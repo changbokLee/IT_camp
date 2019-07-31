@@ -23,7 +23,7 @@ CFG_TEXT_FILES="*.txt|*.xml|*.json";
 //${CONFIG_END}
 
 //${METADATA_BEGIN}
-var META_DATA="[player.png];type=image/png;width=256;height=256;\n[mojo_font.png];type=image/png;width=864;height=13;\n";
+var META_DATA="[mojo_font.png];type=image/png;width=864;height=13;\n";
 //${METADATA_END}
 
 //${TRANSCODE_BEGIN}
@@ -2347,49 +2347,959 @@ c_App.prototype.p_OnBack=function(){
 	pop_err();
 	return 0;
 }
-function c_RocketGame(){
+function c_BrickGame(){
 	c_App.call(this);
-	this.m_player=null;
-	this.m_mx=.0;
-	this.m_my=.0;
+	this.m_bulletActive=new_bool_array(100);
+	this.m_board=new_number_array(390);
+	this.m_level=1;
+	this.m_ballStickOnBrick=true;
+	this.m_canShoot=true;
+	this.m_ballBatBounce=0;
+	this.m_batWidth=64;
+	this.m_batX=0;
+	this.m_batY=456;
+	this.m_ballX=207.3047;
+	this.m_ballRadius=5;
+	this.m_ballY=81.5195;
+	this.m_prevBallX=0.0;
+	this.m_prevBallY=0.0;
+	this.m_ballVelX=0.8;
+	this.m_ballVelY=-3.9192;
+	this.m_explodeWaitTime=0;
+	this.m_waitExplodeFlag=0;
+	this.m_bulletX=new_number_array(100);
+	this.m_bulletY=new_number_array(100);
+	this.m_batHeight=16;
+	this.m_AnimTime=0;
 }
-c_RocketGame.prototype=extend_class(c_App);
-c_RocketGame.m_new=function(){
+c_BrickGame.prototype=extend_class(c_App);
+c_BrickGame.m_new=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<4>";
 	c_App.m_new.call(this);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<6>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<4>";
 	pop_err();
 	return this;
 }
-c_RocketGame.prototype.p_OnCreate=function(){
+c_BrickGame.prototype.p_CopyBoard=function(t_lvl){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<19>";
-	this.m_player=c_Rocket.m_new.call(new c_Rocket);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<23>";
-	dbg_object(this.m_player).m_image=bb_graphics_LoadImage("player.png",1,1);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<27>";
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<92>";
+	var t_i=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<94>";
+	for(t_i=0;t_i<this.m_board.length;t_i=t_i+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<95>";
+		dbg_array(this.m_board,t_i)[dbg_index]=0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<98>";
+	for(t_i=0;t_i<t_lvl.length;t_i=t_i+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<99>";
+		dbg_array(this.m_board,t_i)[dbg_index]=dbg_array(t_lvl,t_i)[dbg_index];
+	}
+	pop_err();
+}
+c_BrickGame.prototype.p_SetupBoard=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<106>";
+	var t_i=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<107>";
+	var t_j=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<109>";
+	for(t_i=0;t_i<100;t_i=t_i+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<110>";
+		dbg_array(this.m_bulletActive,t_i)[dbg_index]=false;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<113>";
+	for(t_i=0;t_i<390;t_i=t_i+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<114>";
+		dbg_array(this.m_board,t_i)[dbg_index]=0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<117>";
+	var t_1=this.m_level;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<118>";
+	if(t_1==1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<119>";
+		for(t_i=0;t_i<13;t_i=t_i+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<120>";
+			dbg_array(this.m_board,39+t_i)[dbg_index]=10;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<121>";
+			dbg_array(this.m_board,52+t_i)[dbg_index]=15;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<122>";
+			dbg_array(this.m_board,65+t_i)[dbg_index]=5;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<123>";
+			dbg_array(this.m_board,78+t_i)[dbg_index]=6;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<124>";
+			dbg_array(this.m_board,91+t_i)[dbg_index]=2;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<125>";
+			dbg_array(this.m_board,104+t_i)[dbg_index]=15;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<126>";
+			dbg_array(this.m_board,117+t_i)[dbg_index]=14;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<127>";
+			dbg_array(this.m_board,130+t_i)[dbg_index]=4;
+		}
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<129>";
+		if(t_1==2){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<145>";
+			var t_level=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,15,2,0,0,0,0,0,0,0,0,0,0,0,1,15,3,0,0,0,0,0,0,0,0,0,0,1,2,15,4,0,0,0,0,0,0,0,0,0,1,2,3,15,5,0,0,0,0,0,0,0,0,1,2,3,4,15,6,0,0,0,0,0,0,0,1,2,3,4,5,15,7,0,0,0,0,0,0,1,2,3,4,5,6,15,8,0,0,0,0,0,1,2,3,4,5,6,7,8,7,0,0,0,0,1,2,3,4,5,6,7,8,7,6,0,0,0,1,2,3,4,5,6,7,8,7,6,5,0,0,15,15,15,15,15,15,15,15,15,15,15,15,15,12,12,12,12,12,12,12,12,12,12,12,12,12];
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<146>";
+			this.p_CopyBoard(t_level);
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<147>";
+			if(t_1==3){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<166>";
+				var t_level2=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,7,4,3,6,0,5,7,4,3,6,0,0,15,5,7,4,3,0,15,5,7,4,3,0,0,5,15,5,7,4,0,5,15,5,7,4,0,0,7,5,15,5,7,0,7,5,15,5,7,0,0,4,7,5,15,5,0,4,7,5,15,5,0,0,3,4,7,5,15,0,3,4,7,5,15,0,0,6,3,4,7,5,0,6,3,4,7,5,0,0,6,3,4,7,5,0,6,3,4,7,5,0,0,3,4,7,5,15,0,3,4,7,5,15,0,0,4,7,5,15,5,0,4,7,5,15,5,0,0,7,5,15,5,7,0,7,5,15,5,7,0,0,5,15,5,7,4,0,5,15,5,7,4,0,0,15,5,7,4,3,0,15,5,7,4,3,0,0,5,7,4,3,6,0,5,7,4,3,6,0];
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<167>";
+				this.p_CopyBoard(t_level2);
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<168>";
+				if(t_1==4){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<185>";
+					var t_level3=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,5,7,4,3,0,0,0,0,0,0,0,7,5,15,15,15,6,3,0,0,0,0,0,0,5,15,4,3,6,15,4,0,0,0,0,0,5,7,15,3,6,3,15,7,5,0,0,0,0,7,15,3,6,3,4,7,15,7,0,0,0,0,4,15,6,3,4,7,5,7,4,0,0,0,0,3,15,3,4,7,5,7,4,3,0,0,0,0,6,15,4,7,15,7,4,3,6,0,0,0,0,3,15,7,5,7,15,3,6,3,0,0,0,0,4,15,5,7,4,3,15,3,4,0,0,0,0,7,5,7,4,3,6,3,15,7,0,0,0,0,0,7,4,3,6,3,4,7,0,0,0,0,0,0,4,3,6,3,4,7,5,0,0,0,0,0,0,0,6,3,4,7,5,0,0,0,0];
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<186>";
+					this.p_CopyBoard(t_level3);
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<187>";
+					if(t_1==5){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<202>";
+						var t_level4=[0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,4,7,5,0,0,0,0,0,0,0,0,0,4,7,15,7,4,0,0,0,0,0,0,0,4,7,15,7,15,3,6,0,0,0,0,0,0,0,5,7,15,3,6,0,0,0,0,0,0,0,0,0,4,3,6,0,6,0,0,0,0,0,0,0,0,0,6,0,6,3,4,0,0,0,0,0,5,0,0,0,6,3,15,7,5,0,0,0,5,7,4,0,6,3,15,7,15,7,5,0,5,7,15,3,6,0,4,7,15,7,5,0,5,7,15,3,15,3,4,0,5,7,5,0,0,0,4,3,15,3,4,0,0,0,5,0,0,0,0,0,6,3,4,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0];
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<203>";
+						this.p_CopyBoard(t_level4);
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<204>";
+						if(t_1==6){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<219>";
+							var t_level5=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,9,0,0,0,0,15,15,15,15,9,15,15,15,15,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,7,4,3,6,9,5,7,4,3,0,0,0,0,15,15,15,15,9,15,15,15,15,0,0,0,0,9,9,9,9,9,9,9,9,9,0,0];
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<220>";
+							this.p_CopyBoard(t_level5);
+						}else{
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<221>";
+							if(t_1==7){
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<237>";
+								var t_level6=[0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,7,15,3,0,0,0,0,0,0,0,0,0,0,7,15,3,0,0,0,0,0,0,0,0,0,5,7,15,3,6,0,0,0,0,0,0,0,0,5,7,15,3,6,0,0,0,0,0,0,0,7,5,15,15,15,6,3,0,0,0,0,0,0,7,5,15,4,15,6,3,0,0,0,0,0,4,7,15,7,4,3,15,3,4,0,0,0,0,4,7,15,7,4,3,15,3,4,0,0,0,3,4,15,5,7,4,3,6,15,4,7,0,0,3,4,15,5,7,4,3,6,15,4,7,0,6,3,15,7,5,7,4,3,6,3,15,7,5,6,3,15,7,5,7,4,3,6,3,15,7,5,12,12,12,12,12,12,12,12,12,12,12,12,12];
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<238>";
+								this.p_CopyBoard(t_level6);
+							}else{
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<239>";
+								if(t_1==8){
+									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<254>";
+									var t_level7=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,5,5,5,5,4,15,4,4,15,4,4,4,15,4,4,15,4,6,6,15,15,6,15,6,15,6,15,15,6,6,9,9,9,9,9,5,15,5,9,9,9,9,9,9,4,4,4,9,13,13,13,9,4,4,4,9,9,5,5,5,9,0,0,0,9,6,6,6,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,0,0,9,9,0,0,0,9,15,15,15,9,0,0,0,9,9,13,13,13,9,9,9,9,9,13,13,13,9];
+									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<255>";
+									this.p_CopyBoard(t_level7);
+								}else{
+									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<256>";
+									if(t_1==9){
+										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<275>";
+										var t_level8=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0,5,5,5,0,5,5,5,0,0,7,15,7,0,7,15,7,0,7,15,7,0,0,4,15,4,0,4,15,4,0,4,15,4,0,0,3,15,3,0,3,15,3,0,3,15,3,0,0,6,15,6,0,6,15,6,0,6,15,6,0,0,3,3,3,0,3,3,3,0,3,3,3,0,0,4,4,4,0,4,4,4,0,4,4,4,0,0,7,7,7,0,7,7,7,0,7,7,7,0,0,5,15,5,0,5,15,5,0,5,15,5,0,0,7,15,7,0,7,15,7,0,7,15,7,0,0,4,15,4,0,4,15,4,0,4,15,4,0,0,3,15,3,0,3,15,3,0,3,15,3,0,0,6,6,6,0,6,6,6,0,6,6,6,0,0,3,3,3,0,3,3,3,0,3,3,3,0];
+										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<276>";
+										this.p_CopyBoard(t_level8);
+									}else{
+										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<277>";
+										if(t_1==10){
+											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<292>";
+											var t_level9=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,15,15,4,9,0,9,4,15,15,15,15,4,4,4,4,4,9,0,9,4,4,4,4,4,12,12,12,12,12,9,0,9,12,12,12,12,12,7,7,7,7,7,9,0,9,7,7,7,7,7,5,15,5,15,5,9,0,9,5,15,5,15,5,7,15,7,15,7,9,0,9,7,15,7,15,7,4,4,15,4,4,9,0,9,4,4,15,4,4,3,15,3,15,3,9,0,9,3,15,3,15,3,6,15,6,15,6,9,0,9,6,15,6,15,6,3,3,3,3,3,9,0,9,3,3,3,3,3];
+											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<293>";
+											this.p_CopyBoard(t_level9);
+										}else{
+											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<295>";
+											for(t_j=0;t_j<13;t_j=t_j+1){
+												err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<296>";
+												for(t_i=0;t_i<13;t_i=t_i+1){
+													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<297>";
+													var t_brick=((bb_random_Rnd3(15.0)+1.0)|0);
+													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<298>";
+													if(t_brick==9){
+														err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<299>";
+														t_brick=15;
+													}
+													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<301>";
+													dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=t_brick;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<306>";
+	this.m_ballStickOnBrick=true;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<307>";
+	this.m_canShoot=false;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<308>";
+	this.m_ballBatBounce=0;
+	pop_err();
+}
+c_BrickGame.prototype.p_OnCreate=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<86>";
 	bb_app_SetUpdateRate(60);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<87>";
+	this.p_SetupBoard();
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnUpdate=function(){
+c_BrickGame.prototype.p_CountBrick=function(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<35>";
-	this.m_mx=bb_input_MouseX();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<36>";
-	this.m_my=bb_input_MouseY();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<38>";
-	this.m_player.p_MovePlayer(this.m_mx,this.m_my);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<683>";
+	var t_i=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<684>";
+	var t_j=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<685>";
+	var t_c=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<687>";
+	for(t_j=0;t_j<30;t_j=t_j+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<688>";
+		for(t_i=0;t_i<13;t_i=t_i+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<689>";
+			var t_brick=dbg_array(this.m_board,t_j*13+t_i)[dbg_index];
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<690>";
+			if(t_brick!=9 && t_brick!=0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<691>";
+				t_c+=1;
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<696>";
+	pop_err();
+	return t_c;
+}
+c_BrickGame.prototype.p_CheckBrickExplode=function(t_i,t_j){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<367>";
+	if(t_i<0){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<371>";
+	if(t_j<0){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<375>";
+	if(t_i>=13){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<379>";
+	if(t_j>=30){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<383>";
+	var t_3=dbg_array(this.m_board,t_j*13+t_i)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<384>";
+	if(t_3==15){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<385>";
+		var t_flag=1-this.m_waitExplodeFlag;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<386>";
+		dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=200+t_flag;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<387>";
+		if(t_3==200){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<388>";
+			dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=200;
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<389>";
+			if(t_3==201){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<390>";
+				dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=201;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<392>";
+				dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=100;
+			}
+		}
+	}
+	pop_err();
+}
+c_BrickGame.prototype.p_BallBrickCollide=function(t_ballX,t_ballY,t_brickX1,t_brickY1,t_brickX2,t_brickY2){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<315>";
+	if(t_ballX>=t_brickX1 && t_ballX<=t_brickX2 && t_ballY>=t_brickY1 && t_ballY<=t_brickY2){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<317>";
+		pop_err();
+		return true;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<321>";
+	pop_err();
+	return false;
+}
+c_BrickGame.prototype.p_CheckBrick=function(t_i,t_j){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<327>";
+	if(t_i<0){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<331>";
+	if(t_j<0){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<335>";
+	if(t_i>=13){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<339>";
+	if(t_j>=30){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<343>";
+	var t_2=dbg_array(this.m_board,t_j*13+t_i)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<344>";
+	if(t_2==9){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<345>";
+		dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=9;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<346>";
+		if(t_2==13){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<347>";
+			dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=14;
+		}else{
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<348>";
+			if(t_2==12){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<349>";
+				dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=11;
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<350>";
+				if(t_2==11){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<351>";
+					dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=10;
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<352>";
+					if(t_2==15){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<353>";
+						var t_flag=1-this.m_waitExplodeFlag;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<354>";
+						dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=200+t_flag;
+					}else{
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<355>";
+						if(t_2==200){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<356>";
+							dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=200;
+						}else{
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<357>";
+							if(t_2==201){
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<358>";
+								dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=201;
+							}else{
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<360>";
+								dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=100;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	pop_err();
+}
+c_BrickGame.prototype.p_OnUpdate=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<399>";
+	if((bb_input_KeyHit(82))!=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<400>";
+		this.p_SetupBoard();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<403>";
+	var t_countBrick=this.p_CountBrick();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<405>";
+	if(t_countBrick<=0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<406>";
+		this.m_level+=1;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<407>";
+		this.p_SetupBoard();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<410>";
+	if(t_countBrick<=30){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<411>";
+		this.m_canShoot=true;
+	}else{
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<413>";
+		this.m_canShoot=false;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<416>";
+	this.m_batX=((bb_input_MouseX()-((this.m_batWidth/2)|0))|0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<417>";
+	this.m_batY=456;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<419>";
+	if(this.m_batX<=16){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<420>";
+		this.m_batX=16;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<423>";
+	if(this.m_batX>=432-this.m_batWidth){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<424>";
+		this.m_batX=432-this.m_batWidth;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<427>";
+	if(this.m_ballStickOnBrick==true){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<429>";
+		this.m_ballX=(this.m_batX+((this.m_batWidth*3/4)|0));
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<430>";
+		this.m_ballY=(this.m_batY-this.m_ballRadius);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<432>";
+		if((bb_input_MouseHit(0))!=0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<433>";
+			this.m_ballStickOnBrick=false;
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<436>";
+		pop_err();
+		return 0;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<440>";
+	this.m_prevBallX=this.m_ballX;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<441>";
+	this.m_prevBallY=this.m_ballY;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<443>";
+	this.m_ballX+=this.m_ballVelX;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<444>";
+	this.m_ballY+=this.m_ballVelY;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<446>";
+	if(this.m_ballX-(this.m_ballRadius)<=16.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<447>";
+		if(this.m_ballVelX<0.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<448>";
+			this.m_ballVelX=-this.m_ballVelX;
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<451>";
+	if(this.m_ballX+(this.m_ballRadius)>=432.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<452>";
+		if(this.m_ballVelX>0.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<453>";
+			this.m_ballVelX=-this.m_ballVelX;
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<456>";
+	if(this.m_ballY-(this.m_ballRadius)<=16.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<457>";
+		if(this.m_ballVelY<0.0){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<458>";
+			this.m_ballVelY=-this.m_ballVelY;
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<461>";
+	if(this.m_ballY>=480.0){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<462>";
+		this.p_SetupBoard();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<465>";
+	if(bb_app_Millisecs()-this.m_explodeWaitTime>100){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<466>";
+		for(var t_j=0;t_j<30;t_j=t_j+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<467>";
+			for(var t_i=0;t_i<13;t_i=t_i+1){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<468>";
+				if(dbg_array(this.m_board,t_j*13+t_i)[dbg_index]==200+this.m_waitExplodeFlag){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<470>";
+					dbg_array(this.m_board,t_j*13+t_i)[dbg_index]=100;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<472>";
+					this.p_CheckBrickExplode(t_i-1,t_j-1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<473>";
+					this.p_CheckBrickExplode(t_i,t_j-1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<474>";
+					this.p_CheckBrickExplode(t_i+1,t_j-1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<476>";
+					this.p_CheckBrickExplode(t_i-1,t_j);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<477>";
+					this.p_CheckBrickExplode(t_i+1,t_j);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<479>";
+					this.p_CheckBrickExplode(t_i-1,t_j+1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<480>";
+					this.p_CheckBrickExplode(t_i,t_j+1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<481>";
+					this.p_CheckBrickExplode(t_i+1,t_j+1);
+				}
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<486>";
+		this.m_waitExplodeFlag=1-this.m_waitExplodeFlag;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<487>";
+		this.m_explodeWaitTime=bb_app_Millisecs();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<490>";
+	if(this.m_canShoot==true){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<492>";
+		if(bb_input_MouseHit(0)==1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<494>";
+			for(var t_j2=0;t_j2<2;t_j2=t_j2+1){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<496>";
+				var t_found=-1;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<498>";
+				for(var t_i2=0;t_i2<100;t_i2=t_i2+1){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<499>";
+					if(dbg_array(this.m_bulletActive,t_i2)[dbg_index]==false){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<500>";
+						t_found=t_i2;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<501>";
+						break;
+					}
+				}
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<505>";
+				if(t_found>=0 && t_found<100){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<507>";
+					dbg_array(this.m_bulletActive,t_found)[dbg_index]=true;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<508>";
+					dbg_array(this.m_bulletX,t_found)[dbg_index]=this.m_batX+t_j2*this.m_batWidth+3-t_j2*2*3;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<509>";
+					dbg_array(this.m_bulletY,t_found)[dbg_index]=this.m_batY-4;
+				}
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<519>";
+	for(var t_k=0;t_k<100;t_k=t_k+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<520>";
+		if(dbg_array(this.m_bulletActive,t_k)[dbg_index]==true){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<521>";
+			dbg_array(this.m_bulletY,t_k)[dbg_index]-=4;
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<522>";
+			if(dbg_array(this.m_bulletY,t_k)[dbg_index]<0){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<523>";
+				dbg_array(this.m_bulletActive,t_k)[dbg_index]=false;
+			}
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<525>";
+			for(var t_j3=0;t_j3<30;t_j3=t_j3+1){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<527>";
+				for(var t_i3=0;t_i3<13;t_i3=t_i3+1){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<529>";
+					var t_brick=dbg_array(this.m_board,t_j3*13+t_i3)[dbg_index];
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<531>";
+					if(t_brick!=0 && t_brick<100){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<533>";
+						var t_brickLeft=t_i3*32+16;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<534>";
+						var t_brickRight=t_brickLeft+32-1;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<535>";
+						var t_brickTop=t_j3*16+16;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<536>";
+						var t_brickBottom=t_brickTop+16-1;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<538>";
+						if(this.p_BallBrickCollide((dbg_array(this.m_bulletX,t_k)[dbg_index]),(dbg_array(this.m_bulletY,t_k)[dbg_index]),(t_brickLeft),(t_brickTop),(t_brickRight),(t_brickBottom))==true){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<539>";
+							this.p_CheckBrick(t_i3,t_j3);
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<540>";
+							dbg_array(this.m_bulletActive,t_k)[dbg_index]=false;
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<541>";
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<550>";
+	if(this.m_ballX>(this.m_batX) && this.m_ballX<(this.m_batX+this.m_batWidth) && this.m_ballY+(this.m_ballRadius)>(this.m_batY) && this.m_ballY+(this.m_ballRadius)<(this.m_batY+this.m_batHeight)){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<552>";
+		var t_w2=((this.m_batWidth/2)|0);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<554>";
+		this.m_ballVelX=(this.m_ballX-(this.m_batX)-t_w2)/t_w2;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<555>";
+		if(bb_math_Abs2(this.m_ballVelX)<0.2){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<556>";
+			this.m_ballVelX=0.2*bb_math_Sgn2(this.m_ballVelX);
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<558>";
+		if(bb_math_Abs2(this.m_ballVelX)>0.9){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<559>";
+			this.m_ballVelX=0.9*bb_math_Sgn2(this.m_ballVelX);
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<562>";
+		this.m_ballVelY=-Math.sqrt(1.0-this.m_ballVelX*this.m_ballVelX);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<564>";
+		this.m_ballVelX=this.m_ballVelX*4.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<565>";
+		this.m_ballVelY=this.m_ballVelY*4.0;
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<567>";
+		this.m_ballBatBounce+=1;
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<570>";
+	if(bb_app_Millisecs()-this.m_AnimTime>20){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<572>";
+		for(var t_j4=0;t_j4<30;t_j4=t_j4+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<574>";
+			for(var t_i4=0;t_i4<13;t_i4=t_i4+1){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<576>";
+				var t_brick2=dbg_array(this.m_board,t_j4*13+t_i4)[dbg_index];
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<578>";
+				if(t_brick2!=200 && t_brick2!=201){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<579>";
+					if(t_brick2>=100){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<580>";
+						if(t_brick2>=109){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<581>";
+							dbg_array(this.m_board,t_j4*13+t_i4)[dbg_index]=0;
+						}else{
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<583>";
+							dbg_array(this.m_board,t_j4*13+t_i4)[dbg_index]+=1;
+						}
+					}
+				}
+			}
+		}
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<592>";
+		this.m_AnimTime=bb_app_Millisecs();
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<596>";
+	for(var t_j5=0;t_j5<30;t_j5=t_j5+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<598>";
+		for(var t_i5=0;t_i5<13;t_i5=t_i5+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<600>";
+			var t_brick3=dbg_array(this.m_board,t_j5*13+t_i5)[dbg_index];
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<602>";
+			if(t_brick3!=0 && t_brick3<100){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<604>";
+				var t_brickLeft2=t_i5*32+16;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<605>";
+				var t_brickRight2=t_brickLeft2+32-1;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<606>";
+				var t_brickTop2=t_j5*16+16;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<607>";
+				var t_brickBottom2=t_brickTop2+16-1;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<609>";
+				var t_hit=false;
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<611>";
+				if(this.m_ballVelX<0.0 && this.p_BallBrickCollide(this.m_ballX-(this.m_ballRadius),this.m_ballY,(t_brickLeft2),(t_brickTop2),(t_brickRight2),(t_brickBottom2))==true){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<613>";
+					this.p_CheckBrick(t_i5,t_j5);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<614>";
+					this.m_ballVelX=-this.m_ballVelX;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<615>";
+					t_hit=true;
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<617>";
+					if(this.m_ballVelX>0.0 && this.p_BallBrickCollide(this.m_ballX+(this.m_ballRadius),this.m_ballY,(t_brickLeft2),(t_brickTop2),(t_brickRight2),(t_brickBottom2))==true){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<619>";
+						this.p_CheckBrick(t_i5,t_j5);
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<620>";
+						this.m_ballVelX=-this.m_ballVelX;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<621>";
+						t_hit=true;
+					}
+				}
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<625>";
+				if(this.m_ballVelY<0.0 && this.p_BallBrickCollide(this.m_ballX,this.m_ballY-(this.m_ballRadius),(t_brickLeft2),(t_brickTop2),(t_brickRight2),(t_brickBottom2))==true){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<627>";
+					this.p_CheckBrick(t_i5,t_j5);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<628>";
+					this.m_ballVelY=-this.m_ballVelY;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<629>";
+					t_hit=true;
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<631>";
+					if(this.m_ballVelY>0.0 && this.p_BallBrickCollide(this.m_ballX,this.m_ballY+(this.m_ballRadius),(t_brickLeft2),(t_brickTop2),(t_brickRight2),(t_brickBottom2))==true){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<633>";
+						this.p_CheckBrick(t_i5,t_j5);
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<634>";
+						this.m_ballVelY=-this.m_ballVelY;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<635>";
+						t_hit=true;
+					}
+				}
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<639>";
+				if(t_hit==true){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<641>";
+					this.m_ballX=this.m_prevBallX;
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<642>";
+					this.m_ballY=this.m_prevBallY;
+				}
+			}
+		}
+	}
 	pop_err();
 	return 0;
 }
-c_RocketGame.prototype.p_OnRender=function(){
+c_BrickGame.prototype.p_DrawGold=function(t_x,t_y){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<46>";
-	bb_graphics_Cls(32.0,64.0,128.0);
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<50>";
-	bb_graphics_DrawImage2(dbg_object(this.m_player).m_image,dbg_object(this.m_player).m_x,dbg_object(this.m_player).m_y,0.0,0.25,0.25,0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<663>";
+	bb_graphics_SetColor(255.0,192.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<664>";
+	bb_graphics_DrawRect((t_x+1),(t_y+1),30.0,4.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<665>";
+	bb_graphics_SetColor(255.0,255.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<666>";
+	bb_graphics_DrawRect((t_x+1),(t_y+1+4),30.0,6.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<667>";
+	bb_graphics_SetColor(255.0,128.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<668>";
+	bb_graphics_DrawRect((t_x+1),(t_y+1+10),30.0,4.0);
+	pop_err();
+}
+c_BrickGame.prototype.p_DrawBrick=function(t_x,t_y,t_border){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<657>";
+	bb_graphics_DrawRect((t_x+t_border),(t_y+t_border),(32-t_border*2),(16-t_border*2));
+	pop_err();
+}
+c_BrickGame.prototype.p_OnRender=function(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<702>";
+	var t_i=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<703>";
+	var t_j=0;
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<704>";
+	var t_countBrick=this.p_CountBrick();
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<706>";
+	bb_graphics_Cls(0.0,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<708>";
+	if(t_countBrick<=30){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<709>";
+		bb_graphics_DrawText("Brick Left: "+String(t_countBrick),240,340,0.5,0.0);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<710>";
+		bb_graphics_DrawText("Press left mouse button to shoot",240,360,0.5,0.0);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<714>";
+	bb_graphics_SetColor(128.0,128.0,128.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<715>";
+	bb_graphics_DrawRect(0.0,0.0,16.0,480.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<716>";
+	bb_graphics_DrawRect(0.0,0.0,448.0,16.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<717>";
+	bb_graphics_DrawRect(432.0,0.0,16.0,480.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<719>";
+	for(t_j=0;t_j<30;t_j=t_j+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<720>";
+		for(t_i=0;t_i<13;t_i=t_i+1){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<722>";
+			var t_brick=dbg_array(this.m_board,t_j*13+t_i)[dbg_index];
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<724>";
+			if(t_brick==9){
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<726>";
+				this.p_DrawGold(t_i*32+16,t_j*16+16);
+			}else{
+				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<728>";
+				if(t_brick==15){
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<730>";
+					bb_graphics_SetColor(255.0,128.0,0.0);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<731>";
+					this.p_DrawBrick(t_i*32+16,t_j*16+16,1);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<732>";
+					bb_graphics_SetColor(255.0,255.0,255.0);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<733>";
+					this.p_DrawBrick(t_i*32+16,t_j*16+16,3);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<734>";
+					bb_graphics_SetColor(255.0,128.0,0.0);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<735>";
+					this.p_DrawBrick(t_i*32+16,t_j*16+16,5);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<736>";
+					bb_graphics_SetColor(255.0,255.0,255.0);
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<737>";
+					this.p_DrawBrick(t_i*32+16,t_j*16+16,7);
+				}else{
+					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<739>";
+					if(t_brick!=0){
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<741>";
+						var t_4=t_brick;
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<742>";
+						if(t_4==1){
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<743>";
+							bb_graphics_SetColor(255.0,255.0,255.0);
+						}else{
+							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<744>";
+							if(t_4==2){
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<745>";
+								bb_graphics_SetColor(255.0,128.0,0.0);
+							}else{
+								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<746>";
+								if(t_4==3){
+									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<747>";
+									bb_graphics_SetColor(0.0,128.0,255.0);
+								}else{
+									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<748>";
+									if(t_4==4){
+										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<749>";
+										bb_graphics_SetColor(0.0,255.0,0.0);
+									}else{
+										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<750>";
+										if(t_4==5){
+											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<751>";
+											bb_graphics_SetColor(255.0,0.0,0.0);
+										}else{
+											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<752>";
+											if(t_4==6){
+												err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<753>";
+												bb_graphics_SetColor(0.0,0.0,255.0);
+											}else{
+												err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<754>";
+												if(t_4==7){
+													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<755>";
+													bb_graphics_SetColor(255.0,128.0,128.0);
+												}else{
+													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<756>";
+													if(t_4==8){
+														err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<757>";
+														bb_graphics_SetColor(0.0,255.0,255.0);
+													}else{
+														err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<758>";
+														if(t_4==9){
+															err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<759>";
+															bb_graphics_SetColor(255.0,192.0,0.0);
+														}else{
+															err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<760>";
+															if(t_4==10){
+																err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<761>";
+																bb_graphics_SetColor(192.0,192.0,192.0);
+															}else{
+																err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<762>";
+																if(t_4==11){
+																	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<763>";
+																	bb_graphics_SetColor(96.0,96.0,96.0);
+																}else{
+																	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<764>";
+																	if(t_4==12){
+																		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<765>";
+																		bb_graphics_SetColor(32.0,32.0,32.0);
+																	}else{
+																		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<766>";
+																		if(t_4==13){
+																			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<767>";
+																			bb_graphics_SetColor(0.0,0.0,0.0);
+																		}else{
+																			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<768>";
+																			if(t_4==14){
+																				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<769>";
+																				bb_graphics_SetColor(128.0,0.0,255.0);
+																			}else{
+																				err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<770>";
+																				if(t_4==15){
+																					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<771>";
+																					bb_graphics_SetColor(255.0,128.0+bb_random_Rnd3(48.0),bb_random_Rnd3(100.0));
+																				}else{
+																					err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<772>";
+																					if(t_4==109){
+																						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<773>";
+																						bb_graphics_SetColor(0.0,32.0,65.0);
+																					}else{
+																						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<774>";
+																						if(t_4==108){
+																							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<775>";
+																							bb_graphics_SetColor(0.0,44.0,89.0);
+																						}else{
+																							err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<776>";
+																							if(t_4==107){
+																								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<777>";
+																								bb_graphics_SetColor(0.0,56.0,113.0);
+																							}else{
+																								err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<778>";
+																								if(t_4==106){
+																									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<779>";
+																									bb_graphics_SetColor(0.0,69.0,134.0);
+																								}else{
+																									err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<780>";
+																									if(t_4==105){
+																										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<781>";
+																										bb_graphics_SetColor(0.0,81.0,158.0);
+																									}else{
+																										err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<782>";
+																										if(t_4==104){
+																											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<783>";
+																											bb_graphics_SetColor(0.0,93.0,182.0);
+																										}else{
+																											err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<784>";
+																											if(t_4==103){
+																												err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<785>";
+																												bb_graphics_SetColor(0.0,105.0,207.0);
+																											}else{
+																												err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<786>";
+																												if(t_4==102){
+																													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<787>";
+																													bb_graphics_SetColor(0.0,117.0,231.0);
+																												}else{
+																													err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<788>";
+																													if(t_4==101){
+																														err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<789>";
+																														bb_graphics_SetColor(0.0,130.0,255.0);
+																													}else{
+																														err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<790>";
+																														if(t_4==100){
+																															err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<791>";
+																															bb_graphics_SetColor(28.0,142.0,255.0);
+																														}else{
+																															err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<792>";
+																															if(t_4==200){
+																																err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<793>";
+																																bb_graphics_SetColor(28.0,142.0,255.0);
+																															}else{
+																																err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<794>";
+																																if(t_4==201){
+																																	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<795>";
+																																	bb_graphics_SetColor(28.0,142.0,255.0);
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<798>";
+						this.p_DrawBrick(t_i*32+16,t_j*16+16,1);
+					}
+				}
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<804>";
+	bb_graphics_SetColor(255.0,128.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<805>";
+	bb_graphics_DrawRect((this.m_batX),(this.m_batY),(this.m_batWidth),(this.m_batHeight));
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<807>";
+	if(this.m_canShoot==true){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<808>";
+		bb_graphics_SetColor(255.0,0.0,0.0);
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<809>";
+		bb_graphics_DrawRect((this.m_batX),(this.m_batY-1),6.0,(this.m_batHeight+2));
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<810>";
+		bb_graphics_DrawRect((this.m_batX+this.m_batWidth-6),(this.m_batY-1),6.0,(this.m_batHeight+2));
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<813>";
+	for(t_i=0;t_i<100;t_i=t_i+1){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<815>";
+		if(dbg_array(this.m_bulletActive,t_i)[dbg_index]==true){
+			err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<816>";
+			bb_graphics_DrawCircle((dbg_array(this.m_bulletX,t_i)[dbg_index]),(dbg_array(this.m_bulletY,t_i)[dbg_index]),3.0);
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<822>";
+	bb_graphics_SetColor(255.0,255.0,255.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<823>";
+	bb_graphics_DrawCircle(this.m_ballX,this.m_ballY,(this.m_ballRadius));
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<825>";
+	if(this.m_ballStickOnBrick==true){
+		err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<826>";
+		bb_graphics_DrawText("Level "+String(this.m_level),240,240,0.5,0.5);
+	}
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<829>";
+	bb_graphics_DrawText("Brick Left: "+String(t_countBrick),490,10,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<830>";
+	bb_graphics_DrawText("Ball Bat Bounce: "+String(this.m_ballBatBounce),490,30,0.0,0.0);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<831>";
+	bb_graphics_DrawText("R to Restart ",490,50,0.0,0.0);
 	pop_err();
 	return 0;
 }
@@ -2539,8 +3449,8 @@ var bb_app__delegate=null;
 var bb_app__game=null;
 function bbMain(){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<87>";
-	c_RocketGame.m_new.call(new c_RocketGame);
+	err_info="C:/IT_camp/Cerberus/examples/mojo/ferdi/breakout/breakout.cxs<842>";
+	c_BrickGame.m_new.call(new c_BrickGame);
 	pop_err();
 	return 0;
 }
@@ -2951,6 +3861,50 @@ c_Font.m_Load3=function(t_url){
 	var t_9=c_Font.m_new.call(new c_Font,t__pages,t__pageCount,t__charMap,-1,(t_lineHeight));
 	pop_err();
 	return t_9;
+}
+c_Font.prototype.p_GetGlyph=function(t_char){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<112>";
+	var t_=dbg_object(this).m__charMap.p_Get(t_char);
+	pop_err();
+	return t_;
+}
+c_Font.prototype.p_TextWidth=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<116>";
+	var t_w=0.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<117>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<118>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<119>";
+		var t_glyph=this.p_GetGlyph(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+		if(!((t_glyph)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<120>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<121>";
+		t_w=t_w+(dbg_object(t_glyph).m_advance);
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<123>";
+	pop_err();
+	return t_w;
+}
+c_Font.prototype.p_TextHeight=function(t_text){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<127>";
+	pop_err();
+	return this.m__height;
 }
 function c_GraphicsContext(){
 	Object.call(this);
@@ -3479,6 +4433,47 @@ c_Map.prototype.p_Add=function(t_key,t_value){
 	pop_err();
 	return true;
 }
+c_Map.prototype.p_FindNode=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<157>";
+	var t_node=this.m_root;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<159>";
+	while((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<160>";
+		var t_cmp=this.p_Compare(t_key,dbg_object(t_node).m_key);
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<161>";
+		if(t_cmp>0){
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<162>";
+			t_node=dbg_object(t_node).m_right;
+		}else{
+			err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<163>";
+			if(t_cmp<0){
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<164>";
+				t_node=dbg_object(t_node).m_left;
+			}else{
+				err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<166>";
+				pop_err();
+				return t_node;
+			}
+		}
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<169>";
+	pop_err();
+	return t_node;
+}
+c_Map.prototype.p_Get=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<101>";
+	var t_node=this.p_FindNode(t_key);
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+	if((t_node)!=null){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/map.cxs<102>";
+		pop_err();
+		return dbg_object(t_node).m_value;
+	}
+	pop_err();
+	return null;
+}
 function c_IntMap(){
 	c_Map.call(this);
 }
@@ -3801,17 +4796,23 @@ c_InputDevice.prototype.p_MotionEvent=function(t_event,t_data,t_x,t_y,t_z){
 	this.m__accelZ=t_z;
 	pop_err();
 }
+c_InputDevice.prototype.p_KeyHit=function(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<52>";
+	if(t_key>0 && t_key<512){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<52>";
+		pop_err();
+		return dbg_array(this.m__keyHit,t_key)[dbg_index];
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<53>";
+	pop_err();
+	return 0;
+}
 c_InputDevice.prototype.p_MouseX=function(){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<69>";
 	pop_err();
 	return this.m__mouseX;
-}
-c_InputDevice.prototype.p_MouseY=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/inputdevice.cxs<73>";
-	pop_err();
-	return this.m__mouseY;
 }
 function c_JoyState(){
 	Object.call(this);
@@ -4428,36 +5429,6 @@ function bb_app_EndApp(){
 	error("");
 	pop_err();
 }
-function c_Rocket(){
-	Object.call(this);
-	this.m_image=null;
-	this.m_x=.0;
-	this.m_y=.0;
-	this.m_mousediv=12.0;
-}
-c_Rocket.m_new=function(){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<58>";
-	pop_err();
-	return this;
-}
-c_Rocket.prototype.p_MovePlayer=function(t_towardsx,t_towardsy){
-	push_err();
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<71>";
-	var t_xdist=t_towardsx-this.m_x;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<72>";
-	var t_ydist=t_towardsy-this.m_y;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<74>";
-	var t_xstep=t_xdist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<75>";
-	var t_ystep=t_ydist/this.m_mousediv;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<77>";
-	this.m_x=this.m_x+t_xstep;
-	err_info="C:/IT_camp/Cerberus/examples/mojo/hitoro/basicgame/basicgame.cxs<78>";
-	this.m_y=this.m_y+t_ystep;
-	pop_err();
-	return 0;
-}
 var bb_app__updateRate=0;
 function bb_app_SetUpdateRate(t_hertz){
 	push_err();
@@ -4467,6 +5438,37 @@ function bb_app_SetUpdateRate(t_hertz){
 	bb_app__game.SetUpdateRate(t_hertz);
 	pop_err();
 }
+var bb_random_Seed=0;
+function bb_random_Rnd(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<37>";
+	bb_random_Seed=bb_random_Seed*1664525+1013904223|0;
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<38>";
+	var t_=(bb_random_Seed>>8&16777215)/16777216.0;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd2(t_low,t_high){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<46>";
+	var t_=bb_random_Rnd3(t_high-t_low)+t_low;
+	pop_err();
+	return t_;
+}
+function bb_random_Rnd3(t_range){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/random.cxs<42>";
+	var t_=bb_random_Rnd()*t_range;
+	pop_err();
+	return t_;
+}
+function bb_input_KeyHit(t_key){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<44>";
+	var t_=bb_input_device.p_KeyHit(t_key);
+	pop_err();
+	return t_;
+}
 function bb_input_MouseX(){
 	push_err();
 	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<58>";
@@ -4474,12 +5476,76 @@ function bb_input_MouseX(){
 	pop_err();
 	return t_;
 }
-function bb_input_MouseY(){
+function bb_input_MouseHit(t_button){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<62>";
-	var t_=bb_input_device.p_MouseY();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/input.cxs<74>";
+	var t_=bb_input_device.p_KeyHit(1+t_button);
 	pop_err();
 	return t_;
+}
+function bb_app_Millisecs(){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/app.cxs<233>";
+	var t_=bb_app__game.Millisecs();
+	pop_err();
+	return t_;
+}
+function bb_math_Abs(t_x){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<46>";
+	if(t_x>=0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<46>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<47>";
+	var t_=-t_x;
+	pop_err();
+	return t_;
+}
+function bb_math_Abs2(t_x){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<73>";
+	if(t_x>=0.0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<73>";
+		pop_err();
+		return t_x;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<74>";
+	var t_=-t_x;
+	pop_err();
+	return t_;
+}
+function bb_math_Sgn(t_x){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<41>";
+	if(t_x<0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<41>";
+		pop_err();
+		return -1;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<42>";
+	var t_=((t_x>0)?1:0);
+	pop_err();
+	return t_;
+}
+function bb_math_Sgn2(t_x){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<67>";
+	if(t_x<0.0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<67>";
+		pop_err();
+		return -1.0;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<68>";
+	if(t_x>0.0){
+		err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<68>";
+		pop_err();
+		return 1.0;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/cerberus/math.cxs<69>";
+	pop_err();
+	return 0.0;
 }
 function bb_graphics_DebugRenderDevice(){
 	push_err();
@@ -4524,27 +5590,26 @@ function bb_graphics_Cls3(t_rgb){
 	pop_err();
 	return 0;
 }
-function bb_graphics_DrawImage(t_image,t_x,t_y,t_frame){
+function bb_graphics_DrawImageRect(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_frame){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<765>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<874>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
 	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<766>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<875>";
 		error("Invalid image frame");
 	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<769>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<771>";
-	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<773>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<774>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<776>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,t_x-dbg_object(t_image).m_tx,t_y-dbg_object(t_image).m_ty,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<876>";
+		error("Invalid image rectangle");
 	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<879>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<881>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<883>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,-dbg_object(t_image).m_tx+t_x,-dbg_object(t_image).m_ty+t_y,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
 	pop_err();
 	return 0;
 }
@@ -4632,39 +5697,156 @@ function bb_graphics_PopMatrix(){
 	pop_err();
 	return 0;
 }
-function bb_graphics_DrawImage2(t_image,t_x,t_y,t_rotation,t_scaleX,t_scaleY,t_frame){
+function bb_graphics_DrawImageRect2(t_image,t_x,t_y,t_srcX,t_srcY,t_srcWidth,t_srcHeight,t_rotation,t_scaleX,t_scaleY,t_frame){
 	push_err();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<783>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<889>";
 	bb_graphics_DebugRenderDevice();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
 	if(t_frame<0 || t_frame>=dbg_object(t_image).m_frames.length){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<784>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<890>";
 		error("Invalid image frame");
 	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<787>";
-	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<789>";
-	bb_graphics_PushMatrix();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<791>";
-	bb_graphics_Translate(t_x,t_y);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<792>";
-	bb_graphics_Rotate(t_rotation);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<793>";
-	bb_graphics_Scale(t_scaleX,t_scaleY);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<795>";
-	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<797>";
-	bb_graphics_context.p_Validate();
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<799>";
-	if((dbg_object(t_image).m_flags&65536)!=0){
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<800>";
-		bb_graphics_renderDevice.DrawSurface(dbg_object(t_image).m_surface,0.0,0.0);
-	}else{
-		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<802>";
-		bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,dbg_object(t_f).m_x,dbg_object(t_f).m_y,dbg_object(t_image).m_width,dbg_object(t_image).m_height);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+	if(t_srcX<0 || t_srcY<0 || t_srcX+t_srcWidth>dbg_object(t_image).m_width || t_srcY+t_srcHeight>dbg_object(t_image).m_height){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<891>";
+		error("Invalid image rectangle");
 	}
-	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<805>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<894>";
+	var t_f=dbg_array(dbg_object(t_image).m_frames,t_frame)[dbg_index];
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<896>";
+	bb_graphics_PushMatrix();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<898>";
+	bb_graphics_Translate(t_x,t_y);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<899>";
+	bb_graphics_Rotate(t_rotation);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<900>";
+	bb_graphics_Scale(t_scaleX,t_scaleY);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<901>";
+	bb_graphics_Translate(-dbg_object(t_image).m_tx,-dbg_object(t_image).m_ty);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<903>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<905>";
+	bb_graphics_renderDevice.DrawSurface2(dbg_object(t_image).m_surface,0.0,0.0,t_srcX+dbg_object(t_f).m_x,t_srcY+dbg_object(t_f).m_y,t_srcWidth,t_srcHeight);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<907>";
 	bb_graphics_PopMatrix();
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawText(t_text,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<951>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<953>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<954>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<955>";
+	if(!((dbg_object(bb_graphics_context).m_font)!=null)){
+		pop_err();
+		return;
+	}
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<957>";
+	t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<958>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text)*t_yhandle)|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_=t_text;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	var t_2=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+	while(t_2<t_.length){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_char=dbg_charCodeAt(t_,t_2);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<960>";
+		t_2=t_2+1;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<961>";
+		var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+		if(!((t_tmpChar2)!=null)){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<962>";
+			continue;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<963>";
+		bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<964>";
+		t_x+=dbg_object(t_tmpChar2).m_advance;
+	}
+	pop_err();
+}
+function bb_graphics_DrawText2(t_textLines,t_x,t_y,t_xhandle,t_yhandle){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<970>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<972>";
+	var t_char=0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<973>";
+	var t_tmpChar=null;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<974>";
+	var t_currX=.0;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<975>";
+	var t_text="";
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<977>";
+	var t_linesCount=t_textLines.length;
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<979>";
+	t_y=(((t_y)-dbg_object(bb_graphics_context).m_font.p_TextHeight("")*t_yhandle*(t_linesCount))|0);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<980>";
+	t_currX=(t_x);
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<982>";
+	for(var t__y=1;t__y<=t_linesCount;t__y=t__y+1){
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<983>";
+		t_text=dbg_array(t_textLines,t__y-1)[dbg_index];
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<984>";
+		t_x=(((t_x)-dbg_object(bb_graphics_context).m_font.p_TextWidth(t_text)*t_xhandle)|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_=t_text;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		var t_2=0;
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+		while(t_2<t_.length){
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_char=dbg_charCodeAt(t_,t_2);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<985>";
+			t_2=t_2+1;
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<986>";
+			var t_tmpChar2=dbg_object(dbg_object(bb_graphics_context).m_font).m__charMap.p_Get(t_char);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+			if(!((t_tmpChar2)!=null)){
+				err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<987>";
+				continue;
+			}
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<988>";
+			bb_graphics_DrawImageRect(dbg_array(dbg_object(dbg_object(bb_graphics_context).m_font).m__pages,dbg_object(t_tmpChar2).m_page)[dbg_index],(t_x+dbg_object(t_tmpChar2).m_xoff),(t_y+dbg_object(t_tmpChar2).m_yoff),dbg_object(t_tmpChar2).m_x,dbg_object(t_tmpChar2).m_y,dbg_object(t_tmpChar2).m_width,dbg_object(t_tmpChar2).m_height,0);
+			err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<989>";
+			t_x+=dbg_object(t_tmpChar2).m_advance;
+		}
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<991>";
+		t_y=(((t_y)+dbg_object(bb_graphics_context).m_font.p_TextHeight(t_text))|0);
+		err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<992>";
+		t_x=((t_currX)|0);
+	}
+	pop_err();
+}
+function bb_graphics_DrawRect(t_x,t_y,t_w,t_h){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<706>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<708>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<709>";
+	bb_graphics_renderDevice.DrawRect(t_x,t_y,t_w,t_h);
+	pop_err();
+	return 0;
+}
+function bb_graphics_DrawCircle(t_x,t_y,t_r){
+	push_err();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<730>";
+	bb_graphics_DebugRenderDevice();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<732>";
+	bb_graphics_context.p_Validate();
+	err_info="C:/IT_camp/Cerberus/modules/mojo/graphics.cxs<733>";
+	bb_graphics_renderDevice.DrawOval(t_x-t_r,t_y-t_r,t_r*2.0,t_r*2.0);
 	pop_err();
 	return 0;
 }
@@ -4683,5 +5865,6 @@ function bbInit(){
 	bb_app__desktopMode=null;
 	bb_graphics_renderDevice=null;
 	bb_app__updateRate=0;
+	bb_random_Seed=1234;
 }
 //${TRANSCODE_END}

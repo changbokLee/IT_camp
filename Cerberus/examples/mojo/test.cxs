@@ -1,0 +1,13 @@
+Import mojo
+
+
+Import imports.media			' Default media filenames
+Import imports.defaultmedia	
+Import imports.game			' Main game logic ' IMPORTS GAME, LEVEL, etc.
+
+
+Global RockOut:GameApp				' Application control
+
+Function Main ()
+	RockOut = New GameApp (854, 480)
+End

@@ -1,0 +1,102 @@
+Import mojo
+Import graphics
+	
+	Global w:Float
+   	Global h:Float
+	Global UR:Float = 60 'OnUpdateUate 
+    Global JS:Float = 50 'JumpScale
+	Global BS:Float = 5 'BallSize
+	Global SqS:Float = 30 'SquareSize
+	Global SN:Float = 2 'StageNum
+	Global R:Float = 187 , G:Float = 222, B:Float = 251 '배경 색
+	Global SR:Int[][] = [[100,100],[200,100],[300,100]]
+	Global XP:Float = 300 'x 포지션
+	Global YP:Float = 300 'Y 포지션
+	Global i:Float = 10
+	Global TR:Float = 3'
+	Global TL:Float = 3
+	Global image:Image
+	Global STAGE1:Int[][] = 
+	[
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+	[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
+Class ballbounce Extends App
+
+
+
+	Method OnCreate()
+      SetUpdateRate(UR)
+      	w = 600
+   		h = 480
+   		XP = SR[SN][0]
+   		YP = SR[SN][1]
+   End
+   
+   Method OnUpdate() 
+   		If KeyDown(KEY_LEFT)
+		XP -= TL
+		End
+		If KeyDown(KEY_RIGHT)
+		XP += TR
+		End
+   		i-=1
+   		If STAGE1[YP/30][XP/30-0.1] = 1
+   		TL = 0
+		Else
+		TL = 3
+   		End
+   		If STAGE1[YP/30][XP/30+0.1] = 1
+   		TR = 0
+		Else
+		TR = 3
+   		End 
+   		If STAGE1[YP/30+1][XP/30] = 1
+   		Print "run"
+		i=+10
+   		End
+   		YP-=i
+    '  Print "DeviceWidth = " + w +" DeviceHeight = " + h
+   End
+   
+Method Collision (cx, cy, cr, )
+	Local nCenterX
+   
+	
+	
+   
+   Method OnRender()
+   
+   Cls(R,G,B)
+   SetColor(0,0,0)
+
+   SetColor(0,0,0)
+   DrawCircle(XP, YP, BS+2)
+   SetColor(255,255,0)
+   DrawCircle(XP, YP , BS)
+      Print "XP " + XP + "YP" +YP
+   End
+
+End
+	
+Function Main()
+   
+
+   
+   New ballbounce()
+   
+End

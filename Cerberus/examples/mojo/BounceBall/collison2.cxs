@@ -1,0 +1,15 @@
+Import bounceball
+
+'-----------------------------------------------------------------
+Function distance
+End
+
+Function postion
+End
+
+Function squre
+End
+
+Function checkCollistion
+	If (postion x)
+End

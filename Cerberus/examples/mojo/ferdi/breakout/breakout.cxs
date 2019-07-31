@@ -114,7 +114,17 @@ Class BrickGame Extends App
 			board[i] = EMPTY
 		End For
 		
-		Select level
+		Select levelMethod CopyBoard:Void(lvl:Int[])
+	
+		Local i:Int = 0
+		
+		For i = 0 Until board.Length
+			board[i] = 0
+		End For
+		
+		For i = 0 Until lvl.Length
+			board[i] = lvl[i]
+		End For
 		Case 1
 			For i = 0 Until 13
 				board[3*BOARD_WIDTH+i] = SILVER

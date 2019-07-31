@@ -4,15 +4,13 @@ Import mojo.graphics
 
 
 Class MyApp Extends App
-	
+	Field Squre
 	Field Circle
-	Field BackgroundX: Float = 0
-	Field BackgroundY: Float =0
+	
 
 	Method OnCreate()
-	
 		LoadGame()
-		SetUpdateRate 60
+		SetUpdateRate 0
 		
 	End
 	
@@ -22,18 +20,20 @@ Class MyApp Extends App
 	End
 	
 	Method OnUpdate()
-		
+	
+		LoadGame()
 		 			
 	End
 	
 	Method OnRender()
-		Cls
+        	Circle = DrawCircle(30,30,30)
+	
+		If KeyDown(Y) 
+			Circle = Circle +0.01
+		End        	
 	End
 	
 	
-	Method OnLoading()
-		
-	End
 End
 
 Function Main()
